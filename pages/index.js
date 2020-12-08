@@ -1,5 +1,9 @@
-const Home = () => {
-  return <h1>Hello World</h1>
+import Menu from '@/components/Menu';
+
+const Accueil = () => {
+  return (
+    <Menu />
+  );
 }
 
-export default Home;
+export default Accueil;

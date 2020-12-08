@@ -1,7 +1,7 @@
 {
-  "name": "nextjs-template",
-  "version": "1.0.0",
-  "description": "Template for NextJS app using styled-components",
+  "name": "augustine-website",
+  "version": "0.1.0",
+  "description": "Crêperie Augustine website",
   "main": "index.js",
   "private": true,
   "scripts": {
@@ -9,9 +9,9 @@
     "build": "next build",
     "start": "next start"
   },
-  "author": "dr0geo",
-  "license": "MIT",
+  "license": "",
   "dependencies": {
+    "firebase": "^8.1.2",
     "next": "^10.0.3",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
