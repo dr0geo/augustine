@@ -5,36 +5,40 @@ const GlobalStyle = createGlobalStyle`
     font-family: 'Raleway';
     font-weight: 400;
     src: 
-      url('/fonts/Raleway-Regular.woff2') format('woff2'),
-      url('/fonts/Raleway-Regular.woff') format('woff');
+      url('/fonts/raleway/Raleway-Regular.woff2') format('woff2'),
+      url('/fonts/raleway/Raleway-Regular.woff') format('woff');
   }
 
   @font-face {
     font-family: 'Raleway';
     font-weight: 600;
     src: 
-      url('/fonts/Raleway-SemiBold.woff2') format('woff2'),
-      url('/fonts/Raleway-SemiBold.woff') format('woff');
+      url('/fonts/raleway/Raleway-SemiBold.woff2') format('woff2'),
+      url('/fonts/raleway/Raleway-SemiBold.woff') format('woff');
   }
 
   @font-face {
     font-family: 'Raleway';
     font-weight: 700;
     src: 
-      url('/fonts/Raleway-Bold.woff2') format('woff2'),
-      url('/fonts/Raleway-Bold.woff') format('woff');
+      url('/fonts/raleway/Raleway-Bold.woff2') format('woff2'),
+      url('/fonts/raleway/Raleway-Bold.woff') format('woff');
   }
 
   @font-face {
     font-family: 'Dancing-Script';
-    font-weight: 600;
+    font-weight: 400;
     src: 
-      url('/fonts/DancingScript-SemiBold.woff2') format('woff2'),
-      url('/fonts/DancingScript-SemiBold.woff') format('woff');
+      url('/fonts/dancing-script/DancingScript-SemiBold.woff2') format('woff2'),
+      url('/fonts/dancing-script/DancingScript-SemiBold.woff') format('woff');
   }
 
   * {
     box-sizing: border-box;
+  }
+
+  html {
+    font-size: 16px;
   }
 
   body {
@@ -44,10 +48,42 @@ const GlobalStyle = createGlobalStyle`
   }
 
   a {
+    color: white;
     text-decoration: none;
     &:visited {
       color: white;
     }
+  }
+
+  h1 {
+    font-size: 1.3rem;
+    text-align: center;
+  }
+
+  h2 {
+    color: #ac6c14;
+    text-align: center;
+    & > em {
+      color: #012f6a;
+      font-family: 'Dancing-Script', sans-serif;
+      font-size: 1.6rem;
+    }
+    & > strong {
+      color: white;
+      font-family: 'Dancing-Script', sans-serif;
+      font-size: 1.6rem;
+    }
+    @media only screen and (min-width: 1200px) {
+      font-size: 2rem;
+      & > em, & > strong {
+        font-size: 2rem;
+      }
+    }
+  }
+
+  p {
+    padding: 0 20px;
+    text-align: center;
   }
 `;
 
