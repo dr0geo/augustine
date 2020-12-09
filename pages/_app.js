@@ -81,9 +81,17 @@ const GlobalStyle = createGlobalStyle`
     }
   }
 
+  h3 {
+    text-align: center;
+  }
+
   p {
     padding: 0 20px;
     text-align: center;
+  }
+
+  li {
+    list-style-type: none;
   }
 `;
 
