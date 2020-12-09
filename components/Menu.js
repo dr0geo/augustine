@@ -130,7 +130,7 @@ const Menu = props => {
             Réservez une table
           </Anchor>
         </Link>
-        <Link href="/" passHref>
+        <Link href="/click-n-collect" passHref>
           <Anchor onClick={hideMenu} isSelected={props.isSelected === 4}>
             Click & Collect
           </Anchor>

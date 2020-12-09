@@ -1,10 +1,12 @@
 import { db } from '@/utils/firebase';
 
+import Menu from '@/components/Menu';
 import { BlackButton } from '@/elements/Buttons';
 
 const ClicknCollect = props => {
   return (
     <>
+      <Menu isSelected={4} />
       <h1>Commandez en ligne et venez récupérer votre commande</h1>
       <h2>Entrees</h2>
       <ul>
@@ -60,7 +62,7 @@ const ClicknCollect = props => {
       </ul>
       <h2>Crêpes classiques</h2>
       <ul>
-        {props.clasCrepes.map((crepe, index) => {
+        {props.classiquesCrepes.map((crepe, index) => {
           return ( 
             <li key={index}>
               <h3>{crepe.name}</h3>
@@ -72,7 +74,7 @@ const ClicknCollect = props => {
       </ul>
       <h2>Crêpes gourmandes</h2>
       <ul>
-        {props.gourmCrepes.map((crepe, index) => {
+        {props.gourmandesCrepes.map((crepe, index) => {
           return ( 
             <li key={index}>
               <h3>{crepe.name}</h3>
@@ -85,7 +87,7 @@ const ClicknCollect = props => {
       </ul>
       <h2>Formules</h2>
       <ul>
-        {props.formulas.map((formula, index) => {
+        {props.formules.map((formula, index) => {
           return ( 
             <li key={index}>
               <h3>{formula.name}</h3>
@@ -104,40 +106,30 @@ export const getStaticProps = async () => {
   // Retrieve all foods in collection 'foods':
   const dbFoods = db.collection('foods').doc('pUn7ePba4vpsZ2v0nbHY');
 
-  // Entrees:
-  const dbEntrees = await dbFoods.collection('entrees').get();
   const entrees = [];
-  dbEntrees.forEach(doc => entrees.push(doc.data()));
-
-  // Salades:
-  const dbSalades = await dbFoods.collection('salades').get();
   const salades = [];
-  dbSalades.forEach(doc => salades.push(doc.data()));
-
-  // Galettes Classiques:
-  const classiquesGal = await dbFoods.collection('classiques').get();
   const classiques = [];
-  classiquesGal.forEach(doc => classiques.push(doc.data()));
-
-  // Galettes Gourmandes:
-  const gourmandesGal = await dbFoods.collection('gourmandes').get();
   const gourmandes = [];
-  gourmandesGal.forEach(doc => gourmandes.push(doc.data()));
+  const classiquesCrepes = [];
+  const gourmandesCrepes = [];
 
-  // Crepes classiques:
-  const classiquesCrepes = await dbFoods.collection('crepes-classiques').get();
-  const clasCrepes = [];
-  classiquesCrepes.forEach(doc => clasCrepes.push(doc.data()));
+  // Create general function to retrieve each sub-collection:
+  const retrieveData = async (collectionName, resultsArray) => {
+    const docs = await dbFoods.collection(collectionName).get();
+    docs.forEach(doc => resultsArray.push(doc.data()));
+  }
 
-  // Crepes gourmandes:
-  const gourmandesCrepes = await dbFoods.collection('crepes-gourmandes').get();
-  const gourmCrepes = [];
-  gourmandesCrepes.forEach(doc => gourmCrepes.push(doc.data()));
-  
+  retrieveData('entrees', entrees);
+  retrieveData('salades', salades);
+  retrieveData('classiques', classiques);
+  retrieveData('gourmandes', gourmandes);
+  retrieveData('crepes-classiques', classiquesCrepes);
+  retrieveData('crepes-gourmandes', gourmandesCrepes);
+
   // Retrieve all formulas:
   const dbFormulas = await db.collection('formules').get();
-  const formulas = [];
-  dbFormulas.forEach(doc => formulas.push(doc.data()));
+  const formules = [];
+  dbFormulas.forEach(doc => formules.push(doc.data()));
 
   return {
     props: { 
@@ -145,9 +137,9 @@ export const getStaticProps = async () => {
       salades,
       classiques,
       gourmandes,
-      clasCrepes,
-      gourmCrepes,
-      formulas,
+      classiquesCrepes,
+      gourmandesCrepes,
+      formules,
     },
     revalidate: 1
   };

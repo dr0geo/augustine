@@ -15,6 +15,9 @@ export const BlackButton = styled.a`
     background-color 0.2s ease-in-out,
     border-color 0.2s ease-in-out,
     color 0.2s ease-in-out;
+  &:visited {
+    color: black;
+  }
   @media only screen and (min-width: 1200px) {
     &:hover {
       background-color: black;
@@ -28,6 +31,9 @@ export const WhiteButton = styled(BlackButton)`
   background-color: transparent;
   border-color: white;
   color: white;
+  &:visited {
+    color: white;
+  }
   @media only screen and (min-width: 1200px) {
     &:hover {
       background-color: white;

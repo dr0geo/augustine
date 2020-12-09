@@ -90,8 +90,13 @@ const GlobalStyle = createGlobalStyle`
     text-align: center;
   }
 
+  ul {
+    padding-left: 0;
+  }
+
   li {
     list-style-type: none;
+    list-style-position: outside;
   }
 `;
 

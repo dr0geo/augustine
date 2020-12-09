@@ -41,7 +41,13 @@ const Accueil = () => {
             8ème arrondissement de Paris. Nos deux restaurants ont été
             entièrement rénovés, et n’attendent que vous !
           </p>
-          <BlackButton>Voir sur la carte</BlackButton>
+          <BlackButton 
+            href="https://goo.gl/maps/MPwfHjV2Acxp852R9"
+            rel="noopener, noreferrer"
+            target="_blank"
+          >
+            Voir sur la carte
+          </BlackButton>
         </Section>
 
         <Section bgColor="#fcf3ea">
