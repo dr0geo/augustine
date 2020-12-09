@@ -112,7 +112,7 @@ const Menu = props => {
         <h1>crêperie contemporaine - Paris</h1>
       </Logo>
       <Icon onClick={toggleMenu}>
-        <Image src="/images/icons/menu.webp" alt="" height={50} width={50} />
+        <Image src="/images/icons/menud.png" alt="" height={50} width={50} />
       </Icon>
       <FlexDiv isClicked={isClicked}>
         <Link href="/" passHref>
