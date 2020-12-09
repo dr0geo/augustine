@@ -1,9 +1,31 @@
+import styled, { keyframes } from 'styled-components';
 import Image from 'next/image';
 import Link from 'next/link';
 
 import { FlexDiv, Section } from '@/elements/Divs';
 import { PromessCard } from '@/elements/Cards';
 import { WhiteButton } from '@/elements/Buttons';
+
+const shakingAnimation = keyframes`
+  0% {
+    transform: translateX(0px);
+  }
+  25% {
+    transform: translateX(-2px);
+  }
+  50% {
+    transform: translateX(0px)
+  }
+  75% {
+    transform: translateX(2px)
+  }
+`;
+
+const ShakingDiv = styled.div`
+  &:hover {
+    animation: 0.1s ${shakingAnimation} 2;
+  }
+`;
 
 const Book = () => {
   return (
@@ -16,14 +38,14 @@ const Book = () => {
       <FlexDiv>
         <PromessCard isWhite={true}>
           <figure>
-            <div>
+            <ShakingDiv>
               <Image
                 src="/images/icons/resto.png"
                 alt="Restaurant"
                 height={40}
                 width={50}
               />
-            </div>
+            </ShakingDiv>
           </figure>
           <figcaption>
             <h3>Réserver une table</h3>
@@ -35,14 +57,14 @@ const Book = () => {
         </PromessCard>
         <PromessCard isWhite={true}>
           <figure>
-            <div>
+            <ShakingDiv>
               <Image
                 src="/images/icons/click-and-collect.png"
                 alt="Click & Collect"
                 height={50}
                 width={50}
               />
-            </div>
+            </ShakingDiv>
           </figure>
           <figcaption>
             <h3>Click & Collect</h3>
@@ -54,14 +76,14 @@ const Book = () => {
         </PromessCard>
         <PromessCard isWhite={true}>
           <figure>
-            <div>
+            <ShakingDiv>
               <Image
                 src="/images/icons/uber-eats.png"
                 alt="Logo Bio"
                 height={50}
                 width={40}
               />
-            </div>
+            </ShakingDiv>
           </figure>
           <figcaption>
             <h3>Livraison à domicile</h3>
