@@ -1,5 +1,6 @@
-import Link from 'next/link';
 import styled from 'styled-components';
+import Link from 'next/link';
+import Image from 'next/image';
 
 import { FlexDiv } from '@/elements/Divs';
 
@@ -16,6 +17,10 @@ const StyledFooter = styled.footer`
   & a + a {
     margin-left: 20px;
   }
+`;
+
+const CenteredDiv = styled.div`
+  text-align: center;
 `;
 
 const Footer = () => {
@@ -52,14 +57,24 @@ const Footer = () => {
               <a>Contactez-nous</a>
             </Link>
           </p>
-          <p>
-            <a href="#" rel="noopener, noreferrer">
-              Fb
+          <CenteredDiv>
+            <a href="#" rel="noopener, noreferrer" target="_blank">
+              <Image
+                src="/images/icons/fb.jpg"
+                alt="Logo FaceBook"
+                height={40}
+                width={40}
+              />
             </a>
-            <a href="#" rel="noopener, noreferrer">
-              Insta
+            <a href="https://www.instagram.com/creperieaugustine/" rel="noopener, noreferrer" target="_blank">
+              <Image
+                src="/images/icons/insta.jpeg"
+                alt="Logo Instagram"
+                height={40}
+                width={40}
+              />
             </a>
-          </p>
+          </CenteredDiv>
         </div>
       </FlexDiv>
     </StyledFooter>

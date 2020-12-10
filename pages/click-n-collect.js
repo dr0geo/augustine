@@ -108,6 +108,13 @@ const ClicknCollect = props => {
 };
 
 export const getStaticProps = async () => {
+
+  // Create general function to retrieve each sub-collection:
+  const retrieveData = async (docName, collectionName, resultsArray) => {
+    const docs = await docName.collection(collectionName).get();
+    docs.forEach(doc => resultsArray.push(doc.data()));
+  }
+  
   // Retrieve all foods in collection 'foods':
   const dbFoods = db.collection('foods').doc('pUn7ePba4vpsZ2v0nbHY');
 
@@ -118,23 +125,30 @@ export const getStaticProps = async () => {
   const classiquesCrepes = [];
   const gourmandesCrepes = [];
 
-  // Create general function to retrieve each sub-collection:
-  const retrieveData = async (collectionName, resultsArray) => {
-    const docs = await dbFoods.collection(collectionName).get();
-    docs.forEach(doc => resultsArray.push(doc.data()));
-  }
-
-  retrieveData('entrees', entrees);
-  retrieveData('salades', salades);
-  retrieveData('classiques', classiques);
-  retrieveData('gourmandes', gourmandes);
-  retrieveData('crepes-classiques', classiquesCrepes);
-  retrieveData('crepes-gourmandes', gourmandesCrepes);
+  retrieveData(dbFoods, 'entrees', entrees);
+  retrieveData(dbFoods, 'salades', salades);
+  retrieveData(dbFoods, 'classiques', classiques);
+  retrieveData(dbFoods, 'gourmandes', gourmandes);
+  retrieveData(dbFoods, 'crepes-classiques', classiquesCrepes);
+  retrieveData(dbFoods, 'crepes-gourmandes', gourmandesCrepes);
 
   // Retrieve all formulas:
   const dbFormulas = await db.collection('formules').get();
   const formules = [];
   dbFormulas.forEach(doc => formules.push(doc.data()));
+
+  // Retrieve all drinks:
+  const dbDrinks = db.collection('drinks').doc('znRDAknerTd91N6ddKkx');
+
+  const fraiches = [];
+  const chaudes = [];
+  const aperitifs = [];
+  const alcoolisees = [];
+
+  retrieveData(dbDrinks, 'fraiches', fraiches);
+  retrieveData(dbDrinks, 'chaudes', chaudes);
+  retrieveData(dbDrinks, 'aperitifs', aperitifs);
+  retrieveData(dbDrinks, 'alcoolisees', alcoolisees);
 
   return {
     props: { 
@@ -145,8 +159,12 @@ export const getStaticProps = async () => {
       classiquesCrepes,
       gourmandesCrepes,
       formules,
+      fraiches,
+      chaudes,
+      aperitifs,
+      alcoolisees
     },
-    revalidate: 1
+    revalidate: 86400
   };
 };
 

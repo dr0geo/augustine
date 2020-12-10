@@ -90,9 +90,9 @@ const Book = () => {
           <figcaption>
             <h3>Livraison à domicile</h3>
             <p>la carte d'Augustine à déguster chez vous</p>
-            <a href="#" rel="noopener, noreferrer" target="_blank">
-              <WhiteButton>J'y vais</WhiteButton>
-            </a>
+            <WhiteButton href="#" rel="noopener, noreferrer" target="_blank">
+              J'y vais
+            </WhiteButton>
           </figcaption>
         </PromessCard>
       </FlexDiv>
