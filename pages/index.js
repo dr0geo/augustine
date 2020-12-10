@@ -42,7 +42,7 @@ export const getStaticProps = async () => {
   const uid = process.env.INSTAGRAM_UID;
   const token = process.env.INSTAGRAM_TOKEN;
   
-  const res = await fetch(`https://graph.instagram.com/${uid}/media?fields=id,caption,media_type,media_url,permalink,username&access_token=${token}`);
+  const res = await fetch(`https://graph.instagram.com/${uid}/media?fields=id,caption,media_type,media_url,thumbnail_url,permalink,username&access_token=${token}`);
   const posts = await res.json();
 
   return {
