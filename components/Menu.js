@@ -110,12 +110,12 @@ const Menu = props => {
             Accueil
           </Anchor>
         </Link>
-        <Link href="/" passHref>
+        <Link href="/la-carte" passHref>
           <Anchor onClick={props.hideMenu} isSelected={props.isSelected === 2}>
             La Carte
           </Anchor>
         </Link>
-        <Link href="/" passHref>
+        <Link href="/reserver" passHref>
           <Anchor onClick={props.hideMenu} isSelected={props.isSelected === 3}>
             Réservez une table
           </Anchor>
@@ -125,12 +125,12 @@ const Menu = props => {
             Click & Collect
           </Anchor>
         </Link>
-        <Link href="/" passHref>
+        <Link href="/la-cuisine" passHref>
           <Anchor onClick={props.hideMenu} isSelected={props.isSelected === 5}>
             La Cuisine
           </Anchor>
         </Link>
-        <Link href="/" passHref>
+        <Link href="/contact" passHref>
           <Anchor onClick={props.hideMenu} isSelected={props.isSelected === 6}>
             Contact
           </Anchor>

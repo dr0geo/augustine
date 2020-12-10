@@ -53,7 +53,7 @@ const Footer = () => {
             <strong>Restez connectés !</strong>
           </h2>
           <p>
-            <Link href="/">
+            <Link href="/contact">
               <a>Contactez-nous</a>
             </Link>
           </p>

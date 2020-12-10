@@ -1,3 +1,5 @@
+import { db } from '@/utils/firebase';
+
 const Carte = (props) => {
   return <p>La carte</p>
 }
