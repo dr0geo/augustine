@@ -2,13 +2,24 @@ import styled from 'styled-components';
 
 import { Section } from '@/elements/Divs';
 
-const StyledDiv = styled.div`
+const Container = styled.ul`
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  margin: 40px auto 30px auto;
+  max-width: 1200px;
+  @media only screen and (min-width: 1200px) {
+    flex-direction: row;
+  }
+`;
+
+const StyledDiv = styled.li`
   align-items: center;
   border-radius: 5px;
   box-shadow: 0 0 2px 2px lightgray;
   display: flex;
   flex-direction: column;
-  margin: auto;
   width: 300px;
   padding: 0;
   transition: transform 0.2s ease-in-out;
@@ -46,16 +57,21 @@ const Share = ({ posts }) => {
         <br />
         <em>votre expérience</em>
       </h2>
-      <ul>
-        {selectedPosts !== undefined && selectedPosts.map(post => (
-          <li key={post.id}>
-            <StyledDiv>
+      <Container>
+        {selectedPosts !== undefined &&
+          selectedPosts.map(post => (
+            <StyledDiv key={post.id}>
               <StyledAnchor
                 href={post.permalink}
                 rel="noopener, noreferrer"
                 target="_blank"
               >
-                <img src={post.media_url || post.thumbnail_url} alt="" height={300} width={300} />
+                <img
+                  src={post.media_url || post.thumbnail_url}
+                  alt=""
+                  height={300}
+                  width={300}
+                />
                 <p>{post.caption}</p>
               </StyledAnchor>
               <p>
@@ -68,9 +84,8 @@ const Share = ({ posts }) => {
                 </StyledAnchor>
               </p>
             </StyledDiv>
-          </li>
-        ))}
-      </ul>
+          ))}
+      </Container>
     </Section>
   );
 };
