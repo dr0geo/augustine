@@ -18,7 +18,6 @@ const Accueil = props => {
           name="description"
           content="Bienvenue sur le site de la crêperie Augustine située à Paris. Laissez-vous tenter par nos succulentes recettes !"
         />
-        <script src="https://www.instagram.com/static/bundles/metro/EmbedSDK.js/33cd2c5d5d59.js" async></script>
       </Head>
       <Menu 
         isSelected={1}
