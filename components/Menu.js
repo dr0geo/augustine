@@ -86,16 +86,6 @@ const Anchor = styled.a`
 `;
 
 const Menu = props => {
-  const [isClicked, setIsClicked] = useState(false);
-
-  const toggleMenu = () => {
-    setIsClicked(!isClicked);
-  };
-
-  const hideMenu = () => {
-    setIsClicked(false);
-  };
-
   return (
     <Header>
       <Logo>
@@ -111,41 +101,41 @@ const Menu = props => {
         </Link>
         <h1>crêperie contemporaine - Paris</h1>
       </Logo>
-      <Icon onClick={toggleMenu}>
+      <Icon onClick={props.toggleMenu}>
         <Image src="/images/icons/menud.png" alt="" height={50} width={50} />
       </Icon>
-      <FlexDiv isClicked={isClicked}>
+      <FlexDiv isClicked={props.isClicked}>
         <Link href="/" passHref>
-          <Anchor onClick={hideMenu} isSelected={props.isSelected === 1}>
+          <Anchor onClick={props.hideMenu} isSelected={props.isSelected === 1}>
             Accueil
           </Anchor>
         </Link>
         <Link href="/" passHref>
-          <Anchor onClick={hideMenu} isSelected={props.isSelected === 2}>
+          <Anchor onClick={props.hideMenu} isSelected={props.isSelected === 2}>
             La Carte
           </Anchor>
         </Link>
         <Link href="/" passHref>
-          <Anchor onClick={hideMenu} isSelected={props.isSelected === 3}>
+          <Anchor onClick={props.hideMenu} isSelected={props.isSelected === 3}>
             Réservez une table
           </Anchor>
         </Link>
         <Link href="/click-n-collect" passHref>
-          <Anchor onClick={hideMenu} isSelected={props.isSelected === 4}>
+          <Anchor onClick={props.hideMenu} isSelected={props.isSelected === 4}>
             Click & Collect
           </Anchor>
         </Link>
         <Link href="/" passHref>
-          <Anchor onClick={hideMenu} isSelected={props.isSelected === 5}>
+          <Anchor onClick={props.hideMenu} isSelected={props.isSelected === 5}>
             La Cuisine
           </Anchor>
         </Link>
         <Link href="/" passHref>
-          <Anchor onClick={hideMenu} isSelected={props.isSelected === 6}>
+          <Anchor onClick={props.hideMenu} isSelected={props.isSelected === 6}>
             Contact
           </Anchor>
         </Link>
-        <Icon onClick={hideMenu}>
+        <Icon onClick={props.hideMenu}>
           <Image src="/images/icons/close.png" alt="" height={35} width={35} />
         </Icon>
       </FlexDiv>

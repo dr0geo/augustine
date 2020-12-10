@@ -8,7 +8,7 @@ import Book from '@/components/Book';
 import Share from '@/components/accueil/Share';
 import Footer from '@/components/Footer';
 
-const Accueil = () => {
+const Accueil = (props) => {
   return (
     <>
       <Head>
@@ -19,17 +19,35 @@ const Accueil = () => {
           content="Bienvenue sur le site de la crêperie Augustine située à Paris. Laissez-vous tenter par nos succulentes recettes !"
         />
       </Head>
-      <Menu isSelected={1} />
+      <Menu 
+        isSelected={1}
+        isClicked={props.isClicked}
+        toggleMenu={props.toggleMenu}
+        hideMenu={props.hideMenu}
+      />
       <main>
         <Presentation />
         <Promesse />
         <Grid />
         <Book />
-        <Share />
+        <Share posts={props.posts} />
       </main>
       <Footer />
     </>
   );
 };
+
+export const getStaticProps = async () => {
+  const url = 'https://www.instagram.com/creperieaugustine/';
+  const token = process.env.INSTAGRAM_TOKEN;
+  
+  const res = await fetch(`https://graph.facebook.com/v9.0/instagram_oembed?url=${url}&access_token=${token}`);
+  const posts = await res.json();
+
+  return {
+    props: { posts },
+    revalidate: 60
+  }
+}
 
 export default Accueil;

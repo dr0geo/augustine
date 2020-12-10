@@ -6,7 +6,12 @@ import { BlackButton } from '@/elements/Buttons';
 const ClicknCollect = props => {
   return (
     <>
-      <Menu isSelected={4} />
+      <Menu
+        isSelected={4} 
+        isClicked={props.isClicked}
+        toggleMenu={props.toggleMenu}
+        hideMenu={props.hideMenu}
+      />
       <h1>Commandez en ligne et venez récupérer votre commande</h1>
       <h2>Entrees</h2>
       <ul>

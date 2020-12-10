@@ -1,6 +1,6 @@
 import { Section } from '@/elements/Divs';
 
-const Share = () => {
+const Share = ({ posts }) => {
   return (
     <Section bgColor="white">
       <h2>

@@ -1,4 +1,5 @@
 import { createGlobalStyle } from 'styled-components';
+import { useState } from 'react';
 
 const GlobalStyle = createGlobalStyle`
   @font-face {
@@ -48,6 +49,7 @@ const GlobalStyle = createGlobalStyle`
   body {
     font-family: 'Raleway', sans-serif;
     margin: 0;
+    overflow: ${props => props.isClicked ? 'hidden' : 'auto'};
     padding: 0;
   }
 
@@ -105,10 +107,25 @@ const GlobalStyle = createGlobalStyle`
 `;
 
 const App = ({ Component, pageProps }) => {
+  const [isClicked, setIsClicked] = useState(false);
+
+  const toggleMenu = () => {
+    setIsClicked(!isClicked);
+  };
+
+  const hideMenu = () => {
+    setIsClicked(false);
+  };
+
   return (
     <>
-      <GlobalStyle />
-      <Component {...pageProps} />
+      <GlobalStyle isClicked={isClicked} />
+      <Component
+        {...pageProps} 
+        isClicked={isClicked}
+        toggleMenu={toggleMenu}
+        hideMenu={hideMenu}
+      />
     </>
   );
 };

@@ -22,8 +22,10 @@ const shakingAnimation = keyframes`
 `;
 
 const ShakingDiv = styled.div`
-  &:hover {
-    animation: 0.1s ${shakingAnimation} 2;
+  @media only screen and (min-width: 1200px) {
+    &:hover {
+      animation: 0.1s ${shakingAnimation} 2;
+    }
   }
 `;
 
@@ -69,7 +71,7 @@ const Book = () => {
           <figcaption>
             <h3>Click & Collect</h3>
             <p>nous vous appelons lorsque votre commande est prête</p>
-            <Link href="/" passHref>
+            <Link href="/click-n-collect" passHref>
               <WhiteButton>J'y vais</WhiteButton>
             </Link>
           </figcaption>
@@ -88,9 +90,9 @@ const Book = () => {
           <figcaption>
             <h3>Livraison à domicile</h3>
             <p>la carte d'Augustine à déguster chez vous</p>
-            <Link href="/" passHref>
+            <a href="#" rel="noopener, noreferrer" target="_blank">
               <WhiteButton>J'y vais</WhiteButton>
-            </Link>
+            </a>
           </figcaption>
         </PromessCard>
       </FlexDiv>
