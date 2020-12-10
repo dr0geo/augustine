@@ -1,13 +1,23 @@
 import { db } from '@/utils/firebase';
+import Head from 'next/head';
 
 import Menu from '@/components/Menu';
 import { BlackButton } from '@/elements/Buttons';
+import Footer from '@/components/Footer';
 
 const ClicknCollect = props => {
   return (
     <>
+      <Head>
+        <title>Crêperie Augustine - Click & Collect</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta
+          name="description"
+          content="Commandez en ligne dans l'une de nos deux crêperies Parisiennes, et venez récupérer directement votre repas une fois prêt !"
+        />
+      </Head>
       <Menu
-        isSelected={4} 
+        isSelected={4}
         isClicked={props.isClicked}
         toggleMenu={props.toggleMenu}
         hideMenu={props.hideMenu}
@@ -16,7 +26,7 @@ const ClicknCollect = props => {
       <h2>Entrees</h2>
       <ul>
         {props.entrees.map((entree, index) => {
-          return ( 
+          return (
             <li key={index}>
               <h3>{entree.name}</h3>
               <p>{entree.description}</p>
@@ -29,7 +39,7 @@ const ClicknCollect = props => {
       <h2>Salades</h2>
       <ul>
         {props.salades.map((salade, index) => {
-          return ( 
+          return (
             <li key={index}>
               <h3>{salade.name}</h3>
               <p>{salade.description}</p>
@@ -42,7 +52,7 @@ const ClicknCollect = props => {
       <h2>Classiques</h2>
       <ul>
         {props.classiques.map((classique, index) => {
-          return ( 
+          return (
             <li key={index}>
               <h3>{classique.name}</h3>
               <p>{classique.description}</p>
@@ -55,7 +65,7 @@ const ClicknCollect = props => {
       <h2>Gourmandes</h2>
       <ul>
         {props.gourmandes.map((gourmande, index) => {
-          return ( 
+          return (
             <li key={index}>
               <h3>{gourmande.name}</h3>
               <p>{gourmande.description}</p>
@@ -68,7 +78,7 @@ const ClicknCollect = props => {
       <h2>Crêpes classiques</h2>
       <ul>
         {props.classiquesCrepes.map((crepe, index) => {
-          return ( 
+          return (
             <li key={index}>
               <h3>{crepe.name}</h3>
               <p>{crepe.price.toFixed(2)}€</p>
@@ -80,7 +90,7 @@ const ClicknCollect = props => {
       <h2>Crêpes gourmandes</h2>
       <ul>
         {props.gourmandesCrepes.map((crepe, index) => {
-          return ( 
+          return (
             <li key={index}>
               <h3>{crepe.name}</h3>
               <p>{crepe.description}</p>
@@ -93,7 +103,7 @@ const ClicknCollect = props => {
       <h2>Formules</h2>
       <ul>
         {props.formules.map((formula, index) => {
-          return ( 
+          return (
             <li key={index}>
               <h3>{formula.name}</h3>
               <p>{formula.description}</p>
@@ -103,18 +113,18 @@ const ClicknCollect = props => {
           );
         })}
       </ul>
+      <Footer />
     </>
   );
 };
 
 export const getStaticProps = async () => {
-
   // Create general function to retrieve each sub-collection:
   const retrieveData = async (docName, collectionName, resultsArray) => {
     const docs = await docName.collection(collectionName).get();
     docs.forEach(doc => resultsArray.push(doc.data()));
-  }
-  
+  };
+
   // Retrieve all foods in collection 'foods':
   const dbFoods = db.collection('foods').doc('pUn7ePba4vpsZ2v0nbHY');
 
@@ -151,7 +161,7 @@ export const getStaticProps = async () => {
   retrieveData(dbDrinks, 'alcoolisees', alcoolisees);
 
   return {
-    props: { 
+    props: {
       entrees,
       salades,
       classiques,
