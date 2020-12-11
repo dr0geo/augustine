@@ -7,7 +7,7 @@ const Container = styled.div`
     ${props => props.isShort === 0 && 'height: 290px'};
     ${props => props.isShort === 1 && 'height: 350px'};
     ${props => props.isShortDrink && 'height: 315px'};
-    ${props => props.offset && 'margin-top: 49px'};
+    ${props => props.setVertOffset && 'margin-top: 49px'};
     width: 840px;
   }
 `;
@@ -60,7 +60,7 @@ const CategorySelecter = styled.div`
     gap: 0;
     grid-template-columns: repeat(4, 1fr);
     margin-left: -20px;
-    ${props => props.offset && 'margin-top: -48px'};
+    ${props => props.setVertOffset && 'margin-top: -48px'};
     padding: 0;
   }
 `;
@@ -127,11 +127,11 @@ const Results = props => {
   return (
     <Container
       isShort={props.isSelected}
-      offset={[2, 3, 4].includes(props.isSelected)}
+      setVertOffset={[2, 3, 4].includes(props.isSelected)}
       isShortDrink={props.isSelected === 4 && [1, 2].includes(props.isCategorySelected)}
     >
       {[2, 3, 4].includes(props.isSelected) && (
-        <CategorySelecter offset={true}>
+        <CategorySelecter setVertOffset={true}>
           {props.selectedFood.map((food, index) => (
             <Category
               key={food.id}

@@ -4,10 +4,34 @@ import Image from 'next/image';
 
 import { FlexDiv } from '@/elements/Divs';
 
+const FooterFlexDiv = styled(FlexDiv)`
+  @media only screen and (min-width: 1200px) {
+    justify-content: space-between;
+    max-width: 1200px;
+    & > div:first-of-type {
+      & * {
+        text-align: left;
+      }
+      & p {
+        padding-left: 0;
+      }
+    }
+    & > div:last-of-type {
+      & * {
+        text-align: right;
+      }
+      & p {
+        padding-bottom: 20px;
+        padding-right: 0;
+      }
+    } 
+  }
+  
+`;
+
 const StyledFooter = styled.footer`
   background-color: #ac6c14;
   color: white;
-
   & > div > div {
     padding: 10px 40px;
     & > div > p {
@@ -26,7 +50,7 @@ const CenteredDiv = styled.div`
 const Footer = () => {
   return (
     <StyledFooter>
-      <FlexDiv>
+      <FooterFlexDiv>
         <div>
           <h2>
             <strong>Nos adresses</strong>
@@ -76,7 +100,7 @@ const Footer = () => {
             </a>
           </CenteredDiv>
         </div>
-      </FlexDiv>
+      </FooterFlexDiv>
     </StyledFooter>
   );
 };
