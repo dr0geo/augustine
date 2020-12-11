@@ -30,9 +30,11 @@ const StyledDiv = styled.li`
   }
   & > a > p {
     font-size: 0.85rem;
+    margin: 10px auto;
   }
   & > p {
     font-weight: 600;
+    padding: 10px 0;
   }
   @media only screen and (min-width: 1200px) {
     &:hover {

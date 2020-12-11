@@ -97,6 +97,7 @@ const GlobalStyle = createGlobalStyle`
   }
 
   h3 {
+    font-weight: 600;
     text-align: center;
   }
 

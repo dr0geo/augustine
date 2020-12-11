@@ -43,6 +43,7 @@ const Logo = styled.div`
 `;
 
 const Icon = styled.div`
+  margin-top: 30px;
   margin-bottom: 20px;
   @media only screen and (min-width: 1200px) {
     display: none;
@@ -107,7 +108,7 @@ const Menu = props => {
     <Header bg={props.bg}>
       {props.logo ? logo : <h1>{props.title}</h1>}
       <Icon onClick={props.toggleMenu}>
-        <Image src="/images/icons/menud.png" alt="" height={50} width={50} />
+        <Image src="/images/icons/menu.png" alt="" height={25} width={35} />
       </Icon>
       <FlexDiv isClicked={props.isClicked}>
         <Link href="/" passHref>

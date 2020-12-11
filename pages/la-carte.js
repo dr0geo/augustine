@@ -6,7 +6,9 @@ import Menu from '@/components/Menu';
 import Intro from '@/components/carte/Intro';
 import Categories from '@/components/carte/Categories';
 import Results from '@/components/carte/Results';
+import { MenuSection } from '@/components/elements/Divs';
 import Footer from '@/components/Footer';
+
 
 const Carte = props => {
   const [isSelected, setIsSelected] = useState(0);
@@ -58,13 +60,16 @@ const Carte = props => {
         title="La Carte"
       />
       <Intro />
-      <Categories isSelected={isSelected} handleClick={handleClick} />
-      <Results
-        isSelected={isSelected}
-        selectedFood={selectedFood}
-        isCategorySelected={isCategorySelected}
-        handleCategoryClick={handleCategoryClick}
-      />
+      <MenuSection>
+        <Categories isSelected={isSelected} handleClick={handleClick} />
+        <Results
+          isSelected={isSelected}
+          selectedFood={selectedFood}
+          isCategorySelected={isCategorySelected}
+          handleCategoryClick={handleCategoryClick}
+        />
+      </MenuSection>
+      
       <Footer />
     </>
   );
@@ -117,7 +122,7 @@ export const getStaticProps = async () => {
       entrees,
       salades,
       galettes: [
-        { title: 'Classique', data: classiques },
+        { title: 'Classiques', data: classiques },
         { title: 'Gourmandes', data: gourmandes }
       ],
       crepes: [

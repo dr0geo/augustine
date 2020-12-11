@@ -1,12 +1,19 @@
 import styled from 'styled-components';
-import { useState } from 'react';
 
 const Container = styled.div`
   display: grid;
   gap: 20px;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   margin: 20px auto;
   padding: 0 30px;
+  @media only screen and (min-width: 520px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  @media only screen and (min-width: 1200px) {
+    grid-template-columns: 150px;
+    height: 400px;
+    margin-top: 0;
+  }
 `;
 
 const Category = styled.button`
@@ -46,7 +53,7 @@ const Categories = props => {
         value={3}
         onClick={props.handleClick}
       >
-        Crêpes
+        Crêpes & Gaufres
       </Category>
       <Category
         isSelected={props.isSelected === 4}

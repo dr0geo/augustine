@@ -9,6 +9,15 @@ export const Section = styled.section`
   padding: 30px 0;
 `;
 
+export const MenuSection = styled.section`
+  @media only screen and (min-width: 1200px) {
+    display: flex;
+    justify-content: center;
+    margin: 30px auto;
+    max-width: 1200px;
+  }
+`;
+
 export const FlexDiv = styled.div`
   display: flex;
   flex-wrap: wrap;
