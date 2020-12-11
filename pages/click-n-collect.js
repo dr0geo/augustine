@@ -142,12 +142,7 @@ export const getStaticProps = async () => {
   retrieveData(dbFoods, 'crepes-classiques', classiquesCrepes);
   retrieveData(dbFoods, 'crepes-gourmandes', gourmandesCrepes);
 
-  // Retrieve all formulas:
-  const dbFormulas = await db.collection('formules').get();
-  const formules = [];
-  dbFormulas.forEach(doc => formules.push(doc.data()));
-
-  // Retrieve all drinks:
+  // Retrieve all drinks in collection 'drinks':
   const dbDrinks = db.collection('drinks').doc('znRDAknerTd91N6ddKkx');
 
   const fraiches = [];
@@ -158,21 +153,21 @@ export const getStaticProps = async () => {
   retrieveData(dbDrinks, 'fraiches', fraiches);
   retrieveData(dbDrinks, 'chaudes', chaudes);
   retrieveData(dbDrinks, 'aperitifs', aperitifs);
-  retrieveData(dbDrinks, 'alcoolisees', alcoolisees);
+  retrieveData(dbDrinks, 'alcoolisees', alcoolisees); 
+  
+  // Retrieve all formulas in collection 'formules':
+  const dbFormulas = await db.collection('formules').get();
+  const formules = [];
+  dbFormulas.forEach(doc => formules.push(doc.data()));
 
   return {
     props: {
       entrees,
       salades,
-      classiques,
-      gourmandes,
-      classiquesCrepes,
-      gourmandesCrepes,
-      formules,
-      fraiches,
-      chaudes,
-      aperitifs,
-      alcoolisees
+      galettes: [classiques, gourmandes],
+      crepes: [classiquesCrepes, gourmandesCrepes],
+      boissons: [fraiches, chaudes, aperitifs, alcoolisees],
+      formules
     },
     revalidate: 86400
   };
