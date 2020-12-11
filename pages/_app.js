@@ -62,8 +62,17 @@ const GlobalStyle = createGlobalStyle`
   }
 
   h1 {
-    font-size: 1.3rem;
+    color: white;
+    font-family: 'Dancing-Script', sans serif;
+    font-size: 2.6rem;
     text-align: center;
+    @media only screen and (min-width: 1200px) {
+      align-items: center;
+      display: flex;
+      font-size: 3.8rem;
+      height: 400px;
+      margin-top: 0;
+    }
   }
 
   h2 {

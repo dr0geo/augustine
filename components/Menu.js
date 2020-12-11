@@ -1,19 +1,22 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { useState } from 'react';
 import styled from 'styled-components';
 
 const Header = styled.header`
   align-items: center;
-  background: linear-gradient(hsla(0deg, 0%, 0%, 0.6), hsla(0deg, 0%, 0%, 0.6)), url('/images/background/header-bg.jpg');
+  background: linear-gradient(hsla(0deg, 0%, 0%, 0.6), hsla(0deg, 0%, 0%, 0.6)),
+    url(${props => props.bg});
   background-position: center;
   background-repeat: no-repeat;
+  background-size: cover;
   display: flex;
   flex-direction: column;
+  min-height: 200px;
   padding: 0 40px;
   @media only screen and (min-width: 1200px) {
     flex-direction: column-reverse;
-    justify-content: center;
+    justify-content: flex-end;
+    min-height: 550px;
   }
 `;
 
@@ -25,13 +28,16 @@ const Logo = styled.div`
   width: 280px;
   & > h1 {
     color: #012f6a;
-    font-family: 'Dancing-Script', sans-serif;
+    font-size: 1.3rem;
   }
   @media only screen and (min-width: 1200px) {
     margin-bottom: 40px;
     width: auto;
     & > h1 {
       font-size: 1.8rem;
+      height: auto;
+      justify-content: center;
+      margin-top: 20px;
     }
   }
 `;
@@ -85,22 +91,21 @@ const Anchor = styled.a`
   }
 `;
 
+const logo = (
+  <Logo>
+    <Link href="/">
+      <a>
+        <Image src="/images/logo/logo.png" alt="" height={300} width={450} />
+      </a>
+    </Link>
+    <h1>crêperie contemporaine - Paris</h1>
+  </Logo>
+);
+
 const Menu = props => {
   return (
-    <Header>
-      <Logo>
-        <Link href="/">
-          <a>
-            <Image
-              src="/images/logo/logo.png"
-              alt=""
-              height={300}
-              width={450}
-            />
-          </a>
-        </Link>
-        <h1>crêperie contemporaine - Paris</h1>
-      </Logo>
+    <Header bg={props.bg}>
+      {props.logo ? logo : <h1>{props.title}</h1>}
       <Icon onClick={props.toggleMenu}>
         <Image src="/images/icons/menud.png" alt="" height={50} width={50} />
       </Icon>

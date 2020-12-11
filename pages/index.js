@@ -24,6 +24,8 @@ const Accueil = props => {
         isClicked={props.isClicked}
         toggleMenu={props.toggleMenu}
         hideMenu={props.hideMenu}
+        bg="/images/background/header-bg.jpg"
+        logo={true}
       />
       <main>
         <Presentation />

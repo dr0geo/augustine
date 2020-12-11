@@ -20,6 +20,8 @@ const Carte = props => {
         isClicked={props.isClicked}
         toggleMenu={props.toggleMenu}
         hideMenu={props.hideMenu}
+        bg="/images/restaurant/downstairs.jpeg"
+        title="La Carte"
       />
       <p>La carte</p>
       <Footer />
