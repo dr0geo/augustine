@@ -14,7 +14,7 @@ export const MenuSection = styled.section`
     display: flex;
     justify-content: center;
     margin: 30px auto;
-    max-width: 1200px;
+    max-width: 1160px;
   }
 `;
 

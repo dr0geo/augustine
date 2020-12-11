@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import Image from 'next/image';
 
 const Container = styled.div`
   display: grid;
@@ -6,13 +7,34 @@ const Container = styled.div`
   grid-template-columns: repeat(2, 1fr);
   margin: 20px auto;
   padding: 0 30px;
+
   @media only screen and (min-width: 520px) {
     grid-template-columns: repeat(3, 1fr);
   }
   @media only screen and (min-width: 1200px) {
-    grid-template-columns: 150px;
+    grid-template-columns: 260px;
     height: 400px;
     margin-top: 0;
+  }
+`;
+
+const FlexDiv = styled.div`
+  align-items: center;
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-between;
+`;
+
+const ImageDiv = styled.div`
+  display: none;
+  @media only screen and (min-width: 1200px) {
+    align-items: center;
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+    width: 80px;
   }
 `;
 
@@ -22,53 +44,126 @@ const Category = styled.button`
   border-radius: 5px;
   color: ${props => (props.isSelected ? 'white' : 'black')};
   padding: 15px 10px;
+  transition: background-color 0.3s ease-in-out;
+  width: 100%;
+  @media only screen and (min-width: 1200px) {
+    ${props => props.isSelected && '& + div { opacity: 1 }'};
+    width: 140px;
+    &:hover {
+      ${props => !props.isSelected && 'background-color: #e3e9ef'};
+      cursor: pointer;
+      & + div {
+        opacity: 1;
+      }
+    }
+  }
 `;
 
 const Categories = props => {
   return (
     <Container>
-      <Category
-        isSelected={props.isSelected === 0}
-        value={0}
-        onClick={props.handleClick}
-      >
-        Entrées
-      </Category>
-      <Category
-        isSelected={props.isSelected === 1}
-        value={1}
-        onClick={props.handleClick}
-      >
-        Salades
-      </Category>
-      <Category
-        isSelected={props.isSelected === 2}
-        value={2}
-        onClick={props.handleClick}
-      >
-        Galettes
-      </Category>
-      <Category
-        isSelected={props.isSelected === 3}
-        value={3}
-        onClick={props.handleClick}
-      >
-        Crêpes & Gaufres
-      </Category>
-      <Category
-        isSelected={props.isSelected === 4}
-        value={4}
-        onClick={props.handleClick}
-      >
-        Boissons
-      </Category>
-      <Category
-        isSelected={props.isSelected === 5}
-        value={5}
-        onClick={props.handleClick}
-      >
-        Menu
-      </Category>
+      <FlexDiv>
+        <Category
+          isSelected={props.isSelected === 0}
+          value={0}
+          onClick={props.handleClick}
+        >
+          Entrées
+        </Category>
+        <ImageDiv>
+          <Image
+            src="/images/icons/menu/entrees.png"
+            alt=""
+            height={50}
+            width={80}
+          />
+        </ImageDiv>
+      </FlexDiv>
+      <FlexDiv>
+        <Category
+          isSelected={props.isSelected === 1}
+          value={1}
+          onClick={props.handleClick}
+        >
+          Salades
+        </Category>
+        <ImageDiv>
+          <Image
+            src="/images/icons/menu/salades.png"
+            alt=""
+            height={50}
+            width={80}
+          />
+        </ImageDiv>
+      </FlexDiv>
+      <FlexDiv>
+        <Category
+          isSelected={props.isSelected === 2}
+          value={2}
+          onClick={props.handleClick}
+        >
+          Galettes
+        </Category>
+        <ImageDiv>
+          <Image
+            src="/images/icons/menu/galettes.png"
+            alt=""
+            height={50}
+            width={80}
+          />
+        </ImageDiv>
+      </FlexDiv>
+      <FlexDiv>
+        <Category
+          isSelected={props.isSelected === 3}
+          value={3}
+          onClick={props.handleClick}
+        >
+          Crêpes & Gaufres
+        </Category>
+        <ImageDiv>
+          <Image
+            src="/images/icons/menu/crepes.png"
+            alt=""
+            height={50}
+            width={45}
+          />
+        </ImageDiv>
+      </FlexDiv>
+      <FlexDiv>
+        <Category
+          isSelected={props.isSelected === 4}
+          value={4}
+          onClick={props.handleClick}
+        >
+          Boissons
+        </Category>
+        <ImageDiv>
+          <Image
+            src="/images/icons/menu/boissons.png"
+            alt=""
+            height={50}
+            width={50}
+          />
+        </ImageDiv>
+      </FlexDiv>
+      <FlexDiv>
+        <Category
+          isSelected={props.isSelected === 5}
+          value={5}
+          onClick={props.handleClick}
+        >
+          Menu
+        </Category>
+        <ImageDiv>
+          <Image
+            src="/images/icons/menu/menu.png"
+            alt=""
+            height={50}
+            width={60}
+          />
+        </ImageDiv>
+      </FlexDiv>
     </Container>
   );
 };

@@ -4,10 +4,11 @@ const Container = styled.div`
   background-color: #e3e9ef;
   padding: 0 20px;
   @media only screen and (min-width: 1200px) {
-    ${props => props.isShort === 0 && 'height: 290px;'};
-    ${props => props.isShort === 1 && 'height: 350px;'};
+    ${props => props.isShort === 0 && 'height: 290px'};
+    ${props => props.isShort === 1 && 'height: 350px'};
+    ${props => props.isShortDrink && 'height: 315px'};
     ${props => props.offset && 'margin-top: 49px'};
-    width: 900px;
+    width: 840px;
   }
 `;
 
@@ -35,9 +36,13 @@ const ResultDiv = styled.div`
       text-align: left;
     }
     & > div > p {
-      max-width: 750px;
+      max-width: 700px;
       padding: 0;
       text-align: left;
+    }
+    & > div:last-of-type {
+      align-items: center;
+      display: flex;
     }
     & > div:last-of-type > p {
       margin-top: 0;
@@ -55,19 +60,22 @@ const CategorySelecter = styled.div`
     gap: 0;
     grid-template-columns: repeat(4, 1fr);
     margin-left: -20px;
-    ${props => props.offset === true && 'margin-top: -49px'};
+    ${props => props.offset && 'margin-top: -48px'};
     padding: 0;
   }
 `;
 
 const Category = styled.button`
-  background-color: ${props => (props.isCategorySelected ? '#012f6a' : 'white')};
-  border: 1px solid ${props => (props.isCategorySelected ? '#012f6a' : '#e3e9ef')};
+  background-color: ${props =>
+    props.isCategorySelected ? '#012f6a' : 'white'};
+  border: 1px solid
+    ${props => (props.isCategorySelected ? '#012f6a' : '#e3e9ef')};
   border-radius: 5px;
   color: ${props => (props.isCategorySelected ? 'white' : 'black')};
   padding: 15px 10px;
   @media only screen and (min-width: 1200px) {
-    background-color: ${props => (props.isCategorySelected ? '#e3e9ef' : 'white')};
+    background-color: ${props =>
+      props.isCategorySelected ? '#e3e9ef' : 'white'};
     border: 1px solid #e3e9ef;
     border-radius: 0;
     color: #012f6a;
@@ -76,29 +84,23 @@ const Category = styled.button`
     font-weight: 600;
     padding: 8px 20px;
     text-align: left;
+    width: 210px;
+    & + & {
+      border-left: 0;
+    }
+    &:hover {
+      cursor: pointer;
+    }
   }
 `;
 
 const Results = props => {
-
   let results;
 
   // Check if there are sub-arrays:
   [0, 1, 5].includes(props.isSelected)
-    // Display food that has no subcategory:
-    ? results = props.selectedFood.map(food => (
-      <ResultDiv key={food.id}>
-        <div>
-          <h3>{food.name}</h3>
-          {food.description && <p>{food.description}</p>}
-        </div>
-        <div>
-          <p>{food.price.toFixed(2)}€</p>
-        </div>
-      </ResultDiv>
-    ))
-    // Display only the subselection selected via selected food and selected subcategory of that food:
-    : results = props.selectedFood[props.isCategorySelected].data.map(food => (
+    ? // Display food that has no subcategory:
+      (results = props.selectedFood.map(food => (
         <ResultDiv key={food.id}>
           <div>
             <h3>{food.name}</h3>
@@ -108,14 +110,30 @@ const Results = props => {
             <p>{food.price.toFixed(2)}€</p>
           </div>
         </ResultDiv>
-      ));
+      )))
+    : // Display only the subselection selected via selected food and selected subcategory of that food:
+      (results = props.selectedFood[props.isCategorySelected].data.map(food => (
+        <ResultDiv key={food.id}>
+          <div>
+            <h3>{food.name}</h3>
+            {food.description && <p>{food.description}</p>}
+          </div>
+          <div>
+            <p>{food.price.toFixed(2)}€</p>
+          </div>
+        </ResultDiv>
+      )));
 
   return (
-    <Container isShort={props.isSelected} offset={[2, 3, 4].includes(props.isSelected)}>
-      {[2, 3, 4].includes(props.isSelected) &&
+    <Container
+      isShort={props.isSelected}
+      offset={[2, 3, 4].includes(props.isSelected)}
+      isShortDrink={props.isSelected === 4 && [1, 2].includes(props.isCategorySelected)}
+    >
+      {[2, 3, 4].includes(props.isSelected) && (
         <CategorySelecter offset={true}>
           {props.selectedFood.map((food, index) => (
-            <Category 
+            <Category
               key={food.id}
               isCategorySelected={props.isCategorySelected === index}
               value={index}
@@ -125,10 +143,10 @@ const Results = props => {
             </Category>
           ))}
         </CategorySelecter>
-      }
+      )}
       {results}
     </Container>
   );
-}
+};
 
 export default Results;
