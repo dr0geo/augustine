@@ -10,8 +10,9 @@ import Footer from '@/components/Footer';
 
 const Carte = props => {
   const [isSelected, setIsSelected] = useState(0);
-  const [selectedFood, setSelectedFood] = useState(props.entrees);
   const [isCategorySelected, setIsCategorySelected] = useState(0);
+  const [selectedFood, setSelectedFood] = useState(props.entrees);
+  
 
   const handleClick = ({ target }) => {
     setIsSelected(parseInt(target.value));

@@ -26,7 +26,9 @@ const Results = props => {
 
   let results;
 
+  // Check if there are sub-arrays:
   [0, 1, 5].includes(props.isSelected)
+    // Display food that has no subcategory:
     ? results = props.selectedFood.map(food => (
       <div key={food.id}>
         <h3>{food.name}</h3>
@@ -34,16 +36,14 @@ const Results = props => {
         <p>{food.price.toFixed(2)}€</p>
       </div>
     ))
-
-    : results = props.selectedFood.map(category => (
-      category.data.map(food => (
+    // Display only the subselection selected via selected food and selected subcategory of that food:
+    : results = props.selectedFood[props.isCategorySelected].data.map(food => (
         <div key={food.id}>
           <h3>{food.name}</h3>
           {food.description && <p>{food.description}</p>}
           <p>{food.price.toFixed(2)}€</p>
         </div>
-      ))
-    ));
+      ));
 
   return (
     <Container>
