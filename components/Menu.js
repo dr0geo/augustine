@@ -2,7 +2,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import styled from 'styled-components';
 import { CloseOutline } from '@styled-icons/evaicons-outline';
-import { FoodMenu } from '@styled-icons/boxicons-regular';
+import { Menu as MenuIcon } from '@styled-icons/evaicons-solid';
 
 const Header = styled.header`
   align-items: center;
@@ -51,8 +51,9 @@ const Close = styled(CloseOutline)`
   }
 `;
 
-const MenuIcon = styled(FoodMenu)`
+const MenuIc = styled(MenuIcon)`
   color: white;
+  margin-bottom: 10px;
   @media only screen and (min-width: 1200px) {
     display: none;
   }
@@ -115,7 +116,7 @@ const Menu = props => {
   return (
     <Header bg={props.bg}>
       {props.logo ? logo : <h1>{props.title}</h1>}
-      <MenuIcon onClick={props.toggleMenu} height={90} width={45} />
+      <MenuIc onClick={props.toggleMenu} size={40} />
       <FlexDiv isClicked={props.isClicked}>
         <Link href="/" passHref>
           <Anchor onClick={props.hideMenu} isSelected={props.isSelected === 1}>
