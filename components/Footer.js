@@ -8,6 +8,9 @@ const FooterFlexDiv = styled(FlexDiv)`
   & > div:last-of-type > p > a {
     margin: 20px 0;
   }
+  & p {
+    margin-top: 15px;
+  }
   @media only screen and (min-width: 731px) {
     justify-content: space-between;
     max-width: 1200px;
@@ -16,6 +19,7 @@ const FooterFlexDiv = styled(FlexDiv)`
         text-align: left;
       }
       & p {
+        margin-top: 0;
         padding-left: 0;
       }
     }
