@@ -120,7 +120,7 @@ const Footer = () => {
               rel="noopener, noreferrer"
               target="_blank"
             >
-              <Insta size={50} />
+              <Insta size={55} />
             </a>
           </CenteredDiv>
         </div>
