@@ -8,7 +8,7 @@ const FooterFlexDiv = styled(FlexDiv)`
   & > div:last-of-type > p > a {
     margin: 20px 0;
   }
-  @media only screen and (min-width: 1200px) {
+  @media only screen and (min-width: 731px) {
     justify-content: space-between;
     max-width: 1200px;
     & > div:first-of-type {
@@ -83,7 +83,7 @@ const Footer = () => {
               <br />
               75001 Paris
               <br />
-              <a href="tel:0100000000">01.00.00.00.00</a>
+              <a href="tel:+33183929448">01 83 92 94 48</a>
             </p>
             <p>
               Autre adresse
