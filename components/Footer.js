@@ -1,10 +1,13 @@
 import styled from 'styled-components';
 import Link from 'next/link';
-import Image from 'next/image';
+import { FacebookCircle, Instagram } from '@styled-icons/boxicons-logos';
 
 import { FlexDiv } from '@/elements/Divs';
 
 const FooterFlexDiv = styled(FlexDiv)`
+  & > div:last-of-type > p > a {
+    margin: 20px 0;
+  }
   @media only screen and (min-width: 1200px) {
     justify-content: space-between;
     max-width: 1200px;
@@ -21,12 +24,10 @@ const FooterFlexDiv = styled(FlexDiv)`
         text-align: right;
       }
       & p {
-        padding-bottom: 20px;
         padding-right: 0;
       }
     } 
   }
-  
 `;
 
 const StyledFooter = styled.footer`
@@ -44,6 +45,7 @@ const StyledFooter = styled.footer`
 `;
 
 const CenteredDiv = styled.div`
+  margin: 20px auto;
   text-align: center;
 `;
 
@@ -83,20 +85,10 @@ const Footer = () => {
           </p>
           <CenteredDiv>
             <a href="#" rel="noopener, noreferrer" target="_blank">
-              <Image
-                src="/images/icons/fb.jpg"
-                alt="Logo FaceBook"
-                height={40}
-                width={40}
-              />
+              <FacebookCircle size={50} />
             </a>
             <a href="https://www.instagram.com/creperieaugustine/" rel="noopener, noreferrer" target="_blank">
-              <Image
-                src="/images/icons/insta.jpeg"
-                alt="Logo Instagram"
-                height={40}
-                width={40}
-              />
+              <Instagram size={50} />
             </a>
           </CenteredDiv>
         </div>
