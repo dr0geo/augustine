@@ -46,7 +46,9 @@ const Logo = styled.div`
 
 const Close = styled(CloseOutline)`
   margin: 0 auto;
-  
+  @media only screen and (min-width: 1200px) {
+    display: none;
+  }
 `;
 
 const MenuIcon = styled(FoodMenu)`
