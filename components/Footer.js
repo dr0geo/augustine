@@ -26,7 +26,7 @@ const FooterFlexDiv = styled(FlexDiv)`
       & p {
         padding-right: 0;
       }
-    } 
+    }
   }
 `;
 
@@ -47,6 +47,26 @@ const StyledFooter = styled.footer`
 const CenteredDiv = styled.div`
   margin: 20px auto;
   text-align: center;
+`;
+
+const Fb = styled(FacebookCircle)`
+  @media only screen and (min-width: 1200px) {
+    transition: opacity 0.2s ease-in-out, transform 0.2s ease-in-out;
+    &:hover {
+      opacity: 0.8;
+      transform: scale(1.1);
+    }
+  }
+`;
+
+const Insta = styled(Instagram)`
+  @media only screen and (min-width: 1200px) {
+    transition: opacity 0.2s ease-in-out, transform 0.2s ease-in-out;
+    &:hover {
+      opacity: 0.8;
+      transform: scale(1.1);
+    }
+  }
 `;
 
 const Footer = () => {
@@ -84,11 +104,19 @@ const Footer = () => {
             </Link>
           </p>
           <CenteredDiv>
-            <a href="#" rel="noopener, noreferrer" target="_blank">
-              <FacebookCircle size={50} />
+            <a
+              href="https://www.facebook.com/crepesaugustine"
+              rel="noopener, noreferrer"
+              target="_blank"
+            >
+              <Fb size={50} />
             </a>
-            <a href="https://www.instagram.com/creperieaugustine/" rel="noopener, noreferrer" target="_blank">
-              <Instagram size={50} />
+            <a
+              href="https://www.instagram.com/creperieaugustine/"
+              rel="noopener, noreferrer"
+              target="_blank"
+            >
+              <Insta size={50} />
             </a>
           </CenteredDiv>
         </div>
