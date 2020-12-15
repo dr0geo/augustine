@@ -1,6 +1,8 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import styled from 'styled-components';
+import { CloseOutline } from '@styled-icons/evaicons-outline';
+import { FoodMenu } from '@styled-icons/boxicons-regular';
 
 const Header = styled.header`
   align-items: center;
@@ -42,9 +44,13 @@ const Logo = styled.div`
   }
 `;
 
-const Icon = styled.div`
-  margin-top: 30px;
-  margin-bottom: 20px;
+const Close = styled(CloseOutline)`
+  margin: 0 auto;
+  
+`;
+
+const MenuIcon = styled(FoodMenu)`
+  color: white;
   @media only screen and (min-width: 1200px) {
     display: none;
   }
@@ -60,7 +66,7 @@ const FlexDiv = styled.div`
   display: flex;
   flex-direction: column;
   height: 100vh;
-  justify-content: space-around;
+  justify-content: space-evenly;
   position: absolute;
   text-align: center;
   transform: ${props => (props.isClicked ? 'scale(1)' : 'scale(0)')};
@@ -107,9 +113,7 @@ const Menu = props => {
   return (
     <Header bg={props.bg}>
       {props.logo ? logo : <h1>{props.title}</h1>}
-      <Icon onClick={props.toggleMenu}>
-        <Image src="/images/icons/menu.png" alt="" height={25} width={35} />
-      </Icon>
+      <MenuIcon onClick={props.toggleMenu} height={90} width={45} />
       <FlexDiv isClicked={props.isClicked}>
         <Link href="/" passHref>
           <Anchor onClick={props.hideMenu} isSelected={props.isSelected === 1}>
@@ -141,9 +145,7 @@ const Menu = props => {
             Contact
           </Anchor>
         </Link>
-        <Icon onClick={props.hideMenu}>
-          <Image src="/images/icons/close.png" alt="" height={35} width={35} />
-        </Icon>
+        <Close onClick={props.hideMenu} size={70} />
       </FlexDiv>
     </Header>
   );
