@@ -49,7 +49,7 @@ const Category = styled.button`
   @media only screen and (min-width: 1200px) {
     ${props => props.isSelected && '& + div { opacity: 1 }'};
     width: 140px;
-    @media (any-hover:hover) {
+    @media (any-hover: hover) {
       &:hover {
         ${props => !props.isSelected && 'background-color: #e3e9ef'};
         cursor: pointer;

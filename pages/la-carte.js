@@ -69,7 +69,6 @@ const Carte = props => {
           handleCategoryClick={handleCategoryClick}
         />
       </MenuSection>
-      
       <Footer />
     </>
   );
