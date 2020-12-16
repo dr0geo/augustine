@@ -87,7 +87,7 @@ const FlexPar = styled.div`
   }
 `;
 
-const TimeButton = styled.div`
+const TimeButton = styled.option`
   background-color: #012f6a;
   border: 1px solid #012f6a;
   color: white;
@@ -101,7 +101,7 @@ const TimeButton = styled.div`
 export const DateChoice = props => (
   <Section bgColor="#e3e9ef">
     <PreviousButton onClick={props.goToPreviousStep}>
-      <LeftArrow size={20} /> Précédent
+      <LeftArrow size={20} /> Retour
     </PreviousButton>
     <WhiteDiv>
       <LeftArrow size={20} onClick={props.handleDateDecrease} />
@@ -119,11 +119,21 @@ export const DateChoice = props => (
       <FlexPar>
         <p>Réservations disponibles</p>
         <div>
-          <TimeButton>19:00</TimeButton>
-          <TimeButton>19:45</TimeButton>
-          <TimeButton>20:15</TimeButton>
-          <TimeButton>20:45</TimeButton>
-          <TimeButton>21:30</TimeButton>
+          <TimeButton value="19:00" onClick={props.handleTimeSelection}>
+            19:00
+          </TimeButton>
+          <TimeButton value="19:45" onClick={props.handleTimeSelection}>
+            19:45
+          </TimeButton>
+          <TimeButton value="20:15" onClick={props.handleTimeSelection}>
+            20:15
+          </TimeButton>
+          <TimeButton value="20:45" onClick={props.handleTimeSelection}>
+            20:45
+          </TimeButton>
+          <TimeButton value="21:30" onClick={props.handleTimeSelection}>
+            21:30
+          </TimeButton>
         </div>
       </FlexPar>
     </WhiteDiv>

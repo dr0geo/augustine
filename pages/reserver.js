@@ -75,6 +75,15 @@ const Reserver = props => {
   // Booking time:
   const [time, setTime] = useState('');
 
+  const handleTimeSelection = e => {
+    setTime(e.target.value);
+    goToNextStep();
+  }
+  console.log(time);
+
+  // Handle booking submission:
+
+
   return (
     <>
       <Head>
@@ -108,7 +117,6 @@ const Reserver = props => {
       {bookingStep === 1 && (
         <DateChoice
           goToPreviousStep={goToPreviousStep}
-          goToNextStep={goToNextStep}
           dateSentence={dateSentence}
           people={people}
           time={time}
@@ -116,6 +124,7 @@ const Reserver = props => {
           handleDateIncrease={handleDateIncrease}
           handlePeopleDecrease={handlePeopleDecrease}
           handlePeopleIncrease={handlePeopleIncrease}
+          handleTimeSelection={handleTimeSelection}
         />
       )}
       <Footer />
