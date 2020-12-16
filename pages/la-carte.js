@@ -44,7 +44,7 @@ const Carte = props => {
   return (
     <>
       <Head>
-        <title>Crêperie Augustine - La Carte</title>
+        <title>Crêperie Augustine | La Carte</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta
           name="description"

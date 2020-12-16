@@ -5,6 +5,9 @@ import { FacebookCircle, Instagram } from '@styled-icons/boxicons-logos';
 import { FlexDiv } from '@/elements/Divs';
 
 const FooterFlexDiv = styled(FlexDiv)`
+  & > div:last-of-type > p:first-of-type {
+    text-decoration: underline;
+  }
   & > div:last-of-type > p > a {
     margin: 20px 0;
   }
@@ -104,7 +107,7 @@ const Footer = () => {
           </h2>
           <p>
             <Link href="/contact">
-              <a>Contactez-nous</a>
+              <a title="Cliquez pour accéder au formulaire de contact">Contactez-nous</a>
             </Link>
           </p>
           <CenteredDiv>

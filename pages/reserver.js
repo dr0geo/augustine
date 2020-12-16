@@ -107,7 +107,6 @@ const Reserver = props => {
   const [bookingConfirmation, setBookingConfirmation] = useState('');
 
   const handleSubmit = async (e) => {
-    console.log('submitted');
     e.preventDefault();
 
     const bookingRef = {
@@ -138,7 +137,7 @@ const Reserver = props => {
   return (
     <>
       <Head>
-        <title>Crêperie Augustine - Réserver</title>
+        <title>Crêperie Augustine | Réserver</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta
           name="description"

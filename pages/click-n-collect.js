@@ -8,7 +8,7 @@ const ClicknCollect = props => {
   return (
     <>
       <Head>
-        <title>Crêperie Augustine - Click & Collect</title>
+        <title>Crêperie Augustine | Click & Collect</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta
           name="description"

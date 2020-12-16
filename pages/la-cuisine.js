@@ -7,7 +7,7 @@ const Cuisine = props => {
   return (
     <>
       <Head>
-        <title>Crêperie Augustine - La Cuisine</title>
+        <title>Crêperie Augustine | La Cuisine</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta
           name="description"
