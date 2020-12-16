@@ -126,7 +126,15 @@ const FlexPar = styled.div`
   padding: 0;
 `;
 
-const TimeButton = styled.option`
+const TimeList = styled.div`
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 15px;
+`;
+
+const TimeButton = styled.button`
   background-color: #012f6a;
   border: 1px solid #012f6a;
   color: white;
@@ -167,7 +175,7 @@ export const DateChoice = props => (
       <WhiteDiv>
         <FlexPar>
           <p>Réservations disponibles</p>
-          <datalist>
+          <TimeList>
             <TimeButton value="19:00" onClick={props.handleTimeSelection}>
               19:00
             </TimeButton>
@@ -183,7 +191,7 @@ export const DateChoice = props => (
             <TimeButton value="21:30" onClick={props.handleTimeSelection}>
               21:30
             </TimeButton>
-          </datalist>
+          </TimeList>
         </FlexPar>
       </WhiteDiv>
     </LimitedWidthDiv>
