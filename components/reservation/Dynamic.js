@@ -242,6 +242,11 @@ const ValidateButton = styled.button`
   margin: 20px auto 0 auto;
   padding: 10px;
   width: 130px;
+  @media only screen and (min-width: 1200px) {
+    @media (any-hover: hover) {
+      cursor: pointer;
+    }
+  }
 `;
 
 export const Personal = props => (
@@ -258,7 +263,7 @@ export const Personal = props => (
           </p>
         </FlexPar>
         <p>
-          Pour {props.people} personnes, le {props.dateSentence} à {props.time}
+          Pour {props.people} personnes, le {props.dateSentence.toLowerCase()} à {props.time}
         </p>
         <form onSubmit={props.handleSubmit}>
           <input

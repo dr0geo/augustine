@@ -120,7 +120,7 @@ const Reserver = props => {
       phoneNumber
     }
 
-    fetch('/api/reservation', {
+    fetch('/api/reservations', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
