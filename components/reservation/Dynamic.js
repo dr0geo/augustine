@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { useState } from 'react';
+import Link from 'next/link';
 
 import { Section, FlexDiv } from '@/elements/Divs';
 import { RestaurantCard } from '@/elements/Cards';
@@ -38,7 +38,7 @@ export const RestaurantChoice = props => (
       </Restaurant>
       <Restaurant
         bgUrl="/images/restaurant/upstairs.jpeg"
-        onClick={() => props.handleRestaurantSelection(2)}
+        onClick={() => props.handleRestaurantSelection(8)}
       >
         <div>Paris 08</div>
       </Restaurant>
@@ -63,9 +63,9 @@ const PreviousButton = styled(BlackButton)`
   color: #012f6a;
   display: flex;
   font-weight: 400;
-  justify-content: space-between;
+  justify-content: space-around;
   margin: 0 20px 40px 20px;
-  max-width: 150px;
+  max-width: 130px;
 `;
 
 const FlexPar = styled.div`
@@ -137,5 +137,138 @@ export const DateChoice = props => (
         </div>
       </FlexPar>
     </WhiteDiv>
+  </Section>
+);
+
+// Personal information:
+const Container = styled.div`
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  max-width: 280px;
+  padding: 20px;
+  & > p {
+    margin: 20px auto;
+    padding: 0;
+  }
+  & > form {
+    & > input {
+      border: 2px solid #e3e9ef;
+      border-radius: 5px;
+      color: #012f6a;
+      margin: 10px auto;
+      padding: 10px;
+      transition: border 0.2s ease-in-out;
+      width: 240px;
+      &::placeholder {
+        color: #012f6a;
+      }
+      &:focus {
+        border: 2px solid #012f6a;
+      }
+    }
+  }
+`;
+
+const ValidateButton = styled.button`
+  background-color: #012f6a;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  display: block;
+  font-family: 'Dancing-Script', sans-serif;
+  font-size: 1.3rem;
+  margin: 20px auto 0 auto;
+  padding: 10px;
+  width: 130px;
+`;
+
+export const Personal = props => (
+  <Section bgColor="#e3e9ef">
+    <PreviousButton onClick={props.goToPreviousStep}>
+      <LeftArrow size={20} /> Retour
+    </PreviousButton>
+    <Container>
+      <FlexPar>
+        <p>
+          Confirmez votre réservation chez Augustine Paris{' '}
+          {props.restaurant.toString().padStart(2, '0')}
+        </p>
+      </FlexPar>
+      <p>
+        Pour {props.people} personnes, le {props.dateSentence} à {props.time}
+      </p>
+      <form onSubmit={props.handleSubmit}>
+        <input
+          type="text"
+          placeholder="Prénom *"
+          name="firstName"
+          required
+          onChange={props.handleInputValues}
+        />
+        <input
+          type="text"
+          placeholder="Nom *"
+          name="lastName"
+          required
+          onChange={props.handleInputValues}
+        />
+        <input
+          type="e-mail"
+          placeholder="E-mail *"
+          name="email"
+          required
+          onChange={props.handleInputValues}
+        />
+        <input
+          type="tel"
+          placeholder="Téléphone *"
+          name="phoneNumber"
+          minLength="10"
+          maxLength="13"
+          required
+          onChange={props.handleInputValues}
+        />
+        <p>
+          En validant ma réservation, j'accepte les conditions d'utilisation et
+          la politique de confidentialité.
+        </p>
+        <ValidateButton type="submit">Valider</ValidateButton>
+      </form>
+    </Container>
+  </Section>
+);
+
+// Booking successfully submitted:
+const SuccessContainer = styled.div`
+  background-color: white;
+  margin: auto;
+  padding: 20px;
+  width: 95%;
+  & > p {
+    color: #012f6a;
+    line-height: 1.5rem;
+    padding: 0;
+    & > a {
+      color: #012f6a;
+      border-bottom: 1px solid #012f6a;
+    }
+    & > em {
+      font-weight: 600; 
+    }
+  }
+`;
+
+export const Success = props => (
+  <Section bgColor="#e3e9ef">
+    <SuccessContainer>
+      <p>
+        Nous vous remercions pour votre réservation. Celle-ci a bien été
+        enregistrée avec la référence <em>{props.bookingConfirmation}</em> et nous sommes
+        impatients de vous recevoir dans notre restaurant !<br />
+        Vous pouvez maintenant revenir à la <Link href="/"><a title="Cliquez pour revenir à la page d'accueil">page d'accueil</a></Link>.
+      </p>
+    </SuccessContainer>
   </Section>
 );

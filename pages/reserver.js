@@ -3,7 +3,7 @@ import { useState } from 'react';
 
 import Menu from '@/components/Menu';
 import { Section } from '@/elements/Divs';
-import { RestaurantChoice, DateChoice } from '@/components/reservation/Dynamic';
+import { RestaurantChoice, DateChoice, Personal, Success } from '@/components/reservation/Dynamic';
 import Footer from '@/components/Footer';
 
 const weekDays = [
@@ -79,11 +79,62 @@ const Reserver = props => {
     setTime(e.target.value);
     goToNextStep();
   }
-  console.log(time);
+
+  // Personal information:
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [email, setEmail] = useState('');
+  const [phoneNumber, setPhoneNumber] = useState('');
+
+  const handleInputValues = e => {
+    switch (e.target.name) {
+      case 'firstName':
+        setFirstName(e.target.value);
+        break;
+      case 'lastName':
+        setLastName(e.target.value);
+        break;
+      case 'email':
+        setEmail(e.target.value);
+        break;
+      case 'phoneNumber':
+        setPhoneNumber(e.target.value);
+        break;
+    }
+  }
 
   // Handle booking submission:
+  const [bookingConfirmation, setBookingConfirmation] = useState('');
 
+  const handleSubmit = async (e) => {
+    console.log('submitted');
+    e.preventDefault();
 
+    const bookingRef = {
+      restaurant,
+      date,
+      time,
+      people,
+      firstName,
+      lastName,
+      email,
+      phoneNumber
+    }
+
+    fetch('/api/reservation', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(bookingRef)
+    })
+      .then(res => res.json())
+      .then(data => setBookingConfirmation(data.bookingId))
+      .then(() => goToNextStep())
+      .catch(err => console.log(err));
+  }
+
+  // Display on screen according to current booking step:
   return (
     <>
       <Head>
@@ -125,6 +176,22 @@ const Reserver = props => {
           handlePeopleDecrease={handlePeopleDecrease}
           handlePeopleIncrease={handlePeopleIncrease}
           handleTimeSelection={handleTimeSelection}
+        />
+      )}
+      {bookingStep === 2 && (
+        <Personal 
+          goToPreviousStep={goToPreviousStep}
+          restaurant={restaurant}
+          people={people}
+          dateSentence={dateSentence}
+          time={time}
+          handleInputValues={handleInputValues}
+          handleSubmit={handleSubmit}
+        />
+      )}
+      {bookingStep === 3 && (
+        <Success 
+          bookingConfirmation={bookingConfirmation}
         />
       )}
       <Footer />
