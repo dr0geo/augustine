@@ -266,12 +266,11 @@ export const Personal = props => (
       <Container>
         <FlexPar>
           <p>
-            Confirmez votre réservation chez Augustine Paris{' '}
-            {props.restaurant.toString().padStart(2, '0')}
+            Confirmez votre réservation chez Augustine Paris {props.restaurant.toString().padStart(2, '0')}
           </p>
         </FlexPar>
         <p>
-          Pour {props.people} personnes, le {props.dateSentence.toLowerCase()} à {props.time}
+          Pour {props.people} {props.people === 1 ? 'personne' : 'personnes'}, le {props.dateSentence.toLowerCase()} à {props.time}
         </p>
         <form onSubmit={props.handleSubmit}>
           <input
