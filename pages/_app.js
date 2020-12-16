@@ -116,6 +116,11 @@ const GlobalStyle = createGlobalStyle`
     list-style-type: none;
     list-style-position: outside;
   }
+
+  button {
+    font-family: 'Raleway', sans-serif;
+    font-size: 1rem;
+  }
 `;
 
 const App = ({ Component, pageProps }) => {
