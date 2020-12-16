@@ -122,7 +122,7 @@ const GlobalStyle = createGlobalStyle`
     font-size: 1rem;
   }
 
-  optgroup {
+  datalist {
     align-items: center;
     display: flex;
     flex-wrap: wrap;

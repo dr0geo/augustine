@@ -167,25 +167,23 @@ export const DateChoice = props => (
       <WhiteDiv>
         <FlexPar>
           <p>Réservations disponibles</p>
-          <div>
-            <optgroup>
-              <TimeButton value="19:00" onClick={props.handleTimeSelection}>
-                19:00
-              </TimeButton>
-              <TimeButton value="19:45" onClick={props.handleTimeSelection}>
-                19:45
-              </TimeButton>
-              <TimeButton value="20:15" onClick={props.handleTimeSelection}>
-                20:15
-              </TimeButton>
-              <TimeButton value="20:45" onClick={props.handleTimeSelection}>
-                20:45
-              </TimeButton>
-              <TimeButton value="21:30" onClick={props.handleTimeSelection}>
-                21:30
-              </TimeButton>
-            </optgroup>
-          </div>
+          <datalist>
+            <TimeButton value="19:00" onClick={props.handleTimeSelection}>
+              19:00
+            </TimeButton>
+            <TimeButton value="19:45" onClick={props.handleTimeSelection}>
+              19:45
+            </TimeButton>
+            <TimeButton value="20:15" onClick={props.handleTimeSelection}>
+              20:15
+            </TimeButton>
+            <TimeButton value="20:45" onClick={props.handleTimeSelection}>
+              20:45
+            </TimeButton>
+            <TimeButton value="21:30" onClick={props.handleTimeSelection}>
+              21:30
+            </TimeButton>
+          </datalist>
         </FlexPar>
       </WhiteDiv>
     </LimitedWidthDiv>
