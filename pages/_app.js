@@ -121,6 +121,14 @@ const GlobalStyle = createGlobalStyle`
     font-family: 'Raleway', sans-serif;
     font-size: 1rem;
   }
+
+  optgroup {
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 15px;
+  }
 `;
 
 const App = ({ Component, pageProps }) => {

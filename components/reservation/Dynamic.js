@@ -124,13 +124,6 @@ const FlexPar = styled.div`
   justify-content: space-around;
   margin: auto;
   padding: 0;
-  & > div {
-    align-items: center;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    margin-top: 15px;
-  }
 `;
 
 const TimeButton = styled.option`
@@ -175,21 +168,23 @@ export const DateChoice = props => (
         <FlexPar>
           <p>Réservations disponibles</p>
           <div>
-            <TimeButton value="19:00" onClick={props.handleTimeSelection}>
-              19:00
-            </TimeButton>
-            <TimeButton value="19:45" onClick={props.handleTimeSelection}>
-              19:45
-            </TimeButton>
-            <TimeButton value="20:15" onClick={props.handleTimeSelection}>
-              20:15
-            </TimeButton>
-            <TimeButton value="20:45" onClick={props.handleTimeSelection}>
-              20:45
-            </TimeButton>
-            <TimeButton value="21:30" onClick={props.handleTimeSelection}>
-              21:30
-            </TimeButton>
+            <optgroup>
+              <TimeButton value="19:00" onClick={props.handleTimeSelection}>
+                19:00
+              </TimeButton>
+              <TimeButton value="19:45" onClick={props.handleTimeSelection}>
+                19:45
+              </TimeButton>
+              <TimeButton value="20:15" onClick={props.handleTimeSelection}>
+                20:15
+              </TimeButton>
+              <TimeButton value="20:45" onClick={props.handleTimeSelection}>
+                20:45
+              </TimeButton>
+              <TimeButton value="21:30" onClick={props.handleTimeSelection}>
+                21:30
+              </TimeButton>
+            </optgroup>
           </div>
         </FlexPar>
       </WhiteDiv>
