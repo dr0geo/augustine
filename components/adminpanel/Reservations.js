@@ -34,7 +34,7 @@ const Reservations = () => {
   return (
     <Container>
       {data.bookings.map(booking => (
-        <ListItem key={booking.id}>
+        <ListItem key={booking.id} value={booking.id}>
           <p>Restaurant : Paris {booking.restaurant}</p>
           <p>Date : {booking.date}</p>
           <p>Heure : {booking.time}</p>
