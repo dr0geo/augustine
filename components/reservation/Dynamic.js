@@ -32,13 +32,13 @@ export const RestaurantChoice = props => (
     <Div>
       <Restaurant
         bgUrl="/images/restaurant/stairs.jpeg"
-        onClick={props.goToNextStep}
+        onClick={() => props.handleRestaurantSelection(1)}
       >
         <div>Paris 01</div>
       </Restaurant>
       <Restaurant
         bgUrl="/images/restaurant/upstairs.jpeg"
-        onClick={props.goToNextStep}
+        onClick={() => props.handleRestaurantSelection(2)}
       >
         <div>Paris 08</div>
       </Restaurant>
@@ -68,90 +68,64 @@ const PreviousButton = styled(BlackButton)`
   max-width: 150px;
 `;
 
-const FlexPar = styled.p`
+const FlexPar = styled.div`
   align-items: center;
   color: #012f6a;
   display: flex;
+  flex-direction: column;
   font-family: 'Dancing-Script', sans-serif;
   font-size: 1.2rem;
-  justify-content: space-between;
+  justify-content: space-around;
+  margin: auto;
   padding: 0;
+  & > div {
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 15px;
+  }
 `;
 
-export const DateChoice = props => {
-  const todayDate = new Date(Date.now());
-  const weekDays = [
-    'Dimanche',
-    'Lundi',
-    'Mardi',
-    'Mercredi',
-    'Jeudi',
-    'Vendredi',
-    'Samedi'
-  ];
-  const months = [
-    'janvier',
-    'février',
-    'mars',
-    'avril',
-    'mai',
-    'juin',
-    'juillet',
-    'août',
-    'septembre',
-    'octobre',
-    'novembre',
-    'décembre'
-  ];
+const TimeButton = styled.div`
+  background-color: #012f6a;
+  border: 1px solid #012f6a;
+  color: white;
+  font-family: 'Dancing-Script', sans-serif;
+  margin: 10px;
+  padding: 8px 0;
+  text-align: center;
+  width: 65px;
+`;
 
-  const [date, setDate] = useState(todayDate);
-  const [people, setPeople] = useState(1);
-  const [time, setTime] = useState('');
-
-  return (
-    <Section bgColor="#e3e9ef">
-      <PreviousButton onClick={props.goToPreviousStep}>
-        <LeftArrow size={20} /> Précédent
-      </PreviousButton>
-      <WhiteDiv>
-        <LeftArrow 
-          size={20} 
-          onClick={() => {
-            date > todayDate && setDate(new Date(date.setDate(date.getDate() - 1)));
-          }}
-        />
-        <FlexPar>
-          {`${weekDays[date.getDay()]} ${date.getDate()} ${
-            months[date.getMonth()]
-          } ${date.getFullYear()}`}
-        </FlexPar>
-        <RightArrow 
-          size={20} 
-          onClick={() => {
-            setDate(new Date(date.setDate(date.getDate() + 1)));
-          }}
-          />
-      </WhiteDiv>
-      <WhiteDiv>
-        <LeftArrow
-          size={20}
-          onClick={() => {
-            people > 1 && setPeople(people - 1);
-          }}
-        />
-        <FlexPar>
-          {people} {people === 1 ? 'personne' : 'personnes'}
-        </FlexPar>
-        <RightArrow
-          size={20}
-          onClick={() => {
-            people < 8 && setPeople(people + 1);
-          }}
-        />
-      </WhiteDiv>
-      <WhiteDiv>
-        <FlexPar>Réservations disponibles</FlexPar>
-      </WhiteDiv>
-    </Section>
-  );
-};
+export const DateChoice = props => (
+  <Section bgColor="#e3e9ef">
+    <PreviousButton onClick={props.goToPreviousStep}>
+      <LeftArrow size={20} /> Précédent
+    </PreviousButton>
+    <WhiteDiv>
+      <LeftArrow size={20} onClick={props.handleDateDecrease} />
+      <FlexPar>{props.dateSentence}</FlexPar>
+      <RightArrow size={20} onClick={props.handleDateIncrease} />
+    </WhiteDiv>
+    <WhiteDiv>
+      <LeftArrow size={20} onClick={props.handlePeopleDecrease} />
+      <FlexPar>
+        {props.people} {props.people === 1 ? 'personne' : 'personnes'}
+      </FlexPar>
+      <RightArrow size={20} onClick={props.handlePeopleIncrease} />
+    </WhiteDiv>
+    <WhiteDiv>
+      <FlexPar>
+        <p>Réservations disponibles</p>
+        <div>
+          <TimeButton>19:00</TimeButton>
+          <TimeButton>19:45</TimeButton>
+          <TimeButton>20:15</TimeButton>
+          <TimeButton>20:45</TimeButton>
+          <TimeButton>21:30</TimeButton>
+        </div>
+      </FlexPar>
+    </WhiteDiv>
+  </Section>
+);
