@@ -1,8 +1,9 @@
 import styled from 'styled-components';
 
-const Container = styled.section`
+export const Container = styled.section`
   align-items: center;
   display: flex;
+  flex-direction: column;
   height: 100vh;
   justify-content: center;
 `;
@@ -10,7 +11,7 @@ const Container = styled.section`
 const Form = styled.form`
   display: flex;
   flex-direction: column;
-  margin: auto;
+  margin: 40px auto;
   max-width: 280px;
   & > input {
     border: 2px solid #e3e9ef;
@@ -43,6 +44,7 @@ const Form = styled.form`
 
 const LoginForm = () => (
   <Container>
+    <h2><em>Espace Administrateur - Crêperie Augustine</em></h2>
     <Form action="/api/login" method="POST">
       <input type="email" name="email" placeholder="E-mail" required />
       <input

@@ -1,8 +1,9 @@
 import Head from 'next/head';
+import Link from 'next/link';
 import firebase from '@/utils/firebase';
 
-import Reservations from '@/components/adminpanel/Reservations';
-import LoginForm from '@/components/adminpanel/LoginForm';
+import Card from '@/components/adminpanel/Card';
+import LoginForm, { Container } from '@/components/adminpanel/LoginForm';
 
 const AdminPanel = ({ isLoggedIn }) => {
   return (
@@ -10,13 +11,30 @@ const AdminPanel = ({ isLoggedIn }) => {
       <Head>
         <meta name="robots" content="noindex, nofollow" />
       </Head>
-      {!isLoggedIn 
-        ? <LoginForm />
-        : (
-        <>
-          <h2>Bienvenue sur le panneau administrateur !</h2>
-          <Reservations />
-        </>
+      {!isLoggedIn ? (
+        <LoginForm />
+      ) : (
+        <Container>
+          <h2>
+            <em>
+              Bienvenue sur le panneau administrateur de la crêperie Augustine!
+            </em>
+          </h2>
+          <Link href="/adminpanel/reservations">
+            <a>
+              <Card>
+                <h3>Réservations</h3>
+              </Card>
+            </a>
+          </Link>
+          <Link href="/adminpanel/commandes">
+            <a>
+              <Card>
+                <h3>Commandes</h3>
+              </Card>
+            </a>
+          </Link>
+        </Container>
       )}
     </>
   );
