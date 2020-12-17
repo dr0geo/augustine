@@ -1,18 +1,11 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
-import { useRouter } from 'next/router';
 
-import firebase from '@/utils/firebase';
 import Filter from '@/components/adminpanel/Filter';
 import Reservations from '@/components/adminpanel/Reservations';
 
-const DisplayReservations = ({ isLoggedIn }) => {
-  const router = useRouter();
-  
-  useEffect(() => {
-    !isLoggedIn && router.push('/adminpanel');
-  }, []);
+const DisplayReservations = () => {
 
   const [restaurant, setRestaurant] = useState(0);
   const [date, setDate] = useState('');
@@ -44,14 +37,6 @@ const DisplayReservations = ({ isLoggedIn }) => {
       </>
     </>
   );
-};
-
-export const getServerSideProps = async () => {
-  const isLoggedIn = firebase.auth().currentUser !== null;
-
-  return {
-    props: { isLoggedIn }
-  };
 };
 
 export default DisplayReservations;
