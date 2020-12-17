@@ -1,4 +1,3 @@
-import { useRouter } from 'next/router';
 import { useState } from 'react';
 import styled from 'styled-components';
 
@@ -44,8 +43,7 @@ const Form = styled.form`
   }
 `;
 
-const LoginForm = () => {
-  const router = useRouter();
+const LoginForm = props => {
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -60,7 +58,8 @@ const LoginForm = () => {
       },
       body: JSON.stringify({ email, password })
     })
-      .then(() => router.push('/adminpanel'))
+      .then(() => sessionStorage.setItem('isLoggedIn', 'true'))
+      .then(() => props.handleLogin())
       .catch(err => console.log(err));
   }
 
