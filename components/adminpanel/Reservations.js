@@ -14,6 +14,7 @@ const ListItem = styled.li`
   border-radius: 5px;
   margin: 20px;
   padding: 20px;
+  width: 320px;
   & > p {
     line-height: 1.5rem;
     padding: 0;

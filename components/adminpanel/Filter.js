@@ -4,6 +4,8 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-around;
+  margin: auto;
+  max-width: 450px;
   min-height: 250px;
   & > select {
     margin: auto;
