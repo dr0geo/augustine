@@ -21,6 +21,12 @@ const Container = styled.div`
     & > input {
       padding: 10px;
     }
+    & > button {
+      background-color: white;
+      border: 1px solid gray;
+      height: 44px;
+      padding: 10px;
+    }
   }
   & > div:last-of-type {
     width: 100%;
@@ -42,8 +48,8 @@ const Filter = props => {
         <option value={8}>Paris 08</option>
       </select>
       <div>
-        <label htmlFor="calendar">Choisissez une date :</label>
-        <input id="calendar" type="date" onChange={props.selectDate} />
+        <button onClick={props.allDates}>Toutes les dates</button>
+        <input type="date" onChange={props.selectDate} />
       </div>
       <div>
         <input type="text" onChange={props.getById} placeholder="Entrez une référence de réservation" />

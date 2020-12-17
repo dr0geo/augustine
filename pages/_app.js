@@ -47,7 +47,7 @@ const GlobalStyle = createGlobalStyle`
   }
 
   body {
-    font-family: 'Raleway', sans-serif;
+    font-family: 'Raleway', serif;
     margin: 0;
     overflow: ${props => props.isClicked ? 'hidden' : 'auto'};
     padding: 0;

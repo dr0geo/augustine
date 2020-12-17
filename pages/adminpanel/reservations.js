@@ -3,6 +3,7 @@ import { useState } from 'react';
 import useSWR from 'swr';
 import Head from 'next/head';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import { Spinner9 } from '@styled-icons/icomoon';
 
 import Filter from '@/components/adminpanel/Filter';
@@ -33,6 +34,8 @@ const SpinnerDiv = styled.div`
 const fetcher = (...args) => fetch(...args).then(res => res.json());
 
 const DisplayReservations = () => {
+  const router = useRouter();
+
   const [restaurant, setRestaurant] = useState(0);
   const [date, setDate] = useState('');
   const [bookingId, setBookingId] = useState('');
@@ -49,10 +52,18 @@ const DisplayReservations = () => {
     setBookingId(e.target.value);
   }
 
+  const allDates = () => {
+    setDate('');
+  }
+
   // Fetch bookings on the client side:
-  const { data } = useSWR('/api/reservations', fetcher, {
+  const { data, error } = useSWR('/api/reservations', fetcher, {
     refreshInterval: 60000
   });
+
+  if (error) {
+    router.push('/adminpanel');
+  }
 
   if (!data) {
     return <SpinnerDiv><Spinner9 size={80} color="#012f6a" /></SpinnerDiv>;
@@ -67,7 +78,7 @@ const DisplayReservations = () => {
           <Link href="/adminpanel">
             <a>Retour à l'accueil administrateur</a>
           </Link>
-          <Filter selectRestaurant={selectRestaurant} selectDate={selectDate} getById={getById} />
+          <Filter selectRestaurant={selectRestaurant} selectDate={selectDate} getById={getById} allDates={allDates} />
           <Reservations data={data} restaurant={restaurant} date={date} bookingId={bookingId} />
         </>
       </>

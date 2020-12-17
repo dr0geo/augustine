@@ -20,6 +20,7 @@ const Form = styled.form`
     color: #012f6a;
     margin: 10px auto;
     padding: 10px;
+    width: 240px;
   }
   & > button {
     background-color: #012f6a;
@@ -43,10 +44,15 @@ const Form = styled.form`
   }
 `;
 
+const ErrMessage = styled.div`
+  color: red;
+`;
+
 const LoginForm = props => {
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -58,8 +64,14 @@ const LoginForm = props => {
       },
       body: JSON.stringify({ email, password })
     })
-      .then(() => sessionStorage.setItem('isLoggedIn', 'true'))
-      .then(() => props.handleLogin())
+      .then(res => {
+        if (res.status === 200) {
+          sessionStorage.setItem('isLoggedIn', 'true');
+          props.handleLogin();
+        } else {
+          setErrorMessage('Mauvais nom d\'utilisateur ou mot de passe');
+        }
+      })
       .catch(err => console.log(err));
   }
 
@@ -83,6 +95,7 @@ const LoginForm = props => {
         />
         <button type="submit">Se connecter</button>
       </Form>
+      {errorMessage !== '' && <ErrMessage>{errorMessage}</ErrMessage>}
     </Container>
   );
 }
