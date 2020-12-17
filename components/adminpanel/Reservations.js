@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import useSWR from 'swr';
 
 const Container = styled.ul`
   display: flex;
@@ -22,22 +21,11 @@ const ListItem = styled.li`
   }
 `;
 
-const fetcher = (...args) => fetch(...args).then(res => res.json());
-
 const Reservations = props => {
-  const { data } = useSWR('/api/reservations', fetcher, {
-    refreshInterval: 60000
-  });
-
-  if (!data) {
-    return <Container>Chargement...</Container>;
-
-  } else {
-    let filteredData = data.bookings;
+    let filteredData = props.data.bookings;
 
     if (props.restaurant !== 0) {
-      filteredData = filteredData
-      .filter(booking => booking.restaurant === props.restaurant)
+      filteredData = filteredData.filter(booking => booking.restaurant === props.restaurant);
     }
     if (props.date !== '') {
       filteredData = filteredData.filter(booking => new Date(Date.parse(booking.date)).toLocaleDateString() === new Date(Date.parse(props.date)).toLocaleDateString());
@@ -62,6 +50,5 @@ const Reservations = props => {
       </Container>
     );
   }
-};
 
 export default Reservations;
