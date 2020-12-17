@@ -347,7 +347,7 @@ const SuccessContainer = styled.div`
 export const Success = props => (
   <Section bgColor="#e3e9ef">
     <SuccessContainer>
-      <CheckCircleFill size={80} color="green" />
+      <CheckCircleFill size={80} color="#012f6a" />
       <p>
         Nous vous remercions pour votre réservation. Celle-ci a bien été
         enregistrée avec la référence <em>{props.bookingConfirmation}</em> et

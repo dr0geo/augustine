@@ -8,7 +8,10 @@ const handleBooking = async (req, res) => {
   } else if (req.method === 'GET') {
     const bookings = [];
     const bookingsCollec = await db.collection('bookings').get();
-    bookingsCollec.forEach(booking => bookings.push(booking.data()));
+    bookingsCollec.forEach(booking => bookings.push({
+      id: booking.id, 
+      ...booking.data()
+    }));
     res.status(200).json({ bookings });
 
   } else {
