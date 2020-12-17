@@ -56,7 +56,7 @@ const WhiteDiv = styled.div`
   display: flex;
   justify-content: space-between;
   margin: 15px auto;
-  max-width: 280px;
+  max-width: 300px;
   padding: 10px;
   @media only screen and (min-width: 600px) {
     max-width: 450px;
@@ -65,7 +65,7 @@ const WhiteDiv = styled.div`
 
 const LimitedWidthDiv = styled.div`
   margin: auto;
-  max-width: 280px;
+  max-width: 300px;
   @media only screen and (min-width: 600px) {
     max-width: 450px;
   }
@@ -204,7 +204,7 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   margin: auto;
-  max-width: 280px;
+  max-width: 300px;
   padding: 20px;
   & > p {
     font-size: 0.9rem;
@@ -219,7 +219,7 @@ const Container = styled.div`
       margin: 10px auto;
       padding: 10px;
       transition: border 0.2s ease-in-out;
-      width: 240px;
+      width: 260px;
       &::placeholder {
         color: #012f6a;
       }

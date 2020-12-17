@@ -33,7 +33,7 @@ export const GridWrapper = styled.div`
   background-color: hsla(0deg, 0%, 100%, 0.6);
   border-radius: 5px;
   margin: 0 auto;
-  max-width: 360px;
+  max-width: 330px;
   padding: 30px;
   & > h2 {
     margin-bottom: 45px;
