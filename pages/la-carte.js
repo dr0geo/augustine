@@ -136,6 +136,7 @@ export const getStaticProps = async () => {
       ],
       formules
     },
+    // Use ISR once a day:
     revalidate: 86400
   };
 };

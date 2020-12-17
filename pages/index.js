@@ -40,6 +40,7 @@ const Accueil = props => {
 };
 
 export const getStaticProps = async () => {
+  // Retrieve instagram posts at build time:
   const uid = process.env.INSTAGRAM_UID;
   const token = process.env.INSTAGRAM_TOKEN;
   
@@ -48,6 +49,7 @@ export const getStaticProps = async () => {
 
   return {
     props: { posts },
+    // Use ISR every 5 minutes:
     revalidate: 300
   }
 }

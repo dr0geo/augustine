@@ -8,6 +8,7 @@ const firebaseConfig = {
   projectId: process.env.FIREBASE_PROJECT_ID
 };
 
+// Initialize app only if no other one is already running:
 if (!firebase.apps.length) {
   firebase.initializeApp(firebaseConfig);
 }

@@ -78,6 +78,7 @@ export const getStaticProps = async () => {
       boissons: [fraiches, chaudes, aperitifs, alcoolisees],
       formules
     },
+    // Use ISR once a day:
     revalidate: 86400
   };
 };

@@ -124,6 +124,7 @@ const GlobalStyle = createGlobalStyle`
 `;
 
 const App = ({ Component, pageProps }) => {
+  // Manage header state for each page:
   const [isClicked, setIsClicked] = useState(false);
 
   const toggleMenu = () => {

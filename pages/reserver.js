@@ -33,12 +33,15 @@ const months = [
 const Reserver = props => {
   // Manage booking steps:
   const [bookingStep, setBookingStep] = useState(0);
+
   const goToNextStep = () => {
     setBookingStep(bookingStep + 1);
   };
+
   const goToPreviousStep = () => {
     setBookingStep(bookingStep - 1);
   };
+
   // Manage booking information:
 
   // Restaurant selection:
@@ -53,11 +56,13 @@ const Reserver = props => {
   const todayDate = new Date(Date.now());
 
   const [date, setDate] = useState(todayDate);
+  // Sentence to display in the date input:
   const dateSentence = `${weekDays[date.getDay()]} ${date.getDate()} ${months[date.getMonth()]} ${date.getFullYear()}`;
 
   const handleDateIncrease = () => {
     setDate(new Date(date.setDate(date.getDate() + 1)));
   };
+
   const handleDateDecrease = () => {
     date > todayDate && setDate(new Date(date.setDate(date.getDate() - 1)));
   };
@@ -68,6 +73,7 @@ const Reserver = props => {
   const handlePeopleIncrease = () => {
     people < 8 && setPeople(people + 1);
   };
+  
   const handlePeopleDecrease = () => {
     people > 1 && setPeople(people - 1);
   };
