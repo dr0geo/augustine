@@ -1,3 +1,5 @@
+import { useRouter } from 'next/router';
+import { useState } from 'react';
 import styled from 'styled-components';
 
 export const Container = styled.section`
@@ -42,20 +44,48 @@ const Form = styled.form`
   }
 `;
 
-const LoginForm = () => (
-  <Container>
-    <h2><em>Espace Administrateur - Crêperie Augustine</em></h2>
-    <Form action="/api/login" method="POST">
-      <input type="email" name="email" placeholder="E-mail" required />
-      <input
-        type="password"
-        name="password"
-        placeholder="Mot de passe"
-        required
-      />
-      <button type="submit">Se connecter</button>
-    </Form>
-  </Container>
-);
+const LoginForm = () => {
+  const router = useRouter();
+
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    fetch('/api/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ email, password })
+    })
+      .then(() => router.push('/adminpanel'))
+      .catch(err => console.log(err));
+  }
+
+  return (
+    <Container>
+      <h2><em>Espace Administrateur - Crêperie Augustine</em></h2>
+      <Form onSubmit={handleSubmit}>
+        <input 
+          type="email" 
+          name="email" 
+          placeholder="E-mail" 
+          required 
+          onChange={e => setEmail(e.target.value)}
+        />
+        <input
+          type="password"
+          name="password"
+          placeholder="Mot de passe"
+          required
+          onChange={e => setPassword(e.target.value)}
+        />
+        <button type="submit">Se connecter</button>
+      </Form>
+    </Container>
+  );
+}
 
 export default LoginForm;
