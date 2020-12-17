@@ -3,9 +3,8 @@ import styled from 'styled-components';
 const Container = styled.ul`
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
   margin: auto;
-  max-width: 1200px;
+  max-width: 1080px;
 `;
 
 const ListItem = styled.li`
@@ -22,6 +21,7 @@ const ListItem = styled.li`
 `;
 
 const Reservations = props => {
+    // Filter bookings according to inputs values:
     let filteredData = props.data.bookings;
 
     if (props.restaurant !== 0) {
