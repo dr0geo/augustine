@@ -13,7 +13,7 @@ const Container = styled.div`
   }
   @media only screen and (min-width: 1200px) {
     grid-template-columns: 260px;
-    height: 400px;
+    height: 450px;
     margin-top: 0;
   }
 `;
@@ -48,7 +48,7 @@ const Category = styled.button`
   width: 100%;
   @media only screen and (min-width: 1200px) {
     ${props => props.isSelected && '& + div { opacity: 1 }'};
-    width: 140px;
+    width: 160px;
     @media (any-hover: hover) {
       &:hover {
         ${props => !props.isSelected && 'background-color: #e3e9ef'};

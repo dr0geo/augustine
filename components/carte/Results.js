@@ -60,7 +60,7 @@ const CategorySelecter = styled.div`
     gap: 0;
     grid-template-columns: repeat(4, 1fr);
     margin-left: -20px;
-    ${props => props.setVertOffset && 'margin-top: -48px'};
+    ${props => props.setVertOffset && 'margin-top: -49px'};
     padding: 0;
   }
 `;
