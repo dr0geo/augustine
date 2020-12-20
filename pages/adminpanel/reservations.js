@@ -60,9 +60,9 @@ const DisplayReservations = () => {
   const { data, error } = useSWR('/api/reservations', fetcher, {
     refreshInterval: 60000
   });
-  // If error, go to login screen:
+  // If error, redirect to login screen:
   if (error) {
-    router.push('/adminpanel');
+    router.replace('/adminpanel');
   }
   // Display a spinner while data is being fetched:
   if (!data) {
