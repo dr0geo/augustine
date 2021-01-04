@@ -128,6 +128,7 @@ const App = ({ Component, pageProps }) => {
   const [isClicked, setIsClicked] = useState(false);
 
   const toggleMenu = () => {
+    setTimeout(() => window.scrollTo(0, 0), 300);
     setIsClicked(!isClicked);
   };
 

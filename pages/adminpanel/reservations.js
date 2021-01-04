@@ -29,14 +29,12 @@ const SpinnerDiv = styled.div`
   }
 `;
 
-
-
 const fetcher = (...args) => fetch(...args).then(res => res.json());
 
 const DisplayReservations = () => {
   
   const router = useRouter();
-  
+
   // Check if admin is logged in:
   useEffect(() => {
     if (!sessionStorage.getItem('isLoggedIn')) {
