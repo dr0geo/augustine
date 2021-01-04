@@ -1,5 +1,5 @@
 import styled, { keyframes } from 'styled-components';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import useSWR from 'swr';
 import Head from 'next/head';
 import Link from 'next/link';
@@ -34,8 +34,16 @@ const SpinnerDiv = styled.div`
 const fetcher = (...args) => fetch(...args).then(res => res.json());
 
 const DisplayReservations = () => {
+  
   const router = useRouter();
-
+  
+  // Check if admin is logged in:
+  useEffect(() => {
+    if (!sessionStorage.getItem('isLoggedIn')) {
+      router.replace('/adminpanel');
+    }
+  }, []);
+  
   const [restaurant, setRestaurant] = useState(0);
   const [date, setDate] = useState('');
   const [bookingId, setBookingId] = useState('');
