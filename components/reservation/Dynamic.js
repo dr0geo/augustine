@@ -352,11 +352,7 @@ export const Success = props => (
         Nous vous remercions pour votre réservation. Celle-ci a bien été
         enregistrée avec la référence <em>{props.bookingConfirmation}</em> et
         nous sommes impatients de vous recevoir dans notre restaurant !<br />
-        Vous pouvez maintenant revenir à la{' '}
-        <Link href="/">
-          <a title="Cliquez pour revenir à la page d'accueil">page d'accueil</a>
-        </Link>
-        .
+        Vous pouvez maintenant revenir à la <Link href="/"><a title="Cliquez pour revenir à la page d'accueil">page d'accueil</a></Link>.
       </p>
     </SuccessContainer>
   </Section>
