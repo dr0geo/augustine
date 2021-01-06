@@ -6,8 +6,7 @@ import { Menu as MenuIcon } from '@styled-icons/evaicons-solid';
 
 const Header = styled.header`
   align-items: center;
-  background: linear-gradient(hsla(0deg, 0%, 0%, 0.6), hsla(0deg, 0%, 0%, 0.6)),
-    url(${props => props.bg});
+  background: linear-gradient(hsla(0deg, 0%, 0%, 0.6), hsla(0deg, 0%, 0%, 0.6)), url(${props => props.bg});
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;

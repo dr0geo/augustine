@@ -3,7 +3,6 @@ import { useState } from 'react';
 import Head from 'next/head';
 
 import Menu from '@/components/Menu';
-import Intro from '@/components/carte/Intro';
 import Categories from '@/components/carte/Categories';
 import Results from '@/components/carte/Results';
 import { MenuSection } from '@/components/elements/Divs';
@@ -59,7 +58,7 @@ const Carte = props => {
         bg="/images/restaurant/downstairs.jpeg"
         title="La Carte"
       />
-      <Intro />
+      <h2>Parcourez<br /><em>la carte Augustine</em></h2>
       <MenuSection>
         <Categories isSelected={isSelected} handleClick={handleClick} />
         <Results

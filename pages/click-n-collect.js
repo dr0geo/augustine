@@ -1,10 +1,50 @@
 import { db } from '@/utils/firebase';
 import Head from 'next/head';
+import { useState } from 'react';
 
 import Menu from '@/components/Menu';
+import Categories from '@/components/carte/Categories';
+import Results from '@/components/carte/Results';
 import Footer from '@/components/Footer';
+import { BasketButton, Basket } from '@/components/click-n-collect/Basket';
+import { MenuSection } from '@/components/elements/Divs';
 
 const ClicknCollect = props => {
+
+  const [isSelected, setIsSelected] = useState(0);
+  const [isCategorySelected, setIsCategorySelected] = useState(0);
+  const [selectedFood, setSelectedFood] = useState(props.entrees);
+  const [isBasketDisplayed, setIsBasketDisplayed] = useState(false);
+  
+  const handleClick = ({ target }) => {
+    setIsSelected(parseInt(target.value));
+    setIsCategorySelected(0);
+    setSelectedFood(() => {
+      switch (target.value) {
+        case '0':
+          return props.entrees;
+        case '1':
+          return props.salades;
+        case '2':
+          return props.galettes;
+        case '3':
+          return props.crepes;
+        case '4':
+          return props.boissons;
+        case '5':
+          return props.formules;
+      }
+    });
+  };
+
+  const handleCategoryClick = ({ target }) => {
+    setIsCategorySelected(parseInt(target.value));
+  };
+
+  const toggleBasket = () => {
+    setIsBasketDisplayed(!isBasketDisplayed);
+  }
+
   return (
     <>
       <Head>
@@ -20,9 +60,26 @@ const ClicknCollect = props => {
         isClicked={props.isClicked}
         toggleMenu={props.toggleMenu}
         hideMenu={props.hideMenu}
+        bg="./images/food/augustine.jpeg"
+        title="Click & Collect"
       />
-      <p>Click & Collect</p>
+      <h2>Parcourez<br /><em>la carte Augustine</em></h2>
+      <MenuSection>
+        <Categories isSelected={isSelected} handleClick={handleClick} />
+        <Results
+          isSelected={isSelected}
+          selectedFood={selectedFood}
+          isCategorySelected={isCategorySelected}
+          handleCategoryClick={handleCategoryClick}
+          addImage={true}
+          addBasketIcon={true}
+        />
+      </MenuSection>
       <Footer />
+      <Basket isBasketDisplayed={isBasketDisplayed}>
+        <h2><em>Mon panier</em></h2>
+      </Basket>
+      <BasketButton onClick={toggleBasket}>Mon panier</BasketButton>
     </>
   );
 };
@@ -73,9 +130,20 @@ export const getStaticProps = async () => {
     props: {
       entrees,
       salades,
-      galettes: [classiques, gourmandes],
-      crepes: [classiquesCrepes, gourmandesCrepes],
-      boissons: [fraiches, chaudes, aperitifs, alcoolisees],
+      galettes: [
+        { title: 'Classiques', data: classiques },
+        { title: 'Gourmandes', data: gourmandes }
+      ],
+      crepes: [
+        { title: 'Classiques', data: classiquesCrepes },
+        { title: 'Gourmandes', data: gourmandesCrepes }
+      ],
+      boissons: [
+        { title: 'Fraiches', data: fraiches },
+        { title: 'Chaudes', data: chaudes },
+        { title: 'Apéritifs', data: aperitifs },
+        { title: 'Alcoolisées', data: alcoolisees }
+      ],
       formules
     },
     // Use ISR once a day:

@@ -11,6 +11,7 @@
   },
   "license": "",
   "dependencies": {
+    "@styled-icons/bootstrap": "^10.23.0",
     "@styled-icons/boxicons-logos": "^10.23.0",
     "@styled-icons/boxicons-regular": "^10.23.0",
     "@styled-icons/evaicons-outline": "^10.18.0",
