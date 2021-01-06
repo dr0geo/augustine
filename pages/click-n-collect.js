@@ -6,7 +6,7 @@ import Menu from '@/components/Menu';
 import Categories from '@/components/carte/Categories';
 import OrderResults from '@/components/click-n-collect/OrderResults';
 import Footer from '@/components/Footer';
-import { BasketButton, Basket } from '@/components/click-n-collect/Basket';
+import Basket, { BasketButton } from '@/components/click-n-collect/Basket';
 import { MenuSection } from '@/components/elements/Divs';
 
 const ClicknCollect = props => {
@@ -15,6 +15,7 @@ const ClicknCollect = props => {
   const [isCategorySelected, setIsCategorySelected] = useState(0);
   const [selectedFood, setSelectedFood] = useState(props.entrees);
   const [isBasketDisplayed, setIsBasketDisplayed] = useState(false);
+  const [basketItems, setBasketItems] = useState([]);
   
   const handleClick = ({ target }) => {
     setIsSelected(parseInt(target.value));
@@ -45,6 +46,37 @@ const ClicknCollect = props => {
     setIsBasketDisplayed(!isBasketDisplayed);
   }
 
+  const addToBasket = food => {
+    if (!basketItems.includes(food)) {
+      food.quantity = 1;
+      setBasketItems([
+        ...basketItems,
+        food
+      ]);
+    } else {
+      food.quantity += 1;
+      setBasketItems([...basketItems]);
+    }
+  }
+
+  const decreaseQuantity = item => {
+    if (item.quantity > 1) {
+      item.quantity -= 1;
+      setBasketItems([...basketItems]);
+    } else {
+      setBasketItems(basketItems.filter(food => food.name !== item.name));
+    }
+  }
+
+  const increaseQuantity = item => {
+    item.quantity += 1;
+    setBasketItems([...basketItems]);
+  }
+
+  const deleteItem = item => {
+    setBasketItems(basketItems.filter(food => food.name !== item.name));
+  }
+
   return (
     <>
       <Head>
@@ -71,13 +103,28 @@ const ClicknCollect = props => {
           selectedFood={selectedFood}
           isCategorySelected={isCategorySelected}
           handleCategoryClick={handleCategoryClick}
+          addToBasket={addToBasket}
         />
       </MenuSection>
       <Footer />
-      <Basket isBasketDisplayed={isBasketDisplayed}>
-        <h2><em>Mon panier</em></h2>
-      </Basket>
-      <BasketButton onClick={toggleBasket}>Mon panier</BasketButton>
+      <Basket 
+        isBasketDisplayed={isBasketDisplayed}
+        basketItems={basketItems}
+        decreaseQuantity={decreaseQuantity}
+        increaseQuantity={increaseQuantity}
+        deleteItem={deleteItem}
+      />
+      <BasketButton onClick={toggleBasket}>
+        Mon panier
+          {basketItems.length > 1
+            ? ` (${basketItems.reduce((a, b) => a.quantity + b.quantity)} articles)` 
+            : basketItems.length === 1
+              ? basketItems[0].quantity > 1 
+                ? ` (${basketItems[0].quantity} articles)`
+                : ` (1 article)`
+              : null
+          }
+      </BasketButton>
     </>
   );
 };

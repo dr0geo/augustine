@@ -96,7 +96,7 @@ const OrderResults = props => {
   [0, 1, 5].includes(props.isSelected)
     ? // Display food that has no subcategory:
       (results = props.selectedFood.map(food => (
-        <ResultDiv key={food.id}>
+        <ResultDiv key={food.id} value={food}>
           <div><Image src="/images/icons/food-placeholder.png" alt="" height={200} width={200} /></div>
           <div>
             <h3>{food.name}</h3>
@@ -105,7 +105,7 @@ const OrderResults = props => {
           <div>
             <p>{food.price.toFixed(2)}€</p>
           </div>
-          <div><Basket2 size={40} color="white" /></div>
+          <div><Basket2 size={40} color="white" onClick={() => props.addToBasket(food)} /></div>
         </ResultDiv>
       )))
     : // Display only the subselection selected via selected food and selected subcategory of that food:
@@ -119,7 +119,7 @@ const OrderResults = props => {
           <div>
             <p>{food.price.toFixed(2)}€</p>
           </div>
-          <div><Basket2 size={40} color="white" /></div>
+          <div><Basket2 size={40} color="white" onClick={() => props.addToBasket(food)} /></div>
         </ResultDiv>
       )));
 
