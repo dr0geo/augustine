@@ -25,13 +25,13 @@ export const BasketContainer = styled.div`
   transition: transform 0.3s ease-in-out;
   width: 100vw;
   & > li {
-    margin: 40px auto;
+    padding: 30px 0;
     & > div {
       display: flex;
       justify-content: space-around;
-      margin: 20px auto;
+      margin: 20px auto 10px auto;
       & > button {
-        background-color: white;
+        background-color: #e3e9ef;
         border: 1px solid #e3e9ef;
         border-radius: 5px;
         font-size: 1.4rem;
@@ -39,6 +39,9 @@ export const BasketContainer = styled.div`
         padding: 15px 30px;
       }
     }
+  }
+  & > li + li {
+    border-top: 1px solid lightgray;
   }
   @media only screen and (min-width: 1200px) {
     display: none;

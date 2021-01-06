@@ -21,6 +21,19 @@ const ResultDiv = styled.div`
   & + & {
     border-top: 1px solid lightgray;
   }
+  & > div > form {
+    display: flex;
+    justify-content: space-around;
+    margin: auto;
+    width: 220px;
+    & > div {
+      align-items: center;
+      display: flex;
+      & > input {
+        margin: 0 8px 0 0;
+      }
+    }
+  }
   & > div:last-of-type {
     background-color: #012f6a;
     border-radius: 5px;
@@ -115,6 +128,18 @@ const OrderResults = props => {
           <div>
             <h3>{food.name}</h3>
             {food.description && <p>{food.description}</p>}
+            {props.isSelected === 3 && (
+              <form>
+                <div>
+                  <input id="crepe" type="radio" value="crepe" name="type" checked={true} />
+                  <label htmlFor="crepe">Crêpe</label>
+                </div>
+                <div>
+                  <input id="gaufre" type="radio" value="gaufre" name="type" />
+                  <label htmlFor="gaufre">Gaufre</label>
+                </div>
+              </form>
+            )}
           </div>
           <div>
             <p>{food.price.toFixed(2)}€</p>

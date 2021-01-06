@@ -47,7 +47,7 @@ const ClicknCollect = props => {
   }
 
   const addToBasket = food => {
-    if (!basketItems.includes(food)) {
+    if (!basketItems.some(item => item.name === food.name)) {
       food.quantity = 1;
       setBasketItems([
         ...basketItems,
