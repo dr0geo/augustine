@@ -1,51 +1,47 @@
 import styled from 'styled-components';
+import { Basket2 } from '@styled-icons/bootstrap';
+import Image from 'next/image';
 
 const Container = styled.div`
   background-color: #e3e9ef;
   padding: 0 20px;
   @media only screen and (min-width: 1200px) {
-    ${props => props.isShort === 0 && 'height: 290px'};
-    ${props => props.isShort === 1 && 'height: 350px'};
-    ${props => props.isShortDrink && 'height: 315px'};
     ${props => props.setVertOffset && 'margin-top: 49px'};
     width: 840px;
   }
 `;
 
 const ResultDiv = styled.div`
-  display: flex;
-  flex-direction: column;
+  align-items: center;
+  display: grid;
+  gap: 25px;
+  grid-template-rows: repeat(4, auto);
+  justify-items: center;
   padding: 25px 0;
   & + & {
     border-top: 1px solid lightgray;
   }
-  & > div > h3 {
-    margin: 0 auto;
-  }
-  & > div:first-of-type > p {
-    margin-top: 5px;
-  }
-  & > div:last-of-type > p {
-    margin-bottom: 0;
-    margin-top: 10px;
+  & > div:last-of-type {
+    background-color: #012f6a;
+    border-radius: 5px;
+    padding: 5px;
   }
   @media only screen and (min-width: 1200px) {
-    flex-direction: row;
-    justify-content: space-between;
-    & > div > h3 {
-      text-align: left;
-    }
-    & > div > p {
-      max-width: 700px;
-      padding: 0;
-      text-align: left;
+    grid-auto-flow: column;
+    grid-template-columns: 1fr 2fr 0.5fr;
+    grid-template-rows: repeat(2, auto);
+    & > div:first-of-type, div:last-of-type {
+      grid-row: 1 / 3;
     }
     & > div:last-of-type {
-      align-items: center;
-      display: flex;
+      transform: scale(0.75);
     }
-    & > div:last-of-type > p {
-      margin-top: 0;
+    @media (any-hover: hover) {
+      & > div:last-of-type:hover {
+        cursor: pointer;
+        transform: scale(0.85);
+        transition: transform 0.2s ease-in-out;
+      }
     }
   }
 `;
@@ -93,7 +89,7 @@ const Category = styled.button`
   }
 `;
 
-const Results = props => {
+const OrderResults = props => {
   let results;
 
   // Check if there are sub-arrays:
@@ -101,6 +97,7 @@ const Results = props => {
     ? // Display food that has no subcategory:
       (results = props.selectedFood.map(food => (
         <ResultDiv key={food.id}>
+          <div><Image src="/images/icons/food-placeholder.png" alt="" height={200} width={200} /></div>
           <div>
             <h3>{food.name}</h3>
             {food.description && <p>{food.description}</p>}
@@ -108,11 +105,13 @@ const Results = props => {
           <div>
             <p>{food.price.toFixed(2)}€</p>
           </div>
+          <div><Basket2 size={40} color="white" /></div>
         </ResultDiv>
       )))
     : // Display only the subselection selected via selected food and selected subcategory of that food:
       (results = props.selectedFood[props.isCategorySelected].data.map(food => (
         <ResultDiv key={food.id}>
+          <div><Image src="/images/icons/food-placeholder.png" alt="" height={200} width={200} /></div>
           <div>
             <h3>{food.name}</h3>
             {food.description && <p>{food.description}</p>}
@@ -120,6 +119,7 @@ const Results = props => {
           <div>
             <p>{food.price.toFixed(2)}€</p>
           </div>
+          <div><Basket2 size={40} color="white" /></div>
         </ResultDiv>
       )));
 
@@ -148,4 +148,4 @@ const Results = props => {
   );
 };
 
-export default Results;
+export default OrderResults;

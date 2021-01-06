@@ -4,7 +4,7 @@ import { useState } from 'react';
 
 import Menu from '@/components/Menu';
 import Categories from '@/components/carte/Categories';
-import Results from '@/components/carte/Results';
+import OrderResults from '@/components/click-n-collect/OrderResults';
 import Footer from '@/components/Footer';
 import { BasketButton, Basket } from '@/components/click-n-collect/Basket';
 import { MenuSection } from '@/components/elements/Divs';
@@ -66,13 +66,11 @@ const ClicknCollect = props => {
       <h2>Parcourez<br /><em>la carte Augustine</em></h2>
       <MenuSection>
         <Categories isSelected={isSelected} handleClick={handleClick} />
-        <Results
+        <OrderResults
           isSelected={isSelected}
           selectedFood={selectedFood}
           isCategorySelected={isCategorySelected}
           handleCategoryClick={handleCategoryClick}
-          addImage={true}
-          addBasketIcon={true}
         />
       </MenuSection>
       <Footer />
