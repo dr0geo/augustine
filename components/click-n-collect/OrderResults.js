@@ -1,7 +1,6 @@
 import styled from 'styled-components';
-import { Basket2 } from '@styled-icons/bootstrap';
-import Image from 'next/image';
-import { useState } from 'react';
+
+import OrderResultDiv from '@/components/click-n-collect/OrderResultDiv';
 
 const Container = styled.div`
   background-color: #e3e9ef;
@@ -9,54 +8,6 @@ const Container = styled.div`
   @media only screen and (min-width: 1200px) {
     ${props => props.setVertOffset && 'margin-top: 49px'};
     width: 840px;
-  }
-`;
-
-const ResultDiv = styled.div`
-  align-items: center;
-  display: grid;
-  gap: 25px;
-  grid-template-rows: repeat(4, auto);
-  justify-items: center;
-  padding: 25px 0;
-  & + & {
-    border-top: 1px solid lightgray;
-  }
-  & > div > form {
-    display: flex;
-    justify-content: space-around;
-    margin: auto;
-    width: 220px;
-    & > div {
-      align-items: center;
-      display: flex;
-      & > input {
-        margin: 0 8px 0 0;
-      }
-    }
-  }
-  & > div:last-of-type {
-    background-color: #012f6a;
-    border-radius: 5px;
-    padding: 5px;
-  }
-  @media only screen and (min-width: 1200px) {
-    grid-auto-flow: column;
-    grid-template-columns: 1fr 2fr 0.5fr;
-    grid-template-rows: repeat(2, auto);
-    & > div:first-of-type, div:last-of-type {
-      grid-row: 1 / 3;
-    }
-    & > div:last-of-type {
-      transform: scale(0.75);
-    }
-    @media (any-hover: hover) {
-      & > div:last-of-type:hover {
-        cursor: pointer;
-        transform: scale(0.85);
-        transition: transform 0.2s ease-in-out;
-      }
-    }
   }
 `;
 
@@ -110,43 +61,23 @@ const OrderResults = props => {
   [0, 1, 5].includes(props.isSelected)
     ? // Display food that has no subcategory:
       (results = props.selectedFood.map(food => (
-        <ResultDiv key={food.id} value={food}>
-          <div><Image src="/images/icons/food-placeholder.png" alt="" height={200} width={200} /></div>
-          <div>
-            <h3>{food.name}</h3>
-            {food.description && <p>{food.description}</p>}
-          </div>
-          <div>
-            <p>{food.price.toFixed(2)}€</p>
-          </div>
-          <div><Basket2 size={40} color="white" onClick={() => props.addToBasket(food)} /></div>
-        </ResultDiv>
+        <OrderResultDiv 
+          key={food.id}
+          food={food}
+          isSelected={props.isSelected}
+          addToBasket={props.addToBasket}
+        >
+        </OrderResultDiv>
       )))
     : // Display only the subselection selected via selected food and selected subcategory of that food:
       (results = props.selectedFood[props.isCategorySelected].data.map(food => (
-        <ResultDiv key={food.id}>
-          <div><Image src="/images/icons/food-placeholder.png" alt="" height={200} width={200} /></div>
-          <div>
-            <h3>{food.name}</h3>
-            {food.description && <p>{food.description}</p>}
-            {props.isSelected === 3 && (
-              <form>
-                <div>
-                  <input id={`crepe-${food.name}`} type="radio" value="crepe" name={`type-${food.name}`} defaultChecked={true} />
-                  <label htmlFor={`crepe-${food.name}`}>Crêpe</label>
-                </div>
-                <div>
-                  <input id={`gaufre-${food.name}`} type="radio" value="gaufre" name={`type-${food.name}`} />
-                  <label htmlFor={`gaufre-${food.name}`}>Gaufre</label>
-                </div>
-              </form>
-            )}
-          </div>
-          <div>
-            <p>{food.price.toFixed(2)}€</p>
-          </div>
-          <div><Basket2 size={40} color="white" onClick={() => props.addToBasket(food)} /></div>
-        </ResultDiv>
+        <OrderResultDiv 
+          key={food.id}
+          food={food}
+          isSelected={props.isSelected}
+          addToBasket={props.addToBasket}
+        >
+        </OrderResultDiv>
       )));
 
   return (

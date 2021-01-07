@@ -74,7 +74,9 @@ const Basket = props => {
       {props.basketItems.length > 0 && 
         <Total>
           <p><strong>Montant total : {props.basketItems.length > 1 
-            ? props.basketItems.reduce((a, b) => a.price*a.quantity + b.price*b.quantity).toFixed(2)
+            ? (props.basketItems.reduce((r, b) => {
+              return r + b.price*b.quantity
+            }, 0)).toFixed(2)
             : (props.basketItems[0].price*props.basketItems[0].quantity).toFixed(2)}€</strong></p>
           <p>à régler sur place (CB, liquide ou tickets restaurant)</p>
         </Total>

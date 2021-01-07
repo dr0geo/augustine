@@ -46,19 +46,6 @@ const ClicknCollect = props => {
     setIsBasketDisplayed(!isBasketDisplayed);
   }
 
-  const addToBasket = food => {
-    if (!basketItems.some(item => item.name === food.name)) {
-      food.quantity = 1;
-      setBasketItems([
-        ...basketItems,
-        food
-      ]);
-    } else {
-      food.quantity += 1;
-      setBasketItems([...basketItems]);
-    }
-  }
-
   const decreaseQuantity = item => {
     if (item.quantity > 1) {
       item.quantity -= 1;
@@ -75,6 +62,24 @@ const ClicknCollect = props => {
 
   const deleteItem = item => {
     setBasketItems(basketItems.filter(food => food.name !== item.name));
+  }
+
+  const addToBasket = (food, foodName) => {
+    if (!basketItems.some(item => item.name === foodName)) {
+      food.quantity = 1;
+      setBasketItems([
+        ...basketItems,
+        {
+          name: foodName,
+          price: food.price,
+          quantity: food.quantity,
+          id: food.id
+        }
+      ]);
+    } else {
+      food.quantity += 1;
+      setBasketItems([...basketItems]);
+    }
   }
 
   return (
@@ -117,7 +122,9 @@ const ClicknCollect = props => {
       <BasketButton onClick={toggleBasket}>
         Mon panier
           {basketItems.length > 1
-            ? ` (${basketItems.reduce((a, b) => a.quantity + b.quantity)} articles)` 
+            ? ` (${basketItems.reduce((r, b) => {
+              return r + b.quantity
+              }, 0)} articles)` 
             : basketItems.length === 1
               ? basketItems[0].quantity > 1 
                 ? ` (${basketItems[0].quantity} articles)`
