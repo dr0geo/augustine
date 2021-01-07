@@ -27,6 +27,9 @@ const ResultDiv = styled.div`
       }
     }
   }
+  & > div > p {
+    padding: 0 0;
+  }
   & > div > p + form {
     margin-top: 20px;
   }
@@ -37,7 +40,7 @@ const ResultDiv = styled.div`
   }
   @media only screen and (min-width: 1200px) {
     grid-auto-flow: column;
-    grid-template-columns: 225px 2fr 0.5fr;
+    grid-template-columns: 250px 2fr 0.5fr;
     grid-template-rows: repeat(2, auto);
     & > div > form > div > input {
       transform: scale(1);

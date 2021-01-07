@@ -1,6 +1,6 @@
 import { db } from '@/utils/firebase';
 import Head from 'next/head';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { v1 as uuid } from 'uuid';
 
 import Menu from '@/components/Menu';
@@ -17,6 +17,16 @@ const ClicknCollect = props => {
   const [selectedFood, setSelectedFood] = useState(props.entrees);
   const [isBasketDisplayed, setIsBasketDisplayed] = useState(false);
   const [basketItems, setBasketItems] = useState([]);
+
+  useEffect(() => {
+    if (sessionStorage.getItem('order')) {
+      setBasketItems(JSON.parse(sessionStorage.getItem('order')));
+    }
+  }, []);
+
+  useEffect(() => {
+    sessionStorage.setItem('order', JSON.stringify(basketItems));
+  }, [basketItems]);
   
   const handleClick = ({ target }) => {
     setIsSelected(parseInt(target.value));
