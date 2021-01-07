@@ -76,9 +76,6 @@ const ClicknCollect = props => {
           id: food.id
         }
       ]);
-    } else {
-      food.quantity += 1;
-      setBasketItems([...basketItems]);
     }
   }
 
