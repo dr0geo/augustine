@@ -1,6 +1,7 @@
 import { db } from '@/utils/firebase';
 import Head from 'next/head';
 import { useState } from 'react';
+import { v1 as uuid } from 'uuid';
 
 import Menu from '@/components/Menu';
 import Categories from '@/components/carte/Categories';
@@ -73,10 +74,11 @@ const ClicknCollect = props => {
           name: foodName,
           price: food.price,
           quantity: food.quantity,
-          id: food.id
+          id: uuid()
         }
       ]);
     }
+    console.log(basketItems);
   }
 
   return (
