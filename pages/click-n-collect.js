@@ -78,7 +78,6 @@ const ClicknCollect = props => {
         }
       ]);
     }
-    console.log(basketItems);
   }
 
   return (
@@ -91,6 +90,7 @@ const ClicknCollect = props => {
           content="Commandez en ligne dans l'une de nos deux crêperies Parisiennes, et venez récupérer directement votre repas une fois prêt !"
         />
       </Head>
+      
       <Menu
         isSelected={4}
         isClicked={props.isClicked}

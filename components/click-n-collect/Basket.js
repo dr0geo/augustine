@@ -19,8 +19,8 @@ export const BasketContainer = styled.div`
   background-color: white;
   bottom: 58px;
   padding: 20px;
-  position: fixed;
-  transform: ${props => (props.isBasketDisplayed ? 'scaleY(1)' : 'scaleY(0)')};
+  position: ${props => props.isBasketDisplayed ? 'sticky' : 'fixed'};
+  transform: ${props => props.isBasketDisplayed ? 'scaleY(1)' : 'scaleY(0)'};
   transform-origin: bottom center;
   transition: transform 0.3s ease-in-out;
   width: 100vw;
