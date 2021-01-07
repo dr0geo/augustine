@@ -114,6 +114,7 @@ const ClicknCollect = props => {
         <Categories 
           isSelected={isSelected} 
           handleClick={handleClick}
+          isCnC={true}
         />
         <OrderResults
           isSelected={isSelected}

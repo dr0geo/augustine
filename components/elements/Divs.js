@@ -27,7 +27,7 @@ export const CnCMenuSection = styled.section`
     display: grid;
     gap: 30px;
     grid-template-columns: 0.9fr 2fr 0.9fr;
-    grid-grid-template-rows: 80px 1fr;
+    grid-template-rows: 80px 1fr;
     margin: 0px auto;
     &::last-child {
       display: block;
@@ -37,10 +37,12 @@ export const CnCMenuSection = styled.section`
       grid-column: 2 / 3;
     }
     & > div:first-of-type {
+      align-self: start;
       grid-row: 2 / 3;
       grid-column: 1 / 2;
     }
     & > div:nth-of-type(2) {
+      align-self: start;
       grid-row: 2 / 3;
       grid-column: 2 / 3;
     }

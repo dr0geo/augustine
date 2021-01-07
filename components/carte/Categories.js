@@ -14,7 +14,7 @@ const Container = styled.div`
   @media only screen and (min-width: 1200px) {
     grid-template-columns: 260px;
     height: 450px;
-    margin-top: 0;
+    margin-top: ${props => props.isCnC ? '30px' : '0'};
   }
 `;
 
@@ -63,7 +63,7 @@ const Category = styled.button`
 
 const Categories = props => {
   return (
-    <Container>
+    <Container isCnC={props.isCnC}>
       <FlexDiv>
         <Category
           isSelected={props.isSelected === 0}
