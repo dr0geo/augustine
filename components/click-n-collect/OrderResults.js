@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { Basket2 } from '@styled-icons/bootstrap';
 import Image from 'next/image';
+import { useState } from 'react';
 
 const Container = styled.div`
   background-color: #e3e9ef;
@@ -131,12 +132,12 @@ const OrderResults = props => {
             {props.isSelected === 3 && (
               <form>
                 <div>
-                  <input id="crepe" type="radio" value="crepe" name="type" checked={true} />
-                  <label htmlFor="crepe">Crêpe</label>
+                  <input id={`crepe-${food.name}`} type="radio" value="crepe" name={`type-${food.name}`} defaultChecked={true} />
+                  <label htmlFor={`crepe-${food.name}`}>Crêpe</label>
                 </div>
                 <div>
-                  <input id="gaufre" type="radio" value="gaufre" name="type" />
-                  <label htmlFor="gaufre">Gaufre</label>
+                  <input id={`gaufre-${food.name}`} type="radio" value="gaufre" name={`type-${food.name}`} />
+                  <label htmlFor={`gaufre-${food.name}`}>Gaufre</label>
                 </div>
               </form>
             )}

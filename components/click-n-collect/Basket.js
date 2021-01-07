@@ -48,6 +48,11 @@ export const BasketContainer = styled.div`
   }
 `;
 
+const Total = styled.div`
+  border-top: 3px solid lightgray;
+  padding: 20px 20px 0 20px;
+`;
+
 const Basket = props => {
   return (
     <BasketContainer isBasketDisplayed={props.isBasketDisplayed}>
@@ -66,6 +71,14 @@ const Basket = props => {
           </li>
         );
       })}
+      {props.basketItems.length > 0 && 
+        <Total>
+          <p><strong>Montant total : {props.basketItems.length > 1 
+            ? props.basketItems.reduce((a, b) => a.price*a.quantity + b.price*b.quantity).toFixed(2)
+            : (props.basketItems[0].price*props.basketItems[0].quantity).toFixed(2)}€</strong></p>
+          <p>à régler sur place (CB, liquide ou tickets restaurant)</p>
+        </Total>
+      }
     </BasketContainer>
   );
 };
