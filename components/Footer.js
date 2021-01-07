@@ -49,6 +49,15 @@ const StyledFooter = styled.footer`
   & a + a {
     margin-left: 20px;
   }
+  @media only screen and (min-width: 1200px) {
+    /* Hide basket box shadow */
+    position: relative;
+    z-index: 1;
+    /* Hide mobile basket when on a desktop view */
+    & + div {
+      display: none;
+    }
+  }
 `;
 
 const CenteredDiv = styled.div`

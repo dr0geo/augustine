@@ -6,8 +6,10 @@ const Container = styled.div`
   background-color: #e3e9ef;
   padding: 0 20px;
   @media only screen and (min-width: 1200px) {
+    height: auto;
     ${props => props.setVertOffset && 'margin-top: 49px'};
-    width: 840px;
+    margin-bottom: 30px;
+    padding: 0 0;
   }
 `;
 
@@ -20,7 +22,6 @@ const CategorySelecter = styled.div`
   @media only screen and (min-width: 1200px) {
     gap: 0;
     grid-template-columns: repeat(4, 1fr);
-    margin-left: -20px;
     ${props => props.setVertOffset && 'margin-top: -49px'};
     padding: 0;
   }
@@ -44,7 +45,6 @@ const Category = styled.button`
     font-weight: 600;
     padding: 8px 20px;
     text-align: left;
-    width: 210px;
     & + & {
       border-left: 0;
     }

@@ -44,7 +44,24 @@ export const BasketContainer = styled.div`
     border-top: 1px solid lightgray;
   }
   @media only screen and (min-width: 1200px) {
-    display: none;
+    box-shadow: -10px 3px 5px 0px #dedede;
+    position: static;
+    transform: scaleY(1);
+    width: 100%;
+    & > li > div {
+      align-items: center;
+      & > button {
+        height: 30px;
+        padding: 0 10px;
+      }
+    }
+    @media (any-hover: hover) {
+      & button:hover, svg:hover {
+        cursor: pointer;
+        transform: scale(1.10);
+        transition: transform 0.2s ease-in-out;
+      }
+    }
   }
 `;
 
@@ -66,7 +83,7 @@ const Basket = props => {
             <div>
               <button onClick={() => props.decreaseQuantity(item)}>-</button>
               <button onClick={() => props.increaseQuantity(item)}>+</button>
-              <Bin color="#012f6a" size={50} onClick={() => props.deleteItem(item)} />
+              <Bin color="#012f6a" size={30} onClick={() => props.deleteItem(item)} />
             </div>
           </li>
         );

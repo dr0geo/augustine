@@ -8,7 +8,7 @@ import Categories from '@/components/carte/Categories';
 import OrderResults from '@/components/click-n-collect/OrderResults';
 import Footer from '@/components/Footer';
 import Basket, { BasketButton } from '@/components/click-n-collect/Basket';
-import { MenuSection } from '@/components/elements/Divs';
+import { CnCMenuSection } from '@/components/elements/Divs';
 
 const ClicknCollect = props => {
 
@@ -90,7 +90,6 @@ const ClicknCollect = props => {
           content="Commandez en ligne dans l'une de nos deux crêperies Parisiennes, et venez récupérer directement votre repas une fois prêt !"
         />
       </Head>
-      
       <Menu
         isSelected={4}
         isClicked={props.isClicked}
@@ -99,9 +98,13 @@ const ClicknCollect = props => {
         bg="./images/food/augustine.jpeg"
         title="Click & Collect"
       />
-      <h2>Parcourez<br /><em>la carte Augustine</em></h2>
-      <MenuSection>
-        <Categories isSelected={isSelected} handleClick={handleClick} />
+      
+      <CnCMenuSection>
+        <h2>Parcourez<br /><em>la carte Augustine</em></h2>
+        <Categories 
+          isSelected={isSelected} 
+          handleClick={handleClick}
+        />
         <OrderResults
           isSelected={isSelected}
           selectedFood={selectedFood}
@@ -109,7 +112,13 @@ const ClicknCollect = props => {
           handleCategoryClick={handleCategoryClick}
           addToBasket={addToBasket}
         />
-      </MenuSection>
+        <Basket 
+          basketItems={basketItems}
+          decreaseQuantity={decreaseQuantity}
+          increaseQuantity={increaseQuantity}
+          deleteItem={deleteItem}
+        />
+      </CnCMenuSection>
       <Footer />
       <Basket 
         isBasketDisplayed={isBasketDisplayed}

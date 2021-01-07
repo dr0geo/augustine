@@ -37,10 +37,12 @@ const ResultDiv = styled.div`
   }
   @media only screen and (min-width: 1200px) {
     grid-auto-flow: column;
-    grid-template-columns: 1fr 2fr 0.5fr;
+    grid-template-columns: 225px 2fr 0.5fr;
     grid-template-rows: repeat(2, auto);
-    & > div:first-of-type,
-    div:last-of-type {
+    & > div > form > div > input {
+      transform: scale(1);
+    }
+    & > div:first-of-type, div:last-of-type {
       grid-row: 1 / 3;
     }
     & > div:last-of-type {
