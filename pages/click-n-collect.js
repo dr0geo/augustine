@@ -9,6 +9,7 @@ import OrderResults from '@/components/click-n-collect/OrderResults';
 import Footer from '@/components/Footer';
 import Basket, { BasketButton } from '@/components/click-n-collect/Basket';
 import { CnCMenuSection } from '@/components/elements/Divs';
+import OrderInfo from '@/components/click-n-collect/OrderInfo';
 
 const ClicknCollect = props => {
 
@@ -90,6 +91,80 @@ const ClicknCollect = props => {
     }
   }
 
+  // Display order form:
+  const [displaySection, setDisplaySection] = useState(false);
+  // Personal information:
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [email, setEmail] = useState('');
+  const [phoneNumber, setPhoneNumber] = useState('');
+  // Date:
+  const todayDate = new Date(Date.now());
+  const [date, setDate] = useState(todayDate);
+  // Time:
+  const [time, setTime] = useState('19:00:00')
+  // Handle order submission:
+  const [orderConfirmation, setOrderConfirmation] = useState('');
+  
+  const handleOrder = () => {
+    window.scrollTo(0, 0);
+    props.displayOrderForm();
+    setDisplaySection(true);
+  }
+
+  const backToBasket = () => {
+    setDisplaySection(false);
+    props.hideOrderForm();
+  }
+  
+  const handleInputValues = e => {
+    switch (e.target.name) {
+      case 'firstName':
+        setFirstName(e.target.value);
+        break;
+      case 'lastName':
+        setLastName(e.target.value);
+        break;
+      case 'email':
+        setEmail(e.target.value);
+        break;
+      case 'phoneNumber':
+        setPhoneNumber(e.target.value);
+        break;
+      case 'date':
+        setDate(e.target.value);
+        break;
+      case 'time':
+        setTime(e.target.value);
+        break;
+    }
+  }
+
+  const handleOrderSubmit = e => {
+    e.preventDefault();
+
+    const orderRef = {
+      firstName,
+      lastName,
+      email,
+      phoneNumber,
+      date,
+      time,
+      basketItems
+    }
+
+    fetch('/api/commandes', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(orderRef)
+    })
+      .then(res => res.json())
+      .then(data => setOrderConfirmation(data.orderId))
+      .catch(err => console.log(err));
+  }
+
   return (
     <>
       <Head>
@@ -128,6 +203,7 @@ const ClicknCollect = props => {
           decreaseQuantity={decreaseQuantity}
           increaseQuantity={increaseQuantity}
           deleteItem={deleteItem}
+          handleOrder={handleOrder}
         />
       </CnCMenuSection>
       <Footer />
@@ -137,6 +213,7 @@ const ClicknCollect = props => {
         decreaseQuantity={decreaseQuantity}
         increaseQuantity={increaseQuantity}
         deleteItem={deleteItem}
+        handleOrder={handleOrder}
       />
       <BasketButton onClick={toggleBasket}>
         Mon panier
@@ -151,6 +228,13 @@ const ClicknCollect = props => {
               : null
           }
       </BasketButton>
+      <OrderInfo
+        displaySection={displaySection}
+        backToBasket={backToBasket}
+        handleInputValues={handleInputValues}
+        handleOrderSubmit={handleOrderSubmit}
+        basketItems={basketItems}
+      />
     </>
   );
 };

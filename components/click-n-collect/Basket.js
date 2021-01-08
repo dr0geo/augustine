@@ -15,6 +15,26 @@ export const BasketButton = styled.button`
   }
 `;
 
+const OrderButton = styled(BasketButton)`
+  border: 2px solid #012f6a;
+  border-radius: 5px;
+  display: block;
+  margin: 20px auto;
+  position: static;
+  width: 80%;
+  @media only screen and (min-width: 1200px) {
+    display: block;
+    transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+    @media (any-hover: hover) {
+      &:hover {
+        cursor: pointer;
+        background-color: white;
+        color: #012f6a;
+      }
+    }
+  }
+`;
+
 export const BasketContainer = styled.div`
   background-color: white;
   bottom: 58px;
@@ -58,7 +78,7 @@ export const BasketContainer = styled.div`
     @media (any-hover: hover) {
       & button:hover, svg:hover {
         cursor: pointer;
-        transform: scale(1.10);
+        transform: scale(1.1);
         transition: transform 0.2s ease-in-out;
       }
     }
@@ -89,14 +109,17 @@ const Basket = props => {
         );
       })}
       {props.basketItems.length > 0 && 
-        <Total>
-          <p><strong>Montant total : {props.basketItems.length > 1 
-            ? (props.basketItems.reduce((r, b) => {
-              return r + b.price*b.quantity
-            }, 0)).toFixed(2)
-            : (props.basketItems[0].price*props.basketItems[0].quantity).toFixed(2)}€</strong></p>
-          <p>à régler sur place (CB, liquide ou tickets restaurant)</p>
-        </Total>
+        <>
+          <Total>
+            <p><strong>Montant total : {props.basketItems.length > 1 
+              ? (props.basketItems.reduce((r, b) => {
+                return r + b.price*b.quantity
+              }, 0)).toFixed(2)
+              : (props.basketItems[0].price*props.basketItems[0].quantity).toFixed(2)}€</strong></p>
+            <p>à régler sur place (CB, liquide ou tickets restaurant)</p>
+          </Total>
+          <OrderButton onClick={props.handleOrder}>Passer la commande</OrderButton>
+        </>
       }
     </BasketContainer>
   );
