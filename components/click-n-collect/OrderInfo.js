@@ -1,17 +1,38 @@
 import styled from 'styled-components';
 
-const InfoSection = styled.section`
+const Container = styled.section`
+  background: linear-gradient(hsla(0deg, 0%, 0%, 0.7), hsla(0deg, 0%, 0%, 0.7));
+  display: ${props => props.displaySection ? 'flex' : 'none'};
+  height: 100vh;
+  justify-content: center;
+  position: absolute;
+  top: 0;
+  width: 100vw;
+`;
+
+const InfoSection = styled.div`
   align-items: center;
   background-color: white;
   display: flex;
   flex-direction: column;
   height: 100vh;
   justify-content: center;
+  margin: auto;
   position: absolute;
   top: 0;
   transform: ${props => (props.displaySection ? 'scale(1)' : 'scale(0)')};
   width: 100vw;
   z-index: 100;
+  & > div:first-of-type {
+    margin: 20px auto;
+    max-width: 260px;
+    & > h3 {
+      margin-top: 0;
+    }
+    & > p {
+      padding: 0 0;
+    }
+  }
   & > form {
     & > input {
       border: 2px solid #e3e9ef;
@@ -51,6 +72,20 @@ const InfoSection = styled.section`
         }
       }
     }
+    & > p {
+      color: green;
+      & > a {
+        border-bottom: 1px solid green;
+        color: green;
+      }
+    }
+  }
+  @media only screen and (min-width: 1200px) {
+    border-radius: 5px;
+    max-height: 600px;
+    max-width: 600px;
+    position: fixed;
+    top: calc((100vh - 600px) / 2);
   }
 `;
 
@@ -64,6 +99,16 @@ const BackButton = styled.button`
   max-width: 260px;
   padding: 10px 0;
   width: 90%;
+  @media only screen and (min-width: 1200px) {
+    transition: background-color 0.2s ease-in-out, border 0.2s ease-in-out;
+    @media (any-hover: hover) {
+      &:hover {
+        cursor: pointer;
+        background-color: white;
+        border: 2px solid #012f6a;
+      }
+    }
+  }
 `;
 
 const OrderInfo = props => {
@@ -76,58 +121,78 @@ const OrderInfo = props => {
     return r + b.price*b.quantity
   }, 0).toFixed(2);
 
+  const year = props.todayDate.getFullYear();
+  const month = (props.todayDate.getMonth() + 1).toString().padStart(2, '0');
+  const day = props.todayDate.getDate().toString().padStart(2, '0');
+
   return (
-    <InfoSection displaySection={props.displaySection}>
-      <BackButton onClick={props.backToBasket}>Revenir au panier</BackButton>
-      <h3>Total : {articleNumber} {articleNumber === 1 ? 'article' : 'articles'} / {totalPrice}€</h3>
-      <form onSubmit={props.handleOrderSubmit}>
-        <input
-          type="text"
-          name="firstName"
-          placeholder="Prénom *"
-          required
-          onChange={props.handleInputValues}
-        />
-        <input
-          type="text"
-          name="lastName"
-          placeholder="Nom *"
-          required
-          onChange={props.handleInputValues}
-        />
-        <input
-          type="email"
-          name="email"
-          placeholder="E-mail *"
-          required
-          onChange={props.handleInputValues}
-        />
-        <input
-          type="tel"
-          name="phoneNumber"
-          placeholder="Téléphone *"
-          minLength={10}
-          maxLength={13}
-          required
-          onChange={props.handleInputValues}
-        />
-        <input
-          type="date"
-          name="date"
-          required
-          onChange={props.handleInputValues}
-        />
-        <input
-          type="time"
-          name="time"
-          min="19:00:00"
-          max="21:30:00"
-          required
-          onChange={props.handleInputValues}
-        />
-        <button type="submit">Confirmer la commande</button>
-      </form>
-    </InfoSection>
+    <Container displaySection={props.displaySection}>
+      <InfoSection displaySection={props.displaySection}>
+        {!props.orderConfirmation && <BackButton onClick={props.backToBasket}>Revenir au panier</BackButton>}
+        <div>
+          <h3>Total : {articleNumber} {articleNumber === 1 ? 'article' : 'articles'} / {totalPrice}€</h3>
+          <p>à régler sur place (CB, liquide ou tickets restaurant)</p>
+        </div>
+        <form onSubmit={props.handleOrderSubmit}>
+          {!props.orderConfirmation &&
+            <>
+              <input
+                type="text"
+                name="firstName"
+                placeholder="Prénom *"
+                required
+                onChange={props.handleInputValues}
+              />
+              <input
+                type="text"
+                name="lastName"
+                placeholder="Nom *"
+                required
+                onChange={props.handleInputValues}
+              />
+              <input
+                type="email"
+                name="email"
+                placeholder="E-mail *"
+                required
+                onChange={props.handleInputValues}
+              />
+              <input
+                type="tel"
+                name="phoneNumber"
+                placeholder="Téléphone *"
+                minLength={10}
+                maxLength={13}
+                required
+                onChange={props.handleInputValues}
+              />
+              <input
+                type="date"
+                name="date"
+                min={`${year}-${month}-${day}`}
+                required
+                onChange={props.handleInputValues}
+              />
+              <input
+                type="time"
+                name="time"
+                min="11:00:00"
+                max="21:30:00"
+                required
+                onChange={props.handleInputValues}
+              />
+              <button type="submit">Confirmer la commande</button>
+            </>
+          }
+          {props.orderConfirmation &&
+            <>
+              <p>Merci pour votre commande ! Nous l'avons bien enregistrée sous la référence <strong>{props.orderConfirmation}</strong> et vous attendons avec impatience dans notre restaurant !</p>
+              <button onClick={props.backToHomePage}>Retour</button>
+            </>
+          }
+        </form>
+      </InfoSection>
+    </Container>
   );
 };
 

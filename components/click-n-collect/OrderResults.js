@@ -7,9 +7,9 @@ const Container = styled.div`
   padding: 0 20px;
   @media only screen and (min-width: 1200px) {
     height: auto;
-    ${props => props.setVertOffset && 'margin-top: 49px'};
-    margin: 30px auto;
+    margin: ${props => props.setVertOffset ? '79px auto 30px auto' : '30px auto'};
     padding: 0 0;
+    width: 100%;
   }
 `;
 

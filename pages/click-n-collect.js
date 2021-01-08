@@ -104,7 +104,7 @@ const ClicknCollect = props => {
   // Time:
   const [time, setTime] = useState('19:00:00')
   // Handle order submission:
-  const [orderConfirmation, setOrderConfirmation] = useState('');
+  const [orderConfirmation, setOrderConfirmation] = useState(null);
   
   const handleOrder = () => {
     window.scrollTo(0, 0);
@@ -163,6 +163,13 @@ const ClicknCollect = props => {
       .then(res => res.json())
       .then(data => setOrderConfirmation(data.orderId))
       .catch(err => console.log(err));
+  }
+
+  const backToHomePage = () => {
+    props.hideOrderForm();
+    setDisplaySection(false);
+    setOrderConfirmation(null);
+    setBasketItems([]);
   }
 
   return (
@@ -230,10 +237,14 @@ const ClicknCollect = props => {
       </BasketButton>
       <OrderInfo
         displaySection={displaySection}
+        todayDate={todayDate}
         backToBasket={backToBasket}
         handleInputValues={handleInputValues}
         handleOrderSubmit={handleOrderSubmit}
         basketItems={basketItems}
+        orderConfirmation={orderConfirmation}
+        hideOrderForm={props.hideOrderForm}
+        backToHomePage={backToHomePage}
       />
     </>
   );

@@ -15,14 +15,20 @@ export const BasketButton = styled.button`
   }
 `;
 
-const OrderButton = styled(BasketButton)`
-  border: 2px solid #012f6a;
+const OrderButton = styled.button`
+  background-color:#ac6c14;
+  border: 1px solid #ac6c14;
   border-radius: 5px;
+  color: white;
   display: block;
+  font-weight: 600;
   margin: 20px auto;
+  padding: 10px 0;
   position: static;
-  width: 80%;
+  width: 70%;
   @media only screen and (min-width: 1200px) {
+    background-color: #012f6a;
+    border: 1px solid #012f6a;
     display: block;
     transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
     @media (any-hover: hover) {
