@@ -101,20 +101,30 @@ const ClicknCollect = props => {
   // Date:
   const todayDate = new Date(Date.now());
   const [date, setDate] = useState(todayDate);
-  // Time:
-  const [time, setTime] = useState('19:00:00')
+
+  // Add 15 min of preparation to current time:
+  const hours = todayDate.getHours();
+  const minutes = todayDate.getMinutes();
+  let timeToPickUpOrder;
+
+  if (hours < 11 || (hours > 21 && minutes > 30)) {
+    timeToPickUpOrder = '11:00';
+  } else {
+    const timeWithoutSecs = new Date(todayDate.setMinutes(todayDate.getMinutes() + 15)).toLocaleTimeString().split(':');
+    timeWithoutSecs.pop();
+    timeToPickUpOrder = timeWithoutSecs.join(':');
+  }
+
+  const [time, setTime] = useState(timeToPickUpOrder);
   // Handle order submission:
   const [orderConfirmation, setOrderConfirmation] = useState(null);
   
   const handleOrder = () => {
-    window.scrollTo(0, 0);
-    props.displayOrderForm();
     setDisplaySection(true);
   }
 
   const backToBasket = () => {
     setDisplaySection(false);
-    props.hideOrderForm();
   }
   
   const handleInputValues = e => {
@@ -166,7 +176,6 @@ const ClicknCollect = props => {
   }
 
   const backToHomePage = () => {
-    props.hideOrderForm();
     setDisplaySection(false);
     setOrderConfirmation(null);
     setBasketItems([]);
@@ -243,8 +252,8 @@ const ClicknCollect = props => {
         handleOrderSubmit={handleOrderSubmit}
         basketItems={basketItems}
         orderConfirmation={orderConfirmation}
-        hideOrderForm={props.hideOrderForm}
         backToHomePage={backToHomePage}
+        time={time}
       />
     </>
   );

@@ -49,7 +49,7 @@ const GlobalStyle = createGlobalStyle`
   body {
     font-family: 'Raleway', serif;
     margin: 0;
-    overflow: ${props => props.hideOverflow ? 'hidden' : 'auto'};
+    ${props => props.isClicked && 'hidden'};
     padding: 0;
   }
 
@@ -126,37 +126,23 @@ const GlobalStyle = createGlobalStyle`
 const App = ({ Component, pageProps }) => {
   // Manage header state for each page:
   const [isClicked, setIsClicked] = useState(false);
-  const [hideOverflow, setHideOverflow] = useState(false);
 
   const toggleMenu = () => {
-    setTimeout(() => window.scrollTo(0, 0), 300);
-    setHideOverflow(!hideOverflow);
     setIsClicked(!isClicked);
   };
 
   const hideMenu = () => {
     setIsClicked(false);
-    setHideOverflow(false);
   };
-
-  const displayOrderForm = () => {
-    setHideOverflow(true);
-  }
-
-  const hideOrderForm = () => {
-    setHideOverflow(false);
-  }
 
   return (
     <>
-      <GlobalStyle isClicked={isClicked} hideOverflow={hideOverflow} />
+      <GlobalStyle isClicked={isClicked} />
       <Component
         {...pageProps} 
         isClicked={isClicked}
         toggleMenu={toggleMenu}
         hideMenu={hideMenu}
-        displayOrderForm={displayOrderForm}
-        hideOrderForm={hideOrderForm}
       />
     </>
   );

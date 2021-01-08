@@ -10,6 +10,7 @@ export const BasketButton = styled.button`
   padding: 20px;
   position: sticky;
   width: 100vw;
+  z-index: 50;
   @media only screen and (min-width: 1200px) {
     display: none;
   }

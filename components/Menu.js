@@ -69,12 +69,12 @@ const FlexDiv = styled.div`
   flex-direction: column;
   height: 100vh;
   justify-content: space-evenly;
-  position: absolute;
+  position: fixed;
   text-align: center;
   transform: ${props => (props.isClicked ? 'scale(1)' : 'scale(0)')};
   transition: transform 0.2s ease-in-out 0.1s;
   width: 100vw;
-  z-index: 1;
+  z-index: 100;
   @media only screen and (min-width: 1200px) {
     background: none;
     flex-direction: row;
@@ -135,11 +135,6 @@ const Menu = props => {
         <Link href="/click-n-collect" passHref>
           <Anchor onClick={props.hideMenu} isSelected={props.isSelected === 4}>
             Click & Collect
-          </Anchor>
-        </Link>
-        <Link href="/la-cuisine" passHref>
-          <Anchor onClick={props.hideMenu} isSelected={props.isSelected === 5}>
-            La Cuisine
           </Anchor>
         </Link>
         <Link href="/contact" passHref>

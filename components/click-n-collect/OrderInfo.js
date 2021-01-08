@@ -5,9 +5,10 @@ const Container = styled.section`
   display: ${props => props.displaySection ? 'flex' : 'none'};
   height: 100vh;
   justify-content: center;
-  position: absolute;
+  position: fixed;
   top: 0;
   width: 100vw;
+  z-index: 10;
 `;
 
 const InfoSection = styled.div`
@@ -18,16 +19,15 @@ const InfoSection = styled.div`
   height: 100vh;
   justify-content: center;
   margin: auto;
-  position: absolute;
-  top: 0;
   transform: ${props => (props.displaySection ? 'scale(1)' : 'scale(0)')};
   width: 100vw;
   z-index: 100;
   & > div:first-of-type {
-    margin: 20px auto;
+    margin: 0 auto 20px auto;
     max-width: 260px;
     & > h3 {
       margin-top: 0;
+      margin-bottom: 5px;
     }
     & > p {
       padding: 0 0;
@@ -126,8 +126,8 @@ const OrderInfo = props => {
   const day = props.todayDate.getDate().toString().padStart(2, '0');
 
   return (
-    <Container displaySection={props.displaySection}>
-      <InfoSection displaySection={props.displaySection}>
+    <Container displaySection={props.displaySection} onClick={props.backToBasket}>
+      <InfoSection displaySection={props.displaySection} onClick={e => e.stopPropagation()}>
         {!props.orderConfirmation && <BackButton onClick={props.backToBasket}>Revenir au panier</BackButton>}
         <div>
           <h3>Total : {articleNumber} {articleNumber === 1 ? 'article' : 'articles'} / {totalPrice}€</h3>
@@ -170,6 +170,7 @@ const OrderInfo = props => {
                 type="date"
                 name="date"
                 min={`${year}-${month}-${day}`}
+                defaultValue={`${year}-${month}-${day}`}
                 required
                 onChange={props.handleInputValues}
               />
@@ -178,6 +179,7 @@ const OrderInfo = props => {
                 name="time"
                 min="11:00:00"
                 max="21:30:00"
+                defaultValue={props.time}
                 required
                 onChange={props.handleInputValues}
               />
