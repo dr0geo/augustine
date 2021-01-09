@@ -171,7 +171,20 @@ const ClicknCollect = props => {
       body: JSON.stringify(orderRef)
     })
       .then(res => res.json())
-      .then(data => setOrderConfirmation(data.orderId))
+      .then(data => {
+        setOrderConfirmation(data.orderId)
+        fetch('/api/email', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            orderId: data.orderId,
+            orderRef: orderRef,
+            type: 'CnC'
+          })
+        })
+      })
       .catch(err => console.log(err));
   }
 
