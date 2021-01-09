@@ -180,7 +180,7 @@ const ClicknCollect = props => {
           },
           body: JSON.stringify({
             orderId: data.orderId,
-            orderRef: orderRef,
+            orderRef,
             type: 'CnC'
           })
         })

@@ -134,7 +134,20 @@ const Reserver = props => {
       body: JSON.stringify(bookingRef)
     })
       .then(res => res.json())
-      .then(data => setBookingConfirmation(data.bookingId))
+      .then(data => {
+        setBookingConfirmation(data.bookingId);
+        fetch('/api/email', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            bookingId: data.bookingId,
+            bookingRef,
+            type: 'booking'
+          })
+        })
+      })
       .then(() => goToNextStep())
       .catch(err => console.log(err));
   }
