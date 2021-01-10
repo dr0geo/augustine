@@ -189,6 +189,7 @@ const ClicknCollect = props => {
   }
 
   const backToHomePage = () => {
+    setIsBasketDisplayed(false);
     setDisplaySection(false);
     setOrderConfirmation(null);
     setBasketItems([]);

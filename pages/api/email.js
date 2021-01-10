@@ -20,9 +20,9 @@ const sendConfirmationEmail = async (req, res) => {
       to: `${req.body.orderRef.email}`,
       subject: "Crêperie Augustine - Votre commande !",
       html: `
-        <h1>Votre commande est validée !</h1>
-        <p>${req.body.orderRef.firstName},<br />
-        Merci pour votre commande ! Celle-ci a bien été prise en compte avec la référence <strong>${req.body.orderId}</strong>.</p>
+        <p>${req.body.orderRef.firstName},</p>
+        <br />
+        <p>Merci pour votre commande ! Celle-ci a bien été prise en compte avec la référence <strong>${req.body.orderId}</strong>.</p>
         <p>Voici un récapitulatif des informations liées à votre commande :</p>
         <ul>
           <li>Date souhaitée de retrait de la commande : ${(new Date(req.body.orderRef.date)).toLocaleDateString('fr-FR')}</li>
@@ -41,9 +41,9 @@ const sendConfirmationEmail = async (req, res) => {
       to: `${req.body.bookingRef.email}`,
       subject: "Crêperie Augustine - Votre réservation !",
       html: `
-        <h1>Votre réservation est validée !</h1>
-        <p>${req.body.bookingRef.firstName},<br />
-        Merci pour votre réservation ! Celle-ci a bien été prise en compte avec la référence <strong>${req.body.bookingId}</strong>.</p>
+        <p>${req.body.bookingRef.firstName},</p>
+        <br />
+        <p>Merci pour votre réservation ! Celle-ci a bien été prise en compte avec la référence <strong>${req.body.bookingId}</strong>.</p>
         <p>Voici un récapitulatif des informations liées à votre réservation :</p>
         <ul>
           <li>Restaurant : Augustine Paris ${req.body.bookingRef.restaurant}</li>
@@ -59,8 +59,8 @@ const sendConfirmationEmail = async (req, res) => {
     }
   }
 
-  await transporter.sendMail(confirmation);
-
+  await transporter.sendMail(confirmation)
+    .catch(error => console.log(error));
   res.status(200).end();
 }
 
