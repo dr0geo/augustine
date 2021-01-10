@@ -54,7 +54,7 @@ const StyledFooter = styled.footer`
     position: relative;
     z-index: 1;
     /* Hide mobile basket when on a desktop view */
-    & + div {
+    & + div + div {
       display: none;
     }
   }

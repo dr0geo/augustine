@@ -8,9 +8,17 @@ export const BasketButton = styled.button`
   color: white;
   font-weight: 600;
   padding: 20px;
-  position: sticky;
+  position: fixed;
   width: 100vw;
-  z-index: 50;
+  z-index: 40;
+  @media only screen and (min-width: 1200px) {
+    display: none;
+  }
+`;
+
+export const BasketButtonOffset = styled.div`
+  height: 59px;
+  width: 100%;
   @media only screen and (min-width: 1200px) {
     display: none;
   }
@@ -65,6 +73,10 @@ export const BasketContainer = styled.div`
         font-weight: 600;
         padding: 15px 30px;
       }
+      & > svg {
+        transform: scale(1.8);
+        transform-origin: top center;
+      }
     }
   }
   & > li + li {
@@ -80,6 +92,9 @@ export const BasketContainer = styled.div`
       & > button {
         height: 30px;
         padding: 0 10px;
+      }
+      & > svg {
+        transform: scale(1);
       }
     }
     @media (any-hover: hover) {

@@ -8,7 +8,7 @@ const Container = styled.section`
   position: fixed;
   top: 0;
   width: 100vw;
-  z-index: 10;
+  z-index: 50;
 `;
 
 const InfoSection = styled.div`

@@ -7,7 +7,7 @@ import Menu from '@/components/Menu';
 import Categories from '@/components/carte/Categories';
 import OrderResults from '@/components/click-n-collect/OrderResults';
 import Footer from '@/components/Footer';
-import Basket, { BasketButton } from '@/components/click-n-collect/Basket';
+import Basket, { BasketButton, BasketButtonOffset } from '@/components/click-n-collect/Basket';
 import { CnCMenuSection } from '@/components/elements/Divs';
 import OrderInfo from '@/components/click-n-collect/OrderInfo';
 
@@ -236,6 +236,7 @@ const ClicknCollect = props => {
         />
       </CnCMenuSection>
       <Footer />
+      <BasketButtonOffset />
       <Basket 
         isBasketDisplayed={isBasketDisplayed}
         basketItems={basketItems}
