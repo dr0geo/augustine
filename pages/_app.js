@@ -31,15 +31,6 @@ const GlobalStyle = createGlobalStyle`
       url('/fonts/raleway/Raleway-SemiBold.woff') format('woff');
   }
 
-  @font-face {
-    font-display: swap;
-    font-family: 'Raleway';
-    font-weight: 700;
-    src: 
-      url('/fonts/raleway/Raleway-Bold.woff2') format('woff2'),
-      url('/fonts/raleway/Raleway-Bold.woff') format('woff');
-  }
-
   * {
     box-sizing: border-box;
   }
@@ -79,6 +70,7 @@ const GlobalStyle = createGlobalStyle`
 
   h2 {
     color: #ac6c14;
+    font-weight: 600;
     text-align: center;
     & > em {
       color: #012f6a;
