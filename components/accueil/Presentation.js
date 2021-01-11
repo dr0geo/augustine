@@ -1,6 +1,7 @@
 import { Section, FlexDiv } from '@/elements/Divs';
 import { RestaurantCard } from '@/elements/Cards';
 import { BlackButton } from '@/elements/Buttons';
+import Image from 'next/image';
 
 const Presentation = () => {
   return (
@@ -11,14 +12,17 @@ const Presentation = () => {
         <em>restaurant parisien</em>
       </h2>
       <FlexDiv>
-        <RestaurantCard bgUrl="/images/restaurant/stairs.webp">
-          <div>végétal</div>
+        <RestaurantCard>
+          <Image src="/images/restaurant/stairs.webp" alt="" height={250} width={250} objectFit="cover" quality={100} className="round-border" />
+          <div>Végétal</div>
         </RestaurantCard>
-        <RestaurantCard bgUrl="/images/restaurant/upstairs.webp">
-          <div>chaleureux</div>
+        <RestaurantCard>
+          <Image src="/images/restaurant/downstairs.webp" alt="" height={250} width={250} objectFit="cover" quality={100} className="round-border" />
+          <div>Chaleureux</div>
         </RestaurantCard>
-        <RestaurantCard bgUrl="/images/restaurant/downstairs.webp">
-          <div>gourmand</div>
+        <RestaurantCard>
+          <Image src="/images/restaurant/upstairs.webp" alt="" height={250} width={250} objectFit="cover" quality={100} className="round-border" />
+          <div>Gourmand</div>
         </RestaurantCard>
       </FlexDiv>
       <p>

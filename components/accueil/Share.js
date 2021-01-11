@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 
 import { Section } from '@/elements/Divs';
-import Image from 'next/image';
 
 const Container = styled.ul`
   align-items: center;

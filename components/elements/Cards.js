@@ -1,18 +1,16 @@
 import styled from 'styled-components';
 
 export const RestaurantCard = styled.div`
-  background: url(${props => props.bgUrl});
-  background-position: center;
-  background-size: cover;
-  background-repeat: no-repeat;
-  border-radius: 5px;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
   height: 250px;
   margin: 20px 20px;
   width: 250px;
-  & > div {
+  & > div > .round-border {
+    border-radius: 5px 5px 0 0;
+  }
+  & > div:last-of-type {
     align-items: center;
     background-color: hsl(213deg, 98%, 21%, 0.8);
     border-radius: 0 0 5px 5px;

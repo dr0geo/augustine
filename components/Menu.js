@@ -100,11 +100,7 @@ const Anchor = styled.a`
 
 const logo = (
   <Logo>
-    <Link href="/">
-      <a>
-        <Image src="/images/logo/logo.webp" alt="" height={320} width={450} />
-      </a>
-    </Link>
+    <Image src="/images/logo/logo.webp" alt="" height={320} width={450} />
     <h1>crêperie contemporaine - Paris</h1>
   </Logo>
 );
