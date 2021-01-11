@@ -62,6 +62,10 @@ export const FlexDiv = styled.div`
     justify-content: space-around;
     max-width: 1200px;
   }
+  /* For home page paragraph in Presentation.js: */
+  & + p {
+    margin: 20px auto;
+  }
 `;
 
 export const GridWrapper = styled.div`
