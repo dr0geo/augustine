@@ -17,11 +17,11 @@ const Presentation = () => {
           <div>Végétal</div>
         </RestaurantCard>
         <RestaurantCard>
-          <Image src="/images/restaurant/downstairs.webp" alt="" height={250} width={250} objectFit="cover" quality={100} className="round-border" />
+          <Image src="/images/restaurant/downstairs.webp" alt="" height={250} width={250} objectFit="cover" quality={100} className="round-border" priority={true} />
           <div>Chaleureux</div>
         </RestaurantCard>
         <RestaurantCard>
-          <Image src="/images/restaurant/upstairs.webp" alt="" height={250} width={250} objectFit="cover" quality={100} className="round-border" />
+          <Image src="/images/restaurant/upstairs.webp" alt="" height={250} width={250} objectFit="cover" quality={100} className="round-border" priority={true} />
           <div>Gourmand</div>
         </RestaurantCard>
       </FlexDiv>
