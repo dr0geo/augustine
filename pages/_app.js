@@ -1,5 +1,5 @@
 import { createGlobalStyle } from 'styled-components';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 import { ScrollToTop } from '@/elements/Buttons';
 

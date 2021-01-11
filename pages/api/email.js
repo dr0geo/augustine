@@ -3,7 +3,9 @@ import nodemailer from 'nodemailer';
 const sendConfirmationEmail = async (req, res) => {
 
   const transporter = nodemailer.createTransport({
-    service: 'Gmail',
+    host: 'smtp.pepipost.com',
+    port: 587,
+    secure: false,
     auth: {
       user: process.env.EMAIL_USER,
       pass: process.env.EMAIL_PASSWORD
