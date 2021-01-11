@@ -6,8 +6,8 @@ const handleOrder = async (req, res) => {
     try {
       const order = await db.collection('orders').add(req.body);
       res.status(200).json({ orderId: order.id });
-    } catch (error) {
-      res.status(400).json(error);
+    } catch (err) {
+      res.status(400).json(err);
     }
     
   // Retrieve all orders for admin:
@@ -20,8 +20,8 @@ const handleOrder = async (req, res) => {
         ...order.data()
       }));
       res.status(200).json({ orders });
-    } catch (error) {
-      res.status(401).json(error);
+    } catch (err) {
+      res.status(401).json(err);
     }
   } else {
     res.status(405).json({ message: `${req.method} requests are not authorized` });

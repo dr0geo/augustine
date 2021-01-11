@@ -59,9 +59,12 @@ const sendConfirmationEmail = async (req, res) => {
     }
   }
 
-  await transporter.sendMail(confirmation)
-    .catch(error => console.log(error));
-  res.status(200).end();
+  try {
+    await transporter.sendMail(confirmation);
+    res.status(200).end();
+  } catch(err) {
+    res.status(400).json(err);
+  }
 }
 
 export default sendConfirmationEmail;
