@@ -183,6 +183,7 @@ const Container = styled.div`
     }
     & > p {
       font-size: 0.9rem;
+      padding: 0 0;
     }
   }
   @media only screen and (min-width: 600px) {
@@ -209,6 +210,12 @@ const ValidateButton = styled.button`
       cursor: pointer;
     }
   }
+`;
+
+const ErrorParag = styled.p`
+  color: red;
+  font-weight: 600;
+  margin-top: 20px;
 `;
 
 export const Personal = props => (
@@ -262,6 +269,7 @@ export const Personal = props => (
             et la politique de confidentialité.
           </p>
           <ValidateButton type="submit">Valider</ValidateButton>
+          {props.errorInBooking !== '' && <ErrorParag>{props.errorInBooking}</ErrorParag>}
         </form>
       </Container>
     </LimitedWidthDiv>

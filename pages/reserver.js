@@ -40,6 +40,7 @@ const Reserver = props => {
 
   const goToPreviousStep = () => {
     setBookingStep(bookingStep - 1);
+    setErrorInBooking('');
   };
 
   // Manage booking information:
@@ -103,6 +104,7 @@ const Reserver = props => {
 
   // Handle booking submission:
   const [bookingConfirmation, setBookingConfirmation] = useState('');
+  const [errorInBooking, setErrorInBooking] = useState('');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -124,7 +126,13 @@ const Reserver = props => {
       },
       body: JSON.stringify(bookingRef)
     })
-      .then(res => res.json())
+      .then(res => {
+        if (res.status === 200) {
+          return res.json();
+        } else {
+          throw new Error();
+        }
+      })
       .then(data => {
         setBookingConfirmation(data.bookingId);
         fetch('/api/email', {
@@ -140,7 +148,7 @@ const Reserver = props => {
         })
       })
       .then(() => goToNextStep())
-      .catch(err => console.log(err));
+      .catch(() => setErrorInBooking('Une erreur s\'est produite, veuillez réessayer s\'il vous plaît...'));
   }
 
   // Display on screen according to current booking step:
@@ -189,6 +197,7 @@ const Reserver = props => {
           time={time}
           handleInputValues={handleInputValues}
           handleSubmit={handleSubmit}
+          errorInBooking={errorInBooking}
         />
       )}
       {bookingStep === 3 && (

@@ -6,7 +6,7 @@ import Card from '@/components/adminpanel/Card';
 import LoginForm, { Container } from '@/components/adminpanel/LoginForm';
 
 const AdminPanel = () => {
-  // Manage user log status for the UI:
+  // Manage admin log status for the UI:
   const [isLoggedIn, setIsLoggedIn] = useState('false');
 
   useEffect(() => {

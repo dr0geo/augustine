@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { v1 as uuid } from 'uuid';
 
 const Container = styled.ul`
   display: flex;
@@ -34,7 +35,7 @@ const Reservations = props => {
     return (
       <Container>
         {filteredData.map(booking => (
-          <ListItem key={booking.id} value={booking.id}>
+          <ListItem key={uuid()}>
             <p>Date : {new Date(Date.parse(booking.date)).toLocaleDateString()}</p>
             <p>Heure : {booking.time}</p>
             <p>Nombre de personnes : {booking.people}</p>

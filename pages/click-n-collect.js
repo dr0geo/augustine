@@ -119,6 +119,7 @@ const ClicknCollect = props => {
 
   // Handle order submission:
   const [orderConfirmation, setOrderConfirmation] = useState(null);
+  const [errorInOrder, setErrorInOrder] = useState('');
   
   const handleOrder = () => {
     setDisplaySection(true);
@@ -126,6 +127,7 @@ const ClicknCollect = props => {
 
   const backToBasket = () => {
     setDisplaySection(false);
+    setErrorInOrder('');
   }
   
   const handleInputValues = e => {
@@ -151,7 +153,7 @@ const ClicknCollect = props => {
     }
   }
 
-  const handleOrderSubmit = e => {
+  const handleOrderSubmit = async (e) => {
     e.preventDefault();
 
     const price = basketItems.map(item => item.price * item.quantity).reduce((a, b) => a + b);
@@ -174,7 +176,13 @@ const ClicknCollect = props => {
       },
       body: JSON.stringify(orderRef)
     })
-      .then(res => res.json())
+      .then(res => {
+        if (res.status === 200) {
+          return res.json();
+        } else {
+          throw new Error();
+        }
+      })
       .then(data => {
         setOrderConfirmation(data.orderId)
         fetch('/api/email', {
@@ -189,7 +197,7 @@ const ClicknCollect = props => {
           })
         })
       })
-      .catch(err => console.log(err));
+      .catch(() => setErrorInOrder('Une erreur s\'est produite, veuillez réessayer s\'il vous plaît...'));
   }
 
   const backToHomePage = () => {
@@ -273,6 +281,7 @@ const ClicknCollect = props => {
         orderConfirmation={orderConfirmation}
         backToHomePage={backToHomePage}
         time={time}
+        errorInOrder={errorInOrder}
       />
     </>
   );

@@ -137,6 +137,11 @@ const BackButton = styled.button`
   }
 `;
 
+const ErrorParag = styled.p`
+  color: red;
+  font-weight: 600;
+`;
+
 const OrderInfo = props => {
 
   const articleNumber = props.basketItems.reduce((r, b) => {
@@ -216,6 +221,7 @@ const OrderInfo = props => {
                 />
               </div>
               <button type="submit">Confirmer la commande</button>
+              {props.errorInOrder !== '' && <div><ErrorParag>{props.errorInOrder}</ErrorParag></div>}
             </>
           }
           {props.orderConfirmation &&

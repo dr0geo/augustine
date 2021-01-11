@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { v1 as uuid } from 'uuid';
 
 const Container = styled.ul`
   display: flex;
@@ -34,13 +35,20 @@ const Orders = props => {
     return (
       <Container>
         {filteredData.map(order => (
-          <ListItem key={order.id} value={order.id}>
+          <ListItem key={uuid()}>
             <p>Date : {new Date(Date.parse(order.date)).toLocaleDateString()}</p>
             <p>Heure : {order.time}</p>
             <p>Nom : {order.firstName} {order.lastName}</p>
             <p>Téléphone : {order.phoneNumber}</p>
             <p>E-mail : {order.email}</p>
-            <p>Contenu de la commande : {order.basketItems}</p>
+            <ul>Contenu de la commande : {order.basketItems.map(item => (
+              <li key={uuid()}>
+                <p>{item.quantity}x {item.name}</p>
+                <p>Prix : {(item.price * item.quantity).toFixed(2)}€</p>
+              </li>
+            ))}
+            </ul>
+            <p>Total : {order.price}</p>
           </ListItem>
         ))}
       </Container>
