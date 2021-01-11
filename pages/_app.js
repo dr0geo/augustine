@@ -5,6 +5,7 @@ import { ScrollToTop } from '@/elements/Buttons';
 
 const GlobalStyle = createGlobalStyle`
   @font-face {
+    font-display: swap;
     font-family: 'Raleway';
     font-weight: 400;
     src: 
@@ -13,6 +14,7 @@ const GlobalStyle = createGlobalStyle`
   }
 
   @font-face {
+    font-display: swap;
     font-family: 'Raleway';
     font-weight: 600;
     src: 
@@ -21,6 +23,7 @@ const GlobalStyle = createGlobalStyle`
   }
 
   @font-face {
+    font-display: swap;
     font-family: 'Raleway';
     font-weight: 700;
     src: 
@@ -29,6 +32,7 @@ const GlobalStyle = createGlobalStyle`
   }
 
   @font-face {
+    font-display: swap;
     font-family: 'Dancing-Script';
     font-weight: 400;
     src: 
