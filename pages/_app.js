@@ -1,5 +1,7 @@
 import { createGlobalStyle } from 'styled-components';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+
+import { ScrollToTop } from '@/elements/Buttons';
 
 const GlobalStyle = createGlobalStyle`
   @font-face {
@@ -139,6 +141,14 @@ const App = ({ Component, pageProps }) => {
         isClicked={isClicked}
         toggleMenu={toggleMenu}
         hideMenu={hideMenu}
+      />
+      <ScrollToTop
+        size={50} 
+        onClick={() => window.scrollTo({
+          top: 0,
+          left: 0,
+          behavior: 'smooth'
+        })}
       />
     </>
   );

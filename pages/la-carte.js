@@ -47,7 +47,7 @@ const Carte = props => {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta
           name="description"
-          content="Découvrez la carte de nos différentes galettes et crêpes, ainsi que nos formules, boissons, salades et entrées. Nous serons ravis de vous accueillir dans nos restaurants Parisiens."
+          content="Découvrez la carte de nos différentes galettes et crêpes, ainsi que nos formules, boissons, salades et entrées. Nous serons ravis de vous accueillir dans notre restaurant Parisien."
         />
       </Head>
       <Menu
@@ -55,7 +55,7 @@ const Carte = props => {
         isClicked={props.isClicked}
         toggleMenu={props.toggleMenu}
         hideMenu={props.hideMenu}
-        bg="/images/restaurant/downstairs.webp"
+        bg="/images/background/carte.jpg"
         title="La Carte"
       />
       <h2>Parcourez<br /><em>la carte Augustine</em></h2>

@@ -214,7 +214,7 @@ const ClicknCollect = props => {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta
           name="description"
-          content="Commandez en ligne dans l'une de nos deux crêperies Parisiennes, et venez récupérer directement votre repas une fois prêt !"
+          content="Commandez en ligne dans notre crêperie Parisienne, et venez récupérer directement votre commande une fois prête !"
         />
       </Head>
       <Menu
@@ -222,7 +222,7 @@ const ClicknCollect = props => {
         isClicked={props.isClicked}
         toggleMenu={props.toggleMenu}
         hideMenu={props.hideMenu}
-        bg="./images/food/augustine.jpeg"
+        bg="./images/background/click-n-collect.jpg"
         title="Click & Collect"
       />
       

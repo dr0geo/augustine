@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { ArrowCircleUpOutline } from '@styled-icons/evaicons-outline';
 
 export const BlackButton = styled.a`
   background-color: white;
@@ -39,6 +40,28 @@ export const WhiteButton = styled(BlackButton)`
       &:hover {
         background-color: white;
         color: #012f6a;
+      }
+    }
+  }
+`;
+
+export const ScrollToTop = styled(ArrowCircleUpOutline)`
+  bottom: 10px;
+  opacity: 0.8;
+  position: fixed;
+  right: 10px;
+  transform: scale(0.8);
+  z-index: 30;
+  @media only screen and (min-width: 1200px) {
+    bottom: 40px;
+    right: 40px;
+    transform: scale(1);
+    transition: transform 0.2s ease-in-out, opacity 0.2s ease-in-out;
+    @media (any-hover: hover) {
+      &:hover {
+        cursor: pointer;
+        opacity: 1;
+        transform: scale(1.1);
       }
     }
   }

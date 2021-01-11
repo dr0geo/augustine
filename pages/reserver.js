@@ -159,7 +159,7 @@ const Reserver = props => {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta
           name="description"
-          content="Réservez votre table dans l'un de nos deux restaurants Parisiens directement depuis notre site !"
+          content="Réservez votre table dans notre crêperie Parisienne directement depuis notre site !"
         />
       </Head>
       <Menu

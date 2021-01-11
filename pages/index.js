@@ -16,7 +16,7 @@ const Accueil = props => {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta
           name="description"
-          content="Bienvenue sur le site de la crêperie Augustine située à Paris. Laissez-vous tenter par nos succulentes recettes !"
+          content="Bienvenue sur le site de la crêperie Augustine située à Paris 1er arrondissement. Laissez-vous tenter par nos succulentes recettes !"
         />
       </Head>
       <Menu 

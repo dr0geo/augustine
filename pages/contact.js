@@ -11,7 +11,7 @@ const Contact = props => {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta
           name="description"
-          content="Contactez-nous via notre formulaire en ligne pour toute question relative à nos crêperies Parisiennes, nous vous répondrons dans les plus brefs délais."
+          content="Contactez-nous via notre formulaire en ligne pour toute question relative à notre crêperie Parisienne, nous vous répondrons dans les plus brefs délais."
         />
       </Head>
       <Menu
@@ -19,6 +19,8 @@ const Contact = props => {
         isClicked={props.isClicked}
         toggleMenu={props.toggleMenu}
         hideMenu={props.hideMenu}
+        bg="./images/background/contact.jpg"
+        title="Contact"
       />
       <p>Contact</p>
       <Footer />
