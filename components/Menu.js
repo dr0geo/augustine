@@ -6,7 +6,7 @@ import { Menu as MenuIcon } from '@styled-icons/evaicons-solid';
 
 const Header = styled.header`
   align-items: center;
-  background: url(${props => props.bg});
+  background: url(${props => `${props.bg}-small.webp`});
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -15,6 +15,7 @@ const Header = styled.header`
   min-height: 200px;
   padding: 0 40px;
   @media only screen and (min-width: 1200px) {
+    background: url(${props => `${props.bg}.webp`});
     background-position: bottom -100px center;
     flex-direction: column-reverse;
     justify-content: flex-end;
