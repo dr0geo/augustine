@@ -117,6 +117,7 @@ const Footer = () => {
               href="https://www.facebook.com/crepesaugustine"
               rel="noopener, noreferrer"
               target="_blank"
+              title="Page Facebook de la crêperie Augustine"
             >
               <Fb size={50} />
             </a>
@@ -124,6 +125,7 @@ const Footer = () => {
               href="https://www.instagram.com/creperieaugustine/"
               rel="noopener, noreferrer"
               target="_blank"
+              title="Page Instagram de la crêperie Augustine"
             >
               <Insta size={55} />
             </a>
