@@ -4,7 +4,7 @@ import { GridDiv, GridWrapper, Section } from '@/elements/Divs';
 
 const Grid = () => {
   return (
-    <Section bgUrl="/images/background/grid-bg.jpg">
+    <Section bgUrl="/images/background/grid-bg.webp">
       <GridWrapper>
         <h2>
           Venez déguster
@@ -18,7 +18,7 @@ const Grid = () => {
           </div>
           <div>
             <Image
-              src="/images/background/grid-bg.jpg"
+              src="/images/background/grid-bg.webp"
               alt=""
               height={200}
               width={200}

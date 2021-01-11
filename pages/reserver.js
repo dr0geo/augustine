@@ -168,7 +168,7 @@ const Reserver = props => {
         isClicked={props.isClicked}
         toggleMenu={props.toggleMenu}
         hideMenu={props.hideMenu}
-        bg="/images/restaurant/downstairs.jpeg"
+        bg="/images/restaurant/downstairs.webp"
         title="Réserver une table"
       />
       <Section bgColor="white">

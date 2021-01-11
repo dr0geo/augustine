@@ -33,13 +33,13 @@ export const RestaurantChoice = props => (
   <Sec bgColor="white">
     <Div>
       <Restaurant
-        bgUrl="/images/restaurant/stairs.jpeg"
+        bgUrl="/images/restaurant/stairs.webp"
         onClick={() => props.handleRestaurantSelection(1)}
       >
         <div>Paris 01</div>
       </Restaurant>
       <Restaurant
-        bgUrl="/images/restaurant/upstairs.jpeg"
+        bgUrl="/images/restaurant/upstairs.webp"
         onClick={() => props.handleRestaurantSelection(8)}
       >
         <div>Paris 08</div>

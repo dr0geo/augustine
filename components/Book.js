@@ -42,7 +42,7 @@ const Book = () => {
           <figure>
             <ShakingDiv>
               <Image
-                src="/images/icons/resto.png"
+                src="/images/icons/resto.webp"
                 alt="Restaurant"
                 height={40}
                 width={50}
@@ -61,7 +61,7 @@ const Book = () => {
           <figure>
             <ShakingDiv>
               <Image
-                src="/images/icons/click-and-collect.png"
+                src="/images/icons/click-and-collect.webp"
                 alt="Click & Collect"
                 height={50}
                 width={50}
@@ -80,7 +80,7 @@ const Book = () => {
           <figure>
             <ShakingDiv>
               <Image
-                src="/images/icons/uber-eats.png"
+                src="/images/icons/uber-eats.webp"
                 alt="Logo Bio"
                 height={50}
                 width={40}

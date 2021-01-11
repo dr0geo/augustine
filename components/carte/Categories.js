@@ -74,7 +74,7 @@ const Categories = props => {
         </Category>
         <ImageDiv>
           <Image
-            src="/images/icons/menu/entrees.png"
+            src="/images/icons/menu/entrees.webp"
             alt=""
             height={50}
             width={80}
@@ -91,7 +91,7 @@ const Categories = props => {
         </Category>
         <ImageDiv>
           <Image
-            src="/images/icons/menu/salades.png"
+            src="/images/icons/menu/salades.webp"
             alt=""
             height={50}
             width={80}
@@ -108,7 +108,7 @@ const Categories = props => {
         </Category>
         <ImageDiv>
           <Image
-            src="/images/icons/menu/galettes.png"
+            src="/images/icons/menu/galettes.webp"
             alt=""
             height={50}
             width={80}
@@ -125,7 +125,7 @@ const Categories = props => {
         </Category>
         <ImageDiv>
           <Image
-            src="/images/icons/menu/crepes.png"
+            src="/images/icons/menu/crepes.webp"
             alt=""
             height={50}
             width={45}
@@ -142,7 +142,7 @@ const Categories = props => {
         </Category>
         <ImageDiv>
           <Image
-            src="/images/icons/menu/boissons.png"
+            src="/images/icons/menu/boissons.webp"
             alt=""
             height={50}
             width={50}
@@ -159,7 +159,7 @@ const Categories = props => {
         </Category>
         <ImageDiv>
           <Image
-            src="/images/icons/menu/menu.png"
+            src="/images/icons/menu/menu.webp"
             alt=""
             height={50}
             width={60}

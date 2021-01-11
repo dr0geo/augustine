@@ -16,7 +16,7 @@ const Promesse = () => {
           <figure>
             <div>
               <Image
-                src="/images/icons/wheat-sack.png"
+                src="/images/icons/wheat-sack.webp"
                 alt="Sac de blé"
                 height={50}
                 width={50}
@@ -31,7 +31,7 @@ const Promesse = () => {
           <figure>
             <div>
               <Image
-                src="/images/icons/eggs.png"
+                src="/images/icons/eggs.webp"
                 alt="Oeufs frais"
                 height={50}
                 width={50}
@@ -46,7 +46,7 @@ const Promesse = () => {
           <figure>
             <div>
               <Image
-                src="/images/icons/bio.png"
+                src="/images/icons/bio.webp"
                 alt="Logo Bio"
                 height={50}
                 width={50}

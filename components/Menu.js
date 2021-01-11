@@ -102,7 +102,7 @@ const logo = (
   <Logo>
     <Link href="/">
       <a>
-        <Image src="/images/logo/logo.png" alt="" height={300} width={450} />
+        <Image src="/images/logo/logo.webp" alt="" height={300} width={450} />
       </a>
     </Link>
     <h1>crêperie contemporaine - Paris</h1>

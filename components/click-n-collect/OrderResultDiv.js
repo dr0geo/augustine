@@ -76,7 +76,7 @@ const OrderResultDiv = props => {
     <ResultDiv>
       <div>
         <Image
-          src="/images/icons/food-placeholder.png"
+          src="/images/icons/food-placeholder.webp"
           alt=""
           height={200}
           width={200}

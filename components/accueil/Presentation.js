@@ -11,13 +11,13 @@ const Presentation = () => {
         <em>restaurants parisiens</em>
       </h2>
       <FlexDiv>
-        <RestaurantCard bgUrl="/images/restaurant/stairs.jpeg">
+        <RestaurantCard bgUrl="/images/restaurant/stairs.webp">
           <div>végétal</div>
         </RestaurantCard>
-        <RestaurantCard bgUrl="/images/restaurant/upstairs.jpeg">
+        <RestaurantCard bgUrl="/images/restaurant/upstairs.webp">
           <div>chaleureux</div>
         </RestaurantCard>
-        <RestaurantCard bgUrl="/images/restaurant/downstairs.jpeg">
+        <RestaurantCard bgUrl="/images/restaurant/downstairs.webp">
           <div>gourmand</div>
         </RestaurantCard>
       </FlexDiv>
