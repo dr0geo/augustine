@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 import { Section } from '@/elements/Divs';
+import Image from 'next/image';
 
 const Container = styled.ul`
   align-items: center;
@@ -73,6 +74,7 @@ const Share = ({ posts }) => {
                   alt=""
                   height={300}
                   width={300}
+                  loading="lazy"
                 />
                 <p>{post.caption}</p>
               </StyledAnchor>
