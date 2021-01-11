@@ -6,9 +6,9 @@ const Presentation = () => {
   return (
     <Section bgColor="white">
       <h2>
-        Découvrez nos deux
+        Découvrez notre
         <br />
-        <em>restaurants parisiens</em>
+        <em>restaurant parisien</em>
       </h2>
       <FlexDiv>
         <RestaurantCard bgUrl="/images/restaurant/stairs.webp">
@@ -22,9 +22,7 @@ const Presentation = () => {
         </RestaurantCard>
       </FlexDiv>
       <p>
-        Venez déguster les crêpes et galettes Augustine dans le 1er et le 8ème
-        arrondissement de Paris. Nos deux restaurants ont été entièrement
-        rénovés, et n’attendent que vous !
+        Venez déguster les crêpes et galettes Augustine dans le 1er arrondissement de Paris. Notre restaurant a été entièrement rénové, et n’attend que vous !
       </p>
       <BlackButton
         href="https://goo.gl/maps/MPwfHjV2Acxp852R9"

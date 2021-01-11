@@ -116,8 +116,6 @@ const ClicknCollect = props => {
   }
 
   const [time, setTime] = useState(timeToPickUpOrder);
-  // Restaurant selection:
-  const [restaurant, setRestaurant] = useState(1);
 
   // Handle order submission:
   const [orderConfirmation, setOrderConfirmation] = useState(null);
@@ -150,9 +148,6 @@ const ClicknCollect = props => {
       case 'time':
         setTime(e.target.value);
         break;
-      case 'restaurant':
-        setRestaurant(parseInt(e.target.value));
-        break;
     }
   }
 
@@ -169,7 +164,6 @@ const ClicknCollect = props => {
       date,
       time,
       basketItems,
-      restaurant,
       price
     }
 

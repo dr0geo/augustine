@@ -3,7 +3,7 @@ import { useState } from 'react';
 
 import Menu from '@/components/Menu';
 import { Section } from '@/elements/Divs';
-import { RestaurantChoice, DateChoice, Personal, Success } from '@/components/reservation/Dynamic';
+import { DateChoice, Personal, Success } from '@/components/reservation/Dynamic';
 import Footer from '@/components/Footer';
 
 const weekDays = [
@@ -32,7 +32,7 @@ const months = [
 
 const Reserver = props => {
   // Manage booking steps:
-  const [bookingStep, setBookingStep] = useState(0);
+  const [bookingStep, setBookingStep] = useState(1);
 
   const goToNextStep = () => {
     setBookingStep(bookingStep + 1);
@@ -43,14 +43,6 @@ const Reserver = props => {
   };
 
   // Manage booking information:
-
-  // Restaurant selection:
-  const [restaurant, setRestaurant] = useState(1);
-
-  const handleRestaurantSelection = restaurantNumber => {
-    setRestaurant(restaurantNumber);
-    goToNextStep();
-  };
 
   // Date:
   const todayDate = new Date(Date.now());
@@ -116,7 +108,6 @@ const Reserver = props => {
     e.preventDefault();
 
     const bookingRef = {
-      restaurant,
       date,
       time,
       people,
@@ -178,14 +169,8 @@ const Reserver = props => {
           <em>chez Augustine</em>
         </h2>
       </Section>
-      {bookingStep === 0 && (
-        <RestaurantChoice
-          handleRestaurantSelection={handleRestaurantSelection}
-        />
-      )}
       {bookingStep === 1 && (
         <DateChoice
-          goToPreviousStep={goToPreviousStep}
           dateSentence={dateSentence}
           people={people}
           time={time}
@@ -199,7 +184,6 @@ const Reserver = props => {
       {bookingStep === 2 && (
         <Personal 
           goToPreviousStep={goToPreviousStep}
-          restaurant={restaurant}
           people={people}
           dateSentence={dateSentence}
           time={time}

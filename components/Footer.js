@@ -91,7 +91,7 @@ const Footer = () => {
       <FooterFlexDiv>
         <div>
           <h2>
-            <strong>Nos adresses</strong>
+            <strong>Notre adresse</strong>
           </h2>
           <FlexDiv>
             <p>
@@ -100,13 +100,6 @@ const Footer = () => {
               75001 Paris
               <br />
               <a href="tel:+33183929448">01 83 92 94 48</a>
-            </p>
-            <p>
-              Autre adresse
-              <br />
-              75008 Paris
-              <br />
-              <a href="tel:0100000000">01.00.00.00.00</a>
             </p>
           </FlexDiv>
         </div>

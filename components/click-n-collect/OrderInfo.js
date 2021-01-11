@@ -72,27 +72,8 @@ const InfoSection = styled.div`
           border: 2px solid #012f6a;
         }
       }
-      &:first-of-type {
-        & > input:last-of-type {
+      & > input:last-of-type {
           margin-right: 0;
-        }
-      }
-      &:last-of-type {
-        justify-content: space-around;
-        margin-top: 10px;
-        & > div {
-          align-items: center;
-          display: flex;
-          & > input {
-            margin-left: 0;
-            margin-right: 7px;
-            margin-top: 0;
-            transform: scale(1.4);
-            @media only screen and (min-width: 1200px) {
-              transform: scale(1);
-            }
-          }
-        }
       }
     }
     & > button {
@@ -233,29 +214,6 @@ const OrderInfo = props => {
                   required
                   onChange={props.handleInputValues}
                 />
-              </div>
-              <div>
-                <div>
-                  <input 
-                    id="paris1" 
-                    type="radio" 
-                    name="restaurant" 
-                    value="1" 
-                    onChange={props.handleInputValues}
-                    defaultChecked
-                  />
-                  <label htmlFor="paris1">Paris 1</label>
-                </div>
-                <div>
-                  <input 
-                    id="paris8" 
-                    type="radio" 
-                    name="restaurant" 
-                    value="8" 
-                    onChange={props.handleInputValues}
-                  />
-                  <label htmlFor="paris8">Paris 8</label>
-                </div>
               </div>
               <button type="submit">Confirmer la commande</button>
             </>

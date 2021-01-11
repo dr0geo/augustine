@@ -51,7 +51,7 @@ const Book = () => {
           </figure>
           <figcaption>
             <h3>Réserver une table</h3>
-            <p>dans l'un de nos deux restaurants à Paris</p>
+            <p>dans notre restaurant à Paris</p>
             <Link href="/reserver" passHref>
               <WhiteButton>J'y vais</WhiteButton>
             </Link>

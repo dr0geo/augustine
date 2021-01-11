@@ -1,52 +1,9 @@
 import styled from 'styled-components';
 import Link from 'next/link';
 
-import { Section, FlexDiv } from '@/elements/Divs';
-import { RestaurantCard } from '@/elements/Cards';
+import { Section } from '@/elements/Divs';
 import { LeftArrow, RightArrow } from '@styled-icons/boxicons-regular';
 import { CheckCircleFill } from '@styled-icons/octicons';
-
-// Restaurant selection:
-const Sec = styled(Section)`
-  padding-top: 0;
-`;
-
-const Div = styled(FlexDiv)`
-  @media only screen and (min-width: 1200px) {
-    justify-content: center;
-  }
-`;
-
-const Restaurant = styled(RestaurantCard)`
-  @media only screen and (min-width: 1200px) {
-    transition: opacity 0.2s ease-in-out;
-    @media (any-hover: hover) {
-      &:hover {
-        cursor: pointer;
-        opacity: 0.85;
-      }
-    }
-  }
-`;
-
-export const RestaurantChoice = props => (
-  <Sec bgColor="white">
-    <Div>
-      <Restaurant
-        bgUrl="/images/restaurant/stairs.webp"
-        onClick={() => props.handleRestaurantSelection(1)}
-      >
-        <div>Paris 01</div>
-      </Restaurant>
-      <Restaurant
-        bgUrl="/images/restaurant/upstairs.webp"
-        onClick={() => props.handleRestaurantSelection(8)}
-      >
-        <div>Paris 08</div>
-      </Restaurant>
-    </Div>
-  </Sec>
-);
 
 // Date and time selection:
 const WhiteDiv = styled.div`
@@ -157,9 +114,6 @@ const TimeButton = styled.button`
 export const DateChoice = props => (
   <Section bgColor="#e3e9ef">
     <LimitedWidthDiv>
-      <PreviousButton onClick={props.goToPreviousStep}>
-        <LArrow size={20} /> Retour
-      </PreviousButton>
       <WhiteDiv>
         <LArrow size={20} onClick={props.handleDateDecrease} />
         <FlexPar>{props.dateSentence}</FlexPar>
@@ -266,7 +220,7 @@ export const Personal = props => (
       <Container>
         <FlexPar>
           <p>
-            Confirmez votre réservation chez Augustine Paris {props.restaurant.toString().padStart(2, '0')}
+            Confirmez votre réservation chez Augustine Paris 1er
           </p>
         </FlexPar>
         <p>
