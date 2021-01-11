@@ -25,9 +25,11 @@ const sendConfirmationEmail = async (req, res) => {
         <p>Merci pour votre commande ! Celle-ci a bien été prise en compte avec la référence <strong>${req.body.orderId}</strong>.</p>
         <p>Voici un récapitulatif des informations liées à votre commande :</p>
         <ul>
+          <li>Restaurant de retrait : Paris ${req.body.orderRef.restaurant}</li>
           <li>Date souhaitée de retrait de la commande : ${(new Date(req.body.orderRef.date)).toLocaleDateString('fr-FR')}</li>
           <li>Heure souhaitée de retrait de la commande : ${req.body.orderRef.time}</li>
           <li>Articles : ${orderItems.join(', ')}</li>
+          <li>Total à régler sur place: ${req.body.orderRef.price.toFixed(2)}€</li>
         </ul>
         <p>Nous vous remercions pour votre commande et espérons vous revoir très vite chez nous !</p>
         <br />

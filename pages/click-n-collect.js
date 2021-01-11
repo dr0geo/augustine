@@ -116,6 +116,9 @@ const ClicknCollect = props => {
   }
 
   const [time, setTime] = useState(timeToPickUpOrder);
+  // Restaurant selection:
+  const [restaurant, setRestaurant] = useState(1);
+
   // Handle order submission:
   const [orderConfirmation, setOrderConfirmation] = useState(null);
   
@@ -147,11 +150,16 @@ const ClicknCollect = props => {
       case 'time':
         setTime(e.target.value);
         break;
+      case 'restaurant':
+        setRestaurant(parseInt(e.target.value));
+        break;
     }
   }
 
   const handleOrderSubmit = e => {
     e.preventDefault();
+
+    const price = basketItems.map(item => item.price * item.quantity).reduce((a, b) => a + b);
 
     const orderRef = {
       firstName,
@@ -160,7 +168,9 @@ const ClicknCollect = props => {
       phoneNumber,
       date,
       time,
-      basketItems
+      basketItems,
+      restaurant,
+      price
     }
 
     fetch('/api/commandes', {

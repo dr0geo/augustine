@@ -24,7 +24,7 @@ const InfoSection = styled.div`
   z-index: 100;
   & > div:first-of-type {
     margin: 0 auto 20px auto;
-    max-width: 260px;
+    max-width: 300px;
     & > h3 {
       margin-top: 0;
       margin-bottom: 5px;
@@ -42,12 +42,57 @@ const InfoSection = styled.div`
       margin: 10px auto;
       padding: 10px;
       transition: border 0.2s ease-in-out;
-      width: 260px;
+      width: 300px;
       &::placeholder {
         color: #012f6a;
       }
       &:focus {
         border: 2px solid #012f6a;
+      }
+    }
+    & > div {
+      align-items: center;
+      display: flex;
+      justify-content: space-between;
+      width: 300px;
+      & > label {
+        color: #012f6a;
+      }
+      & > input {
+        border: 2px solid #e3e9ef;
+        border-radius: 5px;
+        color: #012f6a;
+        margin: 10px auto;
+        padding: 7px;
+        transition: border 0.2s ease-in-out;
+        &::placeholder {
+          color: #012f6a;
+        }
+        &:focus {
+          border: 2px solid #012f6a;
+        }
+      }
+      &:first-of-type {
+        & > input:last-of-type {
+          margin-right: 0;
+        }
+      }
+      &:last-of-type {
+        justify-content: space-around;
+        margin-top: 10px;
+        & > div {
+          align-items: center;
+          display: flex;
+          & > input {
+            margin-left: 0;
+            margin-right: 7px;
+            margin-top: 0;
+            transform: scale(1.4);
+            @media only screen and (min-width: 1200px) {
+              transform: scale(1);
+            }
+          }
+        }
       }
     }
     & > button {
@@ -166,23 +211,52 @@ const OrderInfo = props => {
                 required
                 onChange={props.handleInputValues}
               />
-              <input
-                type="date"
-                name="date"
-                min={`${year}-${month}-${day}`}
-                defaultValue={`${year}-${month}-${day}`}
-                required
-                onChange={props.handleInputValues}
-              />
-              <input
-                type="time"
-                name="time"
-                min="11:00:00"
-                max="21:30:00"
-                defaultValue={props.time}
-                required
-                onChange={props.handleInputValues}
-              />
+              <div>
+                <label htmlFor="date">Le : </label>
+                <input
+                  id="date"
+                  type="date"
+                  name="date"
+                  min={`${year}-${month}-${day}`}
+                  defaultValue={`${year}-${month}-${day}`}
+                  required
+                  onChange={props.handleInputValues}
+                />
+                <label htmlFor="time"> à : </label>
+                <input
+                  id="time"
+                  type="time"
+                  name="time"
+                  min="11:00:00"
+                  max="21:30:00"
+                  defaultValue={props.time}
+                  required
+                  onChange={props.handleInputValues}
+                />
+              </div>
+              <div>
+                <div>
+                  <input 
+                    id="paris1" 
+                    type="radio" 
+                    name="restaurant" 
+                    value="1" 
+                    onChange={props.handleInputValues}
+                    defaultChecked
+                  />
+                  <label htmlFor="paris1">Paris 1</label>
+                </div>
+                <div>
+                  <input 
+                    id="paris8" 
+                    type="radio" 
+                    name="restaurant" 
+                    value="8" 
+                    onChange={props.handleInputValues}
+                  />
+                  <label htmlFor="paris8">Paris 8</label>
+                </div>
+              </div>
               <button type="submit">Confirmer la commande</button>
             </>
           }
