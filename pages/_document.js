@@ -33,9 +33,6 @@ export default class MyDocument extends Document {
       <Html lang="fr">
         <Head>
           <link rel="preload" href="/fonts/raleway/Raleway-Regular.woff2" as="font" type="font/woff2" />
-          <link rel="preload" href="/fonts/raleway/Raleway-Bold.woff2" as="font" type="font/woff2" />
-          <link rel="preload" href="/fonts/raleway/Raleway-SemiBold.woff2" as="font" type="font/woff2" />
-          <link rel="preload" href="/fonts/raleway/Raleway-Regular.woff2" as="font" type="font/woff2" />
           <link rel="preload" href="/fonts/dancing-script/DancingScript-SemiBold.woff2" as="font" type="font/woff2" />
           <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
           <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
