@@ -13,7 +13,7 @@ const Presentation = () => {
       </h2>
       <FlexDiv>
         <RestaurantCard>
-          <Image src="/images/restaurant/stairs.webp" alt="" height={250} width={250} objectFit="cover" quality={100} className="round-border" />
+          <Image src="/images/restaurant/stairs.webp" alt="" height={250} width={250} objectFit="cover" quality={100} className="round-border" priority={true} />
           <div>Végétal</div>
         </RestaurantCard>
         <RestaurantCard>
