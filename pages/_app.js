@@ -3,7 +3,6 @@ import { useState } from 'react';
 
 const GlobalStyle = createGlobalStyle`
   @font-face {
-    font-display: block;
     font-family: 'Raleway';
     font-weight: 400;
     src: 
@@ -12,7 +11,6 @@ const GlobalStyle = createGlobalStyle`
   }
 
   @font-face {
-    font-display: block;
     font-family: 'Raleway';
     font-weight: 600;
     src: 
@@ -21,7 +19,6 @@ const GlobalStyle = createGlobalStyle`
   }
 
   @font-face {
-    font-display: block;
     font-family: 'Raleway';
     font-weight: 700;
     src: 
@@ -30,7 +27,6 @@ const GlobalStyle = createGlobalStyle`
   }
 
   @font-face {
-    font-display: block;
     font-family: 'Dancing-Script';
     font-weight: 400;
     src: 
