@@ -12,6 +12,15 @@ const GlobalStyle = createGlobalStyle`
       url('/fonts/raleway/Raleway-Regular.woff2') format('woff2'),
       url('/fonts/raleway/Raleway-Regular.woff') format('woff');
   }
+  
+  @font-face {
+    font-display: swap;
+    font-family: 'Dancing-Script';
+    font-weight: 400;
+    src: 
+      url('/fonts/dancing-script/DancingScript-SemiBold.woff2') format('woff2'),
+      url('/fonts/dancing-script/DancingScript-SemiBold.woff') format('woff');
+  }
 
   @font-face {
     font-display: swap;
@@ -29,15 +38,6 @@ const GlobalStyle = createGlobalStyle`
     src: 
       url('/fonts/raleway/Raleway-Bold.woff2') format('woff2'),
       url('/fonts/raleway/Raleway-Bold.woff') format('woff');
-  }
-
-  @font-face {
-    font-display: swap;
-    font-family: 'Dancing-Script';
-    font-weight: 400;
-    src: 
-      url('/fonts/dancing-script/DancingScript-SemiBold.woff2') format('woff2'),
-      url('/fonts/dancing-script/DancingScript-SemiBold.woff') format('woff');
   }
 
   * {
