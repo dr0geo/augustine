@@ -76,6 +76,9 @@ export const BasketContainer = styled.div`
       & > svg {
         transform: scale(1.8);
         transform-origin: top center;
+        @media only screen and (min-width: 1200px) {
+          transform-origin: center;
+        }
       }
     }
   }

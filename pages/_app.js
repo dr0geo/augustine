@@ -49,7 +49,7 @@ const GlobalStyle = createGlobalStyle`
   body {
     font-family: 'Raleway', serif;
     margin: 0;
-    ${props => props.isClicked && 'hidden'};
+    overflow: ${props => props.isClicked && 'hidden'};
     padding: 0;
   }
 
@@ -62,7 +62,7 @@ const GlobalStyle = createGlobalStyle`
   }
 
   h1 {
-    color: white;
+    color: #012f6a;
     font-family: 'Dancing-Script', sans serif;
     font-size: 2.6rem;
     text-align: center;

@@ -6,7 +6,7 @@ import { Menu as MenuIcon } from '@styled-icons/evaicons-solid';
 
 const Header = styled.header`
   align-items: center;
-  background: linear-gradient(hsla(0deg, 0%, 0%, 0.6), hsla(0deg, 0%, 0%, 0.6)), url(${props => props.bg});
+  background: url(${props => props.bg});
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -15,6 +15,7 @@ const Header = styled.header`
   min-height: 200px;
   padding: 0 40px;
   @media only screen and (min-width: 1200px) {
+    background-position: bottom -100px center;
     flex-direction: column-reverse;
     justify-content: flex-end;
     min-height: 550px;
@@ -22,8 +23,6 @@ const Header = styled.header`
 `;
 
 const Logo = styled.div`
-  background-color: hsla(0deg, 0%, 100%, 0.5);
-  border-radius: 5px;
   margin: 20px;
   padding: 15px 30px;
   width: 280px;
@@ -44,6 +43,7 @@ const Logo = styled.div`
 `;
 
 const Close = styled(CloseOutline)`
+  color: #012f6a;
   margin: 0 auto;
   @media only screen and (min-width: 1200px) {
     display: none;
@@ -51,7 +51,7 @@ const Close = styled(CloseOutline)`
 `;
 
 const MenuIc = styled(MenuIcon)`
-  color: white;
+  color: #012f6a;
   margin-bottom: 10px;
   @media only screen and (min-width: 1200px) {
     display: none;
@@ -59,12 +59,7 @@ const MenuIc = styled(MenuIcon)`
 `;
 
 const FlexDiv = styled.div`
-  background: linear-gradient(hsla(0deg, 0%, 0%, 0.6), hsla(0deg, 0%, 0%, 0.6)),
-    url('/images/background/header-bg.jpg');
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  color: white;
+  background-color: #f4f6f3;
   display: flex;
   flex-direction: column;
   height: 100vh;
@@ -87,14 +82,17 @@ const FlexDiv = styled.div`
 `;
 
 const Anchor = styled.a`
+  color: #012f6a;
+  &:visited {
+    color: #012f6a;
+  }
   @media only screen and (min-width: 1200px) {
-    border-bottom: ${props => props.isSelected ? '2px solid white' : '2px solid transparent'};
-    color: white;
+    border-bottom: ${props => props.isSelected ? '2px solid #012f6a' : '2px solid transparent'};
     margin: 20px 0;
     padding: 7px 0;
     transition: border-bottom 0.2s ease-in-out;
     &:hover {
-      border-bottom: 2px solid white;
+      border-bottom: 2px solid #012f6a;
       cursor: pointer;
     }
   }
