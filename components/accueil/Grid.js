@@ -18,7 +18,7 @@ const Grid = () => {
           </div>
           <div>
             <Image
-              src="/images/background/grid-bg.webp"
+              src="/images/food/salade.webp"
               alt=""
               height={200}
               width={200}
@@ -26,7 +26,7 @@ const Grid = () => {
           </div>
           <div>
             <Image
-              src="/images/food/bretonne.jpeg"
+              src="/images/food/bretonne.webp"
               alt=""
               height={200}
               width={200}
@@ -45,7 +45,7 @@ const Grid = () => {
           </div>
           <div>
             <Image
-              src="/images/food/augustine.jpeg"
+              src="/images/food/augustine.webp"
               alt=""
               height={200}
               width={200}
@@ -53,7 +53,7 @@ const Grid = () => {
           </div>
           <div>
             <Image
-              src="/images/food/danube.jpeg"
+              src="/images/food/danube.webp"
               alt=""
               height={200}
               width={200}
@@ -75,7 +75,7 @@ const Grid = () => {
           </div>
           <div>
             <Image
-              src="/images/food/forestiere.jpeg"
+              src="/images/food/forestiere.webp"
               alt=""
               height={200}
               width={200}
@@ -83,7 +83,7 @@ const Grid = () => {
           </div>
           <div>
             <Image
-              src="/images/food/raclette.jpeg"
+              src="/images/food/raclette.webp"
               alt=""
               height={200}
               width={200}
