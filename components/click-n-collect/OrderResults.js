@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { v1 as uuid } from 'uuid';
 
 import OrderResultDiv from '@/components/click-n-collect/OrderResultDiv';
 
@@ -62,7 +63,7 @@ const OrderResults = props => {
     ? // Display food that has no subcategory:
       (results = props.selectedFood.map(food => (
         <OrderResultDiv 
-          key={food.id}
+          key={uuid()}
           food={food}
           isSelected={props.isSelected}
           addToBasket={props.addToBasket}
@@ -72,7 +73,7 @@ const OrderResults = props => {
     : // Display only the subselection selected via selected food and selected subcategory of that food:
       (results = props.selectedFood[props.isCategorySelected].data.map(food => (
         <OrderResultDiv 
-          key={food.id}
+          key={uuid()}
           food={food}
           isSelected={props.isSelected}
           addToBasket={props.addToBasket}
@@ -90,7 +91,7 @@ const OrderResults = props => {
         <CategorySelecter setVertOffset={true}>
           {props.selectedFood.map((food, index) => (
             <Category
-              key={index}
+              key={uuid()}
               isCategorySelected={props.isCategorySelected === index}
               value={index}
               onClick={props.handleCategoryClick}

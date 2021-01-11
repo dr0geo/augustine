@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { Bin } from '@styled-icons/icomoon';
+import { v1 as uuid } from 'uuid';
 
 export const BasketButton = styled.button`
   background-color: #012f6a;
@@ -122,7 +123,7 @@ const Basket = props => {
       {props.basketItems.length === 0 && <p>Vous n'avez pas encore d'article dans votre panier.</p>}
       {props.basketItems.length !== 0 && props.basketItems.map(item => {
         return (
-          <li key={item.id}>
+          <li key={uuid()}>
             <p>{item.quantity} x {item.name}</p>
             <p>{(item.price*item.quantity).toFixed(2)}€</p>
             <div>

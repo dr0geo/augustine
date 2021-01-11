@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { v1 as uuid } from 'uuid';
 
 const Container = styled.div`
   background-color: #e3e9ef;
@@ -100,7 +101,7 @@ const Results = props => {
   [0, 1, 5].includes(props.isSelected)
     ? // Display food that has no subcategory:
       (results = props.selectedFood.map(food => (
-        <ResultDiv key={food.id}>
+        <ResultDiv key={uuid()}>
           <div>
             <h3>{food.name}</h3>
             {food.description && <p>{food.description}</p>}
@@ -112,7 +113,7 @@ const Results = props => {
       )))
     : // Display only the subselection selected via selected food and selected subcategory of that food:
       (results = props.selectedFood[props.isCategorySelected].data.map(food => (
-        <ResultDiv key={food.id}>
+        <ResultDiv key={uuid()}>
           <div>
             <h3>{food.name}</h3>
             {food.description && <p>{food.description}</p>}
@@ -133,7 +134,7 @@ const Results = props => {
         <CategorySelecter setVertOffset={true}>
           {props.selectedFood.map((food, index) => (
             <Category
-              key={index}
+              key={uuid()}
               isCategorySelected={props.isCategorySelected === index}
               value={index}
               onClick={props.handleCategoryClick}
