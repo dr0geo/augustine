@@ -84,8 +84,8 @@ const DisplayReservations = () => {
           <Link href="/adminpanel">
             <a>Retour à l'accueil administrateur</a>
           </Link>
-          <Filter selectRestaurant={selectRestaurant} selectDate={selectDate} getById={getById} allDates={allDates} />
-          <Reservations data={data} restaurant={restaurant} date={date} bookingId={bookingId} />
+          <Filter selectDate={selectDate} getById={getById} allDates={allDates} />
+          <Reservations data={data} date={date} bookingId={bookingId} />
         </>
       </>
     );

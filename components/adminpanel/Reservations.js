@@ -24,9 +24,6 @@ const Reservations = props => {
     // Filter bookings according to inputs values:
     let filteredData = props.data.bookings;
 
-    if (props.restaurant !== 0) {
-      filteredData = filteredData.filter(booking => booking.restaurant === props.restaurant);
-    }
     if (props.date !== '') {
       filteredData = filteredData.filter(booking => new Date(Date.parse(booking.date)).toLocaleDateString() === new Date(Date.parse(props.date)).toLocaleDateString());
     }
@@ -38,7 +35,6 @@ const Reservations = props => {
       <Container>
         {filteredData.map(booking => (
           <ListItem key={booking.id} value={booking.id}>
-            <p>Restaurant : Paris {booking.restaurant}</p>
             <p>Date : {new Date(Date.parse(booking.date)).toLocaleDateString()}</p>
             <p>Heure : {booking.time}</p>
             <p>Nombre de personnes : {booking.people}</p>

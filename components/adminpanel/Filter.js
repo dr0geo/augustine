@@ -40,13 +40,6 @@ const Container = styled.div`
 const Filter = props => {
   return (
     <Container>
-      <select onChange={props.selectRestaurant}>
-        <option value={0} defaultValue>
-          Tous les restaurants
-        </option>
-        <option value={1}>Paris 01</option>
-        <option value={8}>Paris 08</option>
-      </select>
       <div>
         <button onClick={props.allDates}>Toutes les dates</button>
         <input type="date" onChange={props.selectDate} />
