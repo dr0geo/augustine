@@ -5,30 +5,24 @@ import { ScrollToTop } from '@/elements/Buttons';
 
 const GlobalStyle = createGlobalStyle`
   @font-face {
-    font-display: swap;
+    font-display: optional;
     font-family: 'Raleway';
     font-weight: 400;
-    src: 
-      url('/fonts/raleway/Raleway-Regular.woff2') format('woff2'),
-      url('/fonts/raleway/Raleway-Regular.woff') format('woff');
+    src: url('/fonts/raleway/Raleway-Regular.woff2') format('woff2');
   }
   
   @font-face {
-    font-display: swap;
+    font-display: optional;
     font-family: 'Dancing-Script';
     font-weight: 400;
-    src: 
-      url('/fonts/dancing-script/DancingScript-SemiBold.woff2') format('woff2'),
-      url('/fonts/dancing-script/DancingScript-SemiBold.woff') format('woff');
+    src: url('/fonts/dancing-script/DancingScript-SemiBold.woff2') format('woff2');
   }
 
   @font-face {
-    font-display: swap;
+    font-display: optional;
     font-family: 'Raleway';
     font-weight: 600;
-    src: 
-      url('/fonts/raleway/Raleway-SemiBold.woff2') format('woff2'),
-      url('/fonts/raleway/Raleway-SemiBold.woff') format('woff');
+    src: url('/fonts/raleway/Raleway-SemiBold.woff2') format('woff2');
   }
 
   * {
@@ -40,7 +34,7 @@ const GlobalStyle = createGlobalStyle`
   }
 
   body {
-    font-family: 'Raleway', serif;
+    font-family: 'Raleway', Tahoma, serif;
     margin: 0;
     overflow: ${props => props.isClicked && 'hidden'};
     padding: 0;
