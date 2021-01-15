@@ -2,6 +2,8 @@ import styled from 'styled-components';
 import { useState } from 'react';
 import { mutate } from 'swr';
 
+import Spinner from '@/elements/Spinner';
+
 const Container = styled.ul`
   display: flex;
   flex-direction: column;
@@ -16,7 +18,8 @@ const ListItem = styled.li`
   padding: 20px;
   width: 90%;
   & > p {
-    line-height: 1.5rem;
+    color: #012f6a;
+    line-height: 2rem;
     padding: 0;
     text-align: left;
   }
@@ -27,7 +30,14 @@ const ListItem = styled.li`
   }
 `;
 
-const DarkCont = styled.div`
+const Button = styled.button`
+  background-color: ${props => props.selected === 1 ? '#4eb152' : '#d02f36'};
+  border: none;
+  color: white;
+  font-weight: 600;
+`;
+
+const Cont = styled.div`
   align-items: center;
   background: linear-gradient(hsla(0deg, 0%, 0%, 0.8), hsla(0deg, 0%, 0%, 0.8));display: flex;
   height: 100vh;
@@ -67,8 +77,10 @@ const Reservations = props => {
     }
 
     const [errorMessage, setErrorMessage] = useState('');
+    const [isLoading, setIsLoading] = useState(false);
     
     const handleFile = async (id) => {
+      setIsLoading(true);
       const bookingRef = props.data.find(booking => booking.id === id);
 
       fetch('/api/reservations', {
@@ -81,16 +93,19 @@ const Reservations = props => {
         .then(res => {
           if (res.status === 200) {
             mutate('/api/reservations');
+            setIsLoading(false);
           } else {
             throw new Error();
           }
         })
         .catch(() => {
+          setIsLoading(false);
           setErrorMessage('Une erreur s\'est produite, veuillez réessayer...');
         });
     }
 
     const handleDelete = async (id) => {
+      setIsLoading(true);
       const bookingRef = props.data.find(booking => booking.id === id);
 
       fetch('/api/reservations', {
@@ -103,35 +118,40 @@ const Reservations = props => {
         .then(res => {
           if (res.status === 200) {
             mutate('/api/reservations');
+            setIsLoading(false);
           } else {
             throw new Error();
           }
         })
         .catch(() => {
+          setIsLoading(false);
           setErrorMessage('Une erreur s\'est produite, veuillez réessayer...');
         });
     }
 
     return (
       <Container>
-        {filteredData.map(booking => (
+        {!filteredData.length
+          ? <h2><em>Pas de réservation à la date sélectionnée...</em></h2>
+          : filteredData.map(booking => (
           <ListItem key={booking.id}>
-            <p>Date : {new Date(Date.parse(booking.date)).toLocaleDateString()}</p>
-            <p>Heure : {booking.time}</p>
-            <p>Nombre de personnes : {booking.people}</p>
-            <p>Nom : {booking.firstName} {booking.lastName}</p>
-            <p>Téléphone : {booking.phoneNumber}</p>
-            <p>E-mail : {booking.email}</p>
-            {props.selected === 1 ? <button onClick={() => handleFile(booking.id)}>Valider</button> : <button onClick={() => handleDelete(booking.id)}>Supprimer</button>}
+            <p><strong>Date</strong> : {new Date(Date.parse(booking.date)).toLocaleDateString()}</p>
+            <p><strong>Heure</strong> : {booking.time}</p>
+            <p><strong>Nombre de personnes</strong> : {booking.people}</p>
+            <p><strong>Nom</strong> : {booking.firstName} {booking.lastName}</p>
+            <p><strong>Téléphone</strong> : {booking.phoneNumber}</p>
+            <p><strong>E-mail</strong> : {booking.email}</p>
+            {props.selected === 1 ? <Button selected={props.selected} onClick={() => handleFile(booking.id)}>Valider</Button> : <Button selected={props.selected} onClick={() => handleDelete(booking.id)}>Supprimer</Button>}
           </ListItem>
         ))}
         {errorMessage !== '' && 
-          <DarkCont>
+          <Cont>
             <ErrorDiv>
               <div>{errorMessage}</div>
               <button onClick={() => setErrorMessage('')}>Fermer</button>
             </ErrorDiv>
-          </DarkCont>}
+          </Cont>}
+        {isLoading && <Spinner />}
       </Container>
     );
   }

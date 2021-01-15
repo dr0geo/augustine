@@ -3,6 +3,8 @@ import { v1 as uuid } from 'uuid';
 import { mutate } from 'swr';
 import { useState } from 'react';
 
+import Spinner from '@/elements/Spinner';
+
 const Container = styled.ul`
   display: flex;
   flex-direction: column;
@@ -17,15 +19,37 @@ const ListItem = styled.li`
   padding: 20px;
   width: 90%;
   & > p {
-    line-height: 1.5rem;
+    color: #012f6a;
+    line-height: 2rem;
     padding: 0;
     text-align: left;
+  }
+  & > ul {
+    color: #012f6a;
+    line-height: 2rem;
+    & > li {
+      list-style-position: inside;
+      list-style-type: circle;
+      margin-left: 20px;
+      margin-right: 20px;
+      padding: 10px 20px;
+      & + li {
+        border-top: 1px solid lightgray;
+      }
+    }
   }
   & > button {
     display: block;
     margin: auto;
     padding: 5px 10px;
   }
+`;
+
+const Button = styled.button`
+  background-color: ${props => props.selected === 1 ? '#4eb152' : '#d02f36'};
+  border: none;
+  color: white;
+  font-weight: 600;
 `;
 
 const DarkCont = styled.div`
@@ -68,8 +92,10 @@ const Orders = props => {
     }
 
     const [errorMessage, setErrorMessage] = useState('');
+    const [isLoading, setIsLoading] = useState(false);
     
     const handleFile = async (id) => {
+      setIsLoading(true);
       const orderRef = props.data.find(order => order.id === id);
 
       fetch('/api/commandes', {
@@ -82,16 +108,19 @@ const Orders = props => {
         .then(res => {
           if (res.status === 200) {
             mutate('/api/commandes');
+            setIsLoading(false);
           } else {
             throw new Error();
           }
         })
         .catch(() => {
+          setIsLoading(false);
           setErrorMessage('Une erreur s\'est produite, veuillez réessayer...');
         });
     }
 
     const handleDelete = async (id) => {
+      setIsLoading(true);
       const orderRef = props.data.find(order => order.id === id);
 
       fetch('/api/commandes', {
@@ -104,33 +133,36 @@ const Orders = props => {
         .then(res => {
           if (res.status === 200) {
             mutate('/api/commandes');
+            setIsLoading(false);
           } else {
             throw new Error();
           }
         })
         .catch(() => {
+          setIsLoading(false);
           setErrorMessage('Une erreur s\'est produite, veuillez réessayer...');
         });
     }
 
     return (
       <Container>
-        {filteredData.map(order => (
+        {!filteredData.length 
+          ? <h2><em>Pas de commande à la date sélectionnée...</em></h2>
+          : filteredData.map(order => (
           <ListItem id={order.id} key={order.id}>
-            <p>Date : {new Date(Date.parse(order.date)).toLocaleDateString()}</p>
-            <p>Heure : {order.time}</p>
-            <p>Nom : {order.firstName} {order.lastName}</p>
-            <p>Téléphone : {order.phoneNumber}</p>
-            <p>E-mail : {order.email}</p>
-            <ul>Contenu de la commande : {order.basketItems.map(item => (
+            <p><strong>Date</strong> : {new Date(Date.parse(order.date)).toLocaleDateString()}</p>
+            <p><strong>Heure</strong> : {order.time}</p>
+            <p><strong>Nom</strong> : {order.firstName} {order.lastName}</p>
+            <p><strong>Téléphone</strong> : {order.phoneNumber}</p>
+            <p><strong>E-mail</strong> : {order.email}</p>
+            <ul><strong>Contenu de la commande</strong> : {order.basketItems.map(item => (
               <li key={uuid()}>
-                <p>{item.quantity}x {item.name}</p>
-                <p>Prix : {(item.price * item.quantity).toFixed(2)}€</p>
+                {item.quantity}x {item.name} ({(item.price * item.quantity).toFixed(2)}€)
               </li>
             ))}
             </ul>
-            <p>Total : {order.price.toFixed(2)}€</p>
-            {props.selected === 1 ? <button onClick={() => handleFile(order.id)}>Valider</button> : <button onClick={() => handleDelete(order.id)}>Supprimer</button>}
+            <p><strong>Total</strong> : {order.price.toFixed(2)}€</p>
+            {props.selected === 1 ? <Button selected={props.selected} onClick={() => handleFile(order.id)}>Valider</Button> : <Button selected={props.selected} onClick={() => handleDelete(order.id)}>Supprimer</Button>}
           </ListItem>
         ))}
         {errorMessage !== '' && 
@@ -140,6 +172,7 @@ const Orders = props => {
               <button onClick={() => setErrorMessage('')}>Fermer</button>
             </ErrorDiv>
           </DarkCont>}
+        {isLoading && <Spinner />}
       </Container>
     );
 }

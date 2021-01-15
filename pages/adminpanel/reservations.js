@@ -1,32 +1,19 @@
-import styled, { keyframes } from 'styled-components';
+import styled from 'styled-components';
 import { useState, useEffect } from 'react';
 import useSWR from 'swr';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import { Spinner9 } from '@styled-icons/icomoon';
 
 import Filter from '@/components/adminpanel/Filter';
 import Reservations from '@/components/adminpanel/Reservations';
 import Tabs from '@/components/adminpanel/Tabs';
+import Spinner from '@/elements/Spinner';
 
-const spinnerAnim = keyframes`
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
-`;
-
-const SpinnerDiv = styled.div`
-  align-items: center;
-  display: flex;
+const Title = styled.h1`
+  font-size: 3rem;
+  height: auto;
   justify-content: center;
-  height: 100vh;
-  width: 100vw;
-  & > * {
-    animation: ${spinnerAnim} 1s infinite; 
-  }
+  margin-bottom: 50px;
 `;
 
 const fetcher = (...args) => fetch(...args).then(res => res.json());
@@ -76,7 +63,7 @@ const DisplayReservations = () => {
   }
   // Display a spinner while data is being fetched:
   if (!data) {
-    return <SpinnerDiv><Spinner9 size={80} color="#012f6a" /></SpinnerDiv>;
+    return <Spinner />;
 
   } else {
     return (
@@ -86,7 +73,8 @@ const DisplayReservations = () => {
           <title>Crêperie Augustine | Réservations</title>
         </Head>
         <>
-          <Filter selectDate={selectDate} getById={getById} allDates={allDates} dateString={dateString} />
+          <Filter selectDate={selectDate} getById={getById} allDates={allDates} dateString={dateString} date={date} />
+          <Title>Réservations</Title>
           <Tabs selected={selected} handleSelectTab={handleSelectTab} />
           <Reservations data={selected === 1 ? data.new : data.validated} date={date} bookingId={bookingId} selected={selected} />
         </>
