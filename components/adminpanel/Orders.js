@@ -28,7 +28,7 @@ const ListItem = styled.li`
   }
 `;
 
-const ErrorCont = styled.div`
+const DarkCont = styled.div`
   align-items: center;
   background: linear-gradient(hsla(0deg, 0%, 0%, 0.8), hsla(0deg, 0%, 0%, 0.8));display: flex;
   height: 100vh;
@@ -134,12 +134,12 @@ const Orders = props => {
           </ListItem>
         ))}
         {errorMessage !== '' && 
-          <ErrorCont>
+          <DarkCont>
             <ErrorDiv>
               <div>{errorMessage}</div>
               <button onClick={() => setErrorMessage('')}>Fermer</button>
             </ErrorDiv>
-          </ErrorCont>}
+          </DarkCont>}
       </Container>
     );
 }

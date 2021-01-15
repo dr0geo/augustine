@@ -2,12 +2,12 @@ import styled, { keyframes } from 'styled-components';
 import { useState, useEffect } from 'react';
 import useSWR from 'swr';
 import Head from 'next/head';
-import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { Spinner9 } from '@styled-icons/icomoon';
 
 import Filter from '@/components/adminpanel/Filter';
 import Reservations from '@/components/adminpanel/Reservations';
+import Tabs from '@/components/adminpanel/Tabs';
 
 const spinnerAnim = keyframes`
   0% {
@@ -31,6 +31,12 @@ const SpinnerDiv = styled.div`
 
 const fetcher = (...args) => fetch(...args).then(res => res.json());
 
+const todayDate = new Date(Date.now());
+const day = todayDate.getDate().toString().padStart(2, '0');
+const month = (todayDate.getMonth() + 1).toString().padStart(2, '0');
+const year = todayDate.getFullYear();
+const dateString = `${year}-${month}-${day}`;
+
 const DisplayReservations = () => {
   
   const router = useRouter();
@@ -41,14 +47,10 @@ const DisplayReservations = () => {
       router.replace('/adminpanel');
     }
   }, []);
-  
-  const [restaurant, setRestaurant] = useState(0);
-  const [date, setDate] = useState('');
-  const [bookingId, setBookingId] = useState('');
 
-  const selectRestaurant = e => {
-    setRestaurant(parseInt(e.target.value));
-  };
+  const [date, setDate] = useState(dateString);
+  const [bookingId, setBookingId] = useState('');
+  const [selected, setSelected] = useState(1);
 
   const selectDate = e => {
     setDate(e.target.value);
@@ -61,6 +63,8 @@ const DisplayReservations = () => {
   const allDates = () => {
     setDate('');
   }
+
+  const handleSelectTab = tab => setSelected(tab);
 
   // Fetch bookings on the client side:
   const { data, error } = useSWR('/api/reservations', fetcher, {
@@ -82,11 +86,9 @@ const DisplayReservations = () => {
           <title>Crêperie Augustine | Réservations</title>
         </Head>
         <>
-          <Link href="/adminpanel">
-            <a>Retour à l'accueil administrateur</a>
-          </Link>
-          <Filter selectDate={selectDate} getById={getById} allDates={allDates} />
-          <Reservations data={data} date={date} bookingId={bookingId} />
+          <Filter selectDate={selectDate} getById={getById} allDates={allDates} dateString={dateString} />
+          <Tabs selected={selected} handleSelectTab={handleSelectTab} />
+          <Reservations data={selected === 1 ? data.new : data.validated} date={date} bookingId={bookingId} selected={selected} />
         </>
       </>
     );
