@@ -7,6 +7,7 @@ import styled, { keyframes } from 'styled-components';
 
 import Filter from '@/components/adminpanel/Filter';
 import Orders from '@/components/adminpanel/Orders';
+import Tabs from '@/components/adminpanel/Tabs';
 
 const spinnerAnim = keyframes`
   0% {
@@ -30,6 +31,12 @@ const SpinnerDiv = styled.div`
 
 const fetcher = (...args) => fetch(...args).then(res => res.json());
 
+const todayDate = new Date(Date.now());
+const day = todayDate.getDate().toString().padStart(2, '0');
+const month = (todayDate.getMonth() + 1).toString().padStart(2, '0');
+const year = todayDate.getFullYear();
+const dateString = `${year}-${month}-${day}`;
+
 const Commandes = () => {
 
   const router = useRouter();
@@ -41,13 +48,9 @@ const Commandes = () => {
     }
   }, []);
 
-  const [restaurant, setRestaurant] = useState(0);
-  const [date, setDate] = useState('');
+  const [date, setDate] = useState(dateString);
   const [orderId, setOrderId] = useState('');
-
-  const selectRestaurant = e => {
-    setRestaurant(parseInt(e.target.value));
-  };
+  const [selected, setSelected] = useState(1);
 
   const selectDate = e => {
     setDate(e.target.value);
@@ -60,6 +63,8 @@ const Commandes = () => {
   const allDates = () => {
     setDate('');
   }
+
+  const handleSelectTab = tab => setSelected(tab);
 
   // Fetch orders on the client side:
   const { data, error } = useSWR('/api/commandes', fetcher, {
@@ -78,9 +83,11 @@ const Commandes = () => {
       <>
         <Head>
           <meta name="robots" content="noindex, nofollow" />
+          <title>Crêperie Augustine | Administrateur</title>
         </Head>
-        <Filter selectRestaurant={selectRestaurant} selectDate={selectDate} getById={getById} allDates={allDates} />
-        <Orders data={data} restaurant={restaurant} date={date} orderId={orderId} />
+        <Filter selectDate={selectDate} getById={getById} allDates={allDates} dateString={dateString} />
+        <Tabs selected={selected} handleSelectTab={handleSelectTab} />
+        <Orders data={selected === 1 ? data.new : data.validated} date={date} orderId={orderId} selected={selected} />
       </>
     );
   }
