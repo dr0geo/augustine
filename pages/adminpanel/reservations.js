@@ -79,6 +79,7 @@ const DisplayReservations = () => {
       <>
         <Head>
           <meta name="robots" content="noindex, nofollow" />
+          <title>Crêperie Augustine | Réservations</title>
         </Head>
         <>
           <Link href="/adminpanel">

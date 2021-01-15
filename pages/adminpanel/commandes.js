@@ -83,7 +83,7 @@ const Commandes = () => {
       <>
         <Head>
           <meta name="robots" content="noindex, nofollow" />
-          <title>Crêperie Augustine | Administrateur</title>
+          <title>Crêperie Augustine | Commandes</title>
         </Head>
         <Filter selectDate={selectDate} getById={getById} allDates={allDates} dateString={dateString} />
         <Tabs selected={selected} handleSelectTab={handleSelectTab} />

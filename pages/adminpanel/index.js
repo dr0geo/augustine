@@ -30,6 +30,7 @@ const AdminPanel = () => {
     <>
       <Head>
         <meta name="robots" content="noindex, nofollow" />
+        <title>Crêperie Augustine | Administrateur</title>
       </Head>
       {isLoggedIn === 'false' ? (
         <LoginForm handleLogin={handleLogin} />

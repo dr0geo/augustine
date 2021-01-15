@@ -60,12 +60,12 @@ const Orders = props => {
     // Filter orders according to inputs values:
     let filteredData = props.data;
 
-    //if (props.date !== '') {
-      //filteredData = filteredData.filter(order => new Date(Date.parse(order.date)).toLocaleDateString() === new Date(Date.parse(props.date)).toLocaleDateString());
-    //}
-    //if (props.orderId !== '') {
-      //filteredData = filteredData.filter(order => order.id.toLowerCase().includes(props.orderId.toLowerCase().trim()));
-    //}
+    if (props.date !== '') {
+      filteredData = filteredData.filter(order => new Date(Date.parse(order.date)).toLocaleDateString() === new Date(Date.parse(props.date)).toLocaleDateString());
+    }
+    if (props.orderId !== '') {
+      filteredData = filteredData.filter(order => order.id.toLowerCase().includes(props.orderId.toLowerCase().trim()));
+    }
 
     const [errorMessage, setErrorMessage] = useState('');
     

@@ -41,7 +41,7 @@ const handleOrder = async (req, res) => {
   // File an order:
   } else if (req.method === 'PUT') {
     try {
-      await db.collection('filedOrders').add(req.body);
+      await db.collection('filedOrders').doc(req.body.id).set(req.body);
       await db.collection('orders').doc(req.body.id).delete();
       res.status(200).end();
     } catch (err) {
