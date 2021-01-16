@@ -51,7 +51,7 @@ const ErrMessage = styled.div`
   color: red;
 `;
 
-const LoginForm = () => {
+const LoginForm = props => {
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -71,10 +71,14 @@ const LoginForm = () => {
     })
       .then(res => {
         if (res.status === 200) {
-          mutate('/api/login');
+          return res.json();
         } else {
           setErrorMessage('Mauvais nom d\'utilisateur ou mot de passe');
         }
+      })
+      .then(data => {
+        props.handleToken(data.user.stsTokenManager.accessToken);
+        mutate('/api/login');
       })
       .then(() => setIsLoading(false))
       .catch(err => console.log(err));

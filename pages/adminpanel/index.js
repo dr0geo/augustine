@@ -26,6 +26,11 @@ const fetcher = (...args) => fetch(...args).then(res => res.json());
 const AdminPanel = () => {
 
   const [isLoading, setIsLoading] = useState(false);
+  const [accessToken, setAccessToken] = useState('');
+
+  console.log(accessToken);
+
+  const handleToken = token => setAccessToken(token);
 
   const handleLogout = async () => {
     setIsLoading(true);
@@ -45,7 +50,7 @@ const AdminPanel = () => {
           <meta name="robots" content="noindex, nofollow" />
           <title>Crêperie Augustine | Administrateur</title>
         </Head>
-        <LoginForm />
+        <LoginForm handleToken={handleToken} accessToken={accessToken} />
       </>
     );
   }
