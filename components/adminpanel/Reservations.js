@@ -31,7 +31,7 @@ const ListItem = styled.li`
 `;
 
 const Button = styled.button`
-  background-color: ${props => props.selected === 1 ? '#4eb152' : '#d02f36'};
+  background-color: ${props => (props.selected === 1 ? '#4eb152' : '#d02f36')};
   border: none;
   color: white;
   font-weight: 600;
@@ -39,7 +39,8 @@ const Button = styled.button`
 
 const Cont = styled.div`
   align-items: center;
-  background: linear-gradient(hsla(0deg, 0%, 0%, 0.8), hsla(0deg, 0%, 0%, 0.8));display: flex;
+  background: linear-gradient(hsla(0deg, 0%, 0%, 0.8), hsla(0deg, 0%, 0%, 0.8));
+  display: flex;
   height: 100vh;
   justify-content: center;
   left: 0;
@@ -66,94 +67,134 @@ const ErrorDiv = styled.div`
 `;
 
 const Reservations = props => {
-    // Filter bookings according to inputs values:
-    let filteredData = props.data;
 
-    if (props.date !== '') {
-      filteredData = filteredData.filter(booking => new Date(Date.parse(booking.date)).toLocaleDateString() === new Date(Date.parse(props.date)).toLocaleDateString());
-    }
-    if (props.bookingId !== '') {
-      filteredData = filteredData.filter(booking => booking.id.toLowerCase().includes(props.bookingId.toLowerCase().trim()));
-    }
+  // Filter bookings according to inputs values:
+  let filteredData = props.data;
 
-    const [errorMessage, setErrorMessage] = useState('');
-    const [isLoading, setIsLoading] = useState(false);
-    
-    const handleFile = async (id) => {
-      setIsLoading(true);
-      const bookingRef = props.data.find(booking => booking.id === id);
-
-      fetch('/api/reservations', {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(bookingRef)
-      })
-        .then(res => {
-          if (res.status === 200) {
-            mutate('/api/reservations');
-            setIsLoading(false);
-          } else {
-            throw new Error();
-          }
-        })
-        .catch(() => {
-          setIsLoading(false);
-          setErrorMessage('Une erreur s\'est produite, veuillez réessayer...');
-        });
-    }
-
-    const handleDelete = async (id) => {
-      setIsLoading(true);
-      const bookingRef = props.data.find(booking => booking.id === id);
-
-      fetch('/api/reservations', {
-        method: 'DELETE',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(bookingRef)
-      })
-        .then(res => {
-          if (res.status === 200) {
-            mutate('/api/reservations');
-            setIsLoading(false);
-          } else {
-            throw new Error();
-          }
-        })
-        .catch(() => {
-          setIsLoading(false);
-          setErrorMessage('Une erreur s\'est produite, veuillez réessayer...');
-        });
-    }
-
-    return (
-      <Container>
-        {!filteredData.length
-          ? <h2><em>Pas de réservation à la date sélectionnée...</em></h2>
-          : filteredData.map(booking => (
-          <ListItem key={booking.id}>
-            <p><strong>Date</strong> : {new Date(Date.parse(booking.date)).toLocaleDateString()}</p>
-            <p><strong>Heure</strong> : {booking.time}</p>
-            <p><strong>Nombre de personnes</strong> : {booking.people}</p>
-            <p><strong>Nom</strong> : {booking.firstName} {booking.lastName}</p>
-            <p><strong>Téléphone</strong> : {booking.phoneNumber}</p>
-            <p><strong>E-mail</strong> : {booking.email}</p>
-            {props.selected === 1 ? <Button selected={props.selected} onClick={() => handleFile(booking.id)}>Valider</Button> : <Button selected={props.selected} onClick={() => handleDelete(booking.id)}>Supprimer</Button>}
-          </ListItem>
-        ))}
-        {errorMessage !== '' && 
-          <Cont>
-            <ErrorDiv>
-              <div>{errorMessage}</div>
-              <button onClick={() => setErrorMessage('')}>Fermer</button>
-            </ErrorDiv>
-          </Cont>}
-        {isLoading && <Spinner />}
-      </Container>
+  if (props.date !== '') {
+    filteredData = filteredData.filter(
+      booking =>
+        new Date(Date.parse(booking.date)).toLocaleDateString() ===
+        new Date(Date.parse(props.date)).toLocaleDateString()
     );
   }
+
+  if (props.bookingId !== '') {
+    filteredData = filteredData.filter(booking =>
+      booking.id.toLowerCase().includes(props.bookingId.toLowerCase().trim())
+    );
+  }
+
+  const [errorMessage, setErrorMessage] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+
+  const handleFile = async id => {
+    setIsLoading(true);
+    const bookingRef = props.data.find(booking => booking.id === id);
+
+    fetch('/api/reservations', {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(bookingRef)
+    })
+      .then(res => {
+        if (res.status === 200) {
+          mutate('/api/reservations');
+          setIsLoading(false);
+        } else {
+          throw new Error();
+        }
+      })
+      .catch(() => {
+        setIsLoading(false);
+        setErrorMessage("Une erreur s'est produite, veuillez réessayer...");
+      });
+  };
+
+  const handleDelete = async id => {
+    setIsLoading(true);
+    const bookingRef = props.data.find(booking => booking.id === id);
+
+    fetch('/api/reservations', {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(bookingRef)
+    })
+      .then(res => {
+        if (res.status === 200) {
+          mutate('/api/reservations');
+          setIsLoading(false);
+        } else {
+          throw new Error();
+        }
+      })
+      .catch(() => {
+        setIsLoading(false);
+        setErrorMessage("Une erreur s'est produite, veuillez réessayer...");
+      });
+  };
+
+  return (
+    <Container>
+      {!filteredData.length ? (
+        <h2>
+          <em>Pas de réservation à la date sélectionnée...</em>
+        </h2>
+      ) : (
+        filteredData.map(booking => (
+          <ListItem key={booking.id}>
+            <p>
+              <strong>Date</strong> :{' '}
+              {new Date(Date.parse(booking.date)).toLocaleDateString()}
+            </p>
+            <p>
+              <strong>Heure</strong> : {booking.time}
+            </p>
+            <p>
+              <strong>Nombre de personnes</strong> : {booking.people}
+            </p>
+            <p>
+              <strong>Nom</strong> : {booking.firstName} {booking.lastName}
+            </p>
+            <p>
+              <strong>Téléphone</strong> : {booking.phoneNumber}
+            </p>
+            <p>
+              <strong>E-mail</strong> : {booking.email}
+            </p>
+            {props.selected === 1 ? (
+              <Button
+                selected={props.selected}
+                onClick={() => handleFile(booking.id)}
+              >
+                Valider
+              </Button>
+            ) : (
+              <Button
+                selected={props.selected}
+                onClick={() => handleDelete(booking.id)}
+              >
+                Supprimer
+              </Button>
+            )}
+          </ListItem>
+        ))
+      )}
+      {errorMessage !== '' && (
+        <Cont>
+          <ErrorDiv>
+            <div>{errorMessage}</div>
+            <button onClick={() => setErrorMessage('')}>Fermer</button>
+          </ErrorDiv>
+        </Cont>
+      )}
+      {isLoading && <Spinner />}
+    </Container>
+  );
+};
 
 export default Reservations;

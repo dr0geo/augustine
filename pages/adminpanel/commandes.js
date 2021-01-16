@@ -28,13 +28,6 @@ const Commandes = () => {
 
   const router = useRouter();
 
-  // Check if admin is logged in:
-  useEffect(() => {
-    if (!sessionStorage.getItem('isLoggedIn')) {
-      router.replace('/adminpanel');
-    }
-  }, []);
-
   const [date, setDate] = useState(dateString);
   const [orderId, setOrderId] = useState('');
   const [selected, setSelected] = useState(1);

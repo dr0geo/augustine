@@ -27,7 +27,7 @@ const AdminPanel = () => {
 
   const [isLoading, setIsLoading] = useState(false);
 
-  const handleLogout = () => {
+  const handleLogout = async () => {
     setIsLoading(true);
     fetch('/api/logout')
       .then(() => mutate('/api/login'))

@@ -6,8 +6,8 @@ const handleOrder = async (req, res) => {
     try {
       const order = await db.collection('orders').add(req.body);
       res.status(200).json({ orderId: order.id });
-    } catch (err) {
-      res.status(400).json(err);
+    } catch {
+      res.status(400).end();
     }
     
   // Retrieve all orders for admin:
@@ -34,8 +34,8 @@ const handleOrder = async (req, res) => {
       };
 
       res.status(200).json(totalOrders);
-    } catch (err) {
-      res.status(401).json(err);
+    } catch {
+      res.status(401).end();
     }
   
   // File an order:
@@ -44,8 +44,8 @@ const handleOrder = async (req, res) => {
       await db.collection('filedOrders').doc(req.body.id).set(req.body);
       await db.collection('orders').doc(req.body.id).delete();
       res.status(200).end();
-    } catch (err) {
-      res.status(401).json(err);
+    } catch {
+      res.status(401).end();
     }
 
   // Delete an order:
@@ -53,8 +53,8 @@ const handleOrder = async (req, res) => {
     try {
       await db.collection('filedOrders').doc(req.body.id).delete();
       res.status(200).end();
-    } catch (err) {
-      res.status(401).json(err);
+    } catch {
+      res.status(401).end();
     }
 
   // Other cases:

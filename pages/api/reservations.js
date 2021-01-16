@@ -6,8 +6,8 @@ const handleBooking = async (req, res) => {
     try {
       const booking = await db.collection('bookings').add(req.body);
       res.status(200).json({ bookingId: booking.id });
-    } catch(err) {
-      res.status(400).json(err);
+    } catch {
+      res.status(400).end();
     }
     
   // Retrieve all bookings for admin:
@@ -34,8 +34,8 @@ const handleBooking = async (req, res) => {
       };
 
       res.status(200).json(totalBookings);
-    } catch(err) {
-      res.status(401).json(err);
+    } catch {
+      res.status(401).end();
     }
 
   // File a booking:
@@ -44,8 +44,8 @@ const handleBooking = async (req, res) => {
       await db.collection('filedBookings').doc(req.body.id).set(req.body);
       await db.collection('bookings').doc(req.body.id).delete();
       res.status(200).end();
-    } catch (err) {
-      res.status(401).json(err);
+    } catch {
+      res.status(401).end();
     }
 
   // Delete a booking:
@@ -53,8 +53,8 @@ const handleBooking = async (req, res) => {
     try {
       await db.collection('filedBookings').doc(req.body.id).delete();
       res.status(200).end();
-    } catch (err) {
-      res.status(401).json(err);
+    } catch {
+      res.status(401).end();
     }
 
   // Other cases:
