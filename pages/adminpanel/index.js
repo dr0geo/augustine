@@ -37,7 +37,7 @@ const AdminPanel = () => {
 
   const { data, error } = useSWR('/api/login', fetcher);
 
-  // If no user is logged in:
+  // If no admin is logged in:
   if (error) {
     return (
       <>
@@ -49,10 +49,12 @@ const AdminPanel = () => {
       </>
     );
   }
-  // Display spinner while retrieving info:
+
+  // Display spinner while retrieving log info:
   if (!data) {
     return <Spinner />;
-    // Display UI according to whether user is logged in or not:
+
+  // Display UI if admin is logged in:
   } else {
     return (
       <>
