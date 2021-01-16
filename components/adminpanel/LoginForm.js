@@ -1,5 +1,8 @@
 import { useState } from 'react';
+import { mutate } from 'swr';
 import styled from 'styled-components';
+
+import Spinner from '@/elements/Spinner';
 
 export const Container = styled.section`
   align-items: center;
@@ -48,14 +51,16 @@ const ErrMessage = styled.div`
   color: red;
 `;
 
-const LoginForm = props => {
+const LoginForm = () => {
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsLoading(true);
 
     fetch('/api/login', {
       method: 'POST',
@@ -66,12 +71,12 @@ const LoginForm = props => {
     })
       .then(res => {
         if (res.status === 200) {
-          sessionStorage.setItem('isLoggedIn', 'true');
-          props.handleLogin();
+          mutate('/api/login');
         } else {
           setErrorMessage('Mauvais nom d\'utilisateur ou mot de passe');
         }
       })
+      .then(() => setIsLoading(false))
       .catch(err => console.log(err));
   }
 
@@ -96,6 +101,7 @@ const LoginForm = props => {
         <button type="submit">Se connecter</button>
       </Form>
       {errorMessage !== '' && <ErrMessage>{errorMessage}</ErrMessage>}
+      {isLoading && <Spinner />}
     </Container>
   );
 }

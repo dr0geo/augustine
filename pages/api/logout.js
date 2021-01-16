@@ -1,9 +1,13 @@
 import firebase from '@/utils/firebase';
 
 const handleLogout = async (_, res) => {
-  await firebase.auth().signOut();
+  try {
+    await firebase.auth().signOut();
+    res.status(200).end();
 
-  res.status(200).end();
+  } catch {
+    res.status(400).end();
+  }
 }
 
 export default handleLogout;

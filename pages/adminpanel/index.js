@@ -1,40 +1,65 @@
+import styled from 'styled-components';
 import Head from 'next/head';
 import Link from 'next/link';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
+import useSWR, { mutate } from 'swr';
 
 import Card from '@/components/adminpanel/Card';
 import LoginForm, { Container } from '@/components/adminpanel/LoginForm';
+import Spinner from '@/elements/Spinner';
+
+const Button = styled.button`
+  background-color: #d02f36;
+  border: none;
+  color: white;
+  font-weight: 600;
+  padding: 10px;
+  @media (any-hover: hover) {
+    &:hover {
+      cursor: pointer;
+    }
+  }
+`;
+
+const fetcher = (...args) => fetch(...args).then(res => res.json());
 
 const AdminPanel = () => {
-  // Manage admin log status for the UI:
-  const [isLoggedIn, setIsLoggedIn] = useState('false');
 
-  useEffect(() => {
-    if (sessionStorage.getItem('isLoggedIn')) {
-      setIsLoggedIn('true');
-    }
-  }, []);
-
-  const handleLogin = () => {
-    setIsLoggedIn('true');
-  }
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleLogout = () => {
+    setIsLoading(true);
     fetch('/api/logout')
-      .then(() => sessionStorage.removeItem('isLoggedIn'))
-      .then(() => setIsLoggedIn('false'))
+      .then(() => mutate('/api/login'))
+      .then(() => setIsLoading(false))
       .catch(err => console.log(err));
-  }
+  };
 
-  return (
-    <>
-      <Head>
-        <meta name="robots" content="noindex, nofollow" />
-        <title>Crêperie Augustine | Administrateur</title>
-      </Head>
-      {isLoggedIn === 'false' ? (
-        <LoginForm handleLogin={handleLogin} />
-      ) : (
+  const { data, error } = useSWR('/api/login', fetcher);
+
+  // If no user is logged in:
+  if (error) {
+    return (
+      <>
+        <Head>
+          <meta name="robots" content="noindex, nofollow" />
+          <title>Crêperie Augustine | Administrateur</title>
+        </Head>
+        <LoginForm />
+      </>
+    );
+  }
+  // Display spinner while retrieving info:
+  if (!data) {
+    return <Spinner />;
+    // Display UI according to whether user is logged in or not:
+  } else {
+    return (
+      <>
+        <Head>
+          <meta name="robots" content="noindex, nofollow" />
+          <title>Crêperie Augustine | Administrateur</title>
+        </Head>
         <Container>
           <h2>
             <em>
@@ -55,11 +80,12 @@ const AdminPanel = () => {
               </Card>
             </a>
           </Link>
-          <button onClick={handleLogout}>Se déconnecter</button>
+          <Button onClick={handleLogout}>Se déconnecter</Button>
+          {isLoading && <Spinner />}
         </Container>
-      )}
-    </>
-  );
+      </>
+    );
+  }
 };
 
 export default AdminPanel;
