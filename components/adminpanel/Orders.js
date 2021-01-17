@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 import { v1 as uuid } from 'uuid';
-import { mutate } from 'swr';
 import { useState } from 'react';
 
+import { db } from '@/utils/firebase';
 import Spinner from '@/elements/Spinner';
 
 const Container = styled.ul`
@@ -81,6 +81,10 @@ const ErrorDiv = styled.div`
 `;
 
 const Orders = props => {
+
+    const [isLoading, setIsLoading] = useState(false);
+    const [errorMessage, setErrorMessage] = useState('');
+    
     // Filter orders according to inputs values:
     let filteredData = props.data;
 
@@ -91,57 +95,35 @@ const Orders = props => {
       filteredData = filteredData.filter(order => order.id.toLowerCase().includes(props.orderId.toLowerCase().trim()));
     }
 
-    const [errorMessage, setErrorMessage] = useState('');
-    const [isLoading, setIsLoading] = useState(false);
-    
+    // Handle filing of an order:
     const handleFile = async (id) => {
       setIsLoading(true);
+
       const orderRef = props.data.find(order => order.id === id);
 
-      fetch('/api/commandes', {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(orderRef)
-      })
-        .then(res => {
-          if (res.status === 200) {
-            mutate('/api/commandes');
-            setIsLoading(false);
-          } else {
-            throw new Error();
-          }
-        })
-        .catch(() => {
-          setIsLoading(false);
-          setErrorMessage('Une erreur s\'est produite, veuillez réessayer...');
-        });
+      try {
+        await db.collection('filedOrders').doc(orderRef.id).set(orderRef);
+        await db.collection('orders').doc(orderRef.id).delete();
+      } catch {
+        setErrorMessage('Une erreur s\'est produite, veuillez réessayer...');
+      } finally {
+        setIsLoading(false);
+      }
     }
 
+    // Handle deletion of an order:
     const handleDelete = async (id) => {
       setIsLoading(true);
+
       const orderRef = props.data.find(order => order.id === id);
 
-      fetch('/api/commandes', {
-        method: 'DELETE',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(orderRef)
-      })
-        .then(res => {
-          if (res.status === 200) {
-            mutate('/api/commandes');
-            setIsLoading(false);
-          } else {
-            throw new Error();
-          }
-        })
-        .catch(() => {
-          setIsLoading(false);
-          setErrorMessage('Une erreur s\'est produite, veuillez réessayer...');
-        });
+      try {
+        await db.collection('filedOrders').doc(orderRef.id).delete();
+      } catch {
+        setErrorMessage('Une erreur s\'est produite, veuillez réessayer...');
+      } finally {
+        setIsLoading(false);
+      }
     }
 
     return (

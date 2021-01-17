@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import { mutate } from 'swr';
 import styled from 'styled-components';
 
+import firebase from '@/utils/firebase';
 import Spinner from '@/elements/Spinner';
 
 export const Container = styled.section`
@@ -58,30 +58,14 @@ const LoginForm = props => {
   const [errorMessage, setErrorMessage] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     setIsLoading(true);
 
-    fetch('/api/login', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ email, password })
-    })
-      .then(res => {
-        if (res.status === 200) {
-          return res.json();
-        } else {
-          setErrorMessage('Mauvais nom d\'utilisateur ou mot de passe');
-        }
-      })
-      .then(data => {
-        props.handleToken(data.user.stsTokenManager.accessToken);
-        mutate('/api/login');
-      })
-      .then(() => setIsLoading(false))
-      .catch(err => console.log(err));
+    firebase.auth().signInWithEmailAndPassword(email, password)
+      .then(() => props.handleLogin())
+      .catch(err => console.log(err))
+      .finally(() => setIsLoading(false));
   }
 
   return (

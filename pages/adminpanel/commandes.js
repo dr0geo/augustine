@@ -1,13 +1,12 @@
 import styled from 'styled-components';
 import Head from 'next/head';
-import { useRouter } from 'next/router';
-import { useState, useEffect } from 'react';
-import useSWR from 'swr';
+import { useEffect, useState } from 'react';
 
 import Filter from '@/components/adminpanel/Filter';
 import Orders from '@/components/adminpanel/Orders';
 import Tabs from '@/components/adminpanel/Tabs';
 import Spinner from '@/elements/Spinner';
+import { db } from '@/utils/firebase';
 
 const Title = styled.h1`
   font-size: 3rem;
@@ -16,8 +15,6 @@ const Title = styled.h1`
   margin-bottom: 50px;
 `;
 
-const fetcher = (...args) => fetch(...args).then(res => res.json());
-
 const todayDate = new Date(Date.now());
 const day = todayDate.getDate().toString().padStart(2, '0');
 const month = (todayDate.getMonth() + 1).toString().padStart(2, '0');
@@ -25,9 +22,41 @@ const year = todayDate.getFullYear();
 const dateString = `${year}-${month}-${day}`;
 
 const Commandes = () => {
+  const [isLoading, setIsLoading] = useState(true);
 
-  const router = useRouter();
+  // Fetch data from database:
+  const [newOrders, setNewOrders] = useState([]);
+  const [validatedOrders, setValidatedOrders] = useState([]);
 
+  useEffect(() => {
+
+    // Get and listen for new orders:
+    const getNewOrders = db.collection('orders').onSnapshot(snapshot => {
+      const retrievedNewOrders = [];
+      snapshot.forEach(doc => retrievedNewOrders.push({
+        id: doc.id,
+        ...doc.data()
+      }));
+      setNewOrders(retrievedNewOrders);
+    });
+
+    // Get and listen for validated orders:
+    const getValidatedOrders = db.collection('filedOrders').onSnapshot(snapshot => {
+      const retrievedValidatedOrders = [];
+      snapshot.forEach(doc => retrievedValidatedOrders.push({
+        id: doc.id,
+        ...doc.data()
+      }));
+      setValidatedOrders(retrievedValidatedOrders);
+    });
+
+    // Retrieve all data from database:
+    Promise.all([getNewOrders, getValidatedOrders])
+      .then(() => setIsLoading(false))
+      .catch(err => console.log(err));
+  }, []);
+
+  // Filters settings:
   const [date, setDate] = useState(dateString);
   const [orderId, setOrderId] = useState('');
   const [selected, setSelected] = useState(1);
@@ -38,40 +67,43 @@ const Commandes = () => {
 
   const getById = e => {
     setOrderId(e.target.value);
-  }
+  };
 
   const allDates = () => {
     setDate('');
-  }
+  };
 
   const handleSelectTab = tab => setSelected(tab);
 
-  // Fetch orders on the client side:
-  const { data, error } = useSWR('/api/commandes', fetcher, {
-    refreshInterval: 60000
-  });
-  // If error, redirect to login screen:
-  if (error) {
-    router.replace('/adminpanel');
-  }
-  // Display a spinner while data is being fetched:
-  if (!data) {
-    return <Spinner />;
-
-  } else {
-    return (
-      <>
-        <Head>
-          <meta name="robots" content="noindex, nofollow" />
-          <title>Crêperie Augustine | Commandes</title>
-        </Head>
-        <Filter selectDate={selectDate} getById={getById} allDates={allDates} dateString={dateString} date={date} />
-        <Title>Commandes</Title>
-        <Tabs selected={selected} handleSelectTab={handleSelectTab} />
-        <Orders data={selected === 1 ? data.new : data.validated} date={date} orderId={orderId} selected={selected} />
-      </>
-    );
-  }
+  return (
+    <>
+      <Head>
+        <meta name="robots" content="noindex, nofollow" />
+        <title>Crêperie Augustine | Commandes</title>
+      </Head>
+      {isLoading
+        ? <Spinner />
+        : (
+        <>
+          <Filter
+            selectDate={selectDate}
+            getById={getById}
+            allDates={allDates}
+            dateString={dateString}
+            date={date}
+          />
+          <Title>Commandes</Title>
+          <Tabs selected={selected} handleSelectTab={handleSelectTab} newNumber={newOrders.length} validatedNumber={validatedOrders.length} />
+          <Orders
+            data={selected === 1 ? newOrders : validatedOrders}
+            date={date}
+            orderId={orderId}
+            selected={selected}
+          />
+        </>
+      )}
+    </>
+  );
 };
 
 export default Commandes;

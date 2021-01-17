@@ -2,8 +2,8 @@ import styled from 'styled-components';
 import Head from 'next/head';
 import Link from 'next/link';
 import { useState } from 'react';
-import useSWR, { mutate } from 'swr';
 
+import firebase from '@/utils/firebase';
 import Card from '@/components/adminpanel/Card';
 import LoginForm, { Container } from '@/components/adminpanel/LoginForm';
 import Spinner from '@/elements/Spinner';
@@ -21,43 +21,36 @@ const Button = styled.button`
   }
 `;
 
-const fetcher = (...args) => fetch(...args).then(res => res.json());
-
 const AdminPanel = () => {
 
+  const [adminLoggedIn, setAdminLoggedIn] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [accessToken, setAccessToken] = useState('');
 
-  console.log(accessToken);
+  const handleLogin = () => {
+    setAdminLoggedIn(true);
+  }
 
-  const handleToken = token => setAccessToken(token);
-
-  const handleLogout = async () => {
+  const handleLogout = () => {
     setIsLoading(true);
-    fetch('/api/logout')
-      .then(() => mutate('/api/login'))
-      .then(() => setIsLoading(false))
-      .catch(err => console.log(err));
-  };
-
-  const { data, error } = useSWR('/api/login', fetcher);
+    firebase.auth().signOut()
+      .then(() => {
+        setAdminLoggedIn(false);
+      })
+      .catch(error => console.log(error))
+      .finally(() => setIsLoading(false));
+  }
 
   // If no admin is logged in:
-  if (error) {
+  if (!adminLoggedIn) {
     return (
       <>
         <Head>
           <meta name="robots" content="noindex, nofollow" />
           <title>Crêperie Augustine | Administrateur</title>
         </Head>
-        <LoginForm handleToken={handleToken} accessToken={accessToken} />
+        <LoginForm handleLogin={handleLogin} />
       </>
     );
-  }
-
-  // Display spinner while retrieving log info:
-  if (!data) {
-    return <Spinner />;
 
   // Display UI if admin is logged in:
   } else {

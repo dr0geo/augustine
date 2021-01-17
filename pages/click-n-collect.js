@@ -10,6 +10,7 @@ import Footer from '@/components/Footer';
 import Basket, { BasketButton, BasketButtonOffset } from '@/components/click-n-collect/Basket';
 import { CnCMenuSection } from '@/components/elements/Divs';
 import OrderInfo from '@/components/click-n-collect/OrderInfo';
+import Spinner from '@/elements/Spinner';
 
 const ClicknCollect = props => {
 
@@ -153,8 +154,11 @@ const ClicknCollect = props => {
     }
   }
 
+  const [isLoading, setIsLoading] = useState(false);
+
   const handleOrderSubmit = async (e) => {
     e.preventDefault();
+    setIsLoading(true);
 
     const price = basketItems.map(item => item.price * item.quantity).reduce((a, b) => a + b);
 
@@ -168,36 +172,26 @@ const ClicknCollect = props => {
       basketItems,
       price
     }
-
-    fetch('/api/commandes', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(orderRef)
-    })
-      .then(res => {
-        if (res.status === 200) {
-          return res.json();
-        } else {
-          throw new Error();
-        }
-      })
-      .then(data => {
-        setOrderConfirmation(data.orderId)
-        fetch('/api/email', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({
-            orderId: data.orderId,
-            orderRef,
-            type: 'CnC'
-          })
-        })
-      })
-      .catch(() => setErrorInOrder('Une erreur s\'est produite, veuillez réessayer s\'il vous plaît...'));
+    
+    try {
+      const ref = await db.collection('orders').add(orderRef);
+      setOrderConfirmation(ref.id);
+      // await fetch('/api/email', {
+      //   method: 'POST',
+      //   headers: {
+      //     'Content-Type': 'application/json'
+      //   },
+      //   body: JSON.stringify({
+      //     orderId: ref.id,
+      //     orderRef,
+      //     type: 'CnC'
+      //   })
+      // });
+    } catch {
+      setErrorInOrder('Une erreur s\'est produite, veuillez réessayer s\'il vous plaît...');
+    } finally {
+      setIsLoading(false);
+    }
   }
 
   const backToHomePage = () => {
@@ -217,6 +211,7 @@ const ClicknCollect = props => {
           content="Commandez en ligne dans notre crêperie Parisienne, et venez récupérer directement votre commande une fois prête !"
         />
       </Head>
+      {isLoading && <Spinner />}
       <Menu
         isSelected={4}
         isClicked={props.isClicked}

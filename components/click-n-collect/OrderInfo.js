@@ -21,7 +21,6 @@ const InfoSection = styled.div`
   margin: auto;
   transform: ${props => (props.displaySection ? 'scale(1)' : 'scale(0)')};
   width: 100vw;
-  z-index: 100;
   & > div:first-of-type {
     margin: 0 auto 20px auto;
     max-width: 300px;
