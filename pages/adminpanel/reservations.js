@@ -54,6 +54,12 @@ const DisplayReservations = () => {
     Promise.all([getNewBookings, getValidatedBookings])
       .catch(err => console.log(err))
       .finally(() => setIsLoading(false));
+    
+    // Cleanup function:
+    return () => {
+      getNewBookings();
+      getValidatedBookings();
+    }
   }, []);
 
   // Filters settings:

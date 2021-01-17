@@ -42,7 +42,7 @@ const Filter = props => {
     <Container>
       <div>
         <button onClick={props.allDates}>Toutes les dates</button>
-        <input type="date" onChange={props.selectDate} defaultValue={props.dateString} value={props.date} />
+        <input type="date" onChange={props.selectDate} value={props.date} />
       </div>
       <div>
         <input type="text" onChange={props.getById} placeholder="Entrez une référence..." />

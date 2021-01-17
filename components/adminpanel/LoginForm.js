@@ -51,21 +51,23 @@ const ErrMessage = styled.div`
   color: red;
 `;
 
-const LoginForm = props => {
+const LoginForm = () => {
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
 
-    firebase.auth().signInWithEmailAndPassword(email, password)
-      .then(() => props.handleLogin())
-      .catch(err => console.log(err))
-      .finally(() => setIsLoading(false));
+    try {
+      await firebase.auth().signInWithEmailAndPassword(email, password);
+    } catch {
+      setErrorMessage('Mauvais nom d\'utilisateur ou mot de passe');
+      setIsLoading(false);
+    }
   }
 
   return (

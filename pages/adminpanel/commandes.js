@@ -54,6 +54,12 @@ const Commandes = () => {
     Promise.all([getNewOrders, getValidatedOrders])
       .catch(err => console.log(err))
       .finally(() => setIsLoading(false));
+
+    // Cleanup function:
+    return () => {
+      getNewOrders();
+      getValidatedOrders();
+    }
   }, []);
 
   // Filters settings:

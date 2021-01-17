@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import Head from 'next/head';
 import Link from 'next/link';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import firebase from '@/utils/firebase';
 import Card from '@/components/adminpanel/Card';
@@ -24,20 +24,30 @@ const Button = styled.button`
 const AdminPanel = () => {
 
   const [adminLoggedIn, setAdminLoggedIn] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
-  const handleLogin = () => {
-    setAdminLoggedIn(true);
-  }
+  useEffect(() => {
+    firebase.auth().onAuthStateChanged(user => {
+      if (user) {
+        setAdminLoggedIn(true);
+        setIsLoading(false);
+      } else {
+        setIsLoading(false);
+      }
+    });
+  }, []);
 
-  const handleLogout = () => {
+  const handleLogout = async () => {
     setIsLoading(true);
-    firebase.auth().signOut()
-      .then(() => {
-        setAdminLoggedIn(false);
-      })
-      .catch(error => console.log(error))
-      .finally(() => setIsLoading(false));
+
+    try {
+      await firebase.auth().signOut();
+      setAdminLoggedIn(false);
+    } catch (err) {
+      console.log(err);
+    } finally {
+      setIsLoading(false);
+    }
   }
 
   // If no admin is logged in:
@@ -48,7 +58,10 @@ const AdminPanel = () => {
           <meta name="robots" content="noindex, nofollow" />
           <title>Crêperie Augustine | Administrateur</title>
         </Head>
-        <LoginForm handleLogin={handleLogin} />
+        {isLoading 
+          ? <Spinner />
+          : <LoginForm />
+        }
       </>
     );
 
