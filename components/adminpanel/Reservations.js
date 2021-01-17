@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { useState } from 'react';
-import { mutate } from 'swr';
 
+import { db } from '@/utils/firebase';
 import Spinner from '@/elements/Spinner';
 
 const Container = styled.ul`
@@ -60,14 +60,15 @@ const ErrorDiv = styled.div`
   font-weight: 600;
   height: 250px;
   justify-content: space-around;
-  position: relative;
   text-align: center;
   width: 250px;
-  z-index: 11;
 `;
 
 const Reservations = props => {
 
+  const [isLoading, setIsLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
+  
   // Filter bookings according to inputs values:
   let filteredData = props.data;
 
@@ -85,57 +86,35 @@ const Reservations = props => {
     );
   }
 
-  const [errorMessage, setErrorMessage] = useState('');
-  const [isLoading, setIsLoading] = useState(false);
-
+  // Handle filing of a booking:
   const handleFile = async id => {
     setIsLoading(true);
+
     const bookingRef = props.data.find(booking => booking.id === id);
 
-    fetch('/api/reservations', {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(bookingRef)
-    })
-      .then(res => {
-        if (res.status === 200) {
-          mutate('/api/reservations');
-          setIsLoading(false);
-        } else {
-          throw new Error();
-        }
-      })
-      .catch(() => {
-        setIsLoading(false);
-        setErrorMessage("Une erreur s'est produite, veuillez réessayer...");
-      });
+    try {
+      await db.collection('filedBookings').doc(bookingRef.id).set(bookingRef);
+      await db.collection('bookings').doc(bookingRef.id).delete();
+    } catch {
+      setErrorMessage('Une erreur s\'est produite, veuillez réessayer...');
+    } finally {
+      setIsLoading(false);
+    }
   };
 
+  // Handle deletion of a booking:
   const handleDelete = async id => {
     setIsLoading(true);
+
     const bookingRef = props.data.find(booking => booking.id === id);
 
-    fetch('/api/reservations', {
-      method: 'DELETE',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(bookingRef)
-    })
-      .then(res => {
-        if (res.status === 200) {
-          mutate('/api/reservations');
-          setIsLoading(false);
-        } else {
-          throw new Error();
-        }
-      })
-      .catch(() => {
-        setIsLoading(false);
-        setErrorMessage("Une erreur s'est produite, veuillez réessayer...");
-      });
+    try {
+      await db.collection('filedBookings').doc(bookingRef.id).delete();
+    } catch {
+      setErrorMessage('Une erreur s\'est produite, veuillez réessayer...');
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (

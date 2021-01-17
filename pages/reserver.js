@@ -1,10 +1,12 @@
 import Head from 'next/head';
 import { useState } from 'react';
 
+import { db } from '@/utils/firebase';
 import Menu from '@/components/Menu';
 import { Section } from '@/elements/Divs';
 import { DateChoice, Personal, Success } from '@/components/reservation/Dynamic';
 import Footer from '@/components/Footer';
+import Spinner from '@/elements/Spinner';
 
 const weekDays = [
   'Dimanche',
@@ -105,12 +107,16 @@ const Reserver = props => {
   // Handle booking submission:
   const [bookingConfirmation, setBookingConfirmation] = useState('');
   const [errorInBooking, setErrorInBooking] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsLoading(true);
+
+    const formatedDate = `${date.getFullYear()}-${(date.getMonth() + 1).toString().padStart(2, '0')}-${date.getDate().toString().padStart(2, '0')}`;
 
     const bookingRef = {
-      date,
+      date: formatedDate,
       time,
       people,
       firstName,
@@ -119,36 +125,26 @@ const Reserver = props => {
       phoneNumber
     }
 
-    fetch('/api/reservations', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(bookingRef)
-    })
-      .then(res => {
-        if (res.status === 200) {
-          return res.json();
-        } else {
-          throw new Error();
-        }
-      })
-      .then(data => {
-        setBookingConfirmation(data.bookingId);
-        fetch('/api/email', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({
-            bookingId: data.bookingId,
-            bookingRef,
-            type: 'booking'
-          })
-        })
-      })
-      .then(() => goToNextStep())
-      .catch(() => setErrorInBooking('Une erreur s\'est produite, veuillez réessayer s\'il vous plaît...'));
+    try {
+      const ref = await db.collection('bookings').add(bookingRef);
+      setBookingConfirmation(ref.id);
+      // await fetch('/api/email', {
+      //   method: 'POST',
+      //   headers: {
+      //     'Content-Type': 'application/json'
+      //   },
+      //   body: JSON.stringify({
+      //     bookingId: ref.id,
+      //     bookingRef,
+      //     type: 'booking'
+      //   })
+      // });
+      goToNextStep();
+    } catch {
+      setErrorInBooking('Une erreur s\'est produite, veuillez réessayer s\'il vous plaît...');
+    } finally {
+      setIsLoading(false);
+    }
   }
 
   // Display on screen according to current booking step:
@@ -162,6 +158,7 @@ const Reserver = props => {
           content="Réservez votre table dans notre crêperie Parisienne directement depuis notre site !"
         />
       </Head>
+      {isLoading && <Spinner />}
       <Menu
         isSelected={3}
         isClicked={props.isClicked}

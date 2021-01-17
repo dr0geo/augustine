@@ -52,8 +52,8 @@ const Commandes = () => {
 
     // Retrieve all data from database:
     Promise.all([getNewOrders, getValidatedOrders])
-      .then(() => setIsLoading(false))
-      .catch(err => console.log(err));
+      .catch(err => console.log(err))
+      .finally(() => setIsLoading(false));
   }, []);
 
   // Filters settings:
