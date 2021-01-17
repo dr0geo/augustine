@@ -14,7 +14,7 @@ const sendConfirmationEmail = async (req, res) => {
 
   let confirmation;
 
-  if (req.body.type === 'CnC') {
+  if (req.body.type === 'order') {
     const orderItems = req.body.orderRef.basketItems.map(item => `${item.name} (x${item.quantity})`);
 
     confirmation = {
@@ -38,7 +38,7 @@ const sendConfirmationEmail = async (req, res) => {
       `
     }
 
-  } else {
+  } else if (req.body.type === 'booking') {
     confirmation = {
       from: '"Crêperie Augustine" <contact@creperie-augustine.com>',
       to: `${req.body.bookingRef.email}`,
@@ -58,6 +58,13 @@ const sendConfirmationEmail = async (req, res) => {
         <br />
         <p>L'équipe de la Crêperie Augustine.</p> 
       `
+    }
+  } else if (req.body.type === 'contact') {
+    confirmation = {
+      from: `${req.body.email}`,
+      to: 'geoffroy.vie@gmail.com',
+      subject: "Contact via le site Augustine",
+      html:`<p>test</p>`
     }
   }
 

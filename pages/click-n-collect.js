@@ -184,7 +184,7 @@ const ClicknCollect = props => {
         body: JSON.stringify({
           orderId: ref.id,
           orderRef,
-          type: 'CnC'
+          type: 'order'
         })
       });
     } catch {
