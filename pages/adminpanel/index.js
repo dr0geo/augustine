@@ -27,7 +27,7 @@ const AdminPanel = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    firebase.auth().onAuthStateChanged(user => {
+    const unsubscribe = firebase.auth().onAuthStateChanged(user => {
       if (user) {
         setAdminLoggedIn(true);
         setIsLoading(false);
@@ -35,6 +35,7 @@ const AdminPanel = () => {
         setIsLoading(false);
       }
     });
+    return () => unsubscribe();
   }, []);
 
   const handleLogout = async () => {

@@ -5,21 +5,21 @@ import { ScrollToTop } from '@/elements/Buttons';
 
 const GlobalStyle = createGlobalStyle`
   @font-face {
-    font-display: optional;
+    font-display: swap;
     font-family: 'Raleway';
     font-weight: 400;
     src: url('/fonts/raleway/Raleway-Regular.woff2') format('woff2');
   }
   
   @font-face {
-    font-display: optional;
+    font-display: swap;
     font-family: 'Dancing-Script';
     font-weight: 400;
     src: url('/fonts/dancing-script/DancingScript-SemiBold.woff2') format('woff2');
   }
 
   @font-face {
-    font-display: optional;
+    font-display: swap;
     font-family: 'Raleway';
     font-weight: 600;
     src: url('/fonts/raleway/Raleway-SemiBold.woff2') format('woff2');
