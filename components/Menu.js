@@ -66,8 +66,10 @@ const FlexDiv = styled.nav`
   flex-direction: column;
   height: 100vh;
   justify-content: space-evenly;
+  left: 0;
   position: fixed;
   text-align: center;
+  top: 0;
   transform: ${props => (props.isClicked ? 'scale(1)' : 'scale(0)')};
   transition: transform 0.2s ease-in-out 0.1s;
   width: 100vw;
