@@ -13,6 +13,7 @@ const sendConfirmationEmail = async (req, res) => {
   });
 
   let confirmation;
+  let query;
 
   if (req.body.type === 'order') {
     const orderItems = req.body.orderRef.basketItems.map(item => `${item.name} (x${item.quantity})`);
@@ -34,7 +35,7 @@ const sendConfirmationEmail = async (req, res) => {
         </ul>
         <p>Nous vous remercions pour votre commande et espérons vous revoir très vite chez nous !</p>
         <br />
-        <p>L'équipe de la Crêperie Augustine.</p> 
+        <p>L'équipe de la <a href="https://creperie-augustine.com" target="_blank">crêperie Augustine</a>.</p>
       `
     }
 
@@ -56,23 +57,59 @@ const sendConfirmationEmail = async (req, res) => {
         </ul>
         <p>Nous vous remercions pour votre réservations et vous attendons avec impatience chez nous !</p>
         <br />
-        <p>L'équipe de la Crêperie Augustine.</p> 
+        <p>L'équipe de la <a href="https://creperie-augustine.com" target="_blank">crêperie Augustine</a>.</p>
       `
     }
   } else if (req.body.type === 'contact') {
     confirmation = {
-      from: `${req.body.email}`,
+      from: '"Crêperie Augustine" <contact@creperie-augustine.com>',
+      to: `${req.body.query.email}`,
+      subject: "Crêperie Augustine - Votre demande !",
+      html: `
+        <p>${req.body.query.firstName},</p>
+        <br />
+        <p>Nous avons bien reçu votre demande et nous vous répondrons dans les plus brefs délais.</p>
+        <br />
+        <p>Merci pour votre message !</p>
+        <br />
+        <p>A très bientôt !</p>
+        <br />
+        <p>L'équipe de la <a href="https://creperie-augustine.com" target="_blank">crêperie Augustine</a>.</p>
+      `
+    }
+    
+    query = {
+      from: `${req.body.query.email}`,
       to: 'geoffroy.vie@gmail.com',
       subject: "Contact via le site Augustine",
-      html:`<p>test</p>`
+      html:`
+        <p>Bonjour,</p>
+        <br />
+        <p>Vous avez reçu un message via le formulaire de contact du site web de la crêperie Augustine.</p>
+        <h4>Nom du contact :</h4>
+        <p>${req.body.query.firstName} ${req.body.query.lastName}</p>
+        <h4>E-mail du contact :</h4>
+        <p>${req.body.query.email}</p>
+        <h4>Téléphone du contact (si renseigné) :</h4>
+        <p>${req.body.query.phoneNumber}</p>
+        <h4>Demande du contact :</h4>
+        <p>${req.body.query.message}</p>
+        `
     }
   }
 
   try {
+    // Send customer confirmation:
     await transporter.sendMail(confirmation);
+
+    // Send customer query to restaurant:
+    if (req.body.type === 'contact') {
+      await transporter.sendMail(query);
+    }
+
     res.status(200).end();
-  } catch(err) {
-    res.status(400).json(err);
+  } catch {
+    res.status(400).end();
   }
 }
 

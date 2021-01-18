@@ -1,6 +1,7 @@
 import Head from 'next/head';
 
 import Menu from '@/components/Menu';
+import ContactForm from '@/components/contact/ContactForm';
 import Footer from '@/components/Footer';
 
 const Contact = props => {
@@ -22,7 +23,8 @@ const Contact = props => {
         bg="./images/background/contact.jpg"
         title="Contact"
       />
-      <p>Contact</p>
+      <h2>Envoyez-nous<br /><em>votre demande</em></h2>
+      <ContactForm />
       <Footer />
     </>
   );
