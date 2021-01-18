@@ -78,6 +78,7 @@ const ClicknCollect = props => {
   }
 
   const addToBasket = (food, foodName) => {
+    // If the item is not already in the basket:
     if (!basketItems.some(item => item.name === foodName)) {
       food.quantity = 1;
       setBasketItems([
@@ -89,6 +90,18 @@ const ClicknCollect = props => {
           id: uuid()
         }
       ]);
+    // If item is already in the basket:
+    } else {
+      // Iterate over basketItems array to find the already existing food:
+      const newBasket = basketItems.map(food => {
+        if (food.name === foodName) {
+          food.quantity += 1
+          return food;
+        } else {
+          return food;
+        }
+      });
+      setBasketItems([...newBasket]);
     }
   }
 

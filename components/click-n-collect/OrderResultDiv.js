@@ -33,10 +33,22 @@ const ResultDiv = styled.div`
   & > div > p + form {
     margin-top: 20px;
   }
-  & > div:last-of-type {
-    background-color: #012f6a;
+  & > div > select {
+    appearance: none;
+    background-color: #e3e9ef;
+    border: 1px solid #012f6a;
     border-radius: 5px;
-    padding: 5px;
+    display: block;
+    margin: 20px auto;
+    padding: 10px;
+    transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+    @media (any-hover: hover) {
+      &:hover {
+        background-color: #012f6a;
+        color: white;
+        cursor: pointer;
+      }
+    }
   }
   @media only screen and (min-width: 1200px) {
     grid-auto-flow: column;
@@ -48,11 +60,17 @@ const ResultDiv = styled.div`
     & > div:first-of-type, div:last-of-type {
       grid-row: 1 / 3;
     }
-    & > div:last-of-type {
-      transform: scale(0.75);
-    }
+  }
+`;
+
+const Basket = styled.div`
+  background-color: #012f6a;
+  border-radius: 5px;
+  padding: 5px;
+  @media only screen and (min-width: 1200px) {
+    transform: scale(0.75);
     @media (any-hover: hover) {
-      & > div:last-of-type:hover {
+      &:hover {
         cursor: pointer;
         transform: scale(0.85);
         transition: transform 0.2s ease-in-out;
@@ -61,15 +79,39 @@ const ResultDiv = styled.div`
   }
 `;
 
+const DisabledBasket = styled(Basket)`
+    opacity: 0.3;
+  @media (any-hover: hover) {
+    &:hover {
+      cursor: not-allowed;
+      transform: scale(0.75);
+    }
+  }
+`;
+
 const OrderResultDiv = props => {
   // State to manage choice between 'Crêpe' and 'Gaufre' on a per item basis:
   const [typeOfFood, setTypeOfFood] = useState('Crêpe');
+  const [option, setOption] = useState('');
+
+  const handleOptionSelection = e => {
+    setOption(e.target.value);
+  }
+
   let foodName;
 
   if (props.isSelected === 3) {
-    foodName = `${typeOfFood} ${props.food.name}`;
+    if (option === '') {
+      foodName = `${typeOfFood} ${props.food.name.toLowerCase()}`;
+    } else {
+      foodName = `${typeOfFood} ${option.toLowerCase()}`
+    }
   } else {
-    foodName = props.food.name;
+    if (option === '') {
+      foodName = props.food.name;
+    } else {
+      foodName = `${option}`;
+    }
   }
 
   return (
@@ -108,17 +150,33 @@ const OrderResultDiv = props => {
             </div>
           </form>
         )}
+        {props.food.options && 
+          <select onChange={handleOptionSelection}>
+            <option key="initial" value="" defaultValue>Choisissez une option</option>
+            {props.food.options.map(option => <option key={option} value={option}>{option}</option>)}
+          </select>
+        }
       </div>
       <div>
         <p>{props.food.price.toFixed(2)}€</p>
       </div>
-      <div>
-        <Basket2
-          size={40}
-          color="white"
-          onClick={() => props.addToBasket(props.food, foodName)}
-        />
-      </div>
+      
+        {props.food.options && option === ''
+          ? <DisabledBasket>
+              <Basket2
+                size={40}
+                color="white"
+                title="Choisissez une option"
+              />
+            </DisabledBasket>
+          : <Basket>
+              <Basket2
+                size={40}
+                color="white"
+                onClick={() => props.addToBasket(props.food, foodName)}
+              />
+            </Basket>
+        }
     </ResultDiv>
   );
 };
