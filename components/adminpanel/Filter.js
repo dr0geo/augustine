@@ -14,6 +14,7 @@ const Container = styled.div`
   & > div {
     align-items: center;
     display: flex;
+    flex-direction: column;
     justify-content: space-between;
     margin: 20px auto;
     width: 85%;
@@ -23,6 +24,7 @@ const Container = styled.div`
       color: #012f6a;
       font-family: 'Raleway', sans-serif;
       font-size: 1rem;
+      margin: 20px auto;
       padding: 10px;
       &::placeholder {
         color: #012f6a;
@@ -39,6 +41,14 @@ const Container = styled.div`
       width: 85%;
     }
   }
+  @media only screen and (min-width: 1200px) {
+    & > div {
+      flex-direction: row;
+      & > input {
+        margin: 0 auto;
+      }
+    }
+  }
 `;
 
 const Button = styled.button`
@@ -52,9 +62,6 @@ const Button = styled.button`
 `;
 
 const Filter = props => {
-
-  console.log((new Date(props.date)).toLocaleDateString('fr-FR'));
-
   return (
     <Container>
       <div>

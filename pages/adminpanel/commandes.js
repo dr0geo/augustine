@@ -1,39 +1,12 @@
-import styled from 'styled-components';
 import Head from 'next/head';
 import { useEffect, useState } from 'react';
 
+import { db } from '@/utils/firebase';
 import Filter from '@/components/adminpanel/Filter';
 import Orders from '@/components/adminpanel/Orders';
 import Tabs from '@/components/adminpanel/Tabs';
 import Spinner from '@/elements/Spinner';
-import { db } from '@/utils/firebase';
-
-const Title = styled.h1`
-  font-size: 3rem;
-  height: auto;
-  justify-content: center;
-  margin-bottom: 50px;
-`;
-
-const Total = styled.div`
-  color: orangered;
-  font-size: 1.5rem;
-  font-weight: 600;
-  margin: 50px auto 0 auto;
-  text-align: center;
-  & > span {
-    border-bottom: 1px solid orangered;
-    @media (any-hover: hover) {
-      cursor: pointer;
-    }
-  }
-`;
-
-const todayDate = new Date(Date.now());
-const day = todayDate.getDate().toString().padStart(2, '0');
-const month = (todayDate.getMonth() + 1).toString().padStart(2, '0');
-const year = todayDate.getFullYear();
-const dateString = `${year}-${month}-${day}`;
+import { Title, Total, todayDate, dateString } from '@/components/adminpanel/Elements';
 
 const Commandes = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -106,11 +79,11 @@ const Commandes = () => {
         : (
         <>
           {newOrders.length > 0 && 
-              <Total>
-                Vous avez <span onClick={allDates}>{newOrders.length } { newOrders.length > 1 ? 'nouvelles commandes' : 'nouvelle commande'}
-                </span> !
-              </Total>
-            }
+            <Total>
+              Vous avez <span onClick={allDates}>{newOrders.length} {newOrders.length > 1 ? 'nouvelles commandes' : 'nouvelle commande'}
+              </span> !
+            </Total>
+          }
           <Filter
             selectDate={selectDate}
             getById={getById}

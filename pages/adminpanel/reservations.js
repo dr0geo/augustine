@@ -1,4 +1,3 @@
-import styled from 'styled-components';
 import { useState, useEffect } from 'react';
 import Head from 'next/head';
 
@@ -7,33 +6,7 @@ import Filter from '@/components/adminpanel/Filter';
 import Reservations from '@/components/adminpanel/Reservations';
 import Tabs from '@/components/adminpanel/Tabs';
 import Spinner from '@/elements/Spinner';
-
-const Title = styled.h1`
-  font-size: 3rem;
-  height: auto;
-  justify-content: center;
-  margin-bottom: 50px;
-`;
-
-const Total = styled.div`
-  color: orangered;
-  font-size: 1.5rem;
-  font-weight: 600;
-  margin: 50px auto 0 auto;
-  text-align: center;
-  & > span {
-    border-bottom: 1px solid orangered;
-    @media (any-hover: hover) {
-      cursor: pointer;
-    }
-  }
-`;
-
-const todayDate = new Date(Date.now());
-const day = todayDate.getDate().toString().padStart(2, '0');
-const month = (todayDate.getMonth() + 1).toString().padStart(2, '0');
-const year = todayDate.getFullYear();
-const dateString = `${year}-${month}-${day}`;
+import { Title, Total, todayDate, dateString } from '@/components/adminpanel/Elements';
 
 const DisplayReservations = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -107,7 +80,7 @@ const DisplayReservations = () => {
             <>
             {newBookings.length > 0 && 
               <Total>
-                Vous avez <span onClick={allDates}>{newBookings.length } { newBookings.length > 1 ? 'nouvelles réservations' : 'nouvelle réservation'}
+                Vous avez <span onClick={allDates}>{newBookings.length} {newBookings.length > 1 ? 'nouvelles réservations' : 'nouvelle réservation'}
                 </span> !
               </Total>
             }
