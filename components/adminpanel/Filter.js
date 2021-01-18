@@ -4,9 +4,8 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  margin: auto;
+  margin: 30px auto;
   max-width: 450px;
-  min-height: 250px;
   & > select {
     margin: auto;
     padding: 5px;
@@ -16,16 +15,21 @@ const Container = styled.div`
     align-items: center;
     display: flex;
     justify-content: space-between;
-    margin: auto;
+    margin: 20px auto;
     width: 85%;
     & > input {
+      border: 2px solid #012f6a;
+      border-radius: 5px;
+      color: #012f6a;
+      font-family: 'Raleway', sans-serif;
+      font-size: 1rem;
       padding: 10px;
-    }
-    & > button {
-      background-color: white;
-      border: 1px solid gray;
-      height: 44px;
-      padding: 10px;
+      &::placeholder {
+        color: #012f6a;
+      }
+      &[type='date'] {
+        width: 150px;
+      }
     }
   }
   & > div:last-of-type {
@@ -37,12 +41,25 @@ const Container = styled.div`
   }
 `;
 
+const Button = styled.button`
+  background-color: ${props => props.allDates ? '#012f6a' : 'white'};
+  border: 2px solid #012f6a;
+  border-radius: 5px;
+  color: ${props => props.allDates ? 'white' : '#012f6a'};
+  font-weight: 600;
+  padding: 10px;
+  width: 200px;
+`;
+
 const Filter = props => {
+
+  console.log((new Date(props.date)).toLocaleDateString('fr-FR'));
+
   return (
     <Container>
       <div>
-        <button onClick={props.allDates}>Toutes les dates</button>
         <input type="date" onChange={props.selectDate} value={props.date} />
+        <Button onClick={props.allDates} allDates={props.date === ''}>{props.date !== '' ? 'Voir toutes les dates' : 'Toutes les dates'}</Button>
       </div>
       <div>
         <input type="text" onChange={props.getById} placeholder="Entrez une référence..." />

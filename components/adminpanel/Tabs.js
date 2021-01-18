@@ -19,8 +19,8 @@ const Button = styled.button`
 const Tabs = props => {
   return (
     <Container>
-      <Button selected={props.selected === 1} onClick={() => props.handleSelectTab(1)}>Non traitées (total : {props.newNumber})</Button>
-      <Button selected={props.selected === 2} onClick={() => props.handleSelectTab(2)}>Validées (total : {props.validatedNumber})</Button>
+      <Button selected={props.selected === 1} onClick={() => props.handleSelectTab(1)}>Non traitées</Button>
+      <Button selected={props.selected === 2} onClick={() => props.handleSelectTab(2)}>Validées</Button>
     </Container>
   );
 }

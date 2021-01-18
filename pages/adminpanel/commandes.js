@@ -15,6 +15,20 @@ const Title = styled.h1`
   margin-bottom: 50px;
 `;
 
+const Total = styled.div`
+  color: orangered;
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin: 50px auto 0 auto;
+  text-align: center;
+  & > span {
+    border-bottom: 1px solid orangered;
+    @media (any-hover: hover) {
+      cursor: pointer;
+    }
+  }
+`;
+
 const todayDate = new Date(Date.now());
 const day = todayDate.getDate().toString().padStart(2, '0');
 const month = (todayDate.getMonth() + 1).toString().padStart(2, '0');
@@ -91,6 +105,12 @@ const Commandes = () => {
         ? <Spinner />
         : (
         <>
+          {newOrders.length > 0 && 
+              <Total>
+                Vous avez <span onClick={allDates}>{newOrders.length } { newOrders.length > 1 ? 'nouvelles commandes' : 'nouvelle commande'}
+                </span> !
+              </Total>
+            }
           <Filter
             selectDate={selectDate}
             getById={getById}
@@ -98,8 +118,15 @@ const Commandes = () => {
             dateString={dateString}
             date={date}
           />
-          <Title>Commandes</Title>
-          <Tabs selected={selected} handleSelectTab={handleSelectTab} newNumber={newOrders.length} validatedNumber={validatedOrders.length} />
+          <Title>
+          {date !== '' && 
+            `Commandes pour ${date !== '' && todayDate.toLocaleDateString('fr-FR') === (new Date(date)).toLocaleDateString('fr-FR') ? 'aujourd\'hui' : `le ${(new Date(date)).toLocaleDateString('fr-FR')}`}`
+          }
+          {date === '' &&
+            'Toutes les commandes'
+          }
+          </Title>
+          <Tabs selected={selected} handleSelectTab={handleSelectTab} />
           <Orders
             data={selected === 1 ? newOrders : validatedOrders}
             date={date}

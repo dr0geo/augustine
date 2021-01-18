@@ -14,7 +14,7 @@ const Container = styled.ul`
 const ListItem = styled.li`
   background-color: #e3e9ef;
   border-radius: 5px;
-  margin: 20px;
+  margin: 20px auto;
   padding: 20px;
   width: 90%;
   & > p {
@@ -121,7 +121,7 @@ const Reservations = props => {
     <Container>
       {!filteredData.length ? (
         <h2>
-          <em>Pas de réservation à la date sélectionnée...</em>
+          <em>Pas de réservation...</em>
         </h2>
       ) : (
         filteredData.map(booking => (

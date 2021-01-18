@@ -15,7 +15,7 @@ const Container = styled.ul`
 const ListItem = styled.li`
   background-color: #e3e9ef;
   border-radius: 5px;
-  margin: 20px;
+  margin: 20px auto;
   padding: 20px;
   width: 90%;
   & > p {
@@ -129,7 +129,7 @@ const Orders = props => {
     return (
       <Container>
         {!filteredData.length 
-          ? <h2><em>Pas de commande à la date sélectionnée...</em></h2>
+          ? <h2><em>Pas de commande...</em></h2>
           : filteredData.map(order => (
           <ListItem id={order.id} key={order.id}>
             <p><strong>Date</strong> : {new Date(Date.parse(order.date)).toLocaleDateString()}</p>
