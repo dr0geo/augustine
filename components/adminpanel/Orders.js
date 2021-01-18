@@ -47,7 +47,7 @@ const Orders = props => {
     }
 
     if (props.orderId !== '') {
-      filteredData = filteredData.filter(order => order.id.toLowerCase().includes(props.orderId.toLowerCase().trim()));
+      filteredData = filteredData.filter(order => order.id.toLowerCase().startsWith(props.orderId.toLowerCase().trim()));
     }
 
     // Handle filing of an order:

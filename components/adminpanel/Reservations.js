@@ -34,7 +34,7 @@ const Reservations = props => {
 
   if (props.bookingId !== '') {
     filteredData = filteredData.filter(booking =>
-      booking.id.toLowerCase().includes(props.bookingId.toLowerCase().trim())
+      booking.id.toLowerCase().startsWith(props.bookingId.toLowerCase().trim())
     );
   }
 
