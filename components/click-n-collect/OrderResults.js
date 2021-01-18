@@ -40,7 +40,7 @@ const Category = styled.button`
     border: 1px solid #e3e9ef;
     border-radius: 0;
     color: #012f6a;
-    font-family: 'Dancing-Script', sans-serif;
+    font-family: 'Dancing-Script', Georgia, serif;
     font-size: 1.6rem;
     font-weight: 600;
     padding: 8px 20px;

@@ -76,7 +76,7 @@ const FlexPar = styled.div`
   color: #012f6a;
   display: flex;
   flex-direction: column;
-  font-family: 'Dancing-Script', sans-serif;
+  font-family: 'Dancing-Script', Georgia, serif;
   font-size: 1.2rem;
   justify-content: space-around;
   margin: auto;
@@ -95,7 +95,7 @@ const TimeButton = styled.button`
   background-color: #012f6a;
   border: 1px solid #012f6a;
   color: white;
-  font-family: 'Dancing-Script', sans-serif;
+  font-family: 'Dancing-Script', Georgia, serif;
   margin: 10px;
   padding: 8px 0;
   text-align: center;
@@ -200,7 +200,7 @@ const ValidateButton = styled.button`
   border-radius: 5px;
   color: white;
   display: block;
-  font-family: 'Dancing-Script', sans-serif;
+  font-family: 'Dancing-Script', Georgia, serif;
   font-size: 1.3rem;
   margin: 20px auto 0 auto;
   padding: 10px;

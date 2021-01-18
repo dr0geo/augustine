@@ -16,7 +16,7 @@ export const RestaurantCard = styled.div`
     border-radius: 0 0 5px 5px;
     color: white;
     display: flex;
-    font-family: 'Dancing-Script', sans serif;
+    font-family: 'Dancing-Script', Georgia, serif;
     font-size: 1.3rem;
     height: 50px;
     justify-content: center;

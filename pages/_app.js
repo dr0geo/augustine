@@ -50,7 +50,7 @@ const GlobalStyle = createGlobalStyle`
 
   h1 {
     color: #012f6a;
-    font-family: 'Dancing-Script', sans serif;
+    font-family: 'Dancing-Script', Georgia, serif;
     font-size: 2.6rem;
     text-align: center;
     @media only screen and (min-width: 1200px) {
@@ -68,12 +68,12 @@ const GlobalStyle = createGlobalStyle`
     text-align: center;
     & > em {
       color: #012f6a;
-      font-family: 'Dancing-Script', sans-serif;
+      font-family: 'Dancing-Script', Georgia, serif;
       font-size: 1.6rem;
     }
     & > strong {
       color: white;
-      font-family: 'Dancing-Script', sans-serif;
+      font-family: 'Dancing-Script', Georgia, serif;
       font-size: 1.6rem;
     }
     @media only screen and (min-width: 1200px) {
