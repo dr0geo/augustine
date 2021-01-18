@@ -10,6 +10,7 @@ import { Title, Total, todayDate, dateString } from '@/components/adminpanel/Ele
 
 const Commandes = () => {
   const [isLoading, setIsLoading] = useState(true);
+  const [errorMessage, setErrorMessage] = useState(null);
 
   // Fetch data from database:
   const [newOrders, setNewOrders] = useState([]);
@@ -25,6 +26,9 @@ const Commandes = () => {
         ...doc.data()
       }));
       setNewOrders(retrievedNewOrders);
+      // Error handling:
+    }, () => {
+      setErrorMessage('Une erreur s\'est produite lors de la connexion à la base de données, veuillez réessayer. Si le problème persiste, contactez votre équipe de dévelopement.')
     });
 
     // Get and listen for validated orders:
@@ -35,11 +39,13 @@ const Commandes = () => {
         ...doc.data()
       }));
       setValidatedOrders(retrievedValidatedOrders);
+      // Error handling:
+    }, () => {
+      setErrorMessage('Une erreur s\'est produite lors de la connexion à la base de données, veuillez réessayer. Si le problème persiste, contactez votre équipe de dévelopement.')
     });
 
     // Retrieve all data from database:
     Promise.all([getNewOrders, getValidatedOrders])
-      .catch(err => console.log(err))
       .finally(() => setIsLoading(false));
 
     // Cleanup function:
@@ -76,38 +82,41 @@ const Commandes = () => {
       </Head>
       {isLoading
         ? <Spinner />
-        : (
-        <>
-          {newOrders.length > 0 && 
-            <Total>
-              Vous avez <span onClick={allDates}>{newOrders.length} {newOrders.length > 1 ? 'nouvelles commandes' : 'nouvelle commande'}
-              </span> !
-            </Total>
-          }
-          <Filter
-            selectDate={selectDate}
-            getById={getById}
-            allDates={allDates}
-            dateString={dateString}
-            date={date}
-          />
-          <Title>
-          {date !== '' && 
-            `Commandes pour ${date !== '' && todayDate.toLocaleDateString('fr-FR') === (new Date(date)).toLocaleDateString('fr-FR') ? 'aujourd\'hui' : `le ${(new Date(date)).toLocaleDateString('fr-FR')}`}`
-          }
-          {date === '' &&
-            'Toutes les commandes'
-          }
-          </Title>
-          <Tabs selected={selected} handleSelectTab={handleSelectTab} />
-          <Orders
-            data={selected === 1 ? newOrders : validatedOrders}
-            date={date}
-            orderId={orderId}
-            selected={selected}
-          />
-        </>
-      )}
+        : errorMessage 
+          ? <Total>{errorMessage}</Total>
+          : (
+          <>
+            {newOrders.length > 0 && 
+              <Total>
+                Vous avez <span onClick={allDates}>{newOrders.length} {newOrders.length > 1 ? 'nouvelles commandes' : 'nouvelle commande'}
+                </span> !
+              </Total>
+            }
+            <Filter
+              selectDate={selectDate}
+              getById={getById}
+              allDates={allDates}
+              dateString={dateString}
+              date={date}
+            />
+            <Title>
+            {date !== '' && 
+              `Commandes pour ${date !== '' && todayDate.toLocaleDateString('fr-FR') === (new Date(date)).toLocaleDateString('fr-FR') ? 'aujourd\'hui' : `le ${(new Date(date)).toLocaleDateString('fr-FR')}`}`
+            }
+            {date === '' &&
+              'Toutes les commandes'
+            }
+            </Title>
+            <Tabs selected={selected} handleSelectTab={handleSelectTab} />
+            <Orders
+              data={selected === 1 ? newOrders : validatedOrders}
+              date={date}
+              orderId={orderId}
+              selected={selected}
+            />
+          </>
+        )
+      }
     </>
   );
 };

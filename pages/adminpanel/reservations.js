@@ -10,6 +10,7 @@ import { Title, Total, todayDate, dateString } from '@/components/adminpanel/Ele
 
 const DisplayReservations = () => {
   const [isLoading, setIsLoading] = useState(true);
+  const [errorMessage, setErrorMessage] = useState(null);
 
   // Fetch data from database:
   const [newBookings, setNewBookings] = useState([]);
@@ -25,6 +26,9 @@ const DisplayReservations = () => {
         ...doc.data()
       }));
       setNewBookings(retrievedNewBookings);
+      // Error handling:
+    }, () => {
+      setErrorMessage('Une erreur s\'est produite lors de la connexion à la base de données, veuillez réessayer. Si le problème persiste, contactez votre équipe de dévelopement.')
     });
 
     // Get and listen for validated bookings:
@@ -35,11 +39,13 @@ const DisplayReservations = () => {
         ...doc.data()
       }));
       setValidatedBookings(retrievedValidatedBookings);
+      // Error handling:
+    }, () => {
+      setErrorMessage('Une erreur s\'est produite lors de la connexion à la base de données, veuillez réessayer. Si le problème persiste, contactez votre équipe de dévelopement.')
     });
 
     // Retrieve all data from database:
     Promise.all([getNewBookings, getValidatedBookings])
-      .catch(err => console.log(err))
       .finally(() => setIsLoading(false));
     
     // Cleanup function:
@@ -76,7 +82,9 @@ const DisplayReservations = () => {
       </Head>
       {isLoading
         ? <Spinner />
-        : (
+        : errorMessage
+          ? <Total>{errorMessage}</Total>
+          : (
             <>
             {newBookings.length > 0 && 
               <Total>
@@ -96,7 +104,8 @@ const DisplayReservations = () => {
             <Tabs selected={selected} handleSelectTab={handleSelectTab} />
             <Reservations data={selected === 1 ? newBookings : validatedBookings} date={date} bookingId={bookingId} selected={selected} />
           </>
-        )}
+        )
+      }
     </>
   );
 }
