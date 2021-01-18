@@ -188,7 +188,7 @@ const ClicknCollect = props => {
         })
       });
     } catch {
-      setErrorInOrder('Une erreur s\'est produite, veuillez réessayer s\'il vous plaît...');
+      setErrorInOrder('Une erreur s\'est produite, veuillez réessayer... Si le problème persiste, n\'hésitez pas à nous contacter par téléphone !');
     } finally {
       setIsLoading(false);
     }
