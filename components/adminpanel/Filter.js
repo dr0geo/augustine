@@ -31,6 +31,11 @@ const Container = styled.div`
       }
       &[type='date'] {
         width: 150px;
+        @media (any-hover: hover) {
+          &:hover {
+            cursor: pointer;
+          }       
+        }
       }
     }
   }
@@ -59,6 +64,11 @@ const Button = styled.button`
   font-weight: 600;
   padding: 10px;
   width: 200px;
+  @media (any-hover: hover) {
+    &:hover {
+      cursor: pointer;
+    }
+  }
 `;
 
 const Filter = props => {

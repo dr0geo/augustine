@@ -10,6 +10,9 @@ export const Container = styled.section`
   flex-direction: column;
   height: 100vh;
   justify-content: center;
+  & > h2 {
+    margin-top: 0;
+  }
 `;
 
 const Form = styled.form`

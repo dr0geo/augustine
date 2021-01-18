@@ -3,13 +3,7 @@ import { useState } from 'react';
 
 import { db } from '@/utils/firebase';
 import Spinner from '@/elements/Spinner';
-
-const Container = styled.ul`
-  display: flex;
-  flex-direction: column;
-  margin: auto;
-  max-width: 800px;
-`;
+import { Container, Button, DarkCont, ErrorDiv } from '@/components/adminpanel/Elements';
 
 const ListItem = styled.li`
   background-color: #e3e9ef;
@@ -23,45 +17,6 @@ const ListItem = styled.li`
     padding: 0;
     text-align: left;
   }
-  & > button {
-    display: block;
-    margin: auto;
-    padding: 5px 10px;
-  }
-`;
-
-const Button = styled.button`
-  background-color: ${props => (props.selected === 1 ? '#4eb152' : '#d02f36')};
-  border: none;
-  color: white;
-  font-weight: 600;
-`;
-
-const Cont = styled.div`
-  align-items: center;
-  background: linear-gradient(hsla(0deg, 0%, 0%, 0.8), hsla(0deg, 0%, 0%, 0.8));
-  display: flex;
-  height: 100vh;
-  justify-content: center;
-  left: 0;
-  position: fixed;
-  top: 0;
-  width: 100vw;
-  z-index: 10;
-`;
-
-const ErrorDiv = styled.div`
-  align-items: center;
-  background-color: white;
-  border-radius: 5px;
-  color: red;
-  display: flex;
-  flex-direction: column;
-  font-weight: 600;
-  height: 250px;
-  justify-content: space-around;
-  text-align: center;
-  width: 250px;
 `;
 
 const Reservations = props => {
@@ -74,10 +29,7 @@ const Reservations = props => {
 
   if (props.date !== '') {
     filteredData = filteredData.filter(
-      booking =>
-        new Date(Date.parse(booking.date)).toLocaleDateString() ===
-        new Date(Date.parse(props.date)).toLocaleDateString()
-    );
+      booking => new Date(Date.parse(booking.date)).toLocaleDateString() === new Date(Date.parse(props.date)).toLocaleDateString());
   }
 
   if (props.bookingId !== '') {
@@ -164,12 +116,12 @@ const Reservations = props => {
         ))
       )}
       {errorMessage !== '' && (
-        <Cont>
+        <DarkCont>
           <ErrorDiv>
             <div>{errorMessage}</div>
             <button onClick={() => setErrorMessage('')}>Fermer</button>
           </ErrorDiv>
-        </Cont>
+        </DarkCont>
       )}
       {isLoading && <Spinner />}
     </Container>
