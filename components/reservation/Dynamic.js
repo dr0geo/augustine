@@ -24,7 +24,10 @@ const LimitedWidthDiv = styled.div`
   margin: auto;
   max-width: 300px;
   @media only screen and (min-width: 600px) {
-    max-width: 450px;
+    max-width: 400px;
+  }
+  @media only screen and (min-width: 760px) and (orientation: portrait) {
+    margin: 100px auto;
   }
 `;
 
@@ -89,25 +92,24 @@ const TimeList = styled.div`
   flex-wrap: wrap;
   justify-content: center;
   margin-top: 15px;
-`;
-
-const TimeButton = styled.button`
-  background-color: #012f6a;
-  border: 1px solid #012f6a;
-  color: white;
-  font-family: 'Dancing-Script', Georgia, serif;
-  margin: 10px;
-  padding: 8px 0;
-  text-align: center;
-  width: 65px;
-  @media only screen and (min-width: 1200px) {
-    transition: opacity 0.2s ease-in-out;
-    @media (any-hover: hover) {
-      &:hover {
-        cursor: pointer;
-        opacity: 0.85;
-      }
+  & > select {
+    appearance: none;
+    background-color: white;
+    border: 2px solid #e3e9ef;
+    border-radius: 5px;
+    color: #012f6a;
+    font-family: 'Dancing-Script', Georgia, serif;
+    font-size: 1.1rem;
+    padding: 5px 10px;
+    &:focus {
+      border: 2px solid #012f6a;
     }
+    @media (any-hover: hover) {
+      cursor: pointer;
+    }
+  }
+  & > p {
+    padding: 0 3px;
   }
 `;
 
@@ -128,26 +130,24 @@ export const DateChoice = props => (
       </WhiteDiv>
       <WhiteDiv>
         <FlexPar>
-          <p>Réservations disponibles</p>
+          <p>Heure de la réservation</p>
           <TimeList>
-            <TimeButton value="19:00" onClick={props.handleTimeSelection}>
-              19:00
-            </TimeButton>
-            <TimeButton value="19:45" onClick={props.handleTimeSelection}>
-              19:45
-            </TimeButton>
-            <TimeButton value="20:15" onClick={props.handleTimeSelection}>
-              20:15
-            </TimeButton>
-            <TimeButton value="20:45" onClick={props.handleTimeSelection}>
-              20:45
-            </TimeButton>
-            <TimeButton value="21:30" onClick={props.handleTimeSelection}>
-              21:30
-            </TimeButton>
+            <select onChange={e => props.handleHoursSelection(e)} defaultValue={props.hours}>
+              <option value="19">19</option>
+              <option value="20">20</option>
+              <option value="21">21</option>
+            </select>
+            <p>h</p>
+            <select onChange={e => props.handleMinutesSelection(e)}>
+              <option value="00">00</option>
+              <option value="15">15</option>
+              <option value="30">30</option>
+              {props.hours !== '21' && <option value="45">45</option>}
+            </select>
           </TimeList>
         </FlexPar>
       </WhiteDiv>
+      <ValidateButton onClick={props.handleNextStep}>Valider</ValidateButton>
     </LimitedWidthDiv>
   </Section>
 );
@@ -173,7 +173,7 @@ const Container = styled.div`
       margin: 10px auto;
       padding: 10px;
       transition: border 0.2s ease-in-out;
-      width: 260px;
+      width: 100%;
       &::placeholder {
         color: #012f6a;
       }
@@ -188,26 +188,28 @@ const Container = styled.div`
   }
   @media only screen and (min-width: 600px) {
     max-width: 450px;
-    & > form > input {
-      width: 410px;
-    }
   }
 `;
 
 const ValidateButton = styled.button`
   background-color: #012f6a;
-  border: none;
+  border: 2px solid #012f6a;
   border-radius: 5px;
   color: white;
   display: block;
   font-family: 'Dancing-Script', Georgia, serif;
   font-size: 1.3rem;
   margin: 20px auto 0 auto;
-  padding: 10px;
+  padding: 8px 10px;
+  transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
   width: 130px;
   @media only screen and (min-width: 1200px) {
     @media (any-hover: hover) {
-      cursor: pointer;
+      &:hover {
+        background-color: white;
+        color: #012f6a;
+        cursor: pointer;
+      }
     }
   }
 `;
@@ -283,14 +285,13 @@ const SuccessContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  margin: auto;
-  max-width: 700px;
+  margin: 50px auto;
+  max-width: 600px;
   padding: 20px;
   width: 95%;
   & > p {
     color: #012f6a;
     line-height: 1.5rem;
-    margin-top: 20px;
     max-width: 500px;
     padding: 0;
     & > a {
@@ -303,6 +304,9 @@ const SuccessContainer = styled.div`
   }
   @media only screen and (min-width: 760px) {
     flex-direction: row;
+  }
+  @media only screen and (min-width: 760px) and (orientation: portrait) {
+    margin: 200px auto;
   }
 `;
 

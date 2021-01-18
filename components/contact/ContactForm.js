@@ -27,7 +27,7 @@ const Form = styled.form`
       margin-top: 20px;
     }
     &:focus {
-      border: 1px solid teal;
+      border: 1px solid #012f6a;
     }
     &::placeholder {
       color: #012f6a;
@@ -48,7 +48,7 @@ const Form = styled.form`
     transition: border 0.2s ease-in-out;
     width: 90%;
     &:focus {
-      border: 1px solid teal;
+      border: 1px solid #012f6a;
     }
     &::placeholder {
       color: #012f6a;

@@ -74,10 +74,20 @@ const Reserver = props => {
   };
 
   // Booking time:
-  const [time, setTime] = useState('');
+  const [hours, setHours] = useState('19');
+  const [minutes, setMinutes] = useState('00');
+  const [time, setTime] = useState(`${hours}:${minutes}`);
 
-  const handleTimeSelection = e => {
-    setTime(e.target.value);
+  const handleHoursSelection = e => {
+    setHours(e.target.value);
+  }
+
+  const handleMinutesSelection = e => {
+    setMinutes(e.target.value);
+  }
+
+  const handleNextStep = () => {
+    setTime(`${hours}:${minutes}`);
     goToNextStep();
   }
 
@@ -178,12 +188,14 @@ const Reserver = props => {
         <DateChoice
           dateSentence={dateSentence}
           people={people}
-          time={time}
           handleDateDecrease={handleDateDecrease}
           handleDateIncrease={handleDateIncrease}
           handlePeopleDecrease={handlePeopleDecrease}
           handlePeopleIncrease={handlePeopleIncrease}
-          handleTimeSelection={handleTimeSelection}
+          hours={hours}
+          handleHoursSelection={handleHoursSelection}
+          handleMinutesSelection={handleMinutesSelection}
+          handleNextStep={handleNextStep}
         />
       )}
       {bookingStep === 2 && (

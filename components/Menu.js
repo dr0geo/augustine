@@ -12,12 +12,15 @@ const Header = styled.header`
   background-size: cover;
   display: flex;
   flex-direction: column;
+  justify-content: center;
   min-height: 200px;
   padding: 0 40px;
+  @media only screen and (min-width: 800px) {
+    min-height: 550px;
+  }
   @media only screen and (min-width: 1200px) {
     flex-direction: column-reverse;
     justify-content: flex-end;
-    min-height: 550px;
   }
 `;
 

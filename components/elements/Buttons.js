@@ -46,17 +46,16 @@ export const WhiteButton = styled(BlackButton)`
 `;
 
 export const ScrollToTop = styled(ArrowCircleUpOutline)`
-  bottom: 10px;
-  opacity: 0.8;
-  position: fixed;
-  right: 10px;
-  transform: scale(0.8);
-  z-index: 30;
+  display: none;
   @media only screen and (min-width: 1200px) {
     bottom: 40px;
+    display: block;
+    opacity: 0.8;
+    position: fixed;
     right: 40px;
     transform: scale(1);
     transition: transform 0.2s ease-in-out, opacity 0.2s ease-in-out;
+    z-index: 30;
     @media (any-hover: hover) {
       &:hover {
         cursor: pointer;

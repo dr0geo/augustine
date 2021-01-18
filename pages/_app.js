@@ -37,6 +37,7 @@ const GlobalStyle = createGlobalStyle`
     font-family: 'Raleway', Tahoma, serif;
     margin: 0;
     overflow: ${props => props.isClicked && 'hidden'};
+    overflow-x: hidden;
     padding: 0;
   }
 
