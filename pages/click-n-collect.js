@@ -189,17 +189,17 @@ const ClicknCollect = props => {
     try {
       const ref = await db.collection('orders').add(orderRef);
       setOrderConfirmation(ref.id);
-      // await fetch('/api/email', {
-      //   method: 'POST',
-      //   headers: {
-      //     'Content-Type': 'application/json'
-      //   },
-      //   body: JSON.stringify({
-      //     orderId: ref.id,
-      //     orderRef,
-      //     type: 'order'
-      //   })
-      // });
+      await fetch('/api/email', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          orderId: ref.id,
+          orderRef,
+          type: 'order'
+        })
+      });
     } catch {
       setErrorInOrder('Une erreur s\'est produite, veuillez réessayer... Si le problème persiste, n\'hésitez pas à nous contacter par téléphone !');
     } finally {

@@ -138,17 +138,17 @@ const Reserver = props => {
     try {
       const ref = await db.collection('bookings').add(bookingRef);
       setBookingConfirmation(ref.id);
-      // await fetch('/api/email', {
-      //   method: 'POST',
-      //   headers: {
-      //     'Content-Type': 'application/json'
-      //   },
-      //   body: JSON.stringify({
-      //     bookingId: ref.id,
-      //     bookingRef,
-      //     type: 'booking'
-      //   })
-      // });
+      await fetch('/api/email', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          bookingId: ref.id,
+          bookingRef,
+          type: 'booking'
+        })
+      });
       goToNextStep();
     } catch {
       setErrorInBooking('Une erreur s\'est produite, veuillez réessayer... Si le problème persiste, n\'hésitez pas à nous contacter par téléphone !');

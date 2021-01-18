@@ -80,7 +80,7 @@ const sendConfirmationEmail = async (req, res) => {
     
     query = {
       from: `${req.body.query.email}`,
-      to: 'geoffroy.vie@gmail.com',
+      to: 'contact@creperie-augustine.com',
       subject: "Contact via le site Augustine",
       html:`
         <p>Bonjour,</p>
@@ -94,7 +94,7 @@ const sendConfirmationEmail = async (req, res) => {
         <p>${req.body.query.phoneNumber}</p>
         <h4>Demande du contact :</h4>
         <p>${req.body.query.message}</p>
-        `
+      `
     }
   }
 
