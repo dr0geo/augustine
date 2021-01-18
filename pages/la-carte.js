@@ -55,7 +55,7 @@ const Carte = props => {
         isClicked={props.isClicked}
         toggleMenu={props.toggleMenu}
         hideMenu={props.hideMenu}
-        bg="/images/background/carte.jpg"
+        bg="/images/background/carte.webp"
         title="La Carte"
       />
       <h2>Parcourez<br /><em>la carte Augustine</em></h2>

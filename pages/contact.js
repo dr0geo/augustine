@@ -20,7 +20,7 @@ const Contact = props => {
         isClicked={props.isClicked}
         toggleMenu={props.toggleMenu}
         hideMenu={props.hideMenu}
-        bg="./images/background/contact.jpg"
+        bg="./images/background/contact.webp"
         title="Contact"
       />
       <h2>Envoyez-nous<br /><em>votre demande</em></h2>

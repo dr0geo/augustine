@@ -217,7 +217,7 @@ const ClicknCollect = props => {
         isClicked={props.isClicked}
         toggleMenu={props.toggleMenu}
         hideMenu={props.hideMenu}
-        bg="./images/background/click-n-collect.jpg"
+        bg="./images/background/click-n-collect.webp"
         title="Click & Collect"
       />
       

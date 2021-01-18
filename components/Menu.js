@@ -15,7 +15,6 @@ const Header = styled.header`
   min-height: 200px;
   padding: 0 40px;
   @media only screen and (min-width: 1200px) {
-    background-position: bottom -100px center;
     flex-direction: column-reverse;
     justify-content: flex-end;
     min-height: 550px;
@@ -58,7 +57,7 @@ const MenuIc = styled(MenuIcon)`
   }
 `;
 
-const FlexDiv = styled.div`
+const FlexDiv = styled.nav`
   background-color: #f4f6f3;
   display: flex;
   flex-direction: column;
@@ -71,11 +70,9 @@ const FlexDiv = styled.div`
   width: 100vw;
   z-index: 100;
   @media only screen and (min-width: 1200px) {
-    background: none;
+    background: linear-gradient(hsla(0deg, 0%, 100%, 0.8), hsla(0deg, 0%, 100%, 0.8));
     flex-direction: row;
-    justify-content: space-between;
     height: auto;
-    max-width: 1100px;
     position: static;
     transform: scale(1);
   }
