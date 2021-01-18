@@ -73,6 +73,13 @@ const Form = styled.form`
   }
 `;
 
+const ConfirmationParag = styled.div`
+  color: green;
+  font-weight: 600;
+  margin: 20px auto;
+  text-align: center;
+`;
+
 const ErrorParag = styled.div`
   color: red;
   font-weight: 600;
@@ -83,12 +90,13 @@ const ErrorParag = styled.div`
 const ContactForm = () => {
   const [isLoading, setIsLoading] = useState(false);
 
-  const [lastName, setLastName] = useState('');
   const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
   const [message, setMessage] = useState('');
 
+  const [confirmationMessage, setConfirmationMessage] = useState(null);
   const [errorMessage, setErrorMessage] = useState(null);
 
   const handleSubmit = async (e) => {
@@ -117,6 +125,8 @@ const ContactForm = () => {
     
     if (res.status === 400) {
       throw new Error();
+    } else if (res.status === 200) {
+      setConfirmationMessage('Votre message a bien été envoyé !');
     }
 
     } catch {
@@ -132,15 +142,15 @@ const ContactForm = () => {
         <input
           type="text"
           name="name"
-          placeholder="Nom *"
-          onChange={e => setLastName(e.target.value)}
+          placeholder="Prénom *"
+          onChange={e => setFirstName(e.target.value)}
           required
         />
         <input
           type="text"
           name="name"
-          placeholder="Prénom *"
-          onChange={e => setFirstName(e.target.value)}
+          placeholder="Nom *"
+          onChange={e => setLastName(e.target.value)}
           required
         />
         <input
@@ -165,6 +175,7 @@ const ContactForm = () => {
           required
         ></textarea>
         <button type="submit">Envoyer la demande</button>
+        {confirmationMessage && <ConfirmationParag>{confirmationMessage}</ConfirmationParag>}
         {errorMessage && <ErrorParag>{errorMessage}</ErrorParag>}
       </Form>
       {isLoading && <Spinner />}
