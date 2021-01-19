@@ -5,10 +5,16 @@ import OrderResultDiv from '@/components/click-n-collect/OrderResultDiv';
 const Container = styled.div`
   background-color: #e3e9ef;
   padding: 0 20px;
+  position: ${props => props.isBasketDisplayed ? 'fixed' : 'static'};
+  transform: ${props => props.isBasketDisplayed ? 'scaleY(0)' : 'scaleY(1)'};
+  transform-origin: top center;
+  transition: transform 0.2s ease-in-out;
   @media only screen and (min-width: 1200px) {
     height: auto;
     margin: ${props => props.setVertOffset ? '79px auto 30px auto' : '30px auto'};
     padding: 0 0;
+    position: static;
+    transform: scaleY(1);
     width: 100%;
   }
 `;
@@ -85,6 +91,7 @@ const OrderResults = props => {
       isShort={props.isSelected}
       setVertOffset={[2, 3, 4].includes(props.isSelected)}
       isShortDrink={props.isSelected === 4 && [1, 2].includes(props.isCategorySelected)}
+      isBasketDisplayed={props.isBasketDisplayed}
     >
       {[2, 3, 4].includes(props.isSelected) && (
         <CategorySelecter setVertOffset={true}>

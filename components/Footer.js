@@ -40,6 +40,10 @@ const FooterFlexDiv = styled(FlexDiv)`
 const StyledFooter = styled.footer`
   background-color: #ac6c14;
   color: white;
+  position: ${props => props.isBasketDisplayed ? 'absolute' : 'static'};
+  transform: ${props => props.isBasketDisplayed ? 'scaleY(0)' : 'scaleY(1)'};
+  transform-origin: top center;
+  transition: transform 0.2s ease-in-out;
   & > div > div {
     padding: 10px 40px;
     & > div > p {
@@ -52,6 +56,7 @@ const StyledFooter = styled.footer`
   @media only screen and (min-width: 1200px) {
     /* Hide basket box shadow */
     position: relative;
+    transform: scaleY(1);
     z-index: 1;
     /* Hide mobile basket when on a desktop view */
     & + div + div {
@@ -85,9 +90,9 @@ const Insta = styled(Instagram)`
   }
 `;
 
-const Footer = () => {
+const Footer = props => {
   return (
-    <StyledFooter>
+    <StyledFooter isBasketDisplayed={props.isBasketDisplayed}>
       <FooterFlexDiv>
         <div>
           <h2>

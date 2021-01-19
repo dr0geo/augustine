@@ -53,9 +53,14 @@ const OrderButton = styled.button`
 
 export const BasketContainer = styled.div`
   background-color: white;
-  bottom: 58px;
-  padding: 20px;
-  position: ${props => props.isBasketDisplayed ? 'sticky' : 'fixed'};
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  left: 0;
+  min-height: 100vh;
+  padding: 20px 20px 58px 20px;
+  position: ${props => props.isBasketDisplayed ? 'absolute' : 'fixed'};
+  top: 0;
   transform: ${props => props.isBasketDisplayed ? 'scaleY(1)' : 'scaleY(0)'};
   transform-origin: bottom center;
   transition: transform 0.3s ease-in-out;
@@ -88,8 +93,9 @@ export const BasketContainer = styled.div`
   }
   @media only screen and (min-width: 1200px) {
     box-shadow: -10px 3px 5px 0px #dedede;
-    position: static;
-    transform: scaleY(1);
+    justify-content: flex-start;
+    position: ${props => props.isMobileBasket ? 'fixed' : 'static'};
+    transform: ${props => props.isMobileBasket ? 'scaleY(0)' : 'scaleY(1)'};
     width: 100%;
     & > li > div {
       align-items: center;
@@ -118,7 +124,7 @@ const Total = styled.div`
 
 const Basket = props => {
   return (
-    <BasketContainer isBasketDisplayed={props.isBasketDisplayed}>
+    <BasketContainer isBasketDisplayed={props.isBasketDisplayed} isMobileBasket={props.isMobileBasket}>
       <h2><em>Mon panier</em></h2>
       {props.basketItems.length === 0 && <p>Vous n'avez pas encore d'article dans votre panier.</p>}
       {props.basketItems.length !== 0 && props.basketItems.map(item => {

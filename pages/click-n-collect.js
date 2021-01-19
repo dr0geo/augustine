@@ -247,6 +247,7 @@ const ClicknCollect = props => {
           isCategorySelected={isCategorySelected}
           handleCategoryClick={handleCategoryClick}
           addToBasket={addToBasket}
+          isBasketDisplayed={isBasketDisplayed}
         />
         <Basket 
           basketItems={basketItems}
@@ -256,7 +257,9 @@ const ClicknCollect = props => {
           handleOrder={handleOrder}
         />
       </CnCMenuSection>
-      <Footer />
+      <Footer
+        isBasketDisplayed={isBasketDisplayed}
+      />
       <BasketButtonOffset />
       <Basket 
         isBasketDisplayed={isBasketDisplayed}
@@ -265,6 +268,7 @@ const ClicknCollect = props => {
         increaseQuantity={increaseQuantity}
         deleteItem={deleteItem}
         handleOrder={handleOrder}
+        isMobileBasket={true}
       />
       <BasketButton onClick={toggleBasket}>
         Mon panier
