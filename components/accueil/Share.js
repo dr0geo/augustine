@@ -20,6 +20,7 @@ const StyledDiv = styled.li`
   box-shadow: 0 0 2px 2px lightgray;
   display: flex;
   flex-direction: column;
+  height: 450px;
   width: 300px;
   padding: 0;
   transition: transform 0.2s ease-in-out;
@@ -36,9 +37,17 @@ const StyledDiv = styled.li`
     font-weight: 600;
     padding: 10px 0;
   }
+  & + & {
+    margin-top: 50px;
+  }
   @media only screen and (min-width: 1200px) {
-    &:hover {
-      transform: scale(1.02);
+    & + & {
+      margin-top: 0px;
+    }
+    @media (any-hover: hover) {
+      &:hover {
+        transform: scale(1.02);
+      }
     }
   }
 `;
