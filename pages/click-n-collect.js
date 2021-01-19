@@ -85,7 +85,7 @@ const ClicknCollect = props => {
         ...basketItems,
         {
           name: foodName,
-          price: food.price,
+          price: foodName.includes('Gaufre') ? food.price + 1 : food.price,
           quantity: food.quantity,
           id: uuid()
         }

@@ -93,7 +93,7 @@ export const BasketContainer = styled.div`
   }
   @media only screen and (min-width: 1200px) {
     box-shadow: -10px 3px 5px 0px #dedede;
-    justify-content: flex-start;
+    display: block;
     position: ${props => props.isMobileBasket ? 'fixed' : 'static'};
     transform: ${props => props.isMobileBasket ? 'scaleY(0)' : 'scaleY(1)'};
     width: 100%;

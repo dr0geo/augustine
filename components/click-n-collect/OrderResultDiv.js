@@ -158,7 +158,7 @@ const OrderResultDiv = props => {
         }
       </div>
       <div>
-        <p>{props.food.price.toFixed(2)}€</p>
+        <p>{foodName.includes('Gaufre') ? (props.food.price + 1).toFixed(2) : props.food.price.toFixed(2)}€</p>
       </div>
       
         {props.food.options && option === ''
