@@ -41,7 +41,9 @@ const ResultDiv = styled.div`
     display: block;
     margin: 20px auto;
     padding: 10px;
+    text-align: center;
     transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+    width: 220px;
     @media (any-hover: hover) {
       &:hover {
         background-color: #012f6a;
@@ -80,24 +82,30 @@ const Basket = styled.div`
 `;
 
 const DisabledBasket = styled(Basket)`
-    opacity: 0.3;
-  @media (any-hover: hover) {
-    &:hover {
-      cursor: not-allowed;
-      transform: scale(0.75);
+  opacity: 0.3;
+  @media only screen and (min-width: 1200px) {
+    @media (any-hover: hover) {
+      &:hover {
+        cursor: not-allowed;
+        transform: scale(0.75);
+      }
     }
   }
+  
 `;
 
 const OrderResultDiv = props => {
   // State to manage choice between 'Crêpe' and 'Gaufre' on a per item basis:
   const [typeOfFood, setTypeOfFood] = useState('Crêpe');
+
+  // State to manage option according to different foods:
   const [option, setOption] = useState('');
 
   const handleOptionSelection = e => {
     setOption(e.target.value);
   }
 
+  // Manage food name according to options selected:
   let foodName;
 
   if (props.isSelected === 3) {
@@ -114,6 +122,52 @@ const OrderResultDiv = props => {
     }
   }
 
+  // States to manage different menu options selections:
+  const [menuChoiceOne, setMenuChoiceOne] = useState('');
+  const [menuChoiceTwo, setMenuChoiceTwo] = useState('');
+  const [menuChoiceThree, setMenuChoiceThree] = useState('');
+
+  // Display options in the different menus:
+  let menuChoicesArray;
+
+  if (props.food.choice) {
+    
+    if (props.food.choice.choice3) {
+      menuChoicesArray = [
+        props.food.choice.choice1, 
+        props.food.choice.choice2,
+        props.food.choice.choice3
+      ];
+    } else {
+      menuChoicesArray = [
+        props.food.choice.choice1, 
+        props.food.choice.choice2
+      ]
+    }
+
+    if (menuChoicesArray.length === 3) {
+      if ([menuChoiceOne, menuChoiceTwo, menuChoiceThree].every(choice => choice !== '')) {
+        foodName += ` (${menuChoiceOne}, ${menuChoiceTwo}, ${menuChoiceThree})`;
+      }
+    } else if (menuChoiceOne !== '' && menuChoiceTwo !== '') {
+      foodName += ` (${menuChoiceOne}, ${menuChoiceTwo})`;
+    }
+  }
+
+  const handleMenuSelection = (e, index) => {
+    switch (index) {
+      case 0:
+        setMenuChoiceOne(e.target.value);
+        break;
+      case 1:
+        setMenuChoiceTwo(e.target.value);
+        break;
+      case 2:
+        setMenuChoiceThree(e.target.value);
+        break;
+    }
+  }
+
   return (
     <ResultDiv>
       <div>
@@ -126,6 +180,7 @@ const OrderResultDiv = props => {
       </div>
       <div>
         <h3>{foodName}</h3>
+        {props.food.restrictions && <><p><em>{props.food.restrictions}</em></p><br /></>}
         {props.food.description && <p>{props.food.description}</p>}
         {props.isSelected === 3 && (
           <form>
@@ -156,12 +211,21 @@ const OrderResultDiv = props => {
             {props.food.options.map(option => <option key={option} value={option}>{option}</option>)}
           </select>
         }
+        {props.food.choice && 
+          <>
+            {menuChoicesArray.map((choice, index) => (
+              <select key={choice} onChange={e => handleMenuSelection(e, index)}>
+                <option key="initial" value="" defaultValue>Choisissez une option</option>
+                {choice.map(option => <option key={option} value={option}>{option}</option>)}
+              </select>
+            ))}
+          </>
+        }
       </div>
       <div>
         <p>{foodName.includes('Gaufre') ? (props.food.price + 1).toFixed(2) : props.food.price.toFixed(2)}€</p>
       </div>
-      
-        {props.food.options && option === ''
+        {props.food.options && option === '' || props.food.choice && menuChoicesArray.length === 3 && [menuChoiceOne, menuChoiceTwo, menuChoiceThree].some(item => item === '') || props.food.choice && menuChoicesArray.length === 2 && [menuChoiceOne, menuChoiceTwo].some(item => item === '')
           ? <DisabledBasket>
               <Basket2
                 size={40}
