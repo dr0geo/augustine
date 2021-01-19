@@ -114,7 +114,10 @@ const ClicknCollect = props => {
   const [phoneNumber, setPhoneNumber] = useState('');
   // Date:
   const todayDate = new Date(Date.now());
-  const [date, setDate] = useState(todayDate);
+  // Format to an input readable date:
+  const formatedTodayDate = `${todayDate.getFullYear()}-${(todayDate.getMonth() + 1).toString().padStart(2, '0')}-${todayDate.getDate().toString().padStart(2, '0')}`;
+
+  const [date, setDate] = useState(formatedTodayDate);
 
   // Add 15 min of preparation to current time:
   const hours = todayDate.getHours();

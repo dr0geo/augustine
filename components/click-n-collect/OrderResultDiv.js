@@ -225,7 +225,9 @@ const OrderResultDiv = props => {
       <div>
         <p>{foodName.includes('Gaufre') ? (props.food.price + 1).toFixed(2) : props.food.price.toFixed(2)}€</p>
       </div>
-        {props.food.options && option === '' || props.food.choice && menuChoicesArray.length === 3 && [menuChoiceOne, menuChoiceTwo, menuChoiceThree].some(item => item === '') || props.food.choice && menuChoicesArray.length === 2 && [menuChoiceOne, menuChoiceTwo].some(item => item === '')
+        {props.food.options && option === '' 
+          || props.food.choice && menuChoicesArray.length === 3 && [menuChoiceOne, menuChoiceTwo, menuChoiceThree].some(item => item === '') 
+          || props.food.choice && menuChoicesArray.length === 2 && [menuChoiceOne, menuChoiceTwo].some(item => item === '')
           ? <DisabledBasket>
               <Basket2
                 size={40}
