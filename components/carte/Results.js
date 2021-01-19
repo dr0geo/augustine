@@ -103,7 +103,7 @@ const Results = props => {
       (results = props.selectedFood.map(food => (
         <ResultDiv key={uuid()}>
           <div>
-            <h3>{!food.options ? food.name : food.options.join(' - ')}</h3>
+            <h3>{!food.options ? food.name : food.options.join(' - ')}{food.restrictions && (<em> ({food.restrictions})</em>)}</h3>
             {food.description && <p>{food.description}</p>}
           </div>
           <div>
@@ -119,7 +119,7 @@ const Results = props => {
             {food.description && <p>{food.description}</p>}
           </div>
           <div>
-            <p>{food.price.toFixed(2)}€</p>
+            <p>{food.price.toFixed(2)}€{props.isSelected === 3 && <em> (gaufre +1€)</em>}</p>
           </div>
         </ResultDiv>
       )));

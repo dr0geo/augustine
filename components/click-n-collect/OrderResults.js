@@ -66,7 +66,7 @@ const OrderResults = props => {
   // Check if there are sub-arrays:
   [0, 1, 5].includes(props.isSelected)
     ? // Display food that has no subcategory:
-      (results = props.selectedFood.map(food => (
+      (results = props.selectedFood.map(food => food.id!== 70 && (
         <OrderResultDiv 
           key={food.id}
           food={food}
