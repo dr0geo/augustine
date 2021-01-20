@@ -103,7 +103,7 @@ const Anchor = styled.a`
 const logo = (
   <Logo>
     <Image src="/images/logo/logo.webp" alt="" height={320} width={450} />
-    <h1>crêperie contemporaine - Paris</h1>
+    <h1>Crêperie Contemporaine - Paris</h1>
   </Logo>
 );
 

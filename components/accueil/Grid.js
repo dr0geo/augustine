@@ -7,9 +7,9 @@ const Grid = () => {
     <Section bgUrl="/images/background/grid-bg.webp">
       <GridWrapper>
         <h2>
-          Venez déguster
+          Nos
           <br />
-          <em>nos plats</em>
+          <em>recettes</em>
         </h2>
         <GridDiv>
           <div>

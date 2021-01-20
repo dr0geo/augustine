@@ -24,7 +24,7 @@ const Promesse = () => {
             </div>
           </figure>
           <figcaption>
-            Une farine de blé sans additifs, issue de l’agriculture française
+            Nos farines sont issues de l’agriculture biologique française
           </figcaption>
         </PromessCard>
         <PromessCard>
@@ -39,7 +39,7 @@ const Promesse = () => {
             </div>
           </figure>
           <figcaption>
-            Des oeufs frais pondus en France et issus d’un élevage en plein air
+            Des oeufs bio pondus en France
           </figcaption>
         </PromessCard>
         <PromessCard>
@@ -53,7 +53,7 @@ const Promesse = () => {
               />
             </div>
           </figure>
-          <figcaption>Des produits bio respectant l’environnement</figcaption>
+          <figcaption>Des recettes élaborées par notre cheffe normande</figcaption>
         </PromessCard>
       </FlexDiv>
     </Section>
