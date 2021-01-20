@@ -104,6 +104,7 @@ const Footer = props => {
               <br />
               75001 Paris</a>
               <br />
+              <br />
               <a href="tel:+33183929448">01 83 92 94 48</a>
             </p>
           </FlexDiv>
