@@ -1,5 +1,6 @@
 import Head from 'next/head';
 import { useState } from 'react';
+import styled from 'styled-components';
 
 import { db } from '@/utils/firebase';
 import Menu from '@/components/Menu';
@@ -7,6 +8,13 @@ import { Section } from '@/elements/Divs';
 import { DateChoice, Personal, Success } from '@/components/reservation/Dynamic';
 import Footer from '@/components/Footer';
 import Spinner from '@/elements/Spinner';
+
+const InfoParag = styled.p`
+  & > a {
+    border-bottom: 1px solid black;
+    color: black;
+  }
+`;
 
 const weekDays = [
   'Dimanche',
@@ -183,7 +191,9 @@ const Reserver = props => {
           <br />
           <em>chez Augustine</em>
         </h2>
+        <InfoParag>Pour toute réservation de plus de 8 personnes, ou pour privatiser la crêperie, contactez-nous directement par <a href="tel:+33183929448">téléphone</a> ou par le <a href="/contact">formulaire</a> du site.</InfoParag>
       </Section>
+      
       {bookingStep === 1 && (
         <DateChoice
           dateSentence={dateSentence}
