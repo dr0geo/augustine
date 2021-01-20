@@ -182,7 +182,7 @@ const OrderResultDiv = props => {
       <div>
         <h3>{foodName}</h3>
         {props.food.restrictions && <><p><em>{props.food.restrictions}</em></p><br /></>}
-        {props.food.description && <p>{props.food.description}</p>}
+        {props.isSelected !== 5 ? props.food.description && <p>{props.food.description}</p> : <p>{props.food.descriptionCnC}</p>}
         {props.isSelected === 3 && (
           <form>
             <div>
@@ -241,15 +241,71 @@ const OrderResultDiv = props => {
                     </form>
                     <select key={choice} onChange={e => handleMenuSelection(e, index)}>
                       <option key="initial" value="" defaultValue>Choisissez une option</option>
-                      {choice.map(option => <option key={option} value={option}>{option}</option>)}
+
+                      {choice.length > 14 
+                        ? <><optgroup label="Classiques">
+                        {choice.map(option => <option key={option} value={option}>{option}</option>).slice(0, 14)}
+                      </optgroup>
+                      <optgroup label="Gourmandes">
+                        {choice.map(option => <option key={option} value={option}>{option}</option>).slice(14)}
+                      </optgroup></>
+                        
+                        : choice.map(option => <option key={option} value={option}>{option}</option>)
+                      }
                     </select>
                   </>
+                )
+              } else if (menuChoicesArray.length === 3 && index === 0) {
+                return (
+                  <select key={choice} onChange={e => handleMenuSelection(e, index)}>
+                    <option key="initial" value="" defaultValue>Choisissez une option</option>
+                    {choice.length > 8
+                      ? <>
+                      <optgroup label="Classiques">
+                        {choice.map(option => <option key={option} value={option}>{option}</option>).slice(0, 7)}
+                      </optgroup>
+                      <optgroup label="Gourmandes">
+                        {choice.map(option => <option key={option} value={option}>{option}</option>).slice(7)}
+                      </optgroup>
+                      </>
+                      : choice.map(option => <option key={option} value={option}>{option}</option>)
+                    }
+                  </select>
                 )
               } else {
                 return (
                   <select key={choice} onChange={e => handleMenuSelection(e, index)}>
                     <option key="initial" value="" defaultValue>Choisissez une option</option>
-                    {choice.map(option => <option key={option} value={option}>{option}</option>)}
+                    {choice.length > 16
+                      ? <>
+                      <optgroup label="Eau">
+                        {choice.map(option => <option key={option} value={option}>{option}</option>).slice(0, 2)}
+                      </optgroup>
+                      <optgroup label="Jus">
+                        {choice.map(option => <option key={option} value={option}>{option}</option>).slice(2, 6)}
+                      </optgroup>
+                      <optgroup label="Soda">
+                        {choice.map(option => <option key={option} value={option}>{option}</option>).slice(6, 14)}
+                      </optgroup>
+                      <optgroup label="Café / Thé">
+                        {choice.map(option => <option key={option} value={option}>{option}</option>).slice(14, )}
+                      </optgroup>
+                      </>
+
+                      : <><optgroup label="Eau">
+                        {choice.map(option => <option key={option} value={option}>{option}</option>).slice(0, 2)}
+                      </optgroup>
+                      <optgroup label="Jus">
+                        {choice.map(option => <option key={option} value={option}>{option}</option>).slice(2, 6)}
+                      </optgroup>
+                      <optgroup label="Soda">
+                        {choice.map(option => <option key={option} value={option}>{option}</option>).slice(6, 14)}
+                      </optgroup>
+                      <optgroup label="Autre">
+                        {choice.map(option => <option key={option} value={option}>{option}</option>).slice(14, 16)}
+                      </optgroup>
+                      </>
+                    }
                   </select>
                 )
               }
