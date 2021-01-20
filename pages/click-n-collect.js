@@ -331,13 +331,9 @@ export const getStaticProps = async () => {
 
   const fraiches = [];
   const chaudes = [];
-  const aperitifs = [];
-  const alcoolisees = [];
 
   retrieveData(dbDrinks, 'fraiches', fraiches);
   retrieveData(dbDrinks, 'chaudes', chaudes);
-  retrieveData(dbDrinks, 'aperitifs', aperitifs);
-  retrieveData(dbDrinks, 'alcoolisees', alcoolisees); 
   
   // Retrieve all formulas in collection 'formules':
   const dbFormulas = await db.collection('formules').get();
@@ -358,9 +354,7 @@ export const getStaticProps = async () => {
       ],
       boissons: [
         { title: 'Fraiches', data: fraiches },
-        { title: 'Chaudes', data: chaudes },
-        { title: 'Apéritifs', data: aperitifs },
-        { title: 'Alcoolisées', data: alcoolisees }
+        { title: 'Chaudes', data: chaudes }
       ],
       formules
     },

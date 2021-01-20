@@ -103,7 +103,7 @@ const Results = props => {
       (results = props.selectedFood.map(food => (
         <ResultDiv key={uuid()}>
           <div>
-            <h3>{!food.options ? food.name : food.options.join(' - ')}{food.restrictions && (<em> ({food.restrictions})</em>)}</h3>
+            <h3>{!food.options ? food.name : food.description ? food.name : food.options.join(' - ')}{food.restrictions && (<em> ({food.restrictions})</em>)}</h3>
             {food.description && <p>{food.description}</p>}
           </div>
           <div>

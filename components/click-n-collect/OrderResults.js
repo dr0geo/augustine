@@ -76,7 +76,7 @@ const OrderResults = props => {
         </OrderResultDiv>
       )))
     : // Display only the subselection selected via selected food and selected subcategory of that food:
-      (results = props.selectedFood[props.isCategorySelected].data.map(food => (
+      (results = props.selectedFood[props.isCategorySelected].data.map(food => food.id !== 48 && (
         <OrderResultDiv 
           key={food.id}
           food={food}

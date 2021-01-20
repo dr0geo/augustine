@@ -38,6 +38,7 @@ const ResultDiv = styled.div`
     background-color: #e3e9ef;
     border: 1px solid #012f6a;
     border-radius: 5px;
+    color: #012f6a;
     display: block;
     margin: 20px auto;
     padding: 10px;
@@ -147,7 +148,7 @@ const OrderResultDiv = props => {
 
     if (menuChoicesArray.length === 3) {
       if ([menuChoiceOne, menuChoiceTwo, menuChoiceThree].every(choice => choice !== '')) {
-        foodName += ` (${menuChoiceOne}, ${menuChoiceTwo}, ${menuChoiceThree})`;
+        foodName += ` (${menuChoiceOne}, ${typeOfFood} ${menuChoiceTwo}, ${menuChoiceThree})`;
       }
     } else if (menuChoiceOne !== '' && menuChoiceTwo !== '') {
       foodName += ` (${menuChoiceOne}, ${menuChoiceTwo})`;
@@ -213,17 +214,52 @@ const OrderResultDiv = props => {
         }
         {props.food.choice && 
           <>
-            {menuChoicesArray.map((choice, index) => (
-              <select key={choice} onChange={e => handleMenuSelection(e, index)}>
-                <option key="initial" value="" defaultValue>Choisissez une option</option>
-                {choice.map(option => <option key={option} value={option}>{option}</option>)}
-              </select>
-            ))}
+            {menuChoicesArray.map((choice, index) => {
+              if (index === menuChoicesArray.length - 2) {
+                return (
+                  <>
+                    <form>
+                      <div>
+                        <input
+                          id={`crepe-${props.food.name}`}
+                          type="radio"
+                          name={`type-${props.food.name}`}
+                          defaultChecked={true}
+                          onChange={() => setTypeOfFood('Crêpe')}
+                        />
+                        <label htmlFor={`crepe-${props.food.name}`}>Crêpe</label>
+                      </div>
+                      <div>
+                        <input
+                          id={`gaufre-${props.food.name}`}
+                          type="radio"
+                          name={`type-${props.food.name}`}
+                          onChange={() => setTypeOfFood('Gaufre')}
+                        />
+                        <label htmlFor={`gaufre-${props.food.name}`}>Gaufre</label>
+                      </div>
+                    </form>
+                    <select key={choice} onChange={e => handleMenuSelection(e, index)}>
+                      <option key="initial" value="" defaultValue>Choisissez une option</option>
+                      {choice.map(option => <option key={option} value={option}>{option}</option>)}
+                    </select>
+                  </>
+                )
+              } else {
+                return (
+                  <select key={choice} onChange={e => handleMenuSelection(e, index)}>
+                    <option key="initial" value="" defaultValue>Choisissez une option</option>
+                    {choice.map(option => <option key={option} value={option}>{option}</option>)}
+                  </select>
+                )
+              }
+            }
+            )}
           </>
         }
       </div>
       <div>
-        <p>{foodName.includes('Gaufre') ? (props.food.price + 1).toFixed(2) : props.food.price.toFixed(2)}€</p>
+        <p>{typeOfFood === 'Gaufre' ? (props.food.price + 1).toFixed(2) : props.food.price.toFixed(2)}€</p>
       </div>
         {props.food.options && option === '' 
           || props.food.choice && menuChoicesArray.length === 3 && [menuChoiceOne, menuChoiceTwo, menuChoiceThree].some(item => item === '') 
