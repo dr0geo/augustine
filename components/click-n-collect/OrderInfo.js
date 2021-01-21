@@ -221,7 +221,7 @@ const OrderInfo = props => {
                   onChange={props.handleInputValues}
                 />
               </div>
-              <p>En validant ma réservation, j'accepte les conditions d'utilisation et la politique de confidentialité.</p>
+              <p>En confirmant ma commande, j'accepte les conditions d'utilisation et la politique de confidentialité.</p>
               <button type="submit">Confirmer la commande</button>
               {props.errorInOrder !== '' && <div><ErrorParag>{props.errorInOrder}</ErrorParag></div>}
             </>
