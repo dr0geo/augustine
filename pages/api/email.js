@@ -51,7 +51,7 @@ const sendConfirmationEmail = async (req, res) => {
         <p>Voici un récapitulatif des informations liées à votre réservation :</p>
         <ul>
           <li>Nom de la réservation : ${req.body.bookingRef.lastName}</li>
-          <li>Nombre de convives : ${req.body.bookingRef.people}</li>
+          <li>Nombre de convives : ${req.body.bookingRef.guestsNumber}</li>
           <li>Date : ${(new Date(req.body.bookingRef.date)).toLocaleDateString('fr-FR')}</li>
           <li>Heure : ${req.body.bookingRef.time}</li>
         </ul>

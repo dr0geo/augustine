@@ -51,7 +51,7 @@ const MainBlock = styled.div`
 const ExternalLinks = styled.a`
   border-bottom: ${props => (props.underline ? '1px solid #fff' : 'none')};
   display: block;
-  line-height: 1.5rem;
+  line-height: 1.5;
   margin: 10px auto;
   text-align: center;
 `;

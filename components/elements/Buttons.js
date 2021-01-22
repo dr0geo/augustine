@@ -7,6 +7,8 @@ export const Button = styled.a`
   border-radius: 10px;
   color: ${props => props.color};
   display: block;
+  font-family: ${props => props.isCursive ? 'Dancing-Script' : 'Raleway'};
+  font-size: ${props => props.isCursive ? '1.3rem' : '1rem'};
   font-weight: 600;
   padding: 10px 20px;
   margin: 30px auto;
@@ -22,6 +24,7 @@ export const Button = styled.a`
       &:hover {
         background-color: ${props => props.color};
         color: ${props => props.bgColor};
+        cursor: pointer;
       }
     }
   }

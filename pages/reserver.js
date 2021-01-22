@@ -1,27 +1,15 @@
 import Head from 'next/head';
 import { useState } from 'react';
-import styled from 'styled-components';
 
 import { db } from '@/utils/firebase';
 import Header from '@/components/Header';
 import { Section } from '@/elements/Divs';
-import { DateChoice, Personal, Success } from '@/components/reservation/Dynamic';
+import Discount from '@/components/reservation/Discount';
+import DateChoice from '@/components/reservation/DateChoice';
+import PersonalInfo from '@/components/reservation/PersonalInfo';
+import Success from '@/components/reservation/Success';
 import Footer from '@/components/Footer';
 import Spinner from '@/elements/Spinner';
-
-const InfoParag = styled.p`
-  & > a {
-    border-bottom: 1px solid black;
-    color: black;
-  }
-`;
-
-const ReducParag = styled.p`
-  border: 1px solid #ac6c14;
-  color: #ac6c14;
-  margin: 30px auto;
-  padding: 10px;
-`;
 
 const weekDays = [
   'Dimanche',
@@ -77,15 +65,15 @@ const Reserver = props => {
     date > todayDate && setDate(new Date(date.setDate(date.getDate() - 1)));
   };
 
-  // Number of people:
-  const [people, setPeople] = useState(1);
+  // Guests number:
+  const [guestsNumber, setGuestsNumber] = useState(1);
 
   const handlePeopleIncrease = () => {
-    people < 8 && setPeople(people + 1);
+    guestsNumber < 8 && setGuestsNumber(guestsNumber + 1);
   };
   
   const handlePeopleDecrease = () => {
-    people > 1 && setPeople(people - 1);
+    guestsNumber > 1 && setGuestsNumber(guestsNumber - 1);
   };
 
   // Booking time:
@@ -131,19 +119,22 @@ const Reserver = props => {
 
   // Handle booking submission:
   const [bookingConfirmation, setBookingConfirmation] = useState('');
-  const [errorInBooking, setErrorInBooking] = useState('');
+  const [errorInBooking, setErrorInBooking] = useState(null);
+
+  // Display spinner according to loading state:
   const [isLoading, setIsLoading] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
 
+    // To format date for database and admin panel:
     const formatedDate = `${date.getFullYear()}-${(date.getMonth() + 1).toString().padStart(2, '0')}-${date.getDate().toString().padStart(2, '0')}`;
 
     const bookingRef = {
       date: formatedDate,
       time,
-      people,
+      guestsNumber,
       firstName,
       lastName,
       email,
@@ -196,42 +187,48 @@ const Reserver = props => {
         <h2>
           Nous vous attendons
           <br />
-          <em>chez Augustine</em>
+          <span className="cursive">chez Augustine</span>
         </h2>
-        <InfoParag>Pour toute réservation de plus de 8 personnes, ou pour privatiser la crêperie, contactez-nous directement par <a href="tel:+33183929448">téléphone</a> ou par le <a href="/contact">formulaire</a> du site.</InfoParag>
-        <ReducParag>Pour toute réservation un dimanche, lundi ou mardi, obtenez <strong>20% de réduction</strong> sur votre addition !</ReducParag>
+        <Discount />
       </Section>
-      
-      {bookingStep === 1 && (
-        <DateChoice
-          dateSentence={dateSentence}
-          people={people}
-          handleDateDecrease={handleDateDecrease}
-          handleDateIncrease={handleDateIncrease}
-          handlePeopleDecrease={handlePeopleDecrease}
-          handlePeopleIncrease={handlePeopleIncrease}
-          hours={hours}
-          handleHoursSelection={handleHoursSelection}
-          handleMinutesSelection={handleMinutesSelection}
-          handleNextStep={handleNextStep}
-        />
-      )}
-      {bookingStep === 2 && (
-        <Personal 
-          goToPreviousStep={goToPreviousStep}
-          people={people}
-          dateSentence={dateSentence}
-          time={time}
-          handleInputValues={handleInputValues}
-          handleSubmit={handleSubmit}
-          errorInBooking={errorInBooking}
-        />
-      )}
-      {bookingStep === 3 && (
-        <Success 
-          bookingConfirmation={bookingConfirmation}
-        />
-      )}
+      <Section bgColor="#e3e9ef">
+
+        {/* First booking step */}
+        {bookingStep === 1 && (
+          <DateChoice
+            dateSentence={dateSentence}
+            guestsNumber={guestsNumber}
+            handleDateDecrease={handleDateDecrease}
+            handleDateIncrease={handleDateIncrease}
+            handlePeopleDecrease={handlePeopleDecrease}
+            handlePeopleIncrease={handlePeopleIncrease}
+            hours={hours}
+            handleHoursSelection={handleHoursSelection}
+            handleMinutesSelection={handleMinutesSelection}
+            handleNextStep={handleNextStep}
+          />
+        )}
+
+        {/* Second booking step */}
+        {bookingStep === 2 && (
+          <PersonalInfo 
+            goToPreviousStep={goToPreviousStep}
+            guestsNumber={guestsNumber}
+            dateSentence={dateSentence}
+            time={time}
+            handleInputValues={handleInputValues}
+            handleSubmit={handleSubmit}
+            errorInBooking={errorInBooking}
+          />
+        )}
+
+        {/* Booking confirmation */}
+        {bookingStep === 3 && (
+          <Success 
+            bookingConfirmation={bookingConfirmation}
+          />
+        )}
+      </Section>
       <Footer />
     </>
   );

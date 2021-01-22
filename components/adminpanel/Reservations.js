@@ -86,7 +86,7 @@ const Reservations = props => {
               <strong>Heure</strong> : {booking.time}
             </p>
             <p>
-              <strong>Nombre de personnes</strong> : {booking.people}
+              <strong>Nombre de personnes</strong> : {booking.guestsNumber}
             </p>
             <p>
               <strong>Nom</strong> : {booking.firstName} {booking.lastName}

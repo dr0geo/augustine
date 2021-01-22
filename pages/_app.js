@@ -86,6 +86,7 @@ const GlobalStyle = createGlobalStyle`
   }
 
   p {
+    line-height: 1.5;
     max-width: 1200px;
     text-align: center;
   }
