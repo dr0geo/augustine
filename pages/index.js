@@ -3,8 +3,8 @@ import Head from 'next/head';
 import Menu from '@/components/Menu';
 import Presentation from '@/components/accueil/Presentation';
 import Promesse from '@/components/accueil/Promesse';
-import Grid from '@/components/accueil/Grid';
-import Book from '@/components/Book';
+import RecipesGrid from '@/components/accueil/Recettes';
+import Book from '@/components/accueil/Book';
 import Share from '@/components/accueil/Share';
 import Footer from '@/components/Footer';
 
@@ -30,7 +30,7 @@ const Accueil = props => {
       <main>
         <Presentation />
         <Promesse />
-        <Grid />
+        <RecipesGrid />
         <Book />
         <Share posts={props.posts} />
       </main>

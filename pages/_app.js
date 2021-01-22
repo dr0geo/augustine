@@ -1,9 +1,12 @@
 import { createGlobalStyle } from 'styled-components';
+import reset from 'styled-reset';
 import { useState } from 'react';
 
 import { ScrollToTop } from '@/elements/Buttons';
 
 const GlobalStyle = createGlobalStyle`
+  ${reset}
+
   @font-face {
     font-display: swap;
     font-family: 'Raleway';
@@ -57,7 +60,9 @@ const GlobalStyle = createGlobalStyle`
 
   h2 {
     color: #ac6c14;
+    font-size: 1.6rem;
     font-weight: 600;
+    margin: 20px auto;
     text-align: center;
     & > .cursive {
       color: #012f6a;
@@ -81,7 +86,6 @@ const GlobalStyle = createGlobalStyle`
   }
 
   p {
-    margin: auto;
     max-width: 1200px;
     text-align: center;
   }
