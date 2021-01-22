@@ -7,23 +7,25 @@ const Container = styled.ul`
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  margin: 40px auto 30px auto;
+  margin: 0 auto 30px auto;
   max-width: 1200px;
-  @media only screen and (min-width: 1200px) {
+  @media only screen and (min-width: 768px) {
     flex-direction: row;
+    flex-wrap: wrap;
   }
 `;
 
-const StyledDiv = styled.li`
+const InstaCard = styled.li`
   align-items: center;
   border-radius: 5px;
   box-shadow: 0 0 2px 2px lightgray;
   display: flex;
   flex-direction: column;
   height: 450px;
-  width: 300px;
+  margin-top: 50px;
   padding: 0;
   transition: transform 0.2s ease-in-out;
+  width: 300px;
   & img {
     border-radius: 5px 5px 0 0;
     display: block;
@@ -32,18 +34,13 @@ const StyledDiv = styled.li`
   & > a > p {
     font-size: 0.85rem;
     margin: 10px auto;
+    padding: 0 5px;
   }
   & > p {
     font-weight: 600;
     padding: 10px 0;
   }
-  & + & {
-    margin-top: 50px;
-  }
-  @media only screen and (min-width: 1200px) {
-    & + & {
-      margin-top: 0px;
-    }
+  @media only screen and (min-width: 768px) {
     @media (any-hover: hover) {
       &:hover {
         transform: scale(1.02);
@@ -66,12 +63,12 @@ const Share = ({ posts }) => {
       <h2>
         Partagez
         <br />
-        <em>votre expérience</em>
+        <span className="cursive">votre expérience</span>
       </h2>
       <Container>
         {selectedPosts !== undefined &&
           selectedPosts.map(post => (
-            <StyledDiv key={post.id}>
+            <InstaCard key={post.id}>
               <StyledAnchor
                 href={post.permalink}
                 rel="noopener, noreferrer"
@@ -95,7 +92,7 @@ const Share = ({ posts }) => {
                   @{post.username}
                 </StyledAnchor>
               </p>
-            </StyledDiv>
+            </InstaCard>
           ))}
       </Container>
     </Section>
