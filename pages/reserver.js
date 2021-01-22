@@ -186,7 +186,9 @@ const Reserver = props => {
           content="Réservez votre table dans notre crêperie Parisienne directement depuis notre site !"
         />
       </Head>
+
       {isLoading && <Spinner />}
+      
       <Header
         isSelected={3}
         isClicked={props.isClicked}

@@ -7,6 +7,7 @@ export const BasketButton = styled.button`
   border: none;
   bottom: 0;
   color: white;
+  font-size: 1rem;
   font-weight: 600;
   padding: 20px;
   position: fixed;
@@ -42,17 +43,14 @@ const OrderButton = styled.button`
     display: block;
     transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
     @media (any-hover: hover) {
-      &:hover {
-        cursor: pointer;
         background-color: white;
         color: #012f6a;
-      }
     }
   }
 `;
 
 export const BasketContainer = styled.div`
-  background-color: white;
+  background-color: #fff;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
@@ -66,6 +64,7 @@ export const BasketContainer = styled.div`
   transition: transform 0.3s ease-in-out;
   width: 100vw;
   & > li {
+    list-style-type: none;
     padding: 30px 0;
     & > div {
       display: flex;
@@ -125,7 +124,7 @@ const Total = styled.div`
 const Basket = props => {
   return (
     <BasketContainer isBasketDisplayed={props.isBasketDisplayed} isMobileBasket={props.isMobileBasket}>
-      <h2><em>Mon panier</em></h2>
+      <h2><span className="cursive">Mon panier</span></h2>
       {props.basketItems.length === 0 && <p>Vous n'avez pas encore d'article dans votre panier.</p>}
       {props.basketItems.length !== 0 && props.basketItems.map(item => {
         return (

@@ -3,7 +3,7 @@ import { CheckCircleFill } from '@styled-icons/octicons';
 
 const Container = styled.section`
   background: linear-gradient(hsla(0deg, 0%, 0%, 0.7), hsla(0deg, 0%, 0%, 0.7));
-  display: ${props => props.displaySection ? 'flex' : 'none'};
+  display: ${props => props.displayOrderForm ? 'flex' : 'none'};
   height: 100vh;
   justify-content: center;
   position: fixed;
@@ -20,7 +20,7 @@ const InfoSection = styled.div`
   height: 100vh;
   justify-content: center;
   margin: auto;
-  transform: ${props => (props.displaySection ? 'scale(1)' : 'scale(0)')};
+  transform: ${props => (props.displayOrderForm ? 'scale(1)' : 'scale(0)')};
   width: 100vw;
   & > div:first-of-type {
     margin: 0 auto 20px auto;
@@ -158,8 +158,8 @@ const OrderInfo = props => {
   const day = props.todayDate.getDate().toString().padStart(2, '0');
 
   return (
-    <Container displaySection={props.displaySection} onClick={props.backToBasket}>
-      <InfoSection displaySection={props.displaySection} onClick={e => e.stopPropagation()}>
+    <Container displayOrderForm={props.displayOrderForm} onClick={props.backToBasket}>
+      <InfoSection displayOrderForm={props.displayOrderForm} onClick={e => e.stopPropagation()}>
         {!props.orderConfirmation && <BackButton onClick={props.backToBasket}>Revenir au panier</BackButton>}
         <div>
           <h3>Total : {articleNumber} {articleNumber === 1 ? 'article' : 'articles'} / {totalPrice}€</h3>

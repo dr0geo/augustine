@@ -7,10 +7,9 @@ const FooterContainer = styled.footer`
   color: white;
   display: flex;
   flex-direction: column;
+  opacity: ${props => props.isBasketDisplayed ? '0' : '1'};
   position: ${props => (props.isBasketDisplayed ? 'absolute' : 'static')};
   transform: ${props => (props.isBasketDisplayed ? 'scaleY(0)' : 'scaleY(1)')};
-  transform-origin: top center;
-  transition: transform 0.2s ease-in-out;
   & a {
     color: white;
     &:visited {

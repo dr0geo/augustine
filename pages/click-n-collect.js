@@ -1,35 +1,26 @@
-import { db } from '@/utils/firebase';
 import Head from 'next/head';
 import { useState, useEffect } from 'react';
 import { v1 as uuid } from 'uuid';
 
+import { db } from '@/utils/firebase';
 import Header from '@/components/Header';
 import Categories from '@/components/carte/Categories';
 import OrderResults from '@/components/click-n-collect/OrderResults';
-import Footer from '@/components/Footer';
 import Basket, { BasketButton, BasketButtonOffset } from '@/components/click-n-collect/Basket';
 import { CnCMenuSection } from '@/components/elements/Divs';
 import OrderInfo from '@/components/click-n-collect/OrderInfo';
+import Footer from '@/components/Footer';
 import Spinner from '@/elements/Spinner';
 
 const ClicknCollect = props => {
-
+  // To change display of selected main category of food button:
   const [selectedMainFood, setSelectedMainFood] = useState(0);
+  // To change display of selected subcategory of food tab:
   const [selectedSubFood, setSelectedSubFood] = useState(0);
+  // To display food items:
   const [selectedFood, setSelectedFood] = useState(props.entrees);
-  const [isBasketDisplayed, setIsBasketDisplayed] = useState(false);
-  const [basketItems, setBasketItems] = useState([]);
 
-  useEffect(() => {
-    if (sessionStorage.getItem('order')) {
-      setBasketItems(JSON.parse(sessionStorage.getItem('order')));
-    }
-  }, []);
-
-  useEffect(() => {
-    sessionStorage.setItem('order', JSON.stringify(basketItems));
-  }, [basketItems]);
-  
+  // Select main type of food:
   const handleClick = ({ target }) => {
     setSelectedMainFood(parseInt(target.value));
     setSelectedSubFood(0);
@@ -51,14 +42,32 @@ const ClicknCollect = props => {
     });
   };
 
+  // Select subtype of food:
   const handleCategoryClick = ({ target }) => {
     setSelectedSubFood(parseInt(target.value));
   };
 
+  // To display or hide the basket and manage its items:
+  const [isBasketDisplayed, setIsBasketDisplayed] = useState(false);
+  const [basketItems, setBasketItems] = useState([]);
+
+  // Retrieve basket items when refreshing the page:
+  useEffect(() => {
+    if (sessionStorage.getItem('order')) {
+      setBasketItems(JSON.parse(sessionStorage.getItem('order')));
+    }
+  }, []);
+
+  // Save basket in session storage every time it changes:
+  useEffect(() => {
+    sessionStorage.setItem('order', JSON.stringify(basketItems));
+  }, [basketItems]);
+  
   const toggleBasket = () => {
     setIsBasketDisplayed(!isBasketDisplayed);
   }
 
+  // Manage basket items quantity:
   const decreaseQuantity = item => {
     if (item.quantity > 1) {
       item.quantity -= 1;
@@ -90,6 +99,7 @@ const ClicknCollect = props => {
           id: uuid()
         }
       ]);
+      
     // If item is already in the basket:
     } else {
       // Iterate over basketItems array to find the already existing food:
@@ -106,15 +116,17 @@ const ClicknCollect = props => {
   }
 
   // Display order form:
-  const [displaySection, setDisplaySection] = useState(false);
+  const [displayOrderForm, setDisplayOrderForm] = useState(false);
+
   // Personal information:
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
+
   // Date:
   const todayDate = new Date(Date.now());
-  // Format to an input readable date:
+  // Format date to an input readable date (YYYY-MM-DD):
   const formatedTodayDate = `${todayDate.getFullYear()}-${(todayDate.getMonth() + 1).toString().padStart(2, '0')}-${todayDate.getDate().toString().padStart(2, '0')}`;
 
   const [date, setDate] = useState(formatedTodayDate);
@@ -134,19 +146,10 @@ const ClicknCollect = props => {
 
   const [time, setTime] = useState(timeToPickUpOrder);
 
-  // Handle order submission:
-  const [orderConfirmation, setOrderConfirmation] = useState(null);
-  const [errorInOrder, setErrorInOrder] = useState('');
-  
   const handleOrder = () => {
-    setDisplaySection(true);
+    setDisplayOrderForm(true);
   }
 
-  const backToBasket = () => {
-    setDisplaySection(false);
-    setErrorInOrder('');
-  }
-  
   const handleInputValues = e => {
     switch (e.target.name) {
       case 'firstName':
@@ -170,6 +173,16 @@ const ClicknCollect = props => {
     }
   }
 
+  // Handle order submission:
+  const [orderConfirmation, setOrderConfirmation] = useState(null);
+  const [errorInOrder, setErrorInOrder] = useState('');  
+  
+  const backToBasket = () => {
+    setDisplayOrderForm(false);
+    setErrorInOrder('');
+  }
+
+  // Handle app loading state:
   const [isLoading, setIsLoading] = useState(false);
 
   const handleOrderSubmit = async (e) => {
@@ -210,9 +223,10 @@ const ClicknCollect = props => {
     }
   }
 
+  // Return to home page after order submission:
   const backToHomePage = () => {
     setIsBasketDisplayed(false);
-    setDisplaySection(false);
+    setDisplayOrderForm(false);
     setOrderConfirmation(null);
     setBasketItems([]);
   }
@@ -227,7 +241,9 @@ const ClicknCollect = props => {
           content="Commandez en ligne dans notre crêperie Parisienne, et venez récupérer directement votre commande une fois prête !"
         />
       </Head>
+
       {isLoading && <Spinner />}
+
       <Header
         isSelected={4}
         isClicked={props.isClicked}
@@ -238,7 +254,7 @@ const ClicknCollect = props => {
       />
       
       <CnCMenuSection>
-        <h2>Parcourez<br /><em>la carte Augustine</em></h2>
+        <h2>Parcourez<br /><span className="cursive">la carte Augustine</span></h2>
         <Categories 
           selectedMainFood={selectedMainFood} 
           handleClick={handleClick}
@@ -252,6 +268,8 @@ const ClicknCollect = props => {
           addToBasket={addToBasket}
           isBasketDisplayed={isBasketDisplayed}
         />
+
+        {/* Desktop basket */}
         <Basket 
           basketItems={basketItems}
           decreaseQuantity={decreaseQuantity}
@@ -263,6 +281,8 @@ const ClicknCollect = props => {
       <Footer
         isBasketDisplayed={isBasketDisplayed}
       />
+
+      {/* Mobile basket */}
       <BasketButtonOffset />
       <Basket 
         isBasketDisplayed={isBasketDisplayed}
@@ -286,8 +306,10 @@ const ClicknCollect = props => {
               : null
           }
       </BasketButton>
+
+      {/* Validation step */}
       <OrderInfo
-        displaySection={displaySection}
+        displayOrderForm={displayOrderForm}
         todayDate={todayDate}
         backToBasket={backToBasket}
         handleInputValues={handleInputValues}
