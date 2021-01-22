@@ -82,57 +82,69 @@ export const ReducParag = styled.p`
   padding: 10px;
 `;
 
-const DateChoice = props => (
-  <>
-    <WhiteField>
-      <LArrow size={20} onClick={props.handleDateDecrease} />
-      <FlexPar>{props.dateSentence}</FlexPar>
-      <RArrow size={20} onClick={props.handleDateIncrease} />
-    </WhiteField>
-    <WhiteField>
-      <LArrow size={20} onClick={props.handlePeopleDecrease} />
-      <FlexPar>
-        {props.guestsNumber}{' '}
-        {props.guestsNumber === 1 ? 'personne' : 'personnes'}
-      </FlexPar>
-      <RArrow size={20} onClick={props.handlePeopleIncrease} />
-    </WhiteField>
-    <WhiteField>
-      <FlexPar>
-        <p>Heure de la réservation</p>
-        <TimeList>
-          <select
-            onChange={e => props.handleHoursSelection(e)}
-            defaultValue={props.hours}
-          >
-            <option value="19">19</option>
-            <option value="20">20</option>
-            <option value="21">21</option>
-          </select>
-          <p>h</p>
-          <select onChange={e => props.handleMinutesSelection(e)}>
-            <option value="00">00</option>
-            <option value="15">15</option>
-            <option value="30">30</option>
-            {props.hours !== '21' && <option value="45">45</option>}
-          </select>
-        </TimeList>
-      </FlexPar>
-    </WhiteField>
+const DateChoice = props => {
 
-    {/* Check if discount applies */}
-    {['Dimanche', 'Lundi', 'Mardi'].includes(props.dateSentence.split(' ')[0]) && <ReducParag>20% de réduction à cette date !</ReducParag>}
+  // Check if there is a discount according to the day of the week:
+  const discountDay = ['Dimanche', 'Lundi', 'Mardi'].includes(props.dateSentence.split(' ')[0]);
 
-    <Button
-      onClick={props.handleNextStep}
-      bgColor="#012f6a"
-      borderColor="#012f6a"
-      color="#fff"
-      isCursive={true}
-    >
-      Continuer
-    </Button>
-  </>
-);
+  if (discountDay) {
+    props.applyDiscount();
+  } else {
+    props.removeDiscount();
+  }
+
+  return (
+    <>
+      <WhiteField>
+        <LArrow size={20} onClick={props.handleDateDecrease} />
+        <FlexPar>{props.dateSentence}</FlexPar>
+        <RArrow size={20} onClick={props.handleDateIncrease} />
+      </WhiteField>
+      <WhiteField>
+        <LArrow size={20} onClick={props.handlePeopleDecrease} />
+        <FlexPar>
+          {props.guestsNumber}{' '}
+          {props.guestsNumber === 1 ? 'personne' : 'personnes'}
+        </FlexPar>
+        <RArrow size={20} onClick={props.handlePeopleIncrease} />
+      </WhiteField>
+      <WhiteField>
+        <FlexPar>
+          <p>Heure de la réservation</p>
+          <TimeList>
+            <select
+              onChange={e => props.handleHoursSelection(e)}
+              defaultValue={props.hours}
+            >
+              <option value="19">19</option>
+              <option value="20">20</option>
+              <option value="21">21</option>
+            </select>
+            <p>h</p>
+            <select onChange={e => props.handleMinutesSelection(e)}>
+              <option value="00">00</option>
+              <option value="15">15</option>
+              <option value="30">30</option>
+              {props.hours !== '21' && <option value="45">45</option>}
+            </select>
+          </TimeList>
+        </FlexPar>
+      </WhiteField>
+
+      {/* Check if discount applies */}
+      {props.discount && <ReducParag>20% de réduction à cette date !</ReducParag>}
+
+      <Button
+        onClick={props.handleNextStep}
+        bgColor="#012f6a"
+        borderColor="#012f6a"
+        color="#fff"
+        isCursive={true}
+      >
+        Continuer
+      </Button>
+    </>
+  );
+};
 
 export default DateChoice;

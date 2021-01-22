@@ -86,9 +86,7 @@ const PersonalInfo = props => (
       </p>
 
       {/* Check if discount applies */}
-      {['Dimanche', 'Lundi', 'Mardi'].includes(
-        props.dateSentence.split(' ')[0]
-      ) && <ReducParag>20% de réduction à cette date !</ReducParag>}
+      {props.discount && <ReducParag>20% de réduction à cette date !</ReducParag>}
 
       <form>
         <input

@@ -52,8 +52,8 @@ const Reserver = props => {
 
   // Date:
   const todayDate = new Date(Date.now());
-
   const [date, setDate] = useState(todayDate);
+
   // Sentence to display in the date input:
   const dateSentence = `${weekDays[date.getDay()]} ${date.getDate()} ${months[date.getMonth()]} ${date.getFullYear()}`;
 
@@ -117,6 +117,17 @@ const Reserver = props => {
     }
   }
 
+  // Handle discount:
+  const [discount, setDiscount] = useState(false);
+
+  const applyDiscount = () => {
+    setDiscount(true);
+  }
+
+  const removeDiscount = () => {
+    setDiscount(false);
+  }
+
   // Handle booking submission:
   const [bookingConfirmation, setBookingConfirmation] = useState('');
   const [errorInBooking, setErrorInBooking] = useState(null);
@@ -128,7 +139,7 @@ const Reserver = props => {
     e.preventDefault();
     setIsLoading(true);
 
-    // To format date for database and admin panel:
+    // Format date for database and admin panel (YYYY-MM-DD):
     const formatedDate = `${date.getFullYear()}-${(date.getMonth() + 1).toString().padStart(2, '0')}-${date.getDate().toString().padStart(2, '0')}`;
 
     const bookingRef = {
@@ -152,7 +163,8 @@ const Reserver = props => {
         body: JSON.stringify({
           bookingId: ref.id,
           bookingRef,
-          type: 'booking'
+          type: 'booking',
+          discount
         })
       });
       goToNextStep();
@@ -163,7 +175,7 @@ const Reserver = props => {
     }
   }
 
-  // Display on screen according to current booking step:
+  // Display current booking step:
   return (
     <>
       <Head>
@@ -206,6 +218,9 @@ const Reserver = props => {
             handleHoursSelection={handleHoursSelection}
             handleMinutesSelection={handleMinutesSelection}
             handleNextStep={handleNextStep}
+            discount={discount}
+            applyDiscount={applyDiscount}
+            removeDiscount={removeDiscount}
           />
         )}
 
@@ -219,6 +234,7 @@ const Reserver = props => {
             handleInputValues={handleInputValues}
             handleSubmit={handleSubmit}
             errorInBooking={errorInBooking}
+            discount={discount}
           />
         )}
 

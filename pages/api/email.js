@@ -43,8 +43,29 @@ const sendConfirmationEmail = async (req, res) => {
     confirmation = {
       from: '"Crêperie Augustine" <contact@creperie-augustine.com>',
       to: `${req.body.bookingRef.email}`,
-      subject: "Crêperie Augustine - Votre réservation !",
-      html: `
+      subject: "Crêperie Augustine - Votre réservation !"
+    }
+
+    if (req.body.discount) {
+      confirmation.html = `
+        <p>${req.body.bookingRef.firstName},</p>
+        <br />
+        <p>Merci pour votre réservation ! Celle-ci a bien été prise en compte avec la référence <strong>${req.body.bookingId}</strong>.</p>
+        <p>Voici un récapitulatif des informations liées à votre réservation :</p>
+        <ul>
+          <li>Nom de la réservation : ${req.body.bookingRef.lastName}</li>
+          <li>Nombre de convives : ${req.body.bookingRef.guestsNumber}</li>
+          <li>Date : ${(new Date(req.body.bookingRef.date)).toLocaleDateString('fr-FR')}</li>
+          <li>Heure : ${req.body.bookingRef.time}</li>
+        </ul>
+        <p>Vous bénéficiez de <strong>20% de réduction</strong> sur votre addition à cette date !</p>
+        <br />
+        <p>Nous vous remercions pour votre réservations et vous attendons avec impatience chez nous !</p>
+        <br />
+        <p>L'équipe de la <a href="https://creperie-augustine.com" target="_blank">crêperie Augustine</a>.</p>
+      `
+    } else {
+      confirmation.html = `
         <p>${req.body.bookingRef.firstName},</p>
         <br />
         <p>Merci pour votre réservation ! Celle-ci a bien été prise en compte avec la référence <strong>${req.body.bookingId}</strong>.</p>
