@@ -41,14 +41,6 @@ const GlobalStyle = createGlobalStyle`
     padding: 0;
   }
 
-  a {
-    color: white;
-    text-decoration: none;
-    &:visited {
-      color: white;
-    }
-  }
-
   h1 {
     color: #012f6a;
     font-family: 'Dancing-Script', Georgia, serif;
@@ -67,19 +59,17 @@ const GlobalStyle = createGlobalStyle`
     color: #ac6c14;
     font-weight: 600;
     text-align: center;
-    & > em {
+    & > .cursive {
       color: #012f6a;
       font-family: 'Dancing-Script', Georgia, serif;
       font-size: 1.6rem;
     }
-    & > strong {
+    & > .white {
       color: white;
-      font-family: 'Dancing-Script', Georgia, serif;
-      font-size: 1.6rem;
     }
     @media only screen and (min-width: 1200px) {
       font-size: 2rem;
-      & > em, & > strong {
+      & > .cursive {
         font-size: 2rem;
       }
     }
@@ -93,22 +83,11 @@ const GlobalStyle = createGlobalStyle`
   p {
     margin: auto;
     max-width: 1200px;
-    padding: 0 20px;
     text-align: center;
   }
 
-  ul {
-    padding-left: 0;
-  }
-
-  li {
-    list-style-type: none;
-    list-style-position: outside;
-  }
-
-  button {
-    font-family: 'Raleway', sans-serif;
-    font-size: 1rem;
+  a {
+    text-decoration: none;
   }
 `;
 

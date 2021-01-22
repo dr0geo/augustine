@@ -22,33 +22,3 @@ export const RestaurantCard = styled.div`
     justify-content: center;
   }
 `;
-
-export const PromessCard = styled.div`
-  background: none;
-  justify-content: space-around;
-  margin: 20px 20px;
-  width: 250px;
-  & > figure {
-    & > div {
-      align-items: center;
-      background: white;
-      border-radius: 100%;
-      display: flex;
-      height: 70px;
-      justify-content: center;
-      margin: auto;
-      width: 70px;
-    }
-  }
-  & > figcaption {
-    color: ${props => props.isWhite ? 'white' : 'black'};
-    text-align: center;
-    & > h3 {
-      font-weight: 600;
-      margin-bottom: 0;
-    }
-    & > p {
-      margin-top: 0;
-    }
-  }
-`;

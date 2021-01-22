@@ -2,9 +2,8 @@ import styled, { keyframes } from 'styled-components';
 import Image from 'next/image';
 import Link from 'next/link';
 
-import { FlexDiv, Section } from '@/elements/Divs';
-import { PromessCard } from '@/elements/Cards';
-import { WhiteButton } from '@/elements/Buttons';
+import { Section } from '@/elements/Divs';
+import { Button } from '@/elements/Buttons';
 
 const shakingAnimation = keyframes`
   0% {
@@ -35,10 +34,10 @@ const Book = () => {
       <h2>
         Réservez
         <br />
-        <strong>votre table</strong>
+        <span className="cursive white">votre table</span>
       </h2>
-      <FlexDiv>
-        <PromessCard isWhite={true}>
+      <div>
+        <div>
           <figure>
             <ShakingDiv>
               <Image
@@ -53,11 +52,11 @@ const Book = () => {
             <h3>Réserver une table</h3>
             <p>dans notre restaurant à Paris 1er arrondissement</p>
             <Link href="/reserver" passHref>
-              <WhiteButton>J'y vais</WhiteButton>
+              <Button bgColor="#012f6a" color="#fff">J'y vais</Button>
             </Link>
           </figcaption>
-        </PromessCard>
-        <PromessCard isWhite={true}>
+        </div>
+        <div>
           <figure>
             <ShakingDiv>
               <Image
@@ -72,11 +71,11 @@ const Book = () => {
             <h3>Click & Collect</h3>
             <p>nous vous appelons lorsque votre commande est prête</p>
             <Link href="/click-n-collect" passHref>
-              <WhiteButton>J'y vais</WhiteButton>
+              <Button bgColor="#012f6a" color="#fff">J'y vais</Button>
             </Link>
           </figcaption>
-        </PromessCard>
-        <PromessCard isWhite={true}>
+        </div>
+        <div>
           <figure>
             <ShakingDiv>
               <Image
@@ -90,12 +89,12 @@ const Book = () => {
           <figcaption>
             <h3>Livraison à domicile</h3>
             <p>la carte d'Augustine à déguster chez vous</p>
-            <WhiteButton href="#" rel="noopener, noreferrer" target="_blank">
+            <Button href="#" rel="noopener, noreferrer" target="_blank" bgColor="#012f6a" color="#fff">
               J'y vais
-            </WhiteButton>
+            </Button>
           </figcaption>
-        </PromessCard>
-      </FlexDiv>
+        </div>
+      </div>
     </Section>
   );
 };

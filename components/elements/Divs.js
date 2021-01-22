@@ -6,7 +6,7 @@ export const Section = styled.section`
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  padding: 30px 0;
+  padding: 30px 3%;
 `;
 
 export const MenuSection = styled.section`
@@ -50,21 +50,6 @@ export const CnCMenuSection = styled.section`
       grid-row: 1 / 3;
       grid-column: 3 / 4;
     }
-  }
-`;
-
-export const FlexDiv = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  margin: auto;
-  @media only screen and (min-width: 1200px) {
-    justify-content: space-around;
-    max-width: 1200px;
-  }
-  /* For home page paragraph in Presentation.js: */
-  & + p {
-    margin: 20px auto;
   }
 `;
 

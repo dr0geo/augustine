@@ -1,11 +1,11 @@
 import styled from 'styled-components';
 import { ArrowCircleUpOutline } from '@styled-icons/evaicons-outline';
 
-export const BlackButton = styled.a`
-  background-color: white;
-  border: 2px solid black;
+export const Button = styled.a`
+  background-color: ${props => props.bgColor};
+  border: 2px solid ${props => props.borderColor ? props.borderColor : props.color};
   border-radius: 10px;
-  color: black;
+  color: ${props => props.color};
   display: block;
   font-weight: 600;
   padding: 10px 20px;
@@ -15,31 +15,13 @@ export const BlackButton = styled.a`
   transition: background-color 0.2s ease-in-out, border-color 0.2s ease-in-out,
     color 0.2s ease-in-out;
   &:visited {
-    color: black;
+    color: ${props => props.color};
   }
   @media only screen and (min-width: 1200px) {
     @media (any-hover: hover) {
       &:hover {
-        background-color: black;
-        color: white;
-        cursor: pointer;
-      }
-    }
-  }
-`;
-
-export const WhiteButton = styled(BlackButton)`
-  background-color: transparent;
-  border-color: white;
-  color: white;
-  &:visited {
-    color: white;
-  }
-  @media only screen and (min-width: 1200px) {
-    @media (any-hover: hover) {
-      &:hover {
-        background-color: white;
-        color: #012f6a;
+        background-color: ${props => props.color};
+        color: ${props => props.bgColor};
       }
     }
   }

@@ -2,9 +2,7 @@ import styled from 'styled-components';
 import Link from 'next/link';
 import { FacebookCircle, Instagram } from '@styled-icons/boxicons-logos';
 
-import { FlexDiv } from '@/elements/Divs';
-
-const FooterFlexDiv = styled(FlexDiv)`
+const FooterFlexDiv = styled.div`
   & > div:last-of-type > p:first-of-type {
     text-decoration: underline;
   }
@@ -98,7 +96,7 @@ const Footer = props => {
           <h2>
             <strong>Notre adresse</strong>
           </h2>
-          <FlexDiv>
+          <div>
             <p>
               <a href="https://www.google.fr/maps/place/Augustine/@48.8598185,2.3160919,14z/data=!4m5!3m4!1s0x47e66e258641144b:0x5c25c717c82c8462!8m2!3d48.8634037!4d2.3341628" target="_blank" rel="noreferrer" title="Voir sur Google Maps">2 - 4 rue de l'Echelle
               <br />
@@ -107,7 +105,7 @@ const Footer = props => {
               <br />
               <a href="tel:+33183929448">01 83 92 94 48</a>
             </p>
-          </FlexDiv>
+          </div>
         </div>
         <div>
           <h2>

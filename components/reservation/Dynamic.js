@@ -113,6 +113,14 @@ const TimeList = styled.div`
   }
 `;
 
+const ReducParag = styled.p`
+  border: 1px solid #ac6c14;
+  color: #ac6c14;
+  font-weight: 600;
+  margin: 30px auto;
+  padding: 10px;
+`;
+
 export const DateChoice = props => (
   <Section bgColor="#e3e9ef">
     <LimitedWidthDiv>
@@ -147,6 +155,7 @@ export const DateChoice = props => (
           </TimeList>
         </FlexPar>
       </WhiteDiv>
+      {['Dimanche', 'Lundi', 'Mardi'].includes(props.dateSentence.split(' ')[0]) && <ReducParag>20% de réduction à cette date !</ReducParag>}
       <ValidateButton onClick={props.handleNextStep}>Valider</ValidateButton>
     </LimitedWidthDiv>
   </Section>
@@ -160,10 +169,11 @@ const Container = styled.div`
   margin: auto;
   max-width: 300px;
   padding: 20px;
-  & > p {
+  & p {
     font-size: 0.9rem;
     margin: 20px auto;
-    padding: 0;
+    padding-left: 0;
+    padding-right: 0;
   }
   & > form {
     & > input {
@@ -235,6 +245,7 @@ export const Personal = props => (
         <p>
           Pour {props.people} {props.people === 1 ? 'personne' : 'personnes'}, le {props.dateSentence.toLowerCase()} à {props.time}
         </p>
+        {['Dimanche', 'Lundi', 'Mardi'].includes(props.dateSentence.split(' ')[0]) && <ReducParag>20% de réduction à cette date !</ReducParag>}
         <form onSubmit={props.handleSubmit}>
           <input
             type="text"
