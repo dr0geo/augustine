@@ -14,8 +14,8 @@ import Spinner from '@/elements/Spinner';
 
 const ClicknCollect = props => {
 
-  const [isSelected, setIsSelected] = useState(0);
-  const [isCategorySelected, setIsCategorySelected] = useState(0);
+  const [selectedMainFood, setSelectedMainFood] = useState(0);
+  const [selectedSubFood, setSelectedSubFood] = useState(0);
   const [selectedFood, setSelectedFood] = useState(props.entrees);
   const [isBasketDisplayed, setIsBasketDisplayed] = useState(false);
   const [basketItems, setBasketItems] = useState([]);
@@ -31,8 +31,8 @@ const ClicknCollect = props => {
   }, [basketItems]);
   
   const handleClick = ({ target }) => {
-    setIsSelected(parseInt(target.value));
-    setIsCategorySelected(0);
+    setSelectedMainFood(parseInt(target.value));
+    setSelectedSubFood(0);
     setSelectedFood(() => {
       switch (target.value) {
         case '0':
@@ -52,7 +52,7 @@ const ClicknCollect = props => {
   };
 
   const handleCategoryClick = ({ target }) => {
-    setIsCategorySelected(parseInt(target.value));
+    setSelectedSubFood(parseInt(target.value));
   };
 
   const toggleBasket = () => {
@@ -240,14 +240,14 @@ const ClicknCollect = props => {
       <CnCMenuSection>
         <h2>Parcourez<br /><em>la carte Augustine</em></h2>
         <Categories 
-          isSelected={isSelected} 
+          selectedMainFood={selectedMainFood} 
           handleClick={handleClick}
           isCnC={true}
         />
         <OrderResults
-          isSelected={isSelected}
+          selectedMainFood={selectedMainFood}
           selectedFood={selectedFood}
-          isCategorySelected={isCategorySelected}
+          selectedSubFood={selectedSubFood}
           handleCategoryClick={handleCategoryClick}
           addToBasket={addToBasket}
           isBasketDisplayed={isBasketDisplayed}

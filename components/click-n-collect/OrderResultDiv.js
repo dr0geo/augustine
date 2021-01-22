@@ -109,7 +109,7 @@ const OrderResultDiv = props => {
   // Manage food name according to options selected:
   let foodName;
 
-  if (props.isSelected === 3) {
+  if (props.selectedMainFood === 3) {
     if (option === '') {
       foodName = `${typeOfFood} ${props.food.name.toLowerCase()}`;
     } else {
@@ -182,8 +182,8 @@ const OrderResultDiv = props => {
       <div>
         <h3>{foodName}</h3>
         {props.food.restrictions && <><p><em>{props.food.restrictions}</em></p><br /></>}
-        {props.isSelected !== 5 ? props.food.description && <p>{props.food.description}</p> : <p>{props.food.descriptionCnC}</p>}
-        {props.isSelected === 3 && (
+        {props.selectedMainFood !== 5 ? props.food.description && <p>{props.food.description}</p> : <p>{props.food.descriptionCnC}</p>}
+        {props.selectedMainFood === 3 && (
           <form>
             <div>
               <input

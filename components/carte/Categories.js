@@ -38,20 +38,20 @@ const ImageDiv = styled.div`
 `;
 
 const Category = styled.button`
-  background-color: ${props => (props.isSelected ? '#012f6a' : 'white')};
-  border: 1px solid ${props => (props.isSelected ? '#012f6a' : '#e3e9ef')};
+  background-color: ${props => (props.selectedMainFood ? '#012f6a' : 'white')};
+  border: 1px solid ${props => (props.selectedMainFood ? '#012f6a' : '#e3e9ef')};
   border-radius: 5px;
-  color: ${props => (props.isSelected ? 'white' : 'black')};
+  color: ${props => (props.selectedMainFood ? 'white' : 'black')};
   padding: 15px 10px;
   transition: background-color 0.3s ease-in-out;
   width: 100%;
   @media only screen and (min-width: 1200px) {
     /* Display matchin icon when selected */
-    ${props => props.isSelected && '& + div { opacity: 1 }'}
+    ${props => props.selectedMainFood && '& + div { opacity: 1 }'}
     width: 160px;
     @media (any-hover: hover) {
       &:hover {
-        ${props => !props.isSelected && 'background-color: #e3e9ef'};
+        ${props => !props.selectedMainFood && 'background-color: #e3e9ef'};
         cursor: pointer;
         /* Display matching icon when hovering */
         & + div {
@@ -67,7 +67,7 @@ const Categories = props => {
     <Container isCnC={props.isCnC}>
       <FlexDiv>
         <Category
-          isSelected={props.isSelected === 0}
+          selectedMainFood={props.selectedMainFood === 0}
           value={0}
           onClick={props.handleClick}
         >
@@ -84,7 +84,7 @@ const Categories = props => {
       </FlexDiv>
       <FlexDiv>
         <Category
-          isSelected={props.isSelected === 1}
+          selectedMainFood={props.selectedMainFood === 1}
           value={1}
           onClick={props.handleClick}
         >
@@ -101,7 +101,7 @@ const Categories = props => {
       </FlexDiv>
       <FlexDiv>
         <Category
-          isSelected={props.isSelected === 2}
+          selectedMainFood={props.selectedMainFood === 2}
           value={2}
           onClick={props.handleClick}
         >
@@ -118,7 +118,7 @@ const Categories = props => {
       </FlexDiv>
       <FlexDiv>
         <Category
-          isSelected={props.isSelected === 3}
+          selectedMainFood={props.selectedMainFood === 3}
           value={3}
           onClick={props.handleClick}
         >
@@ -135,7 +135,7 @@ const Categories = props => {
       </FlexDiv>
       <FlexDiv>
         <Category
-          isSelected={props.isSelected === 4}
+          selectedMainFood={props.selectedMainFood === 4}
           value={4}
           onClick={props.handleClick}
         >
@@ -152,7 +152,7 @@ const Categories = props => {
       </FlexDiv>
       <FlexDiv>
         <Category
-          isSelected={props.isSelected === 5}
+          selectedMainFood={props.selectedMainFood === 5}
           value={5}
           onClick={props.handleClick}
         >

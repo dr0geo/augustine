@@ -68,14 +68,14 @@ const CategorySelecter = styled.div`
 
 const Category = styled.button`
   background-color: ${props =>
-    props.isCategorySelected ? '#012f6a' : 'white'};
+    props.selectedSubFood ? '#012f6a' : 'white'};
   border: 1px solid
-    ${props => (props.isCategorySelected ? '#012f6a' : '#e3e9ef')};
+    ${props => (props.selectedSubFood ? '#012f6a' : '#e3e9ef')};
   border-radius: 5px;
-  color: ${props => (props.isCategorySelected ? 'white' : 'black')};
+  color: ${props => (props.selectedSubFood ? 'white' : 'black')};
   padding: 15px 10px;
   @media only screen and (min-width: 1200px) {
-    background-color: ${props =>props.isCategorySelected ? '#e3e9ef' : 'white'};
+    background-color: ${props =>props.selectedSubFood ? '#e3e9ef' : 'white'};
     border: 1px solid #e3e9ef;
     border-radius: 0;
     color: #012f6a;
@@ -98,7 +98,7 @@ const Results = props => {
   let results;
 
   // Check if there are sub-arrays:
-  [0, 1, 5].includes(props.isSelected)
+  [0, 1, 5].includes(props.selectedMainFood)
     ? // Display food that has no subcategory:
       (results = props.selectedFood.map(food => (
         <ResultDiv key={uuid()}>
@@ -115,14 +115,14 @@ const Results = props => {
         </ResultDiv>
       )))
     : // Display only the subselection selected via tab:
-      (results = props.selectedFood[props.isCategorySelected].data.map(food => (
+      (results = props.selectedFood[props.selectedSubFood].data.map(food => (
         <ResultDiv key={uuid()}>
           <div>
             <h3>{!food.options ? food.name : food.options.join(' - ')}</h3>
             {food.description && <p>{food.description}</p>}
           </div>
           <div className="price">
-            <p>{food.price.toFixed(2)}€{props.isSelected === 3 && <span className="italic"> (gaufre +1€)</span>}</p>
+            <p>{food.price.toFixed(2)}€{props.selectedMainFood === 3 && <span className="italic"> (gaufre +1€)</span>}</p>
           </div>
         </ResultDiv>
       )));
@@ -130,19 +130,19 @@ const Results = props => {
   return (
     <Container
       // Adapt height of container for short list of food items:
-      isShort={props.isSelected}
+      isShort={props.selectedMainFood}
       // Vertical offset for tabs insertion:
-      setVertOffset={[2, 3, 4].includes(props.isSelected)}
+      setVertOffset={[2, 3, 4].includes(props.selectedMainFood)}
       // Adapt height of container for short list of drinks:
-      isShortDrink={props.isSelected === 4 && [1, 2].includes(props.isCategorySelected)}
+      isShortDrink={props.selectedMainFood === 4 && [1, 2].includes(props.selectedSubFood)}
     >
       {/* Display a tab according to which category of food is selected */}
-      {[2, 3, 4].includes(props.isSelected) && (
+      {[2, 3, 4].includes(props.selectedMainFood) && (
         <CategorySelecter setVertOffset={true}>
           {props.selectedFood.map((food, index) => (
             <Category
               key={uuid()}
-              isCategorySelected={props.isCategorySelected === index}
+              selectedSubFood={props.selectedSubFood === index}
               value={index}
               onClick={props.handleCategoryClick}
             >

@@ -15,11 +15,11 @@ const MenuSection = styled.section`
 const Menu = props => {
   return (
     <MenuSection>
-      <Categories isSelected={props.isSelected} handleClick={props.handleClick} />
+      <Categories selectedMainFood={props.selectedMainFood} handleClick={props.handleClick} />
       <Results
-        isSelected={props.isSelected}
+        selectedMainFood={props.selectedMainFood}
         selectedFood={props.selectedFood} 
-        isCategorySelected={props.isCategorySelected}
+        selectedSubFood={props.selectedSubFood}
         handleCategoryClick={props.handleCategoryClick}
       />
     </MenuSection>

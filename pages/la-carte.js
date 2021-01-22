@@ -3,21 +3,21 @@ import { useState } from 'react';
 import Head from 'next/head';
 
 import Header from '@/components/Header';
-import Categories from '@/components/carte/Categories';
-import Results from '@/components/carte/Results';
 import Menu from '@/components/carte/Menu';
 import Footer from '@/components/Footer';
 
-
 const Carte = props => {
-  const [isSelected, setIsSelected] = useState(0);
-  const [isCategorySelected, setIsCategorySelected] = useState(0);
+  // To change display of selected main category of food button:
+  const [selectedMainFood, setSelectedMainFood] = useState(0);
+  // To change display of selected subcategory of food tab: 
+  const [selectedSubFood, setSelectedSubFood] = useState(0);
+  // To display food items:
   const [selectedFood, setSelectedFood] = useState(props.entrees);
   
-
+  // Select main type of food:
   const handleClick = ({ target }) => {
-    setIsSelected(parseInt(target.value));
-    setIsCategorySelected(0);
+    setSelectedMainFood(parseInt(target.value));
+    setSelectedSubFood(0);
     setSelectedFood(() => {
       switch (target.value) {
         case '0':
@@ -36,8 +36,9 @@ const Carte = props => {
     });
   };
 
+  // Select subtype of food:
   const handleCategoryClick = ({ target }) => {
-    setIsCategorySelected(parseInt(target.value));
+    setSelectedSubFood(parseInt(target.value));
   };
 
   return (
@@ -60,10 +61,10 @@ const Carte = props => {
       />
       <h2>Parcourez<br /><span className="cursive">la carte Augustine</span></h2>
       <Menu 
-        isSelected={isSelected}
+        selectedMainFood={selectedMainFood}
+        selectedSubFood={selectedSubFood}
         handleClick={handleClick}
         selectedFood={selectedFood}
-        isCategorySelected={isCategorySelected}
         handleCategoryClick={handleCategoryClick}
       />
       <Footer />
