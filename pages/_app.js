@@ -93,10 +93,6 @@ const GlobalStyle = createGlobalStyle`
   a {
     text-decoration: none;
   }
-
-  .italic {
-      font-style: italic;
-  }
 `;
 
 const App = ({ Component, pageProps }) => {

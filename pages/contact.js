@@ -16,7 +16,7 @@ const Contact = props => {
         />
       </Head>
       <Header
-        isSelected={6}
+        isSelected={5}
         isClicked={props.isClicked}
         toggleMenu={props.toggleMenu}
         hideMenu={props.hideMenu}

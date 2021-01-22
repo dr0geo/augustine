@@ -127,10 +127,14 @@ const Header = props => {
           <Anchor onClick={props.hideMenu} isSelected={props.isSelected === 3}>
             Réservez une table
           </Anchor>
-        </Link>Header
-Header
+        </Link>
+        <Link href="/click-n-collect" passHref>
+          <Anchor onClick={props.hideMenu} isSelected={props.isSelected === 4}>
+            Click & Collect
+          </Anchor>
+        </Link>
         <Link href="/contact" passHref>
-          <Anchor onClick={props.hideMenu} isSelected={props.isSelected === 6}>
+          <Anchor onClick={props.hideMenu} isSelected={props.isSelected === 5}>
             Contact
           </Anchor>
         </Link>

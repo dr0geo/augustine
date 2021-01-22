@@ -4,6 +4,9 @@ import { v1 as uuid } from 'uuid';
 const Container = styled.div`
   background-color: #e3e9ef;
   padding: 0 20px;
+  & .italic {
+    font-style: italic;
+  }
   @media only screen and (min-width: 1200px) {
     ${props => props.isShort === 0 && 'height: 290px'};
     ${props => props.isShort === 1 && 'height: 350px'};
