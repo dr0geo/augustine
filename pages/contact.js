@@ -1,6 +1,6 @@
 import Head from 'next/head';
 
-import Menu from '@/components/Menu';
+import Header from '@/components/Header';
 import ContactForm from '@/components/contact/ContactForm';
 import Footer from '@/components/Footer';
 
@@ -15,7 +15,7 @@ const Contact = props => {
           content="Contactez-nous via notre formulaire en ligne pour toute question relative à notre crêperie Parisienne, nous vous répondrons dans les plus brefs délais."
         />
       </Head>
-      <Menu
+      <Header
         isSelected={6}
         isClicked={props.isClicked}
         toggleMenu={props.toggleMenu}

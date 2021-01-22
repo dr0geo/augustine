@@ -7,7 +7,6 @@ const Container = styled.div`
   grid-template-columns: repeat(2, 1fr);
   margin: 20px auto;
   padding: 0 30px;
-
   @media only screen and (min-width: 520px) {
     grid-template-columns: repeat(3, 1fr);
   }
@@ -47,12 +46,14 @@ const Category = styled.button`
   transition: background-color 0.3s ease-in-out;
   width: 100%;
   @media only screen and (min-width: 1200px) {
-    ${props => props.isSelected && '& + div { opacity: 1 }'};
+    /* Display matchin icon when selected */
+    ${props => props.isSelected && '& + div { opacity: 1 }'}
     width: 160px;
     @media (any-hover: hover) {
       &:hover {
         ${props => !props.isSelected && 'background-color: #e3e9ef'};
         cursor: pointer;
+        /* Display matching icon when hovering */
         & + div {
           opacity: 1;
         }

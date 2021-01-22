@@ -3,7 +3,7 @@ import { useState } from 'react';
 import styled from 'styled-components';
 
 import { db } from '@/utils/firebase';
-import Menu from '@/components/Menu';
+import Header from '@/components/Header';
 import { Section } from '@/elements/Divs';
 import { DateChoice, Personal, Success } from '@/components/reservation/Dynamic';
 import Footer from '@/components/Footer';
@@ -184,7 +184,7 @@ const Reserver = props => {
         />
       </Head>
       {isLoading && <Spinner />}
-      <Menu
+      <Header
         isSelected={3}
         isClicked={props.isClicked}
         toggleMenu={props.toggleMenu}

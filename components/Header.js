@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { CloseOutline } from '@styled-icons/evaicons-outline';
 import { Menu as MenuIcon } from '@styled-icons/evaicons-solid';
 
-const Header = styled.header`
+const StyledHeader = styled.header`
   align-items: center;
   background: url(${props => props.bg});
   background-position: center;
@@ -107,9 +107,9 @@ const logo = (
   </Logo>
 );
 
-const Menu = props => {
+const Header = props => {
   return (
-    <Header bg={props.bg}>
+    <StyledHeader bg={props.bg}>
       {props.logo ? logo : <h1>{props.title}</h1>}
       <MenuIc onClick={props.toggleMenu} size={40} />
       <FlexDiv isClicked={props.isClicked}>
@@ -127,12 +127,8 @@ const Menu = props => {
           <Anchor onClick={props.hideMenu} isSelected={props.isSelected === 3}>
             Réservez une table
           </Anchor>
-        </Link>
-        <Link href="/click-n-collect" passHref>
-          <Anchor onClick={props.hideMenu} isSelected={props.isSelected === 4}>
-            Click & Collect
-          </Anchor>
-        </Link>
+        </Link>Header
+Header
         <Link href="/contact" passHref>
           <Anchor onClick={props.hideMenu} isSelected={props.isSelected === 6}>
             Contact
@@ -140,8 +136,8 @@ const Menu = props => {
         </Link>
         <Close onClick={props.hideMenu} size={70} />
       </FlexDiv>
-    </Header>
+    </StyledHeader>
   );
 };
 
-export default Menu;
+export default Header;

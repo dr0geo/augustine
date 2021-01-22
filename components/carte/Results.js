@@ -20,32 +20,29 @@ const ResultDiv = styled.div`
   & + & {
     border-top: 1px solid lightgray;
   }
-  & > div > h3 {
+  & h3 {
     margin: 0 auto;
   }
-  & > div:first-of-type > p {
-    margin-top: 5px;
+  & p {
+    margin-top: 10px;
   }
-  & > div:last-of-type > p {
-    margin-bottom: 0;
+  & .price {
     margin-top: 10px;
   }
   @media only screen and (min-width: 1200px) {
     flex-direction: row;
     justify-content: space-between;
-    & > div > h3 {
+    & h3 {
       text-align: left;
     }
-    & > div > p {
+    & p {
       max-width: 700px;
       padding: 0;
       text-align: left;
     }
-    & > div:last-of-type {
+    & .price {
       align-items: center;
       display: flex;
-    }
-    & > div:last-of-type > p {
       margin-top: 0;
     }
   }
@@ -61,7 +58,7 @@ const CategorySelecter = styled.div`
     gap: 0;
     grid-template-columns: repeat(4, 1fr);
     margin-left: -20px;
-    ${props => props.setVertOffset && 'margin-top: -49px'};
+    ${props => props.setVertOffset && 'margin-top: -48px'};
     padding: 0;
   }
 `;
@@ -103,33 +100,40 @@ const Results = props => {
       (results = props.selectedFood.map(food => (
         <ResultDiv key={uuid()}>
           <div>
-            <h3>{!food.options ? food.name : food.description ? food.name : food.options.join(' - ')}{food.restrictions && (<em> ({food.restrictions})</em>)}</h3>
+            <h3>
+              {!food.options ? food.name : food.description ? food.name : food.options.join(' - ')}
+              {food.restrictions && (<span className="italic"> ({food.restrictions})</span>)}
+            </h3>
             {food.description && <p>{food.description}</p>}
           </div>
-          <div>
+          <div className="price">
             <p>{food.price.toFixed(2)}€</p>
           </div>
         </ResultDiv>
       )))
-    : // Display only the subselection selected via selected food and selected subcategory of that food:
+    : // Display only the subselection selected via tab:
       (results = props.selectedFood[props.isCategorySelected].data.map(food => (
         <ResultDiv key={uuid()}>
           <div>
             <h3>{!food.options ? food.name : food.options.join(' - ')}</h3>
             {food.description && <p>{food.description}</p>}
           </div>
-          <div>
-            <p>{food.price.toFixed(2)}€{props.isSelected === 3 && <em> (gaufre +1€)</em>}</p>
+          <div className="price">
+            <p>{food.price.toFixed(2)}€{props.isSelected === 3 && <span className="italic"> (gaufre +1€)</span>}</p>
           </div>
         </ResultDiv>
       )));
 
   return (
     <Container
+      // Adapt height of container for short list of food items:
       isShort={props.isSelected}
+      // Vertical offset for tabs insertion:
       setVertOffset={[2, 3, 4].includes(props.isSelected)}
+      // Adapt height of container for short list of drinks:
       isShortDrink={props.isSelected === 4 && [1, 2].includes(props.isCategorySelected)}
     >
+      {/* Display a tab according to which category of food is selected */}
       {[2, 3, 4].includes(props.isSelected) && (
         <CategorySelecter setVertOffset={true}>
           {props.selectedFood.map((food, index) => (
@@ -139,11 +143,13 @@ const Results = props => {
               value={index}
               onClick={props.handleCategoryClick}
             >
+              {/* Name of the tab */}
               {food.title}
             </Category>
           ))}
         </CategorySelecter>
       )}
+      {/* All results divs */}
       {results}
     </Container>
   );

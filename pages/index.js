@@ -1,6 +1,6 @@
 import Head from 'next/head';
 
-import Menu from '@/components/Menu';
+import Header from '@/components/Header';
 import Presentation from '@/components/accueil/Presentation';
 import Promesse from '@/components/accueil/Promesse';
 import RecipesGrid from '@/components/accueil/Recettes';
@@ -19,7 +19,7 @@ const Accueil = props => {
           content="Bienvenue sur le site de la crêperie Augustine située à Paris 1er arrondissement. Laissez-vous tenter par nos succulentes recettes !"
         />
       </Head>
-      <Menu 
+      <Header 
         isSelected={1}
         isClicked={props.isClicked}
         toggleMenu={props.toggleMenu}

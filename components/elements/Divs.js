@@ -9,15 +9,6 @@ export const Section = styled.section`
   padding: 30px 3%;
 `;
 
-export const MenuSection = styled.section`
-  @media only screen and (min-width: 1200px) {
-    display: flex;
-    justify-content: center;
-    margin: 30px auto;
-    max-width: 1160px;
-  }
-`;
-
 export const CnCMenuSection = styled.section`
   /* Hide desktop menu when on a mobile version */
   &::last-child {

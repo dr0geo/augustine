@@ -2,10 +2,10 @@ import { db } from '@/utils/firebase';
 import { useState } from 'react';
 import Head from 'next/head';
 
-import Menu from '@/components/Menu';
+import Header from '@/components/Header';
 import Categories from '@/components/carte/Categories';
 import Results from '@/components/carte/Results';
-import { MenuSection } from '@/components/elements/Divs';
+import Menu from '@/components/carte/Menu';
 import Footer from '@/components/Footer';
 
 
@@ -50,7 +50,7 @@ const Carte = props => {
           content="Découvrez la carte de nos différentes galettes et crêpes, ainsi que nos formules, boissons, salades et entrées. Nous serons ravis de vous accueillir dans notre restaurant Parisien."
         />
       </Head>
-      <Menu
+      <Header
         isSelected={2}
         isClicked={props.isClicked}
         toggleMenu={props.toggleMenu}
@@ -58,16 +58,14 @@ const Carte = props => {
         bg="/images/background/carte.webp"
         title="La Carte"
       />
-      <h2>Parcourez<br /><em>la carte Augustine</em></h2>
-      <MenuSection>
-        <Categories isSelected={isSelected} handleClick={handleClick} />
-        <Results
-          isSelected={isSelected}
-          selectedFood={selectedFood}
-          isCategorySelected={isCategorySelected}
-          handleCategoryClick={handleCategoryClick}
-        />
-      </MenuSection>
+      <h2>Parcourez<br /><span className="cursive">la carte Augustine</span></h2>
+      <Menu 
+        isSelected={isSelected}
+        handleClick={handleClick}
+        selectedFood={selectedFood}
+        isCategorySelected={isCategorySelected}
+        handleCategoryClick={handleCategoryClick}
+      />
       <Footer />
     </>
   );

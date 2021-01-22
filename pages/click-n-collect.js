@@ -3,7 +3,7 @@ import Head from 'next/head';
 import { useState, useEffect } from 'react';
 import { v1 as uuid } from 'uuid';
 
-import Menu from '@/components/Menu';
+import Header from '@/components/Header';
 import Categories from '@/components/carte/Categories';
 import OrderResults from '@/components/click-n-collect/OrderResults';
 import Footer from '@/components/Footer';
@@ -228,7 +228,7 @@ const ClicknCollect = props => {
         />
       </Head>
       {isLoading && <Spinner />}
-      <Menu
+      <Header
         isSelected={4}
         isClicked={props.isClicked}
         toggleMenu={props.toggleMenu}
