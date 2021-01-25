@@ -55,6 +55,7 @@ const AdminPanel = () => {
     const unsubscribe = firebase.auth().onAuthStateChanged(user => {
       if (user) {
         setAdminLoggedIn(true);
+        handleDeleteHistory();
         setIsLoading(false);
       } else {
         setIsLoading(false);
@@ -62,10 +63,6 @@ const AdminPanel = () => {
     });
     return () => unsubscribe();
   }, []);
-
-  useEffect(() => {
-    handleDeleteHistory();
-  }, [])
 
   const handleLogout = async () => {
     setIsLoading(true);
