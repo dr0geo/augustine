@@ -240,6 +240,18 @@ const ClicknCollect = props => {
           name="description"
           content="Commandez en ligne dans notre crêperie Parisienne, et venez récupérer directement votre commande une fois prête !"
         />
+        
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://creperie-augustine.com/click-n-collect" />
+        <meta property="og:title" content="Crêperie Augustine | Click & Collect" />
+        <meta property="og:description" content="Commandez en ligne dans notre crêperie Parisienne, et venez récupérer directement votre commande une fois prête !" />
+        <meta property="og:image" content="/images/logo/logoOG.webp" />
+
+        <meta property="twitter:card" content="summary_large_image" />
+        <meta property="twitter:url" content="https://creperie-augustine.com/click-n-collect" />
+        <meta property="twitter:title" content="Crêperie Augustine | Click & Collect" />
+        <meta property="twitter:description" content="Commandez en ligne dans notre crêperie Parisienne, et venez récupérer directement votre commande une fois prête !" />
+        <meta property="twitter:image" content="/images/logo/logoOG.webp" />
       </Head>
 
       {isLoading && <Spinner />}

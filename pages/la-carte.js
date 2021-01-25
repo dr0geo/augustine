@@ -46,11 +46,21 @@ const Carte = props => {
       <Head>
         <title>Crêperie Augustine | La Carte</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta
-          name="description"
-          content="Découvrez la carte de nos différentes galettes et crêpes, ainsi que nos formules, boissons, salades et entrées. Nous serons ravis de vous accueillir dans notre restaurant Parisien."
-        />
+        <meta name="description" content="Découvrez la carte de nos différentes galettes, crêpes et gaufres, ainsi que nos formules, boissons, salades et entrées. Nous serons ravis de vous accueillir dans notre restaurant Parisien !" />
+
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://creperie-augustine.com/la-carte" />
+        <meta property="og:title" content="Crêperie Augustine | La Carte" />
+        <meta property="og:description" content="Découvrez la carte de nos différentes galettes, crêpes et gaufres, ainsi que nos formules, boissons, salades et entrées. Nous serons ravis de vous accueillir dans notre restaurant Parisien !" />
+        <meta property="og:image" content="/images/logo/logoOG.webp" />
+
+        <meta property="twitter:card" content="summary_large_image" />
+        <meta property="twitter:url" content="https://creperie-augustine.com/la-carte" />
+        <meta property="twitter:title" content="Crêperie Augustine | La Carte" />
+        <meta property="twitter:description" content="Découvrez la carte de nos différentes galettes, crêpes et gaufres, ainsi que nos formules, boissons, salades et entrées. Nous serons ravis de vous accueillir dans notre restaurant Parisien !" />
+        <meta property="twitter:image" content="/images/logo/logoOG.webp" />
       </Head>
+
       <Header
         isSelected={2}
         isClicked={props.isClicked}

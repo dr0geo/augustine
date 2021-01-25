@@ -185,6 +185,18 @@ const Reserver = props => {
           name="description"
           content="Réservez votre table dans notre crêperie Parisienne directement depuis notre site !"
         />
+
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://creperie-augustine.com/reserver" />
+        <meta property="og:title" content="Crêperie Augustine | Réserver" />
+        <meta property="og:description" content="Réservez votre table dans notre crêperie Parisienne directement depuis notre site !" />
+        <meta property="og:image" content="/images/logo/logoOG.webp" />
+
+        <meta property="twitter:card" content="summary_large_image" />
+        <meta property="twitter:url" content="https://creperie-augustine.com/reserver" />
+        <meta property="twitter:title" content="Crêperie Augustine | Réserver" />
+        <meta property="twitter:description" content="Réservez votre table dans notre crêperie Parisienne directement depuis notre site !" />
+        <meta property="twitter:image" content="/images/logo/logoOG.webp" />
       </Head>
 
       {isLoading && <Spinner />}

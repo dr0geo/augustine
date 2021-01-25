@@ -14,6 +14,18 @@ const Contact = props => {
           name="description"
           content="Contactez-nous via notre formulaire en ligne pour toute question relative à notre crêperie Parisienne, nous vous répondrons dans les plus brefs délais."
         />
+
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://creperie-augustine.com/contact" />
+        <meta property="og:title" content="Crêperie Augustine | Contact" />
+        <meta property="og:description" content="Contactez-nous via notre formulaire en ligne pour toute question relative à notre crêperie Parisienne, nous vous répondrons dans les plus brefs délais." />
+        <meta property="og:image" content="/images/logo/logoOG.webp" />
+
+        <meta property="twitter:card" content="summary_large_image" />
+        <meta property="twitter:url" content="https://creperie-augustine.com/contact" />
+        <meta property="twitter:title" content="Crêperie Augustine | Contact" />
+        <meta property="twitter:description" content="Contactez-nous via notre formulaire en ligne pour toute question relative à notre crêperie Parisienne, nous vous répondrons dans les plus brefs délais." />
+        <meta property="twitter:image" content="/images/logo/logoOG.webp" />
       </Head>
       <Header
         isSelected={5}
