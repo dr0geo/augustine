@@ -63,9 +63,15 @@ export const BasketContainer = styled.div`
   transform-origin: bottom center;
   transition: transform 0.3s ease-in-out;
   width: 100vw;
-  & > li {
+  /* For sentence in case basket is empty */
+  & > p {
+    margin-bottom: 20px;
+  }
+  /* For basket items */
+  & > ul > li {
     list-style-type: none;
     padding: 30px 0;
+    /* Add, substract and delete buttons */
     & > div {
       display: flex;
       justify-content: space-around;
@@ -87,6 +93,7 @@ export const BasketContainer = styled.div`
       }
     }
   }
+  /* Separate with a small border consecutive basket items */
   & > li + li {
     border-top: 1px solid lightgray;
   }
@@ -96,7 +103,8 @@ export const BasketContainer = styled.div`
     position: ${props => props.isMobileBasket ? 'fixed' : 'static'};
     transform: ${props => props.isMobileBasket ? 'scaleY(0)' : 'scaleY(1)'};
     width: 100%;
-    & > li > div {
+    /* Add, substract and delete buttons */ 
+    & > ul > li > div {
       align-items: center;
       & > button {
         height: 30px;
@@ -126,19 +134,21 @@ const Basket = props => {
     <BasketContainer isBasketDisplayed={props.isBasketDisplayed} isMobileBasket={props.isMobileBasket}>
       <h2><span className="cursive">Mon panier</span></h2>
       {props.basketItems.length === 0 && <p>Vous n'avez pas encore d'article dans votre panier.</p>}
-      {props.basketItems.length !== 0 && props.basketItems.map(item => {
-        return (
-          <li key={uuid()}>
-            <p>{item.quantity} x {item.name}</p>
-            <p>{(item.price*item.quantity).toFixed(2)}€</p>
-            <div>
-              <button onClick={() => props.decreaseQuantity(item)}>-</button>
-              <button onClick={() => props.increaseQuantity(item)}>+</button>
-              <Bin color="#012f6a" size={30} onClick={() => props.deleteItem(item)} />
-            </div>
-          </li>
-        );
-      })}
+      {props.basketItems.length !== 0 && <ul>
+        {props.basketItems.map(item => {
+          return (
+            <li key={uuid()}>
+              <p>{item.quantity} x {item.name}</p>
+              <p>{(item.price*item.quantity).toFixed(2)}€</p>
+              <div>
+                <button onClick={() => props.decreaseQuantity(item)}>-</button>
+                <button onClick={() => props.increaseQuantity(item)}>+</button>
+                <Bin color="#012f6a" size={30} onClick={() => props.deleteItem(item)} />
+              </div>
+            </li>
+          )
+        })}
+      </ul>}
       {props.basketItems.length > 0 && 
         <>
           <Total>
