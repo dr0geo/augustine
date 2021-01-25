@@ -1,3 +1,5 @@
+import Link from 'next/link';
+import { useState } from 'react';
 import styled from 'styled-components';
 
 export const Section = styled.section`
@@ -50,3 +52,38 @@ export const CnCMenuSection = styled.section`
     }
   }
 `;
+
+// Discount pop-up:
+const StyledPopUp = styled.div`
+  background-color: #012f6a;
+  bottom: 0;
+  color: white;
+  opacity: ${props => props.isHidden ? '0' : '1'};
+  padding: 20px;
+  position: fixed;
+  text-align: center;
+  transition: opacity 0.5s ease-in-out;
+  width: 100vw;
+  z-index: 10;
+  & a {
+    border-bottom: 1px solid white;
+    color: white;
+    &:visited {
+      color: white;
+    }
+  }
+  @media (any-hover: hover) {
+    &:hover {
+      cursor: pointer;
+    }
+  }
+`;
+
+export const PopUp = () => {
+  const [isHidden, setIsHidden] = useState(false);
+  return (
+    <StyledPopUp onClick={() => setIsHidden(true)} isHidden={isHidden}>
+      Pour toute <Link href="/reserver"><a>réservation en ligne</a></Link> le dimanche, lundi ou mardi, obtenez <strong>20% de réduction</strong> sur votre addition !
+    </StyledPopUp>
+  );
+}

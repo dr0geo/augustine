@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { ArrowCircleUpOutline } from '@styled-icons/evaicons-outline';
 
 export const Button = styled.a`
   background-color: ${props => props.bgColor};
@@ -25,27 +24,6 @@ export const Button = styled.a`
         background-color: ${props => props.color};
         color: ${props => props.bgColor};
         cursor: pointer;
-      }
-    }
-  }
-`;
-
-export const ScrollToTop = styled(ArrowCircleUpOutline)`
-  display: none;
-  @media only screen and (min-width: 1200px) {
-    bottom: 40px;
-    display: block;
-    opacity: 0.8;
-    position: fixed;
-    right: 40px;
-    transform: scale(1);
-    transition: transform 0.2s ease-in-out, opacity 0.2s ease-in-out;
-    z-index: 30;
-    @media (any-hover: hover) {
-      &:hover {
-        cursor: pointer;
-        opacity: 1;
-        transform: scale(1.1);
       }
     }
   }

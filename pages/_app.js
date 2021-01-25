@@ -2,8 +2,6 @@ import { createGlobalStyle } from 'styled-components';
 import reset from 'styled-reset';
 import { useState } from 'react';
 
-import { ScrollToTop } from '@/elements/Buttons';
-
 const GlobalStyle = createGlobalStyle`
   ${reset}
 
@@ -120,14 +118,6 @@ const App = ({ Component, pageProps }) => {
         isClicked={isClicked}
         toggleMenu={toggleMenu}
         hideMenu={hideMenu}
-      />
-      <ScrollToTop
-        size={50} 
-        onClick={() => window.scrollTo({
-          top: 0,
-          left: 0,
-          behavior: 'smooth'
-        })}
       />
     </>
   );

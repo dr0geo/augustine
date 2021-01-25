@@ -1,5 +1,6 @@
 import Head from 'next/head';
 
+import { PopUp } from '@/elements/Divs';
 import Header from '@/components/Header';
 import Presentation from '@/components/accueil/Presentation';
 import Promesse from '@/components/accueil/Promesse';
@@ -19,6 +20,7 @@ const Accueil = props => {
           content="Bienvenue sur le site de la crêperie Augustine située à Paris 1er arrondissement. Laissez-vous tenter par nos succulentes recettes !"
         />
       </Head>
+      <PopUp />
       <Header 
         isSelected={1}
         isClicked={props.isClicked}
