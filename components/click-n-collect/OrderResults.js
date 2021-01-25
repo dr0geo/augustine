@@ -28,7 +28,7 @@ const CategorySelecter = styled.div`
   @media only screen and (min-width: 1200px) {
     gap: 0;
     grid-template-columns: repeat(4, 1fr);
-    ${props => props.setVertOffset && 'margin-top: -49px'};
+    ${props => props.setVertOffset && 'margin-top: -48px'};
     padding: 0;
   }
 `;
@@ -75,7 +75,7 @@ const OrderResults = props => {
         >
         </OrderResultDiv>
       )))
-    : // Display only the subselection selected via selected food and selected subcategory of that food:
+    : // Display only the subselection selected via tab:
       (results = props.selectedFood[props.selectedSubFood].data.map(food => food.id !== 48 && (
         <OrderResultDiv 
           key={food.id}
@@ -88,11 +88,15 @@ const OrderResults = props => {
 
   return (
     <Container
+      // Adapt height of container for short list of food items:
       isShort={props.selectedMainFood}
+      // Vertical offset for tabs insertion:
       setVertOffset={[2, 3, 4].includes(props.selectedMainFood)}
+      // Adapt height of container for short list of drinks:
       isShortDrink={props.selectedMainFood === 4 && [1, 2].includes(props.selectedSubFood)}
       isBasketDisplayed={props.isBasketDisplayed}
     >
+      {/* Display a tab according to which category of food is selected */}
       {[2, 3, 4].includes(props.selectedMainFood) && (
         <CategorySelecter setVertOffset={true}>
           {props.selectedFood.map((food, index) => (
@@ -102,11 +106,13 @@ const OrderResults = props => {
               value={index}
               onClick={props.handleCategoryClick}
             >
+              {/* Name of the tab */}
               {food.title}
             </Category>
           ))}
         </CategorySelecter>
       )}
+      {/* All results divs */}
       {results}
     </Container>
   );

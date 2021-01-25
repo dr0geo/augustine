@@ -10,8 +10,12 @@ const ResultDiv = styled.div`
   grid-template-rows: repeat(4, auto);
   justify-items: center;
   padding: 25px 0;
+  /* Separate each result */
   & + & {
     border-top: 1px solid lightgray;
+  }
+  & > div > h3 {
+    margin-bottom: 10px;
   }
   & > div > form {
     display: flex;
@@ -109,12 +113,14 @@ const OrderResultDiv = props => {
   // Manage food name according to options selected:
   let foodName;
 
+  // For crêpes and gaufres:
   if (props.selectedMainFood === 3) {
     if (option === '') {
       foodName = `${typeOfFood} ${props.food.name.toLowerCase()}`;
     } else {
       foodName = `${typeOfFood} ${option.toLowerCase()}`
     }
+  // All other kinds of food:
   } else {
     if (option === '') {
       foodName = props.food.name;
@@ -132,7 +138,7 @@ const OrderResultDiv = props => {
   let menuChoicesArray;
 
   if (props.food.choice) {
-    
+    // Check if there are two or three choices and store them in a fixed order:
     if (props.food.choice.choice3) {
       menuChoicesArray = [
         props.food.choice.choice1, 
@@ -147,9 +153,11 @@ const OrderResultDiv = props => {
     }
 
     if (menuChoicesArray.length === 3) {
+      // Change foodName only if all three choices are selected:
       if ([menuChoiceOne, menuChoiceTwo, menuChoiceThree].every(choice => choice !== '')) {
         foodName += ` (${menuChoiceOne}, ${typeOfFood} ${menuChoiceTwo}, ${menuChoiceThree})`;
       }
+      // Change foodName only if all two choices are selected:
     } else if (menuChoiceOne !== '' && menuChoiceTwo !== '') {
       foodName += ` (${menuChoiceOne}, ${menuChoiceTwo})`;
     }
@@ -171,6 +179,7 @@ const OrderResultDiv = props => {
 
   return (
     <ResultDiv>
+      {/* First grid item */}
       <div>
         <Image
           src="/images/icons/food-placeholder.webp"
@@ -179,10 +188,13 @@ const OrderResultDiv = props => {
           width={200}
         />
       </div>
+      {/* Second grid item */}
       <div>
         <h3>{foodName}</h3>
         {props.food.restrictions && <><p><em>{props.food.restrictions}</em></p><br /></>}
+        {/* For drinks, change description to not display alcohol */}
         {props.selectedMainFood !== 5 ? props.food.description && <p>{props.food.description}</p> : <p>{props.food.descriptionCnC}</p>}
+        {/* Choose between crêpe and gaufre */}
         {props.selectedMainFood === 3 && (
           <form>
             <div>
@@ -206,15 +218,18 @@ const OrderResultDiv = props => {
             </div>
           </form>
         )}
+        {/* Choose option */}
         {props.food.options && 
           <select onChange={handleOptionSelection}>
             <option key="initial" value="" defaultValue>Choisissez une option</option>
             {props.food.options.map(option => <option key={option} value={option}>{option}</option>)}
           </select>
         }
-        {props.food.choice && 
+        {/* Choose menu choices */}
+        {props.food.choice &&
           <>
             {menuChoicesArray.map((choice, index) => {
+              // Add crêpe or gaufre option for concerned menu choice:
               if (index === menuChoicesArray.length - 2) {
                 return (
                   <>
@@ -239,9 +254,10 @@ const OrderResultDiv = props => {
                         <label htmlFor={`gaufre-${props.food.name}`}>Gaufre</label>
                       </div>
                     </form>
+                    {/* Display a dropdown list for crêpes and gaufres */}
                     <select key={choice} onChange={e => handleMenuSelection(e, index)}>
                       <option key="initial" value="" defaultValue>Choisissez une option</option>
-
+                      {/* Options groups for crêpes/gaufres long lists */}
                       {choice.length > 14 
                         ? <><optgroup label="Classiques">
                         {choice.map(option => <option key={option} value={option}>{option}</option>).slice(0, 14)}
@@ -255,10 +271,12 @@ const OrderResultDiv = props => {
                     </select>
                   </>
                 )
+                // Galette choice:
               } else if (menuChoicesArray.length === 3 && index === 0) {
                 return (
                   <select key={choice} onChange={e => handleMenuSelection(e, index)}>
                     <option key="initial" value="" defaultValue>Choisissez une option</option>
+                    {/* Options group for long galettes lists */}
                     {choice.length > 8
                       ? <>
                       <optgroup label="Classiques">
@@ -273,9 +291,11 @@ const OrderResultDiv = props => {
                   </select>
                 )
               } else {
+                // Drink choices:
                 return (
                   <select key={choice} onChange={e => handleMenuSelection(e, index)}>
                     <option key="initial" value="" defaultValue>Choisissez une option</option>
+                    {/* Options groups for long lists of drinks */}
                     {choice.length > 16
                       ? <>
                       <optgroup label="Eau">
@@ -291,7 +311,7 @@ const OrderResultDiv = props => {
                         {choice.map(option => <option key={option} value={option}>{option}</option>).slice(14, )}
                       </optgroup>
                       </>
-
+                      // Options groups for other drinks lists:
                       : <><optgroup label="Eau">
                         {choice.map(option => <option key={option} value={option}>{option}</option>).slice(0, 2)}
                       </optgroup>
@@ -314,27 +334,32 @@ const OrderResultDiv = props => {
           </>
         }
       </div>
+      {/* Third grid item */}
       <div>
         <p>{typeOfFood === 'Gaufre' ? (props.food.price + 1).toFixed(2) : props.food.price.toFixed(2)}€</p>
       </div>
-        {props.food.options && option === '' 
-          || props.food.choice && menuChoicesArray.length === 3 && [menuChoiceOne, menuChoiceTwo, menuChoiceThree].some(item => item === '') 
-          || props.food.choice && menuChoicesArray.length === 2 && [menuChoiceOne, menuChoiceTwo].some(item => item === '')
-          ? <DisabledBasket>
-              <Basket2
-                size={40}
-                color="white"
-                title="Choisissez une option"
-              />
-            </DisabledBasket>
-          : <Basket>
-              <Basket2
-                size={40}
-                color="white"
-                onClick={() => props.addToBasket(props.food, foodName)}
-              />
-            </Basket>
-        }
+      {/* Fourth grid item */}
+      {/* For options, display disabled basket if it is not selected */}
+      {props.food.options && option === ''
+        // For menus, if one choice is not selected, display a disabled basket: 
+        || props.food.choice && menuChoicesArray.length === 3 && [menuChoiceOne, menuChoiceTwo, menuChoiceThree].some(item => item === '') 
+        || props.food.choice && menuChoicesArray.length === 2 && [menuChoiceOne, menuChoiceTwo].some(item => item === '')
+        
+        ? <DisabledBasket>
+            <Basket2
+              size={40}
+              color="white"
+              title="Choisissez une option"
+            />
+          </DisabledBasket>
+        : <Basket>
+            <Basket2
+              size={40}
+              color="white"
+              onClick={() => props.addToBasket(props.food, foodName)}
+            />
+          </Basket>
+      }
     </ResultDiv>
   );
 };

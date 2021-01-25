@@ -48,16 +48,27 @@ const MainBlock = styled.div`
 `;
 
 const ExternalLinks = styled.a`
-  border-bottom: ${props => (props.underline ? '1px solid #fff' : 'none')};
   display: block;
   line-height: 1.5;
   margin: 10px auto;
   text-align: center;
+  text-decoration: ${props => (props.underline ? 'underline' : 'none')};
+  text-underline-offset: 8px;
+  width: 100%;
+  @media only screen and (min-width: 768px) {
+    margin: 10px 0;
+    text-align: ${props => props.first ? 'left' : 'right'};
+  }
 `;
 
 const SocialNetworksDiv = styled.div`
   margin: 20px auto;
   text-align: center;
+  @media only screen and (min-width: 768px) {
+    margin: 20px 0;
+    text-align: right;
+    width: 100%;
+  }
 `;
 
 const Fb = styled(FacebookCircle)`
@@ -92,12 +103,13 @@ const Footer = props => {
           target="_blank"
           rel="noreferrer"
           title="Voir sur Google Maps"
+          first={true}
         >
           2 - 4 rue de l'Echelle
           <br />
           75001 Paris
         </ExternalLinks>
-        <ExternalLinks href="tel:+33183929448" underline={true}>
+        <ExternalLinks href="tel:+33183929448" underline={true} first={true}>
           01 83 92 94 48
         </ExternalLinks>
       </MainBlock>
