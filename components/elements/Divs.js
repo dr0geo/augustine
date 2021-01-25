@@ -58,6 +58,7 @@ const StyledPopUp = styled.div`
   background-color: #012f6a;
   bottom: 0;
   color: white;
+  line-height: 1.5;
   opacity: ${props => props.isHidden ? '0' : '1'};
   padding: 20px;
   position: fixed;
