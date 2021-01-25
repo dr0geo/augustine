@@ -13,13 +13,23 @@ const Accueil = props => {
   return (
     <>
       <Head>
-        <title>Crêperie Augustine | Accueil</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta
-          name="description"
-          content="Bienvenue sur le site de la crêperie Augustine située à Paris 1er arrondissement. Laissez-vous tenter par nos succulentes recettes !"
-        />
+        <title>Crêperie Augustine</title>
+        <meta name="title" content="Crêperie Augustine" />
+        <meta name="description" content="Bienvenue sur le site de la crêperie Augustine située à Paris 1er ! Venez découvrir nos succulentes recettes, et réservez votre table en ligne ou commandez directement depuis notre site !" />
+
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://creperie-augustine.com/" />
+        <meta property="og:title" content="Crêperie Augustine" />
+        <meta property="og:description" content="Bienvenue sur le site de la crêperie Augustine située à Paris 1er ! Venez découvrir nos succulentes recettes, et réservez votre table en ligne ou commandez directement depuis notre site !" />
+        <meta property="og:image" content="/images/logo/logoOG.webp" />
+
+        <meta property="twitter:card" content="summary_large_image" />
+        <meta property="twitter:url" content="https://creperie-augustine.com/" />
+        <meta property="twitter:title" content="Crêperie Augustine" />
+        <meta property="twitter:description" content="Bienvenue sur le site de la crêperie Augustine située à Paris 1er ! Venez découvrir nos succulentes recettes, et réservez votre table en ligne ou commandez directement depuis notre site !" />
+        <meta property="twitter:image" content="/images/logo/logoOG.webp" />
       </Head>
+
       <PopUp />
       <Header 
         isSelected={1}
