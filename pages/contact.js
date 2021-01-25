@@ -23,7 +23,7 @@ const Contact = props => {
         bg="./images/background/contact.webp"
         title="Contact"
       />
-      <h2>Envoyez-nous<br /><em>votre demande</em></h2>
+      <h2>Envoyez-nous<br /><span className="cursive">votre demande</span></h2>
       <ContactForm />
       <Footer />
     </>

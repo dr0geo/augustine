@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import styled from 'styled-components';
 
-import Spinner from '../elements/Spinner';
+import Spinner from '@/elements/Spinner';
 
 const Container = styled.section`
   background-color: #e3e9ef;
