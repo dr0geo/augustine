@@ -37,7 +37,7 @@ export const Container = styled.ul`
 `;
 
 export const Button = styled.button`
-  background-color: ${props => props.selected === 1 ? '#4eb152' : '#d02f36'};
+  background-color: ${props => props.selected === 1 ? '#4eb152' : '#012f6a'};
   border: none;
   border-radius: 5px;
   color: white;

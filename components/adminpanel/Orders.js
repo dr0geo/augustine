@@ -66,13 +66,14 @@ const Orders = props => {
       }
     }
 
-    // Handle deletion of an order:
-    const handleDelete = async (id) => {
+    // Handle order restore:
+    const handleRestore = async (id) => {
       setIsLoading(true);
 
       const orderRef = props.data.find(order => order.id === id);
 
       try {
+        await db.collection('orders').doc(orderRef.id).set(orderRef);
         await db.collection('filedOrders').doc(orderRef.id).delete();
       } catch {
         setErrorMessage('Une erreur s\'est produite, veuillez réessayer...');
@@ -84,7 +85,7 @@ const Orders = props => {
     return (
       <Container>
         {!filteredData.length 
-          ? <h2><em>Pas de commande...</em></h2>
+          ? <h2><span className="cursive">Pas de commande...</span></h2>
           : filteredData.map(order => (
           <ListItem id={order.id} key={order.id}>
             <p><strong>Date</strong> : {new Date(Date.parse(order.date)).toLocaleDateString()}</p>
@@ -99,7 +100,7 @@ const Orders = props => {
             ))}
             </ul>
             <p><strong>Total</strong> : {order.price.toFixed(2)}€</p>
-            {props.selected === 1 ? <Button selected={props.selected} onClick={() => handleFile(order.id)}>Valider</Button> : <Button selected={props.selected} onClick={() => handleDelete(order.id)}>Supprimer</Button>}
+            {props.selected === 1 ? <Button selected={props.selected} onClick={() => handleFile(order.id)}>Valider</Button> : <Button selected={props.selected} onClick={() => handleRestore(order.id)}>Restaurer</Button>}
           </ListItem>
         ))}
         {errorMessage !== '' && 

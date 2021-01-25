@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { CheckCircleFill } from '@styled-icons/octicons';
 
 const Container = styled.section`
   background: linear-gradient(hsla(0deg, 0%, 0%, 0.7), hsla(0deg, 0%, 0%, 0.7));

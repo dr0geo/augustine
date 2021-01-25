@@ -13,6 +13,12 @@ const CardCont = styled.div`
   display: flex;
   flex-direction: column;
   margin: 50px auto;
+  & a {
+    color: white;
+    &:visited {
+      color: white;
+    }
+  }
   @media only screen and (min-width: 1200px) {
     flex-direction: row;
     justify-content: space-between;
@@ -95,9 +101,9 @@ const AdminPanel = () => {
         </Head>
         <Container>
           <h2>
-            <em>
+            <span className="cursive">
               Bienvenue sur le panneau administrateur de la crêperie Augustine!
-            </em>
+            </span>
           </h2>
           <CardCont>
             <Link href="/adminpanel/reservations">

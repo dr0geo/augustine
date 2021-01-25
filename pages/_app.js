@@ -94,6 +94,10 @@ const GlobalStyle = createGlobalStyle`
   a {
     text-decoration: none;
   }
+
+  strong {
+    font-weight: 600;
+  }
 `;
 
 const App = ({ Component, pageProps }) => {

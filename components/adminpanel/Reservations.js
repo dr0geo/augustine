@@ -54,13 +54,14 @@ const Reservations = props => {
     }
   };
 
-  // Handle deletion of a booking:
-  const handleDelete = async id => {
+  // Handle booking restore:
+  const handleRestore = async id => {
     setIsLoading(true);
 
     const bookingRef = props.data.find(booking => booking.id === id);
 
     try {
+      await db.collection('bookings').doc(bookingRef.id).set(bookingRef);
       await db.collection('filedBookings').doc(bookingRef.id).delete();
     } catch {
       setErrorMessage('Une erreur s\'est produite, veuillez réessayer...');
@@ -73,7 +74,7 @@ const Reservations = props => {
     <Container>
       {!filteredData.length ? (
         <h2>
-          <em>Pas de réservation...</em>
+          <span className="cursive">Pas de réservation...</span>
         </h2>
       ) : (
         filteredData.map(booking => (
@@ -107,9 +108,9 @@ const Reservations = props => {
             ) : (
               <Button
                 selected={props.selected}
-                onClick={() => handleDelete(booking.id)}
+                onClick={() => handleRestore(booking.id)}
               >
-                Supprimer
+                Restaurer
               </Button>
             )}
           </ListItem>
