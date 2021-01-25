@@ -75,7 +75,7 @@ const LoginForm = () => {
 
   return (
     <Container>
-      <h2><em>Espace Administrateur - Crêperie Augustine</em></h2>
+      <h2><span className="cursive">Espace Administrateur - Crêperie Augustine</span></h2>
       <Form onSubmit={handleSubmit}>
         <input 
           type="email" 

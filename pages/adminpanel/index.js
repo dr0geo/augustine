@@ -3,7 +3,7 @@ import Head from 'next/head';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 
-import firebase from '@/utils/firebase';
+import firebase, { db } from '@/utils/firebase';
 import Card from '@/components/adminpanel/Card';
 import LoginForm, { Container } from '@/components/adminpanel/LoginForm';
 import Spinner from '@/elements/Spinner';
@@ -63,6 +63,10 @@ const AdminPanel = () => {
     return () => unsubscribe();
   }, []);
 
+  useEffect(() => {
+    handleDeleteHistory();
+  }, [])
+
   const handleLogout = async () => {
     setIsLoading(true);
 
@@ -73,6 +77,34 @@ const AdminPanel = () => {
       console.log(err);
     } finally {
       setIsLoading(false);
+    }
+  }
+
+  const handleDeleteHistory = async () => {
+    // Create a date 48h before today date:
+    const dateToCompare = new Date();
+    dateToCompare.setDate(dateToCompare.getDate() - 2);
+    
+    // Check in filed bookings collection if there are bookings older than the previous date and delete them:
+    const filedBookingsToDelete = db.collection('filedBookings').get()
+      .then(snapshot => snapshot.forEach(doc => {
+        if (new Date(doc.data().date) < dateToCompare) {
+          db.collection('filedBookings').doc(doc.id).delete();
+        }
+      }));
+
+    // Check in filed orders collection if there are orders older than the previous date and delete them:
+    const filedOrdersToDelete = db.collection('filedOrders').get()
+      .then(snapshot => snapshot.forEach(doc => {
+        if (new Date(doc.data().date) < dateToCompare) {
+          db.collection('filedOrders').doc(doc.id).delete();
+        }
+      }));
+
+    try {
+      await Promise.all([filedBookingsToDelete, filedOrdersToDelete]);
+    } catch (err) {
+      console.log(err);
     }
   }
 
