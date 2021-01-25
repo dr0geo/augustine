@@ -88,7 +88,10 @@ const Commandes = () => {
           <>
             {newOrders.length > 0 && 
               <Total>
-                Vous avez <span onClick={allDates}>{newOrders.length} {newOrders.length > 1 ? 'nouvelles commandes' : 'nouvelle commande'}
+                Vous avez <span onClick={() => {
+                  allDates();
+                  setSelected(1);
+                }}>{newOrders.length} {newOrders.length > 1 ? 'nouvelles commandes' : 'nouvelle commande'}
                 </span> !
               </Total>
             }

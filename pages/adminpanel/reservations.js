@@ -88,7 +88,10 @@ const DisplayReservations = () => {
             <>
             {newBookings.length > 0 && 
               <Total>
-                Vous avez <span onClick={allDates}>{newBookings.length} {newBookings.length > 1 ? 'nouvelles réservations' : 'nouvelle réservation'}
+                Vous avez <span onClick={() => {
+                  allDates();
+                  setSelected(1);
+                }}>{newBookings.length} {newBookings.length > 1 ? 'nouvelles réservations' : 'nouvelle réservation'}
                 </span> !
               </Total>
             }
