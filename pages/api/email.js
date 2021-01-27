@@ -39,6 +39,19 @@ const sendConfirmationEmail = async (req, res) => {
       `
     }
 
+    query = {
+      from: `${req.body.orderRef.email}`,
+      to: 'contact@creperie-augustine.com',
+      subject: "Nouvelle commande via le site Augustine",
+      html:`
+        <p>Bonjour,</p>
+        <br />
+        <p>Vous avez reçu une nouvelle commande via le site web de la crêperie Augustine.</p>
+        <br />
+        <p>Connectez-vous à <a href="https://creperie-augustine.com/adminpanel" target="_blank">votre espace d'administration</a> pour en voir les détails !</p>
+      `
+    }
+
   } else if (req.body.type === 'booking') {
     confirmation = {
       from: '"Crêperie Augustine" <contact@creperie-augustine.com>',
@@ -81,6 +94,20 @@ const sendConfirmationEmail = async (req, res) => {
         <p>L'équipe de la <a href="https://creperie-augustine.com" target="_blank">crêperie Augustine</a>.</p>
       `
     }
+
+    query = {
+      from: `${req.body.bookingRef.email}`,
+      to: 'contact@creperie-augustine.com',
+      subject: "Nouvelle réservation via le site Augustine",
+      html:`
+        <p>Bonjour,</p>
+        <br />
+        <p>Vous avez reçu une nouvelle demande de réservation via le site web de la crêperie Augustine.</p>
+        <br />
+        <p>Connectez-vous à <a href="https://creperie-augustine.com/adminpanel" target="_blank">votre espace d'administration</a> pour en voir les détails !</p>
+      `
+    }
+
   } else if (req.body.type === 'contact') {
     confirmation = {
       from: '"Crêperie Augustine" <contact@creperie-augustine.com>',
@@ -120,13 +147,9 @@ const sendConfirmationEmail = async (req, res) => {
   }
 
   try {
-    // Send customer confirmation:
+    // Send customer confirmation and restaurant notification:
     await transporter.sendMail(confirmation);
-
-    // Send customer query to restaurant:
-    if (req.body.type === 'contact') {
-      await transporter.sendMail(query);
-    }
+    await transporter.sendMail(query);
 
     res.status(200).end();
   } catch {
