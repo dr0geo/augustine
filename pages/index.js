@@ -13,7 +13,7 @@ const Accueil = props => {
   return (
     <>
       <Head>
-        <title>Crêperie Augustine</title>
+        <title>Crêperie Augustine | Accueil</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="description" content="Bienvenue sur le site de la crêperie Augustine située à Paris 1er ! Venez découvrir nos succulentes recettes, et réservez votre table en ligne ou commandez directement depuis notre site !" />
 
