@@ -17,10 +17,10 @@ const ResultDiv = styled.div`
   & > div > h3 {
     margin-bottom: 10px;
   }
-  & > div > form {
+  & form {
     display: flex;
     justify-content: space-around;
-    margin: auto;
+    margin: 20px auto 0 auto;
     width: 220px;
     & > div {
       align-items: center;
@@ -34,10 +34,7 @@ const ResultDiv = styled.div`
   & > div > p {
     padding: 0 0;
   }
-  & > div > p + form {
-    margin-top: 20px;
-  }
-  & > div > select {
+  & select {
     appearance: none;
     background-color: #e3e9ef;
     border: 1px solid #012f6a;
@@ -61,7 +58,7 @@ const ResultDiv = styled.div`
     grid-auto-flow: column;
     grid-template-columns: 250px 2fr 0.5fr;
     grid-template-rows: repeat(2, auto);
-    & > div > form > div > input {
+    & form > div > input {
       transform: scale(1);
     }
     & > div:first-of-type, div:last-of-type {
@@ -227,12 +224,12 @@ const OrderResultDiv = props => {
         }
         {/* Choose menu choices */}
         {props.food.choice &&
-          <>
+          <ul>
             {menuChoicesArray.map((choice, index) => {
               // Add crêpe or gaufre option for concerned menu choice:
               if (index === menuChoicesArray.length - 2) {
                 return (
-                  <>
+                  <li key={choice}>
                     <form>
                       <div>
                         <input
@@ -269,7 +266,7 @@ const OrderResultDiv = props => {
                         : choice.map(option => <option key={option} value={option}>{option}</option>)
                       }
                     </select>
-                  </>
+                  </li>
                 )
                 // Galette choice:
               } else if (menuChoicesArray.length === 3 && index === 0) {
@@ -331,7 +328,7 @@ const OrderResultDiv = props => {
               }
             }
             )}
-          </>
+          </ul>
         }
       </div>
       {/* Third grid item */}

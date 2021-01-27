@@ -149,7 +149,8 @@ const sendConfirmationEmail = async (req, res) => {
   try {
     // Send customer confirmation and restaurant notification:
     await transporter.sendMail(confirmation);
-    await transporter.sendMail(query);
+    // Comment to avoid sending notifications to restauraut in dev:
+    // await transporter.sendMail(query);
 
     res.status(200).end();
   } catch {
