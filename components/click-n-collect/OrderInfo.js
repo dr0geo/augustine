@@ -19,6 +19,7 @@ const InfoSection = styled.div`
   height: 100vh;
   justify-content: center;
   margin: auto;
+  padding: 10px;
   transform: ${props => (props.displayOrderForm ? 'scale(1)' : 'scale(0)')};
   width: 100vw;
   & > div:first-of-type {

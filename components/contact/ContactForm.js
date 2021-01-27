@@ -55,20 +55,22 @@ const Form = styled.form`
       font-family: 'Raleway', sans-serif;
     }
   }
-  & > button {
-    background-color: #012f6a;
-    border: 2px solid #012f6a;
-    border-radius: 5px;
-    color: white;
-    font-weight: 600;
-    padding: 10px 20px;
-    transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
-    @media (any-hover: hover) {
-      &:hover {
-        cursor: pointer;
-        background-color: white;
-        color: #012f6a;
-      }
+`;
+
+const SendButton = styled.button`
+  background-color: #012f6a;
+  border: 2px solid #012f6a;
+  border-radius: 5px;
+  color: white;
+  font-weight: 600;
+  opacity: ${props => props.disabled ? '0.5' : '1'};
+  padding: 10px 20px;
+  transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+  @media (any-hover: hover) {
+    &:hover {
+      cursor: ${props => props.disabled ? 'not-allowed' : 'pointer'};
+      background-color: ${props => props.disabled ? '#012f6a' : 'white'};
+      color: ${props => props.disabled ? 'white' : '#012f6a'};
     }
   }
 `;
@@ -98,6 +100,7 @@ const ContactForm = () => {
 
   const [confirmationMessage, setConfirmationMessage] = useState(null);
   const [errorMessage, setErrorMessage] = useState(null);
+  const [isDisabled, setIsDisabled] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -127,6 +130,7 @@ const ContactForm = () => {
       throw new Error();
     } else if (res.status === 200) {
       setConfirmationMessage('Votre message a bien été envoyé !');
+      setIsDisabled(true);
     }
 
     } catch {
@@ -145,6 +149,7 @@ const ContactForm = () => {
           placeholder="Prénom *"
           onChange={e => setFirstName(e.target.value)}
           required
+          disabled={isDisabled}
         />
         <input
           type="text"
@@ -152,6 +157,7 @@ const ContactForm = () => {
           placeholder="Nom *"
           onChange={e => setLastName(e.target.value)}
           required
+          disabled={isDisabled}
         />
         <input
           type="email"
@@ -159,6 +165,7 @@ const ContactForm = () => {
           placeholder="E-mail *"
           onChange={e => setEmail(e.target.value)}
           required
+          disabled={isDisabled}
         />
         <input
           type="tel"
@@ -167,14 +174,16 @@ const ContactForm = () => {
           minLength="10"
           maxLength="13"
           onChange={e => setPhoneNumber(e.target.value)}
+          disabled={isDisabled}
         />
         <textarea
           placeholder="Votre demande... *"
           minLength="10"
           onChange={e => setMessage(e.target.value)}
           required
+          disabled={isDisabled}
         ></textarea>
-        <button type="submit">Envoyer la demande</button>
+        <SendButton type="submit" disabled={isDisabled} title={isDisabled ? 'Votre demande a déjà été envoyée' : ''}>Envoyer la demande</SendButton>
         {confirmationMessage && <ConfirmationParag>{confirmationMessage}</ConfirmationParag>}
         {errorMessage && <ErrorParag>{errorMessage}</ErrorParag>}
       </Form>
