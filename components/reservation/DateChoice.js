@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { useEffect } from 'react';
 import { LeftArrow, RightArrow } from '@styled-icons/boxicons-regular';
 
 import { Button } from '@/elements/Buttons';
@@ -85,14 +86,16 @@ export const ReducParag = styled.p`
 const DateChoice = props => {
 
   // Check if there is a discount according to the day of the week:
-  const discountDay = ['Dimanche', 'Lundi', 'Mardi'].includes(props.dateSentence.split(' ')[0]);
+  useEffect(() => {
+    const discountDay = ['Dimanche', 'Lundi', 'Mardi'].includes(props.dateSentence.split(' ')[0]);
 
-  if (discountDay) {
-    props.applyDiscount();
-  } else {
-    props.removeDiscount();
-  }
-
+    if (discountDay) {
+      props.applyDiscount();
+    } else {
+      props.removeDiscount();
+    }
+  }, [props.dateSentence]);
+  
   return (
     <>
       <WhiteField>
