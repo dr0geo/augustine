@@ -5,7 +5,7 @@
       "headers": [
         {
           "key": "Content-Security-Policy",
-          "value": "default-src 'none'; font-src 'self'; img-src 'self'; script-src 'self'; style-src 'self'"
+          "value": "default-src 'none'; font-src 'self'; img-src 'self'; script-src 'self'; ; manifest-src 'self'; style-src 'self' 'sha256-NdzQsqPOsWDAD4DKhTr9Y7yOejSDGOO5SyZ2TctE+eU=' 'sha256-Jm/xxsNTmsOOuRob6di/aT5qIoP490QyjtL7m5YnfWM=' 'sha256-Ljy7H99j8bpv7OY6QzOrOkiDan4SDXENbDwoLj+PByg=' 'sha256-lSmhTH3Eqj5ahT1Rt9ER5ohV4Y9ua8v8Kh9wXAnQbPY=' 'sha256-UVz4OkMIazqMyBCUe7iYHZHT5pyN0Mmw5aN8UllXJp4=' 'sha256-WlzGd7/aggoRBnlpwN/RGzWVSHhKDlWcmvIvnbxB4io=' 'sha256-47DEQpj8HBSa+/TImW+5JCeuQeRkm5NMpJWZG3hSuFU=' "
         },
         {
           "key" : "X-Frame-Options",
